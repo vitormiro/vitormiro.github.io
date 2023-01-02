@@ -10,6 +10,7 @@ website:
         text: Home
       - about.qmd
       - pesquisa.qmd
+      - posts.qmd
 
 format:
   html:
