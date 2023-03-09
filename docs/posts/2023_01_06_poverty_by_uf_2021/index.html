@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vitor Hugo Miro">
+<meta name="dcterms.date" content="2023-06-01">
+<meta name="description" content="Nesta primeira postagem apresento dados sobre as diferenças de incidência de pobreza entre as unidades federativas brasileiras.">
+
+<title>Vitor Hugo Miro - Uma evidência sobre a distribuição regional da pobreza no Brasil (2021)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Vitor Hugo Miro</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">Sobre</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../pesquisa.html">
+ <span class="menu-text">Pesquisa</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html">
+ <span class="menu-text">Posts</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Uma evidência sobre a distribuição regional da pobreza no Brasil (2021)</h1>
+                  <div>
+        <div class="description">
+          Nesta primeira postagem apresento dados sobre as diferenças de incidência de pobreza entre as unidades federativas brasileiras.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">pobreza</div>
+                <div class="quarto-category">desigualdade regional</div>
+                <div class="quarto-category">R</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Vitor Hugo Miro </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">06/01/2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#primeira-postagem" id="toc-primeira-postagem" class="nav-link active" data-scroll-target="#primeira-postagem">Primeira postagem</a></li>
+  <li><a href="#indicadores-de-extrema-pobreza-por-uf" id="toc-indicadores-de-extrema-pobreza-por-uf" class="nav-link" data-scroll-target="#indicadores-de-extrema-pobreza-por-uf">Indicadores de extrema pobreza por UF</a></li>
+  <li><a href="#considerações-finais" id="toc-considerações-finais" class="nav-link" data-scroll-target="#considerações-finais">Considerações finais</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="primeira-postagem" class="level3">
+<h3 class="anchored" data-anchor-id="primeira-postagem">Primeira postagem</h3>
+<p>Nesta primeira postagem eu não poderia escolher outro tema. Nos últimos anos me dediquei muito ao cálculo e análise de indicadores de pobreza, seja em pesquisas acadêmicas, trabalhos técnicos ou como consultor.</p>
+<p>Neste texto estarei fazendo referência à pobreza monetária que, sem me alongar muito na definição, pode ser caracterizada pela insuficiência de renda de um indivíduo ou família em relação à um nível mínimo, considerado adequado para garantir a satisfação de necessidades básicas.</p>
+<p>Infelizmente temas relacionados com a pobreza ainda são bastante presentes. Os indicadores de pobreza monetária publicados pelo Instituto Brasileiro de Geografia e Estatística (IBGE) nos últimos anos mostram o quanto o tema ainda é relevante.</p>
+<p>Em momentos recessivos, como o de 2015 e 2016, foi possível verificar os reflexos da situação no mercado de trabalho e da redução da renda sobre os indicadores de pobreza. Em 2020, no cenário de pandemia de Covid-19, foi possível calcular indicadores de renda e pobreza para verificar o impacto das tranferências do Auxílio Emergencial em 2020 e o resultado da descontinuidade delas em 2021.</p>
+<p>Os indicadores de pobreza monetária são um mero reflexo do que acontece com a renda das famílias. Nesse sentido, a situação de pobreza de uma pessoa ou família reflete a sua capacidade de auferir renda, seja no mercado de trabalho, como retorno de ativos ou mesmo sendo beneficiada por uma política social. Os determinantes dessa capacidade são diversos, podendo estar associados à características individuais (como escolaridade) e ao contexto em que estas pessoas e famílias se encontram.</p>
+<p>Um dos aspectos contextuais mais citados como determinante da situação de pobreza é o local onde as pessoas e famílias vivem. O Brasil é um país marcado por forte heterogeneidade regional, sendo caracterizado na década de 1970 como uma “Belindia” (uma grande Índia pobre coexistindo com uma pequena Bélgica rica). Mesmo existindo uma redução de disparidades em muitos indicadores sociais nas últimas décadas, a desigualdade regionais ainda é muito evidente e podemos verificar o quanto este aspecto é determinante para a situação de insuficiência de renda e se traduz no indicador de pobreza.</p>
+<p>O objetivo desta postagem é bastante singelo, apresentar uma evidência sobre as desigualdades regionais de incidência de pobreza. Para fazer isso escolhi o indicador de proporção de pessoas em extrema pobreza. Os dados utilizados são provenientes da Pesquisa Nacional por Amostra de Domicílios Contínua (PNADC) levada a campo em 2021.</p>
+</section>
+<section id="indicadores-de-extrema-pobreza-por-uf" class="level3">
+<h3 class="anchored" data-anchor-id="indicadores-de-extrema-pobreza-por-uf">Indicadores de extrema pobreza por UF</h3>
+<p>O cálculo de um indicador de pobreza deve envolver uma estratégia de identificação e uma de agregação. Como mencionado acima, realizei o cálculo do indicador de extrema pobreza monetária identificando pessoas/famílias pobres com base na linha de pobreza sugerida pelo Banco Mundial. Essa linha adota um valor de referência de US$1,90 por dia (em termos da Paridade de Poder de Compra, a preços internacionais de 2011, e corrigidos para preços de 2021 pelo IPCA). Por sua vez, a agregação considera o indicador de incidência de pobreza dado pela formulação de Foster, Greer e Thorbecke (1984). <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> O cálculo foi realizado com o pacote <code>convey</code>. <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>A tabela abaixo mostra a proporção de pessoas em situação de extrema pobreza em cada região. Temos uma evidência clara da maior proporção na região Nordeste (16,5%), seguida da região Norte (12,6%). Enquanto isso, na região Sul menos de 3% da população é classificada dessa forma.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;border-bottom: 0;">
+<caption>Tabela. Extrema Pobreza por região (2021)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> Prop(%) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Norte </td>
+   <td style="text-align:right;"> 12.6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Nordeste </td>
+   <td style="text-align:right;"> 16.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sudeste </td>
+   <td style="text-align:right;"> 5.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sul </td>
+   <td style="text-align:right;"> 3.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Centro-Oeste </td>
+   <td style="text-align:right;"> 3.6 </td>
+  </tr>
+</tbody>
+<tfoot>
+<tr><td style="padding: 0; " colspan="100%"><span style="font-style: italic;">Note: </span></td></tr>
+<tr><td style="padding: 0; " colspan="100%">
+<sup></sup> Fonte: IBGE/PNADC.</td></tr>
+</tfoot>
+</table>
+
+</div>
+</div>
+<p>Apresentando uma informação mais detalhada, o gráfico a seguir torna ainda mais evidente a maior incidência de famílias em situação de extrema pobreza nos estados das regiões Norte e Nordeste, principalmente nesta segunda. Os estados do Maranhão e de Pernambuco são os que apresentam os maiores indicadores de pobreza.</p>
+<p>No outro extremo, as menores taxas são observadas nos estados das regiões Sul e Centro-Oeste, com destaque para os indicadores dos estados de Santa Catarina e Rio Grande do Sul.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>De forma complementar, empreguei os pacotes <code>geobr</code> e <code>sf</code> para construir uma mapa destacando a desigualdade regional brasileira.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Using year 2010</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="considerações-finais" class="level3">
+<h3 class="anchored" data-anchor-id="considerações-finais">Considerações finais</h3>
+<p>Apesar de ser apresentada em uma postagem breve, essa evidência sobre a desigualdades regional no Brasil é bastante relevante e merece aprofundamentos em análises futuras. Ao visualizar estas primeiras informações diversas questões e hipóteses podem ser formuladas.</p>
+<ul>
+<li><p>De que forma a dinâmica do mercado de trabalho em cada região contribui para este resultado?</p></li>
+<li><p>Como este resultado também é afetado pelas políticas de tranferências de renda?</p></li>
+<li><p>Mudanças na composição de capital humano, principalmente relacionados à educação formal, contribuiram para reduzir estas desigualdades?</p></li>
+<li><p>A estrutura produtiva de cada região importa? As políticas de desenvolvimento regional nas últimas décadas tiveram algum impacto?</p>
+<p>Bom, estes são apenas alguns exemplos de questões que podem ser formuladas e podem ser exploradas em postagens futuras.</p></li>
+</ul>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Foster, James, Joel Greer, and Erik Thorbecke. 1984. “A Class of Decomposable Poverty Measures.” <em>Econometrica</em> 52 (3): 761–66.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Jacob G, Pessoa D, Damico A (2022). “Poverty and Inequality with Complex Survey Data.” Auxiliary information about the usage of the R convey package, https://guilhermejacob.github.io/context/.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{hugomiro2023,
+  author = {Vitor Hugo Miro and Vitor Hugo Miro},
+  title = {Uma Evidência Sobre a Distribuição Regional Da Pobreza No
+    {Brasil} (2021)},
+  date = {2023-01-06},
+  url = {https://vitormiro.github.io/posts/2023_01_06_poverty_by_uf_2021/},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-hugomiro2023" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Vitor Hugo Miro, and Vitor Hugo Miro. 2023. <span>“Uma Evidência Sobre a
+Distribuição Regional Da Pobreza No Brasil (2021).”</span> January 6,
+2023. <a href="https://vitormiro.github.io/posts/2023_01_06_poverty_by_uf_2021/">https://vitormiro.github.io/posts/2023_01_06_poverty_by_uf_2021/</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

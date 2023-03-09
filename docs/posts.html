@@ -70,9 +70,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -139,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(0)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="desigualdade regional">desigualdade regional <span class="quarto-category-count">(1)</span></div><div class="category" data-category="pobreza">pobreza <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -164,9 +164,49 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="pobreza,desigualdade regional,R" data-listing-date-sort="1672974000000" data-listing-file-modified-sort="1673058482345" data-listing-reading-time-sort="13.815">
+<div class="thumbnail">
+<p><a href="./posts/2023_01_06_poverty_by_uf_2021/index.html"> <img src="./posts/2023_01_06_poverty_by_uf_2021/fig2.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2023_01_06_poverty_by_uf_2021/index.html">
+<h3 class="no-anchor listing-title">
+Uma evidência sobre a distribuição regional da pobreza no Brasil (2021)
+</h3>
+<div class="listing-subtitle">
 
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('pobreza'); return false;">
+pobreza
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('desigualdade regional'); return false;">
+desigualdade regional
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+R
+</div>
+</div>
+<a href="./posts/2023_01_06_poverty_by_uf_2021/index.html">
+<div class="listing-description">
+<p>Nesta primeira postagem apresento dados sobre as diferenças de incidência de pobreza entre as unidades federativas brasileiras.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2023_01_06_poverty_by_uf_2021/index.html">
+<div class="listing-date">
+Jan 6, 2023
+</div>
+<div class="listing-author">
+Vitor Hugo Miro, Vitor Hugo Miro
+</div>
+</a>
+</div>
+</div>
 </div>
 <div class="listing-no-matching d-none">
 No matching items

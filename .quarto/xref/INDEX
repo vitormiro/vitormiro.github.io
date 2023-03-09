@@ -10,5 +10,14 @@
   },
   "posts.qmd": {
     "posts.html": "d2ae73b8"
+  },
+  "posts/2023_01_05_poverty_by_uf_2021/index.qmd": {
+    "index.html": "b2652b1a"
+  },
+  "posts/2023_01_06_poverty_by_uf_2021/index.qmd": {
+    "index.html": "a0da78e9"
+  },
+  "posts/2023_01_06_poverty_by_uf_2021/notebook.Rmd": {
+    "notebook.html": "fecbfa53"
   }
 }

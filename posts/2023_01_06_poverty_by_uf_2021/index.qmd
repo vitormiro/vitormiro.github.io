@@ -1,0 +1,222 @@
+---
+title: "Uma evidência sobre a distribuição regional da pobreza no Brasil (2021)"
+description: "Nesta primeira postagem apresento dados sobre as diferenças de incidência de pobreza entre as unidades federativas brasileiras."
+author:
+  - name: Vitor Hugo Miro
+date: 01/06/2023
+date-format: "DD/MM/YYYY"
+categories: [pobreza, desigualdade regional, R]
+citation: 
+    url: https://vitormiro.github.io/posts/2023_01_06_poverty_by_uf_2021/ 
+image: fig2.png
+draft: false
+format:
+  html:
+    code-fold: true
+    code-summary: "Mostrar código"
+page-layout: article
+---
+
+### Primeira postagem
+
+Nesta primeira postagem eu não poderia escolher outro tema. Nos últimos anos me dediquei muito ao cálculo e análise de indicadores de pobreza, seja em pesquisas acadêmicas, trabalhos técnicos ou como consultor.
+
+Neste texto estarei fazendo referência à pobreza monetária que, sem me alongar muito na definição, pode ser caracterizada pela insuficiência de renda de um indivíduo ou família em relação à um nível mínimo, considerado adequado para garantir a satisfação de necessidades básicas.
+
+Infelizmente temas relacionados com a pobreza ainda são bastante presentes. Os indicadores de pobreza monetária publicados pelo Instituto Brasileiro de Geografia e Estatística (IBGE) nos últimos anos mostram o quanto o tema ainda é relevante.
+
+Em momentos recessivos, como o de 2015 e 2016, foi possível verificar os reflexos da situação no mercado de trabalho e da redução da renda sobre os indicadores de pobreza. Em 2020, no cenário de pandemia de Covid-19, foi possível calcular indicadores de renda e pobreza para verificar o impacto das tranferências do Auxílio Emergencial em 2020 e o resultado da descontinuidade delas em 2021.
+
+Os indicadores de pobreza monetária são um mero reflexo do que acontece com a renda das famílias. Nesse sentido, a situação de pobreza de uma pessoa ou família reflete a sua capacidade de auferir renda, seja no mercado de trabalho, como retorno de ativos ou mesmo sendo beneficiada por uma política social. Os determinantes dessa capacidade são diversos, podendo estar associados à características individuais (como escolaridade) e ao contexto em que estas pessoas e famílias se encontram.
+
+Um dos aspectos contextuais mais citados como determinante da situação de pobreza é o local onde as pessoas e famílias vivem. O Brasil é um país marcado por forte heterogeneidade regional, sendo caracterizado na década de 1970 como uma "Belindia" (uma grande Índia pobre coexistindo com uma pequena Bélgica rica). Mesmo existindo uma redução de disparidades em muitos indicadores sociais nas últimas décadas, a desigualdade regionais ainda é muito evidente e podemos verificar o quanto este aspecto é determinante para a situação de insuficiência de renda e se traduz no indicador de pobreza.
+
+O objetivo desta postagem é bastante singelo, apresentar uma evidência sobre as desigualdades regionais de incidência de pobreza. Para fazer isso escolhi o indicador de proporção de pessoas em extrema pobreza. Os dados utilizados são provenientes da Pesquisa Nacional por Amostra de Domicílios Contínua (PNADC) levada a campo em 2021.
+
+### Indicadores de extrema pobreza por UF
+
+O cálculo de um indicador de pobreza deve envolver uma estratégia de identificação e uma de agregação. Como mencionado acima, realizei o cálculo do indicador de extrema pobreza monetária identificando pessoas/famílias pobres com base na linha de pobreza sugerida pelo Banco Mundial. Essa linha adota um valor de referência de US\$1,90 por dia (em termos da Paridade de Poder de Compra, a preços internacionais de 2011, e corrigidos para preços de 2021 pelo IPCA). Por sua vez, a agregação considera o indicador de incidência de pobreza dado pela formulação de Foster, Greer e Thorbecke (1984). [^1] O cálculo foi realizado com o pacote `convey`. [^2]
+
+[^1]: Foster, James, Joel Greer, and Erik Thorbecke. 1984. "A Class of Decomposable Poverty Measures." *Econometrica* 52 (3): 761--66.
+
+[^2]: Jacob G, Pessoa D, Damico A (2022). "Poverty and Inequality with Complex Survey Data." Auxiliary information about the usage of the R convey package, https://guilhermejacob.github.io/context/.
+
+```{r include=FALSE}
+rm(list=ls(all=TRUE))#Libera memória, apagando os objetos abertos no R.
+gc() #Libera a memoria RAM que não esta sendo utilizada pelo computador:
+options(scipen=999) #Remove notação científica.
+
+# Carregar pacotes
+library(tidyverse)
+library(PNADcIBGE)
+library(survey)
+library(srvyr)
+library(convey)
+library(kableExtra)
+library(geobr)
+library(sf)
+
+# Definir variáveis utilizadas na análise em um vetor
+variaveis <- c('Ano', 'UF', 'Estrato', 'UPA', 'V1008', 'V1014', 'V1032', 'V1022', 'V2009', 'VD2002', 'VD4019', 'VD4048')
+
+# Carrega dados da PNADC 
+pnadc <- get_pnadc(year = 2021,
+                   vars = variaveis,
+                   interview = 5,
+                   design = TRUE,
+                   labels = FALSE,
+                   deflator = TRUE,
+                   defyear = 2021)
+
+# Transformar objeto para aplicar os métodos da gramática do dplyr
+pnadc <- srvyr::as_survey(pnadc)
+```
+
+```{r include=FALSE}
+# Cálculo de variáveis relevantes
+pnadc <- pnadc %>% 
+    mutate(
+        id_dom = as.numeric(paste(UPA,V1008,V1014, sep = "")),
+        membro = ifelse(VD2002=="15" | VD2002=="16" | VD2002=="17", 0, 1),
+        ### Contruir variaveis de renda
+        rend_trabalho = ifelse (is.na (VD4019), 0, VD4019*CO2),
+        rend_outras = ifelse (is.na (VD4048), 0, VD4048*CO2e),
+        renda = rend_trabalho + rend_outras,
+        ### Dimensões geograficas
+        regiao = factor(case_when(UF %in% 10:19 ~ "Norte",
+                                  UF %in% 20:29 ~ "Nordeste",
+                                  UF %in% 30:39 ~ "Sudeste",
+                                  UF %in% 40:49 ~ "Sul",
+                                  UF %in% 50:59 ~ "Centro-Oeste"),
+                        levels = c("Norte","Nordeste","Sudeste","Sul","Centro-Oeste"))
+    )
+
+# Criar variaveis agregadas por domicilio
+pnadc <- pnadc %>% 
+    group_by(id_dom) %>% 
+    mutate(n_dom = sum(membro),
+           # Construir variavel de renda domiciliar total e rdpc
+           rend_dom_outras = ifelse(membro==1, sum(rend_outras), 0),
+           rend_dom_trabalho = ifelse(membro==1, sum(rend_trabalho), 0),
+           renda_dom = ifelse(membro==1, sum(renda), 0),
+           rdpc = renda_dom/n_dom )%>%
+    ungroup()
+
+# Aplicar o pacote convey
+pnadc <- convey_prep(pnadc)
+
+# Calcular FGT(0) para cada UF
+pex_reg <- survey::svyby(~rdpc,
+                        by = ~regiao, 
+                        design = pnadc,
+                        FUN = svyfgt,
+                        g=0, 
+                        abs_thresh = 168,
+                        na.rm = TRUE)
+
+
+# Calcular FGT(0) para cada UF
+pex_uf <- survey::svyby(~rdpc,
+                        by = ~UF, 
+                        design = pnadc,
+                        FUN = svyfgt,
+                        g=0, 
+                        abs_thresh = 168,
+                        na.rm = TRUE)
+
+pex_uf <- pex_uf %>% mutate(
+    regiao = factor(case_when(UF %in% 10:19 ~ "Norte",
+                              UF %in% 20:29 ~ "Nordeste", 
+                              UF %in% 30:39 ~ "Sudeste",
+                              UF %in% 40:49 ~ "Sul", 
+                              UF %in% 50:59 ~ "Centro-Oeste")),
+    UF = recode(UF, 
+                   "11" = "RO", 
+                   "12" = "AC", 
+                   "13" = "AM", 
+                   "14" = "RR", 
+                   "15" = "PA", 
+                   "16" = "AP", 
+                   "17" = "TO", 
+                   "21" = "MA", 
+                   "22" = "PI", 
+                   "23" = "CE", 
+                   "24" = "RN", 
+                   "25" = "PB", 
+                   "26" = "PE", 
+                   "27" = "AL", 
+                   "28" = "SE", 
+                   "29" = "BA", 
+                   "31" = "MG", 
+                   "32" = "ES", 
+                   "33" = "RJ", 
+                   "35" = "SP", 
+                   "41" = "PR", 
+                   "42" = "SC", 
+                   "43" = "RS", 
+                   "50" = "MS", 
+                   "51" = "MT", 
+                   "52" = "GO", 
+                   "53" = "DF"))
+
+```
+
+A tabela abaixo mostra a proporção de pessoas em situação de extrema pobreza em cada região. Temos uma evidência clara da maior proporção na região Nordeste (16,5%), seguida da região Norte (12,6%). Enquanto isso, na região Sul menos de 3% da população é classificada dessa forma.
+
+```{r echo=FALSE}
+pex_reg %>% 
+    mutate('Prop(%)' = round(rdpc*100,1)) %>%
+    select('Prop(%)') %>%
+    kbl(caption = "Tabela. Extrema Pobreza por região (2021)") %>%  
+    kable_styling() %>% 
+    footnote(general = "Fonte: IBGE/PNADC.")
+```
+
+Apresentando uma informação mais detalhada, o gráfico a seguir torna ainda mais evidente a maior incidência de famílias em situação de extrema pobreza nos estados das regiões Norte e Nordeste, principalmente nesta segunda. Os estados do Maranhão e de Pernambuco são os que apresentam os maiores indicadores de pobreza.
+
+No outro extremo, as menores taxas são observadas nos estados das regiões Sul e Centro-Oeste, com destaque para os indicadores dos estados de Santa Catarina e Rio Grande do Sul.
+
+```{r echo=FALSE}
+pex_uf %>% 
+    dplyr::as_tibble() %>%
+    dplyr::mutate(UF = forcats::fct_reorder(UF, rdpc)) %>%
+    ggplot2::ggplot(ggplot2::aes(x = rdpc*100, y = UF)) +
+    ggplot2::geom_col(aes(fill = regiao)) +
+    ggplot2::labs(title = "Extrema pobreza por UF (2021)",
+                  subtitle = "Proporção (%) segundo a linha de pobreza extrema de US$1,90/dia PPP.",
+                  x = NULL,
+                  y = NULL,
+                  caption = "Fonte: IBGE/PNADC.")+
+    ggplot2::geom_text(aes(label= round(rdpc*100,1)), vjust=0.5, hjust=-0.1, size=2)
+```
+
+De forma complementar, empreguei os pacotes `geobr` e `sf` para construir uma mapa destacando a desigualdade regional brasileira.
+
+```{r echo=FALSE}
+map <- read_state(showProgress = FALSE)
+pex_map = left_join(map, pex_uf, by=c("abbrev_state"="UF"))
+
+pex_map %>% 
+    ggplot(aes(fill=round(rdpc*100,1)), color = "black") +
+    geom_sf() +
+    scale_fill_distiller(palette = "YlGnBu", name="Proporção (%)", trans = "reverse") +
+    theme(panel.background = element_blank(), 
+          axis.text = element_blank(), 
+          axis.ticks = element_blank()) + 
+    labs(title="Extrema pobreza por UF (2021)",
+         caption="Fonte: IBGE/PNADC.", size=8) 
+```
+
+### Considerações finais
+
+Apesar de ser apresentada em uma postagem breve, essa evidência sobre a desigualdades regional no Brasil é bastante relevante e merece aprofundamentos em análises futuras. Ao visualizar estas primeiras informações diversas questões e hipóteses podem ser formuladas.
+
+-   De que forma a dinâmica do mercado de trabalho em cada região contribui para este resultado?
+
+-   Como este resultado também é afetado pelas políticas de tranferências de renda?
+
+-   Mudanças na composição de capital humano, principalmente relacionados à educação formal, contribuiram para reduzir estas desigualdades?
+
+-   A estrutura produtiva de cada região importa? As políticas de desenvolvimento regional nas últimas décadas tiveram algum impacto?
+
+    Bom, estes são apenas alguns exemplos de questões que podem ser formuladas e podem ser exploradas em postagens futuras.
