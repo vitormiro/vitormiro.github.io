@@ -14,7 +14,11 @@ title: "Pesquisa"
 
 ### Artigos publicados em Periódicos
 
--   [**Diferenciais de rendimentos entre atividades agrícolas e não agrícolas no meio rural do Brasil**](https://www.revistas.usp.br/ecoa/article/view/151004)**. Revista Economia Aplicada (USP), v.26, n.1, 2022.** Com Marcos Paulo Mesquita da Cruz, Robério Telmo Campos, Jair Andrade Araújo e João da Costa Filho.
+- [**Evaluating the impact of an innovative anti-poverty program: evidence using the generalized synthetic control method**](https://www.tandfonline.com/doi/abs/10.1080/13504851.2022.2110561). **Applied Economics Letters**. Published online: 23 Aug 2022. Com Francisca Zilânia Mariano, João Mário Santos de França e Marília Rodrigues Firmiano.
+
+- [**Crédito rural e produção das lavouras temporárias nos distintos cenários do nordeste brasileiro**](https://www.scielo.br/j/resr/a/VWGKx5SCXWFdY3TmFMFLRrx/?lang=pt). **Revista de Economia e Sociologia Rural 61(1): e247380, 2023.** Com Thyena Karen Magalhães Dias e Edward Martins Costa.
+
+-   [**Diferenciais de rendimentos entre atividades agrícolas e não agrícolas no meio rural do Brasil**](https://www.revistas.usp.br/ecoa/article/view/151004).**Revista Economia Aplicada (USP), v.26, n.1, 2022.** Com Marcos Paulo Mesquita da Cruz, Robério Telmo Campos, Jair Andrade Araújo e João da Costa Filho.
 
 -   [**O impacto da posse da terra do agricultor familiar sobre o acesso ao crédito rural**](https://www.ipea.gov.br/portal/images/stories/PDFs/ppp/210913_book_ppp58_art_2.pdf). **Revista Planejamento e Políticas Públicas (PPP), Vol. 58, abr/jun, 2021.** Com Thyena Karen Magalhães Dias, Edward Martins Costa e Ahmad Saeed Khan.
 

@@ -10,7 +10,9 @@ website:
         text: Home
       - about.qmd
       - pesquisa.qmd
+      - ensino.qmd
       - posts.qmd
+      
 
 format:
   html:
