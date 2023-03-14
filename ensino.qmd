@@ -4,11 +4,10 @@ title: "Ensino"
 
 ## Programa de Pós-Graduação em Economia Rural
 
-- Estatística Aplicada
-
+-   Estatística Aplicada
 
 ## Departamento de Economia Agrícola (Graduação)
 
- - Administração Rural (Economia e Gestão de Empresas Rurais)
- 
- - Projetos Agropecuários (Princípios de Finanças para Empresas Rurais)
+-   Administração Rural (Economia e Gestão de Empresas Rurais)
+
+-   Projetos Agropecuários (Princípios de Finanças para Empresas Rurais)

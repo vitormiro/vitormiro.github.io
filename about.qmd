@@ -2,7 +2,7 @@
 title: "Sobre"
 ---
 
-Sou professor adjunto do Departamento de Economia Agrícola/ Centro de Ciências Agrárias da Universidade Federal do Ceará ([DEA/UFC](https://dea.ufc.br/pt/)) e professor do Programa de Pós-Graduação em Economia Rural ([PPGER/UFC](https://ppger.ufc.br/pt/)), pesquisador do Programa de Pós-Graduação em Economia do [CAEN/UFC](https://caen.ufc.br/pt/) e do Laboratório de Estudos da Pobreza ([LEP](https://lepcaen.ufc.br/pt/)), pesquisador no Centro de Análise de Dados e Avaliação de Políticas Públicas ([CAPP/Instituto de Pesquisa e Estratégia Econômica do Ceará - IPECE](https://www.ipece.ce.gov.br/avaliacao-de-politicas-publicas/)).
+Professor adjunto do Departamento de Economia Agrícola/ Centro de Ciências Agrárias da Universidade Federal do Ceará ([DEA/UFC](https://dea.ufc.br/pt/)) e professor do Programa de Pós-Graduação em Economia Rural ([PPGER/UFC](https://ppger.ufc.br/pt/)), pesquisador do Programa de Pós-Graduação em Economia do [CAEN/UFC](https://caen.ufc.br/pt/) e do Laboratório de Estudos da Pobreza ([LEP](https://lepcaen.ufc.br/pt/)).
 
 Sou bacharel em Ciências Econômicas pela Universidade Federal de Uberlândia (2006), mestre (2009) e doutor (2015) em Economia pelo Programa de Pós-Graduação em Economia do CAEN/Universidade Federal do Ceará. Especialista (MBA) em Data Science e Analytics pela USP/ESALQ (2022).
 

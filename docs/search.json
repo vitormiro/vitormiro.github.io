@@ -4,7 +4,21 @@
     "href": "about.html",
     "title": "Sobre",
     "section": "",
-    "text": "Sou professor adjunto do Departamento de Economia Agrícola/ Centro de Ciências Agrárias da Universidade Federal do Ceará (DEA/UFC) e professor do Programa de Pós-Graduação em Economia Rural (PPGER/UFC), pesquisador do Programa de Pós-Graduação em Economia do CAEN/UFC e do Laboratório de Estudos da Pobreza (LEP), pesquisador no Centro de Análise de Dados e Avaliação de Políticas Públicas (CAPP/Instituto de Pesquisa e Estratégia Econômica do Ceará - IPECE).\nSou bacharel em Ciências Econômicas pela Universidade Federal de Uberlândia (2006), mestre (2009) e doutor (2015) em Economia pelo Programa de Pós-Graduação em Economia do CAEN/Universidade Federal do Ceará. Especialista (MBA) em Data Science e Analytics pela USP/ESALQ (2022).\nTenho experiência de pesquisa nas áreas de microeconomia, estatística e econometria aplicadas, principalmente em temas relacionados à Desenvolvimento Econômico, Avaliação de Políticas Públicas, Mercado de Trabalho e Pobreza. Atualmente estou desenvolvendo pesquisas nas áreas de Avaliação de Políticas Públicas e na aplicação de técnicas de Ciências de Dados e modelos de Machine Learning em problemas econômicos."
+    "text": "Professor adjunto do Departamento de Economia Agrícola/ Centro de Ciências Agrárias da Universidade Federal do Ceará (DEA/UFC) e professor do Programa de Pós-Graduação em Economia Rural (PPGER/UFC), pesquisador do Programa de Pós-Graduação em Economia do CAEN/UFC e do Laboratório de Estudos da Pobreza (LEP).\nSou bacharel em Ciências Econômicas pela Universidade Federal de Uberlândia (2006), mestre (2009) e doutor (2015) em Economia pelo Programa de Pós-Graduação em Economia do CAEN/Universidade Federal do Ceará. Especialista (MBA) em Data Science e Analytics pela USP/ESALQ (2022).\nTenho experiência de pesquisa nas áreas de microeconomia, estatística e econometria aplicadas, principalmente em temas relacionados à Desenvolvimento Econômico, Avaliação de Políticas Públicas, Mercado de Trabalho e Pobreza. Atualmente estou desenvolvendo pesquisas nas áreas de Avaliação de Políticas Públicas e na aplicação de técnicas de Ciências de Dados e modelos de Machine Learning em problemas econômicos."
+  },
+  {
+    "objectID": "ensino.html",
+    "href": "ensino.html",
+    "title": "Ensino",
+    "section": "",
+    "text": "Estatística Aplicada"
+  },
+  {
+    "objectID": "ensino.html#departamento-de-economia-agrícola-graduação",
+    "href": "ensino.html#departamento-de-economia-agrícola-graduação",
+    "title": "Ensino",
+    "section": "Departamento de Economia Agrícola (Graduação)",
+    "text": "Departamento de Economia Agrícola (Graduação)\n\nAdministração Rural (Economia e Gestão de Empresas Rurais)\nProjetos Agropecuários (Princípios de Finanças para Empresas Rurais)"
   },
   {
     "objectID": "index.html",
@@ -33,26 +47,5 @@
     "title": "Posts",
     "section": "",
     "text": "Uma evidência sobre a distribuição regional da pobreza no Brasil (2021)\n\n\n\n\n\n\n\npobreza\n\n\ndesigualdade regional\n\n\nR\n\n\n\n\nNesta primeira postagem apresento dados sobre as diferenças de incidência de pobreza entre as unidades federativas brasileiras.\n\n\n\n\n\n\nJan 6, 2023\n\n\nVitor Hugo Miro, Vitor Hugo Miro\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "ensino.html",
-    "href": "ensino.html",
-    "title": "Ensino",
-    "section": "",
-    "text": "Estatística Aplicada"
-  },
-  {
-    "objectID": "ensino.html#departamento-de-economia-agricola",
-    "href": "ensino.html#departamento-de-economia-agricola",
-    "title": "Ensino",
-    "section": "Departamento de Economia Agricola",
-    "text": "Departamento de Economia Agricola\n\nAdministração Rural (Economia e Gestão de Empresas Rurais)\nProjetos Agropecuários (Princípios de Finanças para Empresas Rurais)"
-  },
-  {
-    "objectID": "ensino.html#departamento-de-economia-agrícola-graduação",
-    "href": "ensino.html#departamento-de-economia-agrícola-graduação",
-    "title": "Ensino",
-    "section": "Departamento de Economia Agrícola (Graduação)",
-    "text": "Departamento de Economia Agrícola (Graduação)\n\nAdministração Rural (Economia e Gestão de Empresas Rurais)\nProjetos Agropecuários (Princípios de Finanças para Empresas Rurais)"
   }
 ]
