@@ -2,8 +2,10 @@
 title: "Sobre"
 ---
 
-Professor adjunto do Departamento de Economia Agrícola/ Centro de Ciências Agrárias da Universidade Federal do Ceará ([DEA/UFC](https://dea.ufc.br/pt/)) e professor do Programa de Pós-Graduação em Economia Rural ([PPGER/UFC](https://ppger.ufc.br/pt/)), pesquisador do Programa de Pós-Graduação em Economia do [CAEN/UFC](https://caen.ufc.br/pt/) e do Laboratório de Estudos da Pobreza ([LEP](https://lepcaen.ufc.br/pt/)).
+Professor adjunto do Departamento de Economia Agrícola/ Centro de Ciências Agrárias da Universidade Federal do Ceará ([DEA/UFC](https://dea.ufc.br/pt/)) e professor do Programa de Pós-Graduação em Economia Rural ([PPGER/UFC](https://ppger.ufc.br/pt/)), pesquisador do Programa de Pós-Graduação em Economia do [CAEN/UFC](https://caen.ufc.br/pt/), do Laboratório de Estudos da Pobreza ([LEP](https://lepcaen.ufc.br/pt/)) e do [Centro Centro de Estudos para Desenvolvimento do Nordeste](https://portalibre.fgv.br/nordeste#:~:text=%E2%80%8B%20O%20Centro%20de%20Estudos,aprofundados%20para%20a%20regi%C3%A3o%20Nordeste) do Instituto Brasileiro de Economia/ Fundação Getúlio Vargas (FGV IBRE).
 
 Sou bacharel em Ciências Econômicas pela Universidade Federal de Uberlândia (2006), mestre (2009) e doutor (2015) em Economia pelo Programa de Pós-Graduação em Economia do CAEN/Universidade Federal do Ceará. Especialista (MBA) em Data Science e Analytics pela USP/ESALQ (2022).
 
-Tenho experiência de pesquisa nas áreas de microeconomia, estatística e econometria aplicadas, principalmente em temas relacionados à Desenvolvimento Econômico, Avaliação de Políticas Públicas, Mercado de Trabalho e Pobreza. Atualmente estou desenvolvendo pesquisas nas áreas de Avaliação de Políticas Públicas e na aplicação de técnicas de Ciências de Dados e modelos de Machine Learning em problemas econômicos.
+Tenho experiência de pesquisa nas áreas de microeconomia, estatística e econometria aplicadas, principalmente em temas relacionados à Desenvolvimento Econômico, Avaliação de Políticas Públicas, Mercado de Trabalho e Pobreza.
+
+Atualmente estou desenvolvendo pesquisas nas áreas de Avaliação de Políticas Públicas e na aplicação de técnicas de Ciências de Dados e modelos de Machine Learning em problemas econômicos.

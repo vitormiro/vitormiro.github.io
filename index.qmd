@@ -17,4 +17,4 @@ about:
       href: mailto:vitormiro@ufc.br
 ---
 
-Vitor Hugo Miro é professor do Departamento de Economia Agrícola/ Centro de Ciências Agrárias da Universidade Federal do Ceará ([DEA/UFC](https://dea.ufc.br/pt/)) e do Programa de Pós-Graduação em Economia Rural ([PPGER/UFC](https://ppger.ufc.br/pt/)).
+Vitor Hugo Miro é professor do Departamento de Economia Agrícola/ Centro de Ciências Agrárias da Universidade Federal do Ceará ([DEA/UFC](https://dea.ufc.br/pt/)) e do Programa de Pós-Graduação em Economia Rural ([PPGER/UFC](https://ppger.ufc.br/pt/)).\
