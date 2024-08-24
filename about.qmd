@@ -7,5 +7,3 @@ Professor adjunto do Departamento de Economia Agrícola/ Centro de Ciências Agr
 Sou bacharel em Ciências Econômicas pela Universidade Federal de Uberlândia (2006), mestre (2009) e doutor (2015) em Economia pelo Programa de Pós-Graduação em Economia do CAEN/Universidade Federal do Ceará. Especialista (MBA) em Data Science e Analytics pela USP/ESALQ (2022).
 
 Tenho experiência de pesquisa nas áreas de microeconomia, estatística e econometria aplicadas, principalmente em temas relacionados à Desenvolvimento Econômico, Avaliação de Políticas Públicas, Mercado de Trabalho e Pobreza.
-
-Atualmente estou desenvolvendo pesquisas nas áreas de Avaliação de Políticas Públicas e na aplicação de técnicas de Ciências de Dados e modelos de Machine Learning em problemas econômicos.
