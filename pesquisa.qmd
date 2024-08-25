@@ -8,15 +8,17 @@ title: "Pesquisa"
 
 -   **Estatística e Econometria aplicadas** \[Microeconometria (modelos em cross-section, escolha discreta, decomposição), Ciência de Dados e Machine Learning\]
 
--   **Avaliação de Políticas Públicas**.
+-   **Avaliação de Políticas Públicas** \[Métodos estatísticos, inferência causal\]
 
 \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
 
 ### Artigos publicados em Periódicos
 
-- [**Evaluating the impact of an innovative anti-poverty program: evidence using the generalized synthetic control method**](https://www.tandfonline.com/doi/abs/10.1080/13504851.2022.2110561). **Applied Economics Letters**. Published online: 23 Aug 2022. Com Francisca Zilânia Mariano, João Mário Santos de França e Marília Rodrigues Firmiano.
+-   [**Crédito rural e produção das lavouras temporárias nos distintos cenários do nordeste brasileiro**](https://www.scielo.br/j/resr/a/VWGKx5SCXWFdY3TmFMFLRrx/?lang=pt). **Revista de Economia e Sociologia Rural 61(1): e247380, 2023.** Com Thyena Karen Magalhães Dias e Edward Martins Costa.
 
-- [**Crédito rural e produção das lavouras temporárias nos distintos cenários do nordeste brasileiro**](https://www.scielo.br/j/resr/a/VWGKx5SCXWFdY3TmFMFLRrx/?lang=pt). **Revista de Economia e Sociologia Rural 61(1): e247380, 2023.** Com Thyena Karen Magalhães Dias e Edward Martins Costa.
+-   [**Does the Family Structure Affect the Health Risk Behavior of Adolescents in Brazil?**](https://periodicos.fgv.br/bre/article/view/84954). **Brazilian Review of Econometrics**, v. 42, p.1, 2022. Com Rayen Heredia Peñaloza, Edward Martins Costa, Guilherme Dniz Irffi e Ahmad Saeed Khan.
+
+-   [**Evaluating the impact of an innovative anti-poverty program: evidence using the generalized synthetic control method**](https://www.tandfonline.com/doi/abs/10.1080/13504851.2022.2110561). **Applied Economics Letters**. Published online: 23 Aug 2022. Com Francisca Zilânia Mariano, João Mário Santos de França e Marília Rodrigues Firmiano.
 
 -   [**Diferenciais de rendimentos entre atividades agrícolas e não agrícolas no meio rural do Brasil**](https://www.revistas.usp.br/ecoa/article/view/151004).**Revista Economia Aplicada (USP), v.26, n.1, 2022.** Com Marcos Paulo Mesquita da Cruz, Robério Telmo Campos, Jair Andrade Araújo e João da Costa Filho.
 
