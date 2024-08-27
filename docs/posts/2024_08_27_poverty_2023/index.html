@@ -7,10 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vitor Hugo Miro">
-<meta name="dcterms.date" content="2023-06-01">
-<meta name="description" content="Nesta primeira postagem apresento dados sobre as diferenças de incidência de pobreza entre as unidades federativas brasileiras.">
+<meta name="dcterms.date" content="2024-08-27">
 
-<title>Vitor Hugo Miro - Uma evidência sobre a distribuição regional da pobreza no Brasil (2021)</title>
+<title>Vitor Hugo Miro - Distribuição regional da pobreza monetária no Brasil com dados da PNAD Contínua (2023)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -117,13 +116,8 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Uma evidência sobre a distribuição regional da pobreza no Brasil (2021)</h1>
-                  <div>
-        <div class="description">
-          Nesta primeira postagem apresento dados sobre as diferenças de incidência de pobreza entre as unidades federativas brasileiras.
-        </div>
-      </div>
-                          <div class="quarto-categories">
+      <h1 class="title">Distribuição regional da pobreza monetária no Brasil com dados da PNAD Contínua (2023)</h1>
+                                <div class="quarto-categories">
                 <div class="quarto-category">pobreza</div>
                 <div class="quarto-category">desigualdade regional</div>
                 <div class="quarto-category">R</div>
@@ -144,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">06/01/2023</p>
+        <p class="date">August 27, 2024</p>
       </div>
     </div>
     
@@ -160,9 +154,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#primeira-postagem" id="toc-primeira-postagem" class="nav-link active" data-scroll-target="#primeira-postagem">Primeira postagem</a></li>
-  <li><a href="#indicadores-de-extrema-pobreza-por-uf" id="toc-indicadores-de-extrema-pobreza-por-uf" class="nav-link" data-scroll-target="#indicadores-de-extrema-pobreza-por-uf">Indicadores de extrema pobreza por UF</a></li>
-  <li><a href="#considerações-finais" id="toc-considerações-finais" class="nav-link" data-scroll-target="#considerações-finais">Considerações finais</a></li>
+  <li><a href="#dinâmica-recente-da-pobreza-no-brasil" id="toc-dinâmica-recente-da-pobreza-no-brasil" class="nav-link active" data-scroll-target="#dinâmica-recente-da-pobreza-no-brasil">Dinâmica recente da pobreza no Brasil</a></li>
+  <li><a href="#considerações-finais-com-destaque-para-a-região-nordeste" id="toc-considerações-finais-com-destaque-para-a-região-nordeste" class="nav-link" data-scroll-target="#considerações-finais-com-destaque-para-a-região-nordeste">Considerações finais com destaque para a região Nordeste</a></li>
   </ul>
 </nav>
     </div>
@@ -172,117 +165,94 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="primeira-postagem" class="level3">
-<h3 class="anchored" data-anchor-id="primeira-postagem">Primeira postagem</h3>
-<p>Nesta primeira postagem eu não poderia escolher outro tema. Nos últimos anos me dediquei muito ao cálculo e análise de indicadores de pobreza, seja em pesquisas acadêmicas, trabalhos técnicos ou como consultor.</p>
-<p>Neste texto estarei fazendo referência à pobreza monetária que, sem me alongar muito na definição, pode ser caracterizada pela insuficiência de renda de um indivíduo ou família em relação à um nível mínimo, considerado adequado para garantir a satisfação de necessidades básicas.</p>
-<p>Infelizmente temas relacionados com a pobreza ainda são bastante presentes. Os indicadores de pobreza monetária publicados pelo Instituto Brasileiro de Geografia e Estatística (IBGE) nos últimos anos mostram o quanto o tema ainda é relevante.</p>
-<p>Em momentos recessivos, como o de 2015 e 2016, foi possível verificar os reflexos da situação no mercado de trabalho e da redução da renda sobre os indicadores de pobreza. Em 2020, no cenário de pandemia de Covid-19, foi possível calcular indicadores de renda e pobreza para verificar o impacto das tranferências do Auxílio Emergencial em 2020 e o resultado da descontinuidade delas em 2021.</p>
-<p>Os indicadores de pobreza monetária são um mero reflexo do que acontece com a renda das famílias. Nesse sentido, a situação de pobreza de uma pessoa ou família reflete a sua capacidade de auferir renda, seja no mercado de trabalho, como retorno de ativos ou mesmo sendo beneficiada por uma política social. Os determinantes dessa capacidade são diversos, podendo estar associados à características individuais (como escolaridade) e ao contexto em que estas pessoas e famílias se encontram.</p>
-<p>Um dos aspectos contextuais mais citados como determinante da situação de pobreza é o local onde as pessoas e famílias vivem. O Brasil é um país marcado por forte heterogeneidade regional, sendo caracterizado na década de 1970 como uma “Belindia” (uma grande Índia pobre coexistindo com uma pequena Bélgica rica). Mesmo existindo uma redução de disparidades em muitos indicadores sociais nas últimas décadas, a desigualdade regionais ainda é muito evidente e podemos verificar o quanto este aspecto é determinante para a situação de insuficiência de renda e se traduz no indicador de pobreza.</p>
-<p>O objetivo desta postagem é bastante singelo, apresentar uma evidência sobre as desigualdades regionais de incidência de pobreza. Para fazer isso escolhi o indicador de proporção de pessoas em extrema pobreza. Os dados utilizados são provenientes da Pesquisa Nacional por Amostra de Domicílios Contínua (PNADC) levada a campo em 2021.</p>
-</section>
-<section id="indicadores-de-extrema-pobreza-por-uf" class="level3">
-<h3 class="anchored" data-anchor-id="indicadores-de-extrema-pobreza-por-uf">Indicadores de extrema pobreza por UF</h3>
-<p>O cálculo de um indicador de pobreza deve envolver uma estratégia de identificação e uma de agregação. Como mencionado acima, realizei o cálculo do indicador de extrema pobreza monetária identificando pessoas/famílias pobres com base na linha de pobreza sugerida pelo Banco Mundial. Essa linha adota um valor de referência de US$1,90 por dia (em termos da Paridade de Poder de Compra, a preços internacionais de 2011, e corrigidos para preços de 2021 pelo IPCA). Por sua vez, a agregação considera o indicador de incidência de pobreza dado pela formulação de Foster, Greer e Thorbecke (1984). <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> O cálculo foi realizado com o pacote <code>convey</code>. <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>A tabela abaixo mostra a proporção de pessoas em situação de extrema pobreza em cada região. Temos uma evidência clara da maior proporção na região Nordeste (16,5%), seguida da região Norte (12,6%). Enquanto isso, na região Sul menos de 3% da população é classificada dessa forma.</p>
+<section id="dinâmica-recente-da-pobreza-no-brasil" class="level3">
+<h3 class="anchored" data-anchor-id="dinâmica-recente-da-pobreza-no-brasil">Dinâmica recente da pobreza no Brasil</h3>
+<p>Bom, já fazia algum tempo desde a minha primeira (e até agora, única) postagem nesta página. Eu confesso: não sou muito ativo para gerar este tipo de postagem aqui na minha própria página.</p>
+<p>Mas nos últimos meses passei a integrar o grupo de pesquisadores do Instituto Brasileiro de Economia da Fundação Getúlio Vargas - FGV IBRE. De forma mais específica, do grupo de pesquisadores do Centro de Estudos para Desenvolvimento do Nordeste, a convite do Professor Flávio Ataliba, coordenador desta iniciativa. Pra mim, é um motivo de muito orgulho e uma recompensa gratificante de meus esforços no trabalho de pesquisa na área social.</p>
+<p>No âmbito do “Centro do Nordeste do FGV IBRE”, temos (eu, o Prof.&nbsp;Flávio Ataliba e o Prof.&nbsp;João Mários de França) realizado ótimas discussões sobre bem-estar, pobreza e desigualdade, sempre guiados pela exploração dos dados da Pesquisa Nacional por Amostra de Domicílios Contínua (PNAD Contínua) do Instituto Brasileiro de Geografia e Estatística (IBGE). Estas discussões tem se transformado em artigos postados no Blog do IBRE, como este aqui: <a href="https://blogdoibre.fgv.br/posts/33-milhoes-de-nordestinos-saem-da-pobreza-entre-2012-2023">3,3 milhões de nordestinos saem da pobreza entre 2012 a 2023</a>.</p>
+<p>Aqui vou discutir um pouco dos resultados que exploramos neste artigo e, claro, atualizar os dados apresentados na minha postagem anterior <a href="https://vitormiro.github.io/posts/2023_01_06_poverty_by_uf_2021/">Uma evidência sobre a distribuição regional da pobreza no Brasil (2021)</a>.</p>
+<p>No artigo publicado no Blog do IBRE apresentamos e discutimos algumas evidências com base em indicadores de pobreza monetária, calculados com base nos dados da PNAD Contínua, referente ao período de 2012 a 2023.</p>
+<p>Os indicadores foram calculados com base no rendimento de todas as fontes, atualizados a preços médios de 2023 pelo Índice de Preços ao Consumidor Amplo (IPCA). As linhas de pobreza adotadas são as recomendadas pelo Banco Mundial, convertidas de acordo com a paridade de poder de compra (2017) e ajustadas de acordo com o IPCA. Dessa forma, foram identificados como pobres os domicílios com rendimentos inferiores a linha de pobreza de US$ 6,85/ dia (PPC 2017), valor ajustado como sendo aproximadamente R$ 667/ mês. Por sua vez, são identificados como extremamente pobres os domicílios em que a medida de renda foi inferior a linha de US$ 2,15/ dia (PPC 2017), que foram convertidos para um valor de aproximadamente R$ 209/ mês.</p>
+<p>No caso da região Nordeste, a proporção de pessoas em situação de pobreza foi estimada em aproximadamente 47,4%, em 2023, o que corresponde a mais de 27,5 milhões de pessoas. Esse valor é equivalente a 45% das pessoas em situação de pobreza no Brasil.</p>
+<p>A tabela abaixo mostra a proporção de pessoas em situação de extrema pobreza em cada região. Temos uma evidência clara da maior proporção na região Nordeste (9,08%), seguida da região Norte (6,34%). Enquanto isso, na região Sul menos de 1,7% da população é classificada dessa forma. No Sudeste temos uma incidência de 2,5% e no Centro-Oeste de 1,85%.</p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small" data-quarto-postprocess="true">
-<caption>Tabela. Extrema Pobreza por região (2021)</caption>
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Incidência de Pobreza Extrema por Região (R$209/mês)</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Prop(%)</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Incidência de Pobreza Extrema</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Norte</td>
-<td style="text-align: right;">12.6</td>
+<td style="text-align: left;">6.34%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Nordeste</td>
-<td style="text-align: right;">16.5</td>
+<td style="text-align: left;">9.08%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Sudeste</td>
-<td style="text-align: right;">5.1</td>
+<td style="text-align: left;">2.50%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Sul</td>
-<td style="text-align: right;">3.0</td>
+<td style="text-align: left;">1.69%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Centro-Oeste</td>
-<td style="text-align: right;">3.6</td>
+<td style="text-align: left;">1.85%</td>
 </tr>
-</tbody><tfoot>
-<tr class="even">
-<td style="text-align: left; padding: 0;"><span style="font-style: italic;">Note: </span></td>
-<td style="text-align: right;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0;"><sup></sup> Fonte: IBGE/PNADC.</td>
-<td style="text-align: right;"></td>
-</tr>
-</tfoot>
-
+</tbody>
 </table>
+</div>
 
 
 </div>
 </div>
-<p>Apresentando uma informação mais detalhada, o gráfico a seguir torna ainda mais evidente a maior incidência de famílias em situação de extrema pobreza nos estados das regiões Norte e Nordeste, principalmente nesta segunda. Os estados do Maranhão e de Pernambuco são os que apresentam os maiores indicadores de pobreza.</p>
-<p>No outro extremo, as menores taxas são observadas nos estados das regiões Sul e Centro-Oeste, com destaque para os indicadores dos estados de Santa Catarina e Rio Grande do Sul.</p>
+<p>Trazendo alguns comentários do artigo publicado no blog do IBRE temos que as estatísticas calculadas com base na linha de extrema pobreza mostram que 4,4% da população brasileira em 2023 pode ser identificada em situação de renda mais restrita, o que corresponde a uma estimativa de quase 9,6 milhões de pessoas.</p>
+<p>Em 2023 o índice de pobreza extrema para o Nordeste foi estimado em pouco mais 9%, equivalente a mais de 5,2 milhões de pessoas. Em 2021, pior ano da série (com o mercado de trabalho ainda sob os efeitos da pandemia e os programas de transferência de renda antes do desenho estabelecido em 2022), o índice de extrema pobreza no Nordeste alcançou o patamar de 17,6%, onde mais de 10,1 milhões de pessoas se enquadravam nesta condição de insuficiência de renda mais severa.</p>
+<p>Estes dados permitem inferir que de 2021 a 2023, quase 5 milhões de pessoas deixaram a condição de extrema pobreza na região Nordeste. Isso representa metade da redução de pessoas em situação de pobreza no Brasil no mesmo período (que foi de quase 9,7 milhões entre 2021 e 2023).</p>
+<p>O gráfico a seguir apresenta uma informação mais detalhada, exibindo os indicadores de incidência de extrema pobreza para cada unidade federativa (UF). Neste gráfico a maior incidência de famílias em situação de extrema pobreza nos estados das regiões Norte e Nordeste é bastante evidente.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>O estado do Acre apresenta a maior proporção de pessoas em situação de extrema pobreza, 13%. Na sequência sete dos nove estados do Nordeste. Os maiores indicadores de extrema pobreza no Nordeste são os dos estados do Maranhão (12,2%), Pernambuco e Ceará (ambos com 9,3%). No outro extremo, as menores taxas são observadas nos estados das regiões Sul e Centro-Oeste, com destaque para os indicadores dos estados de Goiás e Rio Grande do Sul (ambos com 1,3%).</p>
+<p>Assim como na publicação anterior, não poderia deixar de construir o mapa a seguir, que representa uma forma alternativa de apresentar os dados do gráfico anterior.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>De forma complementar, empreguei os pacotes <code>geobr</code> e <code>sf</code> para construir uma mapa destacando a desigualdade regional brasileira.</p>
-<div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Using year 2010</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
 </section>
-<section id="considerações-finais" class="level3">
-<h3 class="anchored" data-anchor-id="considerações-finais">Considerações finais</h3>
-<p>Apesar de ser apresentada em uma postagem breve, essa evidência sobre a desigualdades regional no Brasil é bastante relevante e merece aprofundamentos em análises futuras. Ao visualizar estas primeiras informações diversas questões e hipóteses podem ser formuladas.</p>
-<ul>
-<li><p>De que forma a dinâmica do mercado de trabalho em cada região contribui para este resultado?</p></li>
-<li><p>Como este resultado também é afetado pelas políticas de tranferências de renda?</p></li>
-<li><p>Mudanças na composição de capital humano, principalmente relacionados à educação formal, contribuiram para reduzir estas desigualdades?</p></li>
-<li><p>A estrutura produtiva de cada região importa? As políticas de desenvolvimento regional nas últimas décadas tiveram algum impacto?</p>
-<p>Bom, estes são apenas alguns exemplos de questões que podem ser formuladas e podem ser exploradas em postagens futuras.</p></li>
-</ul>
+<section id="considerações-finais-com-destaque-para-a-região-nordeste" class="level3">
+<h3 class="anchored" data-anchor-id="considerações-finais-com-destaque-para-a-região-nordeste">Considerações finais com destaque para a região Nordeste</h3>
+<p>Os indicadores de extrema pobreza apresentados neste texto destacam uma característica crucial das desigualdades regionais no Brasil. Em 2023, o rendimento domiciliar per capita médio estimado para a região Nordeste foi de R$1.146, correspondendo a apenas 62% da média nacional de R$1.848. Nesse mesmo ano, a participação dos rendimentos provenientes do trabalho representou 74,2% da renda média domiciliar per capita no Brasil, enquanto no Nordeste essa participação foi de 65,7%. Programas sociais foram responsáveis por 3,7% da renda média nacional, mas no Nordeste, essa contribuição alcançou um patamar próximo de 10%.</p>
+<p>Esses dados evidenciam que o Nordeste continua distante da realidade econômica das regiões mais desenvolvidas do país, sendo, reconhecidamente, a região que abriga a maior parte da população em situação de pobreza.</p>
+<p>Esse cenário recente (de 2023) já reflete os impactos das novas políticas de transferência de renda, que resultaram na redução da participação dos rendimentos do trabalho entre os mais pobres e no aumento da importância relativa dos programas sociais na composição da renda.</p>
+<p>Sem condições adequadas e oportunidades de melhor inserção no mercado de trabalho, as famílias em extrema pobreza passam a depender cada vez mais das transferências de renda, como o Programa Bolsa Família e iniciativas estaduais e municipais. Essas rendas sociais preenchem uma lacuna significativa no orçamento dessas famílias. Com o aumento dos valores, como ocorreu no âmbito do Auxílio Brasil em 2022 e, posteriormente, no Bolsa Família a partir de 2023, a participação dos programas sociais se tornou ainda mais relevante. No Nordeste, onde residem 55% das pessoas em situação de extrema pobreza do país, essa contribuição é crucial.</p>
 
 
 </section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>Foster, James, Joel Greer, and Erik Thorbecke. 1984. “A Class of Decomposable Poverty Measures.” <em>Econometrica</em> 52 (3): 761–66.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Jacob G, Pessoa D, Damico A (2022). “Poverty and Inequality with Complex Survey Data.” Auxiliary information about the usage of the R convey package, https://guilhermejacob.github.io/context/.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{hugo miro2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{hugo miro2024,
   author = {Hugo Miro, Vitor and Hugo Miro, Vitor},
-  title = {Uma Evidência Sobre a Distribuição Regional Da Pobreza No
-    {Brasil} (2021)},
-  date = {2023-01-06},
-  url = {https://vitormiro.github.io/posts/2023_01_06_poverty_by_uf_2021/},
+  title = {Distribuição Regional Da Pobreza Monetária No {Brasil} Com
+    Dados Da {PNAD} {Contínua} (2023)},
+  date = {2024-08-27},
+  url = {https://vitormiro.github.io/posts/2024_08_27_poverty_2023/},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-hugo miro2023" class="csl-entry quarto-appendix-citeas" role="listitem">
-Hugo Miro, Vitor, and Vitor Hugo Miro. 2023. <span>“Uma Evidência Sobre
-a Distribuição Regional Da Pobreza No Brasil (2021).”</span> January 6,
-2023. <a href="https://vitormiro.github.io/posts/2023_01_06_poverty_by_uf_2021/">https://vitormiro.github.io/posts/2023_01_06_poverty_by_uf_2021/</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-hugo miro2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Hugo Miro, Vitor, and Vitor Hugo Miro. 2024. <span>“Distribuição
+Regional Da Pobreza Monetária No Brasil Com Dados Da PNAD Contínua
+(2023).”</span> August 27, 2024. <a href="https://vitormiro.github.io/posts/2024_08_27_poverty_2023/">https://vitormiro.github.io/posts/2024_08_27_poverty_2023/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
