@@ -22,5 +22,14 @@
   },
   "ensino.qmd": {
     "ensino.html": "40168e94"
+  },
+  "posts/2023_08_10_bias_variance_tradeoff/index_bias_var.qmd": {
+    "index_bias_var.html": "4e5ab974"
+  },
+  "posts/2023_08_10_supervised_learning/supervised_learning.qmd": {
+    "supervised_learning.html": "06529af8"
+  },
+  "posts/2024_08_21_poverty_2023/index.qmd": {
+    "index.html": "cccae16c"
   }
 }
