@@ -2,15 +2,16 @@
 title: "Ensino"
 ---
 
+## Departamento de Economia Agrícola (Graduação)
+
+-   Administração Rural (Economia e Gestão de Empresas Rurais)
+
+-   Projetos Agropecuários (Princípios de Finanças para Empresas Rurais)
+
 ## Programa de Pós-Graduação em Economia Rural
 
 -   Estatística Aplicada
 
 -   Microeconomia
 
-
-## Departamento de Economia Agrícola (Graduação)
-
--   Administração Rural (Economia e Gestão de Empresas Rurais)
-
--   Projetos Agropecuários (Princípios de Finanças para Empresas Rurais)
+-   [Métodos Quantitativos I (Econometria)](econometria1.html)

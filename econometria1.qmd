@@ -1,0 +1,9 @@
+---
+title: "ECONOMETRIA I (Métodos Quantitativos I)"
+author: "Vitor Hugo Miro"
+
+---
+
+# ECONOMETRIA I (Métodos Quantitativos I)
+
+Disciplina ministrada no Programa de Pós-Graduação em Economia Rural da Universidade Federal do Ceará.
