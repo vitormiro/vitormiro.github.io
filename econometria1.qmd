@@ -1,6 +1,7 @@
 ---
 title: "ECONOMETRIA I (Métodos Quantitativos I)"
 author: "Vitor Hugo Miro"
+title-block: false
 
 ---
 
