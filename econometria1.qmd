@@ -8,7 +8,8 @@ Disciplina ministrada no Programa de Pós-Graduação em Economia Rural da Unive
 
 -   [Programa da Disciplina (2024)](docs/docs_econometria/programa_2024.pdf)
 
-
 ## Conteúdo
 
-- [Revisão de Álgebra Linear (parte 1)](docs/docs_econometria/Revisao_ALp1.Rmd)
+-   [Revisão de Álgebra Linear (parte 1)](docs/docs_econometria/Revisao_ALp1.Rmd)
+
+-   [Revisão de Álgebra Linear (parte 2)](docs/docs_econometria/Revisao_ALp2.Rmd)
