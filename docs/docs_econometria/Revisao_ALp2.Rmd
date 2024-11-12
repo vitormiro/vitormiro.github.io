@@ -509,36 +509,13 @@ Em termos matriciais,
 $$
 \sum_{i=1}^{n} (x_i - \bar{x})^2 = 
 (\textbf{x} - {\textbf{i}}\bar{x})' (\textbf{x} - {\textbf{i}}\bar{x}) = 
-(\textbf{M}^0 \textbf{x})' (\textbf{M}^0 \textbf{x}) = 
-\textbf{x}' \textbf{M}^0 ' \textbf{M}^0 \textbf{x}
+(\mathbf{M^0} \textbf{x})' (\mathbf{M^0} \textbf{x}) = 
+\textbf{x}' \mathbf{M^0}' \mathbf{M^0} \textbf{x}
 $$
 
-A matriz $\textbf{M}^0$ possui a propriedade de ser idempotente, ou seja, $\mathbf{M^0}' \mathbf{M^0} = \mathbf{M^0}$.
+A matriz $\mathbf{M^0}$ possui a propriedade de ser idempotente, ou seja, $\mathbf{M^0}' \mathbf{M^0} = \mathbf{M^0}$.
 
-Assim:
-
-$$
-\sum_{i=1}^{n} (x_i - \bar{x})^2 = \textbf{x}' \textbf{M}^0 \textbf{x}
-$$
-
-**EXEMPLO**
-
-```{r}
-# Calculando a soma dos quadrados dos desvios
-soma_quadrados <- t(x) %*% M0 %*% x
-soma_quadrados <- as.numeric(soma_quadrados)
-soma_quadrados
-```
-
-### Formas quadráticas e otimização
-
-Uma forma quadrática sempre assume o valor zero no ponto $\mathbf{x} = 0$.
-
-Este, no entanto, não é um resultado interessante!
-
-Por exemplo, se $\mathbf{x} \in \mathbb{R}$, isto é, $\mathbf{x} = x_1$, então a forma quadrática geral é $ax_1^2$, que é igual a zero quando $x_1 = 0$.
-
-A característica distintiva de uma forma quadrática é o conjunto de valores que assume quando $\mathbf{x} \neq 0$. Queremos saber se $\mathbf{x} = 0$ é um máximo, mínimo ou nenhum dos dois.
+Assim: cterística distintiva de uma forma quadrática é o conjunto de valores que assume quando $\mathbf{x} \neq 0$. Queremos saber se $\mathbf{x} = 0$ é um máximo, mínimo ou nenhum dos dois.
 
 Sob a ótica de um problema de otimização, isso sim é interessante!
 

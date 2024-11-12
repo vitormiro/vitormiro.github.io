@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vitor Hugo Miro">
+
+<title>Vitor Hugo Miro - Revisão de Álgebra Linear (2)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Vitor Hugo Miro</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">Sobre</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../ensino.html" rel="" target="">
+ <span class="menu-text">Ensino</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../pesquisa.html" rel="" target="">
+ <span class="menu-text">Pesquisa</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html" rel="" target="">
+ <span class="menu-text">Posts</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#sistemas-lineares" id="toc-sistemas-lineares" class="nav-link active" data-scroll-target="#sistemas-lineares">1. Sistemas Lineares</a>
+  <ul class="collapse">
+  <li><a href="#sistemas-de-equações-lineares" id="toc-sistemas-de-equações-lineares" class="nav-link" data-scroll-target="#sistemas-de-equações-lineares">Sistemas de equações lineares</a></li>
+  <li><a href="#aplicado-sistemas-de-equações" id="toc-aplicado-sistemas-de-equações" class="nav-link" data-scroll-target="#aplicado-sistemas-de-equações">Aplicado sistemas de equações</a></li>
+  <li><a href="#algumas-operações-comuns" id="toc-algumas-operações-comuns" class="nav-link" data-scroll-target="#algumas-operações-comuns">Algumas operações comuns</a></li>
+  </ul></li>
+  <li><a href="#formas-linares-e-formas-quadráticas" id="toc-formas-linares-e-formas-quadráticas" class="nav-link" data-scroll-target="#formas-linares-e-formas-quadráticas">2. Formas Linares e Formas Quadráticas</a>
+  <ul class="collapse">
+  <li><a href="#formas-quadráticas" id="toc-formas-quadráticas" class="nav-link" data-scroll-target="#formas-quadráticas">Formas Quadráticas</a></li>
+  <li><a href="#aplicando-formas-quadráticas" id="toc-aplicando-formas-quadráticas" class="nav-link" data-scroll-target="#aplicando-formas-quadráticas">Aplicando formas quadráticas</a></li>
+  <li><a href="#formas-quadráticas-e-otimização" id="toc-formas-quadráticas-e-otimização" class="nav-link" data-scroll-target="#formas-quadráticas-e-otimização">Formas quadráticas e otimização</a></li>
+  </ul></li>
+  <li><a href="#autovalores-e-autovetores" id="toc-autovalores-e-autovetores" class="nav-link" data-scroll-target="#autovalores-e-autovetores">3. Autovalores e autovetores</a></li>
+  <li><a href="#diferenciação-matricial" id="toc-diferenciação-matricial" class="nav-link" data-scroll-target="#diferenciação-matricial">4. Diferenciação matricial</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Revisão de Álgebra Linear (2)</h1>
+<p class="subtitle lead">Econometria I</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Vitor Hugo Miro </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="sistemas-lineares" class="level2">
+<h2 class="anchored" data-anchor-id="sistemas-lineares">1. Sistemas Lineares</h2>
+<section id="sistemas-de-equações-lineares" class="level3">
+<h3 class="anchored" data-anchor-id="sistemas-de-equações-lineares">Sistemas de equações lineares</h3>
+<p>Um sistema de <span class="math inline">\(n\)</span> equações simultâneas em <span class="math inline">\(k\)</span> variáveis é dado por:</p>
+<p><span class="math display">\[
+\begin{align*}
+    a_{11} x_1 + a_{12} x_2 + \cdots + a_{1k} x_k &amp;= b_1  \\
+    a_{12} x_1 + a_{22} x_2 + \cdots + a_{2k} x_k &amp;= b_2  \\
+        &amp;\vdots \\
+    a_{n1} x_1 + a_{n2} x_2 + \cdots + a_{nk} x_k &amp;= b_n  \\
+\end{align*}
+\]</span></p>
+<p>e pode ser expresso na forma matricial como</p>
+<p><span class="math display">\[\mathbf{Ax} = \mathbf{b}\]</span></p>
+<p>, onde <span class="math inline">\(\mathbf{A}\)</span> é uma matriz <span class="math inline">\(n \times k\)</span> de coeficientes <span class="math inline">\([a_{ij}]\)</span>, <span class="math inline">\(\mathbf{x}\)</span> é um vetor coluna das variáveis <span class="math inline">\(x_1, \dots, x_K\)</span>, e <span class="math inline">\(\mathbf{b}\)</span> é o vetor coluna de constantes <span class="math inline">\(b_1, \dots, b_n\)</span>.</p>
+<p>Usando a notação matricial, podemos escrever:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+    a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1k} \\
+    a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2k} \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nk}
+\end{bmatrix}
+\begin{bmatrix}
+    x_1 \\
+    x_2 \\
+    \vdots \\
+    x_k
+\end{bmatrix} =
+\begin{bmatrix}
+    b_1 \\
+    b_2 \\
+    \vdots \\
+    b_n
+\end{bmatrix}
+\]</span></p>
+<p>A solução deste sitema é dada por:</p>
+<p><span class="math display">\[\mathbf{x} = \mathbf{A}^{-1}\mathbf{b}\]</span></p>
+<p><strong>EXEMPLO</strong></p>
+<p>Considere o seguinte sistema de equações:</p>
+<p><span class="math display">\[
+\begin{align*}
+x_1 + x_2 + x_3 &amp;= 5 \\[2ex]
+2x_1 – x_2 + 6x_3 &amp;= 12 \\[2ex]
+x_1 + 3x_2 + 5x_3 &amp;= 17
+\end{align*}
+\]</span></p>
+<p>Na forma matricial:</p>
+<p><span class="math display">\[
+\begin{align*}
+\mathbf{Ax} &amp;= \mathbf{b} \\
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 \\
+2 &amp; – 1 &amp; 6\\
+1 &amp; 3 &amp; 5
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3
+\end{bmatrix} &amp;=
+\begin{bmatrix}
+5 \\ 12 \\ 17
+\end{bmatrix}
+\end{align*}
+\]</span></p>
+<p>Para resolver:</p>
+<p><span class="math display">\[
+\begin{split}
+\mathbf{x} &amp;= \mathbf{A}^{-1}\mathbf{b}\\
+\begin{bmatrix}
+x_1 \\
+x_2\\
+x_3
+\end{bmatrix} &amp;= \begin{bmatrix}
+1 &amp; 1 &amp; 1 \\
+2 &amp; – 1 &amp; 6\\
+1 &amp; 3 &amp; 5
+\end{bmatrix}^{-1} \begin{bmatrix}
+5 \\
+12\\
+17
+\end{bmatrix}
+\end{split}
+\]</span></p>
+<p>No <code>R</code> podemos criar as matrizes <span class="math inline">\(\mathbf{A}\)</span> e <span class="math inline">\(\mathbf{b}\)</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz A</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>), </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">byrow =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"A=</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A=</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    1    1
+[2,]    2   -1    6
+[3,]    1    3    5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz b</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">12</span>, <span class="dv">17</span>), <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"b=</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>b=</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]
+[1,]    5
+[2,]   12
+[3,]   17</code></pre>
+</div>
+</div>
+<p>E resolver para <span class="math inline">\(\mathbf{x}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculando o vetor x</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">solve</span>(A) <span class="sc">%*%</span> b</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Nomeando as linhas de x</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(x) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"x1"</span>, <span class="st">"x2"</span>, <span class="st">"x3"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Exibindo o resultado</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   [,1]
+x1    1
+x2    2
+x3    2</code></pre>
+</div>
+</div>
+<p>A solução é <span class="math inline">\(x_1=1\)</span>, <span class="math inline">\(x_2=2\)</span> e <span class="math inline">\(x_3=2\)</span>.</p>
+</section>
+<section id="aplicado-sistemas-de-equações" class="level3">
+<h3 class="anchored" data-anchor-id="aplicado-sistemas-de-equações">Aplicado sistemas de equações</h3>
+<p>Na análise de regressão será bastante comum fazer uso da representação de um sistema de <span class="math inline">\(n\)</span> equações simultâneas e <span class="math inline">\(k\)</span> variáveis, como é o exemplo a seguir:</p>
+<p><span class="math display">\[
+\begin{align*}
+    y_1 &amp;= x_{11} b_1 + x_{12} b_2 + \cdots + x_{1k} b_k \\
+    y_2 &amp;= x_{21} b_1 + x_{22} b_2 + \cdots + x_{2k} b_k \\
+        &amp;\vdots \\
+    y_n &amp;= x_{n1} b_1 + x_{n2} b_2 + \cdots + x_{nk} b_k
+\end{align*}
+\]</span></p>
+<p>Usando a notação matricial, podemos escrever:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+    y_1 \\
+    y_2 \\
+    \vdots \\
+    y_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+    x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1k} \\
+    x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2k} \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{nk}
+\end{bmatrix}
+\begin{bmatrix}
+    b_1 \\
+    b_2 \\
+    \vdots \\
+    b_k
+\end{bmatrix}
+\]</span></p>
+<p>Mais sucintamente: <span class="math inline">\(\mathbf{y} = \mathbf{Xb}\)</span>, onde</p>
+<p><span class="math display">\[
+\begin{equation*}
+        \mathbf{y} =
+        \begin{bmatrix}
+            y_1 \\ y_2 \\ \vdots \\ y_n
+        \end{bmatrix}
+        \quad ; \quad
+        \mathbf{b} =
+        \begin{bmatrix}
+            b_1 \\ b_2 \\ \vdots \\ b_k
+        \end{bmatrix}
+        \quad ; \quad
+        \mathbf{x}_i =
+        \begin{bmatrix}
+            x_{i1} \\ x_{i2} \\ \vdots \\ x_{ik}
+        \end{bmatrix}
+    \end{equation*}
+\]</span></p>
+<p>para <span class="math inline">\(i = 1, 2, \dots, n\)</span> (linhas da matriz <span class="math inline">\(\mathbf{X}\)</span>).</p>
+<p>A matriz <span class="math inline">\(\mathbf{X}\)</span> também pode ser escrita da seguinte forma:</p>
+<p><span class="math display">\[
+\begin{equation*}
+\mathbf{X} =
+    \begin{bmatrix}
+        x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1k} \\
+        x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2k} \\
+        \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+        x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{nk}
+    \end{bmatrix} =
+    \begin{bmatrix}
+         \mathbf{x}_1' \\
+         \mathbf{x}_2' \\
+         \vdots \\
+         \mathbf{x}_n'
+    \end{bmatrix}
+\end{equation*}
+\]</span></p>
+<p>Neste caso, cada <span class="math inline">\(\mathbf{x}_i\)</span> é um “vetor de covariáveis” para a <span class="math inline">\(i\)</span>-ésima observação (cada linha de <span class="math inline">\(\mathbf{X}\)</span>).</p>
+<p>Retornando ao sistema original, podemos escrever cada equação individual usando vetores:</p>
+<p><span class="math display">\[
+\begin{align*}
+    y_1 &amp;= \mathbf{x}_1' \mathbf{b} \\
+    y_2 &amp;= \mathbf{x}_2' \mathbf{b} \\
+        &amp;\vdots \\
+    y_n &amp;= \mathbf{x}_n' \mathbf{b}
+\end{align*}
+\]</span></p>
+<p>Cada vetor destes representa uma equação do tipo:</p>
+<p><span class="math display">\[
+y_i = \begin{bmatrix} x_{i1} &amp; x_{i2} &amp; \cdots &amp; x_{ik} \end{bmatrix}
+      \begin{bmatrix} b_1 \\ b_2 \\ \vdots \\ b_k \end{bmatrix} =
+      x_{i1} b_1 + x_{i2} b_2 + \cdots + x_{ik} b_k
+\]</span></p>
+</section>
+<section id="algumas-operações-comuns" class="level3">
+<h3 class="anchored" data-anchor-id="algumas-operações-comuns">Algumas operações comuns</h3>
+<p><strong>Representando somatórios e o cálculo da média</strong></p>
+<p>Denote por <span class="math inline">\(\textbf{i}\)</span> um vetor contendo uma coluna de uns.</p>
+<p><span class="math display">\[
+\textbf{i} = \begin{bmatrix} 1 \\ \vdots \\ 1 \end{bmatrix}
+\]</span></p>
+<p>Podmeos representar uma soma por meio de um produto escalar entre <span class="math inline">\(\textbf{i}\)</span> e um vetor <span class="math inline">\(\textbf{x}\)</span>:</p>
+<p><span class="math display">\[
+\textbf{i}'\textbf{x} = \begin{bmatrix} 1 &amp; 1 &amp; 1 \end{bmatrix}
+\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} =
+1x_1 + 1x_2 + \cdots + 1x_n = \sum_{i=1}^{n} x_i
+\]</span></p>
+<p>Para qualquer constante <span class="math inline">\(a\)</span> e vetor <span class="math inline">\(\textbf{x}\)</span>, temos:</p>
+<p><span class="math display">\[
+    \sum_{i=1}^{n} a x_i = a \sum_{i=1}^{n} x_i = a \textbf{i}'\textbf{x}.
+\]</span></p>
+<p>Se <span class="math inline">\(a = \frac{1}{n}\)</span>, obtemos a média aritmética:</p>
+<p><span class="math display">\[
+\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i = \frac{1}{n} \textbf{i}'\textbf{x}
+\]</span></p>
+<p><strong>EXEMPLO</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definindo o vetor x</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">7</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Criando um vetor de 1's com o mesmo comprimento de x</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>ones <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(x))</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculando a soma dos elementos de x usando o produto interno</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>soma_x <span class="ot">&lt;-</span> <span class="fu">t</span>(ones) <span class="sc">%*%</span> x</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>soma_x <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(soma_x)  <span class="co"># Convertendo para um número escalar</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>soma_x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25</code></pre>
+</div>
+</div>
+<p>Podemos calcular a média de</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculando a média dos elementos de x</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="fu">length</span>(x)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>media_x <span class="ot">&lt;-</span> a <span class="sc">*</span> (<span class="fu">t</span>(ones) <span class="sc">%*%</span> x) </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>media_x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]
+[1,]    5</code></pre>
+</div>
+</div>
+<p><strong>Desvios em relação à média</strong></p>
+<p>Uma matriz fundamental na estatística é a , usada para transformar dados em desvios em relação à sua média.</p>
+<p>Para calcular os desvios em relação à média, primeiro precisamso definir um vetor com a média. Se <span class="math inline">\(\bar{x} = \frac{1}{n} \textbf{i}'\textbf{x}\)</span>, que é uma constante, então:</p>
+<p><span class="math display">\[
+\textbf{i} \bar{x} =
+\begin{bmatrix} 1 \\ 1 \\ \vdots \\ 1 \end{bmatrix} \bar{x} =
+\begin{bmatrix} \bar{x} \\ \bar{x} \\ \vdots \\ \bar{x} \end{bmatrix}
+\]</span></p>
+<p>Uma vez que <span class="math inline">\(\bar{x} = \frac{1}{n} \textbf{i}'\textbf{x}\)</span>, então <span class="math inline">\(\textbf{i} \bar{x} =\frac{1}{n} \textbf{i} \textbf{i}'\textbf{x}\)</span></p>
+<p>Desvio em relação à média então podem ser escritos como:</p>
+<p><span class="math display">\[
+{\mathbf{x}} -  \frac{1}{n} \mathbf{i}\mathbf{i}'\mathbf{x} =
+\begin{bmatrix}
+x_1 - \bar{x} \\
+x_2 - \bar{x} \\
+\vdots \\
+x_n - \bar{x}
+\end{bmatrix}  
+\]</span></p>
+<p>Considerando que <span class="math inline">\(\mathbf{x} = \mathbf{I} \mathbf{x}\)</span>, temos que:</p>
+<p><span class="math display">\[
+\left[ \mathbf{I} \mathbf{x} - \frac{1}{n} \mathbf{i} \mathbf{i}' \mathbf{x} \right] =
+\left[ \mathbf{I} - \frac{1}{n} \mathbf{i} \mathbf{i}' \right] \mathbf{x} = \mathbf{M^0} \mathbf{x}
+\]</span></p>
+<p><strong>EXEMPLO</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Número de elementos em x</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Criando a matriz identidade I de dimensão n</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>I <span class="ot">&lt;-</span> <span class="fu">diag</span>(n)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Criando o vetor de 1's</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>ones <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span>, n, <span class="dv">1</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Construindo a matriz M0</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>M0 <span class="ot">&lt;-</span> I <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">/</span> n) <span class="sc">*</span> (ones <span class="sc">%*%</span> <span class="fu">t</span>(ones))</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculando os desvios em relação à média</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>desvios <span class="ot">&lt;-</span> M0 <span class="sc">%*%</span> x</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir resultados</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"x =</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x =</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 5 6 3 7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"desvios de x em relação à média =</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>desvios de x em relação à média =</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">round</span>(desvios, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]
+[1,]   -1
+[2,]    0
+[3,]    1
+[4,]   -2
+[5,]    2</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="formas-linares-e-formas-quadráticas" class="level2">
+<h2 class="anchored" data-anchor-id="formas-linares-e-formas-quadráticas">2. Formas Linares e Formas Quadráticas</h2>
+<p>Considere a função linear:</p>
+<p><span class="math display">\[f(x) = a_1x_1 + a_2x_2 + a_3x_3 + \ldots + a_nx_n\]</span></p>
+<p>Podemos usar uma notação matricial para expressar essa função:</p>
+<p><span class="math display">\[
+f(\mathbf{x}) = \mathbf{a}'\mathbf{x}
+\]</span></p>
+<p>Dessa forma, temos:</p>
+<p><span class="math display">\[
+\mathbf{a}' =
+\begin{bmatrix}
+a_1 &amp; a_2 &amp; a_3 &amp; \ldots &amp; a_n
+\end{bmatrix}
+\qquad \mathrm{e} \qquad \mathbf{x}=
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3 \\ \vdots \\ x_n
+\end{bmatrix}
+\]</span></p>
+<p>Considere agora, a função de duas variáveis <span class="math inline">\((x,y)\)</span>:</p>
+<p><span class="math display">\[
+f(x,y) = a_{11}x_1y_1 + a_{21}x_2y_1 + a_{31}x_3y_1 + a_{12}x_1y_2 + a_{22}x_2y_2 + a_{32}x_3y_2
+\]</span></p>
+<p>Na forma matricial temos uma <strong>forma bilinear</strong>:</p>
+<p><span class="math display">\[
+f(\mathbf{x},\mathbf{y}) = \mathbf{x}'\mathbf{A}\mathbf{y}
+\]</span></p>
+<p>em que:</p>
+<p><span class="math display">\[
+\mathbf{A} = \begin{bmatrix}
+a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \\ a_{31} &amp; a_{32}
+\end{bmatrix}
+\]</span></p>
+<section id="formas-quadráticas" class="level3">
+<h3 class="anchored" data-anchor-id="formas-quadráticas">Formas Quadráticas</h3>
+<p>Uma forma quadrática em <span class="math inline">\(\mathbb{R}^n\)</span> é uma função de valor real da forma</p>
+<p><span class="math display">\[
+Q(x_1, \ldots, x_n) = \sum_{i \leq j} a_{ij} x_i x_j
+\]</span></p>
+<p>Por exemplo, no <span class="math inline">\(\mathbb{R}^2\)</span> temos <span class="math inline">\(Q(x_1, x_2) = a_{11}x_1^2 + a_{12}x_1x_2 + a_{22}x_2^2\)</span>.</p>
+<p>Em termos matriciais, podemos pernsar na forma quadrática como uma forma bilinear em que <span class="math inline">\(\mathbf{x}=\mathbf{y}\)</span>.</p>
+<p>Em geral, se <span class="math inline">\(\mathbf{A}\)</span> é uma matriz simétrica <span class="math inline">\(n \times n\)</span> e <span class="math inline">\(\mathbf{x}\)</span> é um vetor-coluna <span class="math inline">\(n \times 1\)</span> de variáveis, então dizemos que a função</p>
+<p><span class="math display">\[
+Q_A(\mathbf{x}) = \mathbf{x}' \mathbf{A} \mathbf{x}
+\]</span></p>
+<p>é a forma quadrática associada com <span class="math inline">\(A\)</span>.</p>
+<p><strong>EXEMPLOS</strong></p>
+<ul>
+<li>Exemplo 1.</li>
+</ul>
+<p><span class="math display">\[
+\mathbf{x}' \mathbf{A} \mathbf{x} =
+\begin{bmatrix} x_1 &amp; x_2 \end{bmatrix}
+\begin{bmatrix} a_1 &amp; a_3 \\ a_3 &amp; a_2 \end{bmatrix}
+\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} =
+a_1 x_1^2 + a_2 x_2^2 + 2 a_3 x_1 x_2 =
+\]</span></p>
+<ul>
+<li>Exemplo 2.</li>
+</ul>
+<p><span class="math display">\[
+\mathbf{x}' \mathbf{A} \mathbf{x} =
+\begin{bmatrix} x_1 &amp; x_2 &amp; x_3 \end{bmatrix}
+\begin{bmatrix} a_1 &amp; a_4 &amp; a_5 \\ a_4 &amp; a_2 &amp; a_6 \\ a_5 &amp; a_6 &amp; a_3 \end{bmatrix}
+\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} =
+a_1 x_1^2 + a_2 x_2^2 + a_3 x_3^2 + 2 a_4 x_1 x_2 + 2 a_5 x_1 x_3 + 2 a_6 x_2 x_3
+\]</span></p>
+<ul>
+<li>Exemplo 3.</li>
+</ul>
+<p>Com <span class="math inline">\(\mathbf{A} = \begin{bmatrix} -3 &amp; 5 \\ 4 &amp; -2 \\ \end{bmatrix}\)</span> e <span class="math inline">\(\mathbf{x} = \begin{bmatrix} x_1 \\ x_2\end{bmatrix}\)</span></p>
+<p><span class="math display">\[
+\begin{split}
+\mathbf{x}^\intercal\mathbf{Ax} &amp;= \begin{bmatrix}
+x_1 &amp; x_2\end{bmatrix}\begin{bmatrix}
+-3 &amp; 5  \\
+4 &amp; -2  \\
+\end{bmatrix}\begin{bmatrix}
+x_1 \\ x_2\end{bmatrix} \\[2ex]
+&amp;= \begin{bmatrix}
+x_1 &amp; x_2\end{bmatrix}\begin{bmatrix}
+-3x_1 + 5x_2  \\
+4x_1 -2x_2
+\end{bmatrix} \\[2ex]
+&amp;= x_1(-3x_1 + 5x_2) + x_2(4x_1 -2x_2) \\[2ex]
+&amp;= -3x_1^2 + 5x_1x_2 + 4x_1x_2 -2x_2^2 \\[2ex]
+&amp;= -3x_1^2 + 9x_1x_2 -2x_2^2
+\end{split}
+\]</span></p>
+<ul>
+<li>Exemplo 4.</li>
+</ul>
+<p>Nos casos em que <span class="math inline">\(\mathbf{A}\)</span> é uma matriz diagonal, a forma quadrática <span class="math inline">\(Q_A\)</span> não tem termos mistos.</p>
+<p>Por exemplo, se <span class="math inline">\(\mathbf{A}\)</span> é uma matriz identidade <span class="math inline">\(n \times n\)</span>, então:</p>
+<p><span class="math display">\[
+Q_A(\mathbf{x}) =
+\mathbf{x}' I \mathbf{x} =
+\mathbf{x}' \mathbf{x} =
+\mathbf{x} \cdot \mathbf{x} =
+\|\mathbf{x}\|^2 =
+x_1^2 + x_2^2 + \cdots + x_n^2
+\]</span></p>
+<ul>
+<li>Exemplo 5.</li>
+</ul>
+<p>Se <span class="math inline">\(\mathbf{A}\)</span> tem entradas diagonais <span class="math inline">\(\lambda_1, \lambda_2, \ldots, \lambda_n\)</span>, então:</p>
+<p><span class="math display">\[
+Q_A(\mathbf{x}) =
+\mathbf{x}' A \mathbf{x} =
+\begin{bmatrix}
+x_1 &amp; x_2 &amp; \cdots &amp; x_n
+\end{bmatrix}
+\begin{bmatrix}
+\lambda_1 &amp; 0 &amp; \cdots &amp; 0 \\
+0 &amp; \lambda_2 &amp; \cdots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; \cdots &amp; \lambda_n
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{bmatrix}
+= \lambda_1 x_1^2 + \lambda_2 x_2^2 + \cdots + \lambda_n x_n^2
+\]</span></p>
+</section>
+<section id="aplicando-formas-quadráticas" class="level3">
+<h3 class="anchored" data-anchor-id="aplicando-formas-quadráticas">Aplicando formas quadráticas</h3>
+<p>Para uma única variável <span class="math inline">\(\textbf{x}\)</span>, a soma dos quadrados dos desvios em relação à média é dada por:</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n} (x_i - \bar{x})^2 = \left( \sum_{i=1}^{n} x_i^2 \right) - n \bar{x}^2.
+\]</span></p>
+<p>Em termos matriciais,</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n} (x_i - \bar{x})^2 =
+(\textbf{x} - {\textbf{i}}\bar{x})' (\textbf{x} - {\textbf{i}}\bar{x}) =
+(\textbf{M}^0 \textbf{x})' (\textbf{M}^0 \textbf{x}) =
+\textbf{x}' \textbf{M}^0 ' \textbf{M}^0 \textbf{x}
+\]</span></p>
+<p>A matriz <span class="math inline">\(\textbf{M}^0\)</span> possui a propriedade de ser idempotente, ou seja, <span class="math inline">\(\mathbf{M^0}' \mathbf{M^0} = \mathbf{M^0}\)</span>.</p>
+<p>Assim:</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n} (x_i - \bar{x})^2 = \textbf{x}' \textbf{M}^0 \textbf{x}
+\]</span></p>
+<p><strong>EXEMPLO</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculando a soma dos quadrados dos desvios</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>soma_quadrados <span class="ot">&lt;-</span> <span class="fu">t</span>(x) <span class="sc">%*%</span> M0 <span class="sc">%*%</span> x</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>soma_quadrados <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(soma_quadrados)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>soma_quadrados</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+</div>
+</section>
+<section id="formas-quadráticas-e-otimização" class="level3">
+<h3 class="anchored" data-anchor-id="formas-quadráticas-e-otimização">Formas quadráticas e otimização</h3>
+<p>Uma forma quadrática sempre assume o valor zero no ponto <span class="math inline">\(\mathbf{x} = 0\)</span>.</p>
+<p>Este, no entanto, não é um resultado interessante!</p>
+<p>Por exemplo, se <span class="math inline">\(\mathbf{x} \in \mathbb{R}\)</span>, isto é, <span class="math inline">\(\mathbf{x} = x_1\)</span>, então a forma quadrática geral é <span class="math inline">\(ax_1^2\)</span>, que é igual a zero quando <span class="math inline">\(x_1 = 0\)</span>.</p>
+<p>A característica distintiva de uma forma quadrática é o conjunto de valores que assume quando <span class="math inline">\(\mathbf{x} \neq 0\)</span>. Queremos saber se <span class="math inline">\(\mathbf{x} = 0\)</span> é um máximo, mínimo ou nenhum dos dois.</p>
+<p>Sob a ótica de um problema de otimização, isso sim é interessante!</p>
+<p>Por exemplo, quando <span class="math inline">\(\mathbf{x} \in \mathbb{R}\)</span>, isto é, a forma quadrática é <span class="math inline">\(ax_1^2\)</span>:</p>
+<ul>
+<li><p>Se <span class="math inline">\(a &gt; 0\)</span> significa que <span class="math inline">\(ax^2 \geq 0\)</span> e é igual a 0 apenas quando <span class="math inline">\(x = 0\)</span>. Tal forma é chamada <strong>definida positiva</strong>; <span class="math inline">\(x = 0\)</span> é um mínimo global.</p></li>
+<li><p>Se <span class="math inline">\(a &lt; 0\)</span> significa que <span class="math inline">\(ax^2 \leq 0\)</span> e é igual a 0 apenas quando <span class="math inline">\(x = 0\)</span>. Tal forma é chamada <strong>definida negativa</strong>; <span class="math inline">\(x = 0\)</span> é um máximo global.</p></li>
+</ul>
+<p>Uma matriz simétrica, <span class="math inline">\(\mathbf{A}\)</span>, é chamada de definida positiva, semidefinida positiva, definida negativa, etc., de acordo com a forma quadrática correspondente <span class="math inline">\(Q(\mathbf{x}) = \mathbf{x}' \mathbf{A} \mathbf{x}\)</span>.</p>
+<p>Seja <span class="math inline">\(\mathbf{A}\)</span> uma matriz simétrica <span class="math inline">\(n \times n\)</span>, então <span class="math inline">\(\mathbf{A}\)</span> é:</p>
+<ul>
+<li><p><strong>definida positiva</strong> se <span class="math inline">\(\mathbf{x}' \mathbf{A} \mathbf{x} &gt; 0\)</span> para todo <span class="math inline">\(\mathbf{x} \neq 0\)</span> em <span class="math inline">\(\mathbb{R}^n\)</span>;</p></li>
+<li><p><strong>semidefinida positiva</strong> se <span class="math inline">\(\mathbf{x}' \mathbf{A} \mathbf{x} \geq 0\)</span> para todo <span class="math inline">\(\mathbf{x} \neq 0\)</span> em <span class="math inline">\(\mathbb{R}^n\)</span>;</p></li>
+<li><p><strong>definida negativa</strong> se <span class="math inline">\(\mathbf{x}' \mathbf{A} \mathbf{x} &lt; 0\)</span> para todo <span class="math inline">\(\mathbf{x} \neq 0\)</span> em <span class="math inline">\(\mathbb{R}^n\)</span>;</p></li>
+<li><p><strong>semidefinida negativa</strong> se <span class="math inline">\(\mathbf{x}' \mathbf{A} \mathbf{x} \leq 0\)</span> para todo <span class="math inline">\(\mathbf{x} \neq 0\)</span> em <span class="math inline">\(\mathbb{R}^n\)</span>;</p></li>
+<li><p><strong>indefinida</strong> se <span class="math inline">\(\mathbf{x}' \mathbf{A} \mathbf{x} &gt; 0\)</span> para algum <span class="math inline">\(\mathbf{x} \neq 0\)</span> em <span class="math inline">\(\mathbb{R}^n\)</span> e <span class="math inline">\(&lt; 0\)</span> para outro <span class="math inline">\(\mathbf{x}\)</span> em <span class="math inline">\(\mathbb{R}^n\)</span>.</p></li>
+</ul>
+</section>
+</section>
+<section id="autovalores-e-autovetores" class="level2">
+<h2 class="anchored" data-anchor-id="autovalores-e-autovetores">3. Autovalores e autovetores</h2>
+<p>Os autovalores e autovetores são conceitos fundamentais em álgebra linear e têm ampla aplicação em econometria.</p>
+<p>Dada uma matriz quadrada <span class="math inline">\(\mathbf{A}\)</span> de ordem <span class="math inline">\(n \times n\)</span>, um número <span class="math inline">\(\lambda\)</span> é chamado de <strong>autovalor</strong> de <span class="math inline">\(\mathbf{A}\)</span> se existir um vetor não nulo <span class="math inline">\(\mathbf{x}\)</span> tal que:</p>
+<p><span class="math display">\[
+\mathbf{A} \mathbf{x} = \lambda \mathbf{x}
+\]</span></p>
+<p>Neste caso, o vetor <span class="math inline">\(\mathbf{x}\)</span> é chamado de <strong>autovetor</strong> associado ao autovalor <span class="math inline">\(\lambda\)</span>.</p>
+<p>Os autovalores (<span class="math inline">\(\lambda\)</span>) indicam a magnitude do efeito de <span class="math inline">\(\mathbf{A}\)</span> sobre os vetores <span class="math inline">\(\mathbf{x}\)</span>.</p>
+<p>Por sua vez, os autovetores (<span class="math inline">\(\mathbf{x}\)</span>) indicam as direções em que a aplicação da matriz <span class="math inline">\(\mathbf{A}\)</span> resulta em um escalonamento sem alteração da direção.</p>
+<ul>
+<li><p>Número de autovalores: Uma matriz <span class="math inline">\(n \times n\)</span> terá até <span class="math inline">\(n\)</span> autovalores.</p></li>
+<li><p>Determinante e traço: O produto dos autovalores de <span class="math inline">\(\mathbf{A}\)</span> é igual ao seu determinante, e a soma dos autovalores é igual ao traço de <span class="math inline">\(\mathbf{A}\)</span> (a soma dos elementos da diagonal).</p></li>
+<li><p>Diagonalização: Se todos os autovalores de uma matriz são distintos e a matriz é simétrica, é possível diagonalizá-la, ou seja, encontrar uma matriz <span class="math inline">\(\mathbf{P}\)</span> de autovetores e uma matriz diagonal <span class="math inline">\(\mathbf{\Lambda}\)</span> de autovalores, tal que <span class="math inline">\(\mathbf{A} = \mathbf{P} \mathbf{\Lambda} \mathbf{P}^{-1}\)</span>.</p></li>
+</ul>
+<p><strong>EXEMPLO</strong></p>
+<p>Vamos calcular os autovalores e autovetores de uma matriz <span class="math inline">\(3 \times 3\)</span> usando R:</p>
+<p>Considere a matriz <span class="math inline">\(\mathbf{A}\)</span>:</p>
+<p><span class="math display">\[
+\mathbf{A} = \begin{bmatrix} 3 &amp; 1 \\ 1 &amp; 2 \end{bmatrix}
+\]</span></p>
+<p>Para encontrar os autovalores, calculamos o polinômio característico de <span class="math inline">\(\mathbf{A}\)</span>.</p>
+<p><span class="math display">\[
+\mathbf{A} - \lambda \mathbf{I} =
+\begin{bmatrix} 3 - \lambda &amp; 1 \\
+1 &amp; 2 - \lambda
+\end{bmatrix}
+\]</span></p>
+<p>Calculamos o determinante desta matriz e igualamos a zero:</p>
+<p><span class="math display">\[
+\lambda^2 - 5 \lambda + 5 = 0
+\]</span></p>
+<p>As raízes dessa equação são:</p>
+<p><span class="math display">\[
+\lambda_1 = \frac{5 + \sqrt{5}}{2} \quad \text{e} \quad \lambda_2 = \frac{5 - \sqrt{5}}{2}
+\]</span></p>
+<p>Trata-se de uma parábola com concavidade ‘para baixo’ (côncava).</p>
+<p>Vamos resolver isso no <code>R</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definindo uma matriz 3x3</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>             <span class="dv">1</span>, <span class="dv">2</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    3    1
+[2,]    1    2</code></pre>
+</div>
+</div>
+<ul>
+<li>Autovalores</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculando os autovalores e autovetores</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>eig_decomp <span class="ot">=</span> <span class="fu">eigen</span>(A)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraindo autovalores</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>autovalores <span class="ot">=</span> eig_decomp<span class="sc">$</span>values</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>autovalores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.618034 1.381966</code></pre>
+</div>
+</div>
+<p>Note que temos autovalores positivos.</p>
+<ul>
+<li>Autovetores</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraindo autovetores</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>autovetores <span class="ot">=</span> eig_decomp<span class="sc">$</span>vectors</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>autovetores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]       [,2]
+[1,] -0.8506508  0.5257311
+[2,] -0.5257311 -0.8506508</code></pre>
+</div>
+</div>
+<ul>
+<li>Verificando estas condições com base em:</li>
+</ul>
+<p>$$ <span class="math display">\[\begin{align*}
+\mathbf{A} \mathbf{x} &amp; = \lambda \mathbf{x} \\
+
+\begin{bmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{bmatrix}
+\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} &amp; =
+\lambda \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
+\end{align*}\]</span> $$</p>
+<p>Vamos considerar o 1º autovalor <span class="math inline">\(\lambda_1\)</span> e o 1º autovetor</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificando a propriedade: A * x = lambda * x para o primeiro autovalor e autovetor</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>lambda1 <span class="ot">=</span> autovalores[<span class="dv">1</span>]</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> autovetores[, <span class="dv">1</span>]</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"A.x =</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A.x =</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(A <span class="sc">%*%</span> x1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]
+[1,] -3.077684
+[2,] -1.902113</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"lambda.x =</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>lambda.x =</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lambda1 <span class="sc">*</span> x1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -3.077684 -1.902113</code></pre>
+</div>
+</div>
+<p><strong>Autovalores, a definição da forma quadrática e otimização</strong></p>
+<p>Seja <span class="math inline">\(\mathbf{A}_{n \times n}\)</span> uma matriz com autovalores <span class="math inline">\(\lambda_1, \cdots, \lambda_n\)</span>.</p>
+<ul>
+<li><p>Se <span class="math inline">\(\mathbf{A}\)</span> é <strong>definida positiva</strong>, então <span class="math inline">\(\lambda_i &gt; 0\)</span> para <span class="math inline">\(i = 1, \dots, n\)</span>.</p></li>
+<li><p>Se <span class="math inline">\(\mathbf{A}\)</span> é <strong>semidefinida positiva</strong>, então <span class="math inline">\(\lambda_i \geq 0\)</span> para <span class="math inline">\(i = 1, \dots, n\)</span>. O número de autovalores para os quais <span class="math inline">\(\lambda_i &gt; 0\)</span> é igual ao posto de <span class="math inline">\(\mathbf{A}\)</span>.</p></li>
+<li><p>Se <span class="math inline">\(\mathbf{A}\)</span> é <strong>definida negativa</strong>, então <span class="math inline">\(\lambda_i &lt; 0\)</span> para <span class="math inline">\(i = 1, \dots, n\)</span>.</p></li>
+<li><p>Se <span class="math inline">\(\mathbf{A}\)</span> é <strong>semidefinida negativa</strong>, então <span class="math inline">\(\lambda_i \leq 0\)</span> para <span class="math inline">\(i = 1, \dots, n\)</span>. O número de autovalores para os quais <span class="math inline">\(\lambda_i &lt; 0\)</span> é igual ao posto de <span class="math inline">\(\mathbf{A}\)</span>.</p></li>
+<li><p>Se <span class="math inline">\(\mathbf{A}\)</span> é <strong>indefinida</strong>, então <span class="math inline">\(\mathbf{A}\)</span> possui autovalores de sinais opostos, ou seja, existem <span class="math inline">\(\lambda_i &gt; 0\)</span> para alguns <span class="math inline">\(i\)</span> e <span class="math inline">\(\lambda_j &lt; 0\)</span> para outros <span class="math inline">\(j\)</span>.</p></li>
+</ul>
+</section>
+<section id="diferenciação-matricial" class="level2">
+<h2 class="anchored" data-anchor-id="diferenciação-matricial">4. Diferenciação matricial</h2>
+<p>Sejam os vetores:</p>
+<p><span class="math display">\[
+\mathbf{a} = \begin{bmatrix}
+a_1 \\ a_2 \\ \vdots \\ a_n
+\end{bmatrix} \quad \text{e} \quad
+\mathbf{x} = \begin{bmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{bmatrix}
+\]</span></p>
+<p>Então:</p>
+<p><span class="math display">\[
+\mathbf{a}'\mathbf{x} = a_1 x_1 + a_2 x_2 + \cdots + a_n x_n
+\]</span></p>
+<p>A derivada de <span class="math inline">\(\mathbf{a}'\mathbf{x}\)</span> é dada por:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\partial}{\partial \mathbf{x}} (\mathbf{a}' \mathbf{x}) &amp;=
+\frac{\partial}{\partial \mathbf{x}} (a_1 x_1 + a_2 x_2 + \cdots + a_n x_n) \\
+&amp;= \begin{bmatrix}
+\frac{\partial}{\partial x_1} (a_1 x_1 + a_2 x_2 + \cdots + a_n x_n) \\
+\frac{\partial}{\partial x_2} (a_1 x_1 + a_2 x_2 + \cdots + a_n x_n) \\
+\vdots \\
+\frac{\partial}{\partial x_n} (a_1 x_1 + a_2 x_2 + \cdots + a_n x_n)
+\end{bmatrix} =
+\begin{bmatrix}
+a_1 \\ a_2 \\ \vdots \\ a_n
+\end{bmatrix} \\
+&amp;= \mathbf{a}
+\end{aligned}
+\]</span></p>
+<p>Considere agora a forma quadrática <span class="math inline">\(\mathbf{x}' \mathbf{A} \mathbf{x}\)</span></p>
+<p><span class="math display">\[
+\frac{\partial}{\partial \mathbf{x}} (\mathbf{x}' \mathbf{A} \mathbf{x}) = 2\mathbf{A} \mathbf{x}
+\]</span></p>
+<p>Vamos demostrar isso de uma forma um pouco diferente:</p>
+<p>Considere a forma quadrática <span class="math inline">\(\mathbf{x}' \mathbf{A} \mathbf{x}\)</span>, onde <span class="math inline">\(\mathbf{A}\)</span> é uma matriz simétrica.</p>
+<p><span class="math display">\[
+f(\mathbf{x}) = \mathbf{x}' \mathbf{A} \mathbf{x} = \sum_{i=1}^n \sum_{j=1}^n x_i a_{ij} x_j
+\]</span></p>
+<p>A derivada de <span class="math inline">\(f(\mathbf{x})\)</span> em relação a <span class="math inline">\(\mathbf{x}\)</span> é:</p>
+<p><span class="math display">\[
+\frac{\partial}{\partial \mathbf{x}} (\mathbf{x}' \mathbf{A} \mathbf{x}) = \frac{\partial}{\partial \mathbf{x}} \left( \sum_{i=1}^n \sum_{j=1}^n x_i a_{ij} x_j \right)
+\]</span></p>
+<p>Como estamos derivando em relação a cada <span class="math inline">\(x_i\)</span>, temos:</p>
+<p><span class="math display">\[
+\frac{\partial}{\partial x_i} \left( \sum_{j=1}^n x_i a_{ij} x_j \right) = \sum_{j=1}^n a_{ij} x_j + \sum_{j=1}^n a_{ji} x_j = 2 \sum_{j=1}^n a_{ij} x_j
+\]</span></p>
+<p>Assim, a derivada é:</p>
+<p><span class="math display">\[
+\frac{\partial}{\partial \mathbf{x}} (\mathbf{x}' \mathbf{A} \mathbf{x}) = 2 \mathbf{A} \mathbf{x}
+\]</span></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
