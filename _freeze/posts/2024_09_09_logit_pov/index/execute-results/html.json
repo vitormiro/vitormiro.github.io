@@ -1,0 +1,14 @@
+{
+  "hash": "0e3e8caab2266157273de4ef81fd8018",
+  "result": {
+    "markdown": "---\ntitle: \"Logit\"\nauthor:\n  - name: Vitor Hugo Miro\ndate: 2024-08-27 \ncategories: [pobreza, desigualdade regional, R]\ncitation: \n    url: https://vitormiro.github.io/posts/2024_09_09_logit_pov/ \nimage: fig1.png\ndraft: true\nformat:\n  html:\n    code-fold: true\n    code-summary: \"Mostrar código\"\npage-layout: article\n---\n\n\n## O Modelo Logit\n\n\n\n\n## Estimação\n\n\n## C\n\n\n\n\n\nA tabela abaixo \n\n\n\n::: {.cell}\n\n:::\n\n\nAAAA\n\n\n::: {.cell}\n\n:::\n\n\nO estado \n\n\n::: {.cell}\n\n:::\n\n\n## Considerações finais\n\nAAA",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
