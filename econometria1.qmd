@@ -8,17 +8,16 @@ Disciplina ministrada no Programa de Pós-Graduação em Economia Rural da Unive
 
 -   [Programa da Disciplina (2026)](docs/docs_econometria/programa_2026.pdf)
 
-
 ## Conteúdo
 
 ### Revisão de Estatística
 
+-   [Revisão de Probablidade e Estatística](docs/docs_econometria/Revisao_Estatistica_1.Rmd)
 
 ### Revisão de Álgebra Linear
 
--   [Revisão de Álgebra Linear (parte 1)](docs/docs_econometria/Revisao_ALp1.Rmd)
+-   [Revisão de Álgebra Linear (parte 1)](docs/docs_econometria/Revisao_AL_1.Rmd)
 
--   [Revisão de Álgebra Linear (parte 2)](docs/docs_econometria/Revisao_ALp2.Rmd)
-
+-   [Revisão de Álgebra Linear (parte 2)](docs/docs_econometria/Revisao_AL_2.Rmd)
 
 ### Econometria

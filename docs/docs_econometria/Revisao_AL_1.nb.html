@@ -12,7 +12,7 @@
 <meta name="author" content="Vitor Hugo Miro" />
 
 
-<title>Revisão de Álgebra Linear</title>
+<title>Revisão de Álgebra Linear — Parte 1</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -2876,1037 +2876,1056 @@ border-radius: 0px;
 
 
 
-<h1 class="title toc-ignore">Revisão de Álgebra Linear</h1>
-<h3 class="subtitle">Elementos básicos e operações com matrizes</h3>
+<h1 class="title toc-ignore">Revisão de Álgebra Linear — Parte 1</h1>
+<h3 class="subtitle">Vetores, matrizes e operações fundamentais</h3>
 <h4 class="author">Vitor Hugo Miro</h4>
 
 </div>
 
 
 <!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-text-begin -->
 <div id="introdução" class="section level1">
 <h1>Introdução</h1>
-<p>A álgebra linear é uma ferramenta essencial para entender, modelar e
-resolver problemas em econometria.</p>
-<p>O presente material não pretende cobrir todos os tópicos de forma
-integral, mas espera ser válido para a revisão dos principais conceitos
-aplicados em econometria.</p>
-<div id="elementos-básicos-vetores-e-matrizes" class="section level2">
-<h2>1. Elementos básicos: vetores e matrizes</h2>
-<p>Um vetor em <span class="math inline">\(\mathbb{R}^n\)</span> é
-definido da seguinte forma:</p>
+<p>A álgebra linear fornece uma linguagem compacta para representar
+dados, formular modelos econométricos e realizar cálculos com muitas
+observações e variáveis.</p>
+<p>Este primeiro material revisa os conceitos fundamentais:</p>
+<ul>
+<li>vetores, matrizes e dimensões;</li>
+<li>soma, transposição e multiplicação;</li>
+<li>produtos interno e externo;</li>
+<li>matrizes especiais;</li>
+<li>submatrizes e indexação;</li>
+<li>independência linear, posto e invertibilidade;</li>
+<li>organização matricial de uma base de dados.</li>
+</ul>
+<p>O objetivo não é apresentar um curso completo de Álgebra Linear. A
+ênfase recairá sobre os resultados utilizados posteriormente na
+formulação matricial do método de mínimos quadrados ordinários.</p>
+<div id="vetores-matrizes-e-dimensões" class="section level2">
+<h2>1. Vetores, matrizes e dimensões</h2>
+<div id="vetores" class="section level3">
+<h3>1.1 Vetores</h3>
+<p>Um vetor-coluna com <span class="math inline">\(n\)</span> elementos
+pode ser representado por:</p>
 <p><span class="math display">\[
-\mathbf{x} =
+\mathbf{x}
+=
 \begin{bmatrix}
-x_1 \\
-x_2 \\
-\vdots \\
+x_1\\
+x_2\\
+\vdots\\
 x_n
-\end{bmatrix}
+\end{bmatrix}_{n\times 1}.
+\]</span></p>
+<p>Sua transposta é um vetor-linha:</p>
+<p><span class="math display">\[
+\mathbf{x}&#39;
+=
+\begin{bmatrix}
+x_1 &amp; x_2 &amp; \cdots &amp; x_n
+\end{bmatrix}_{1\times n}.
 \]</span></p>
 <p><strong>EXEMPLO</strong></p>
-<p>Vamos criar o vetor</p>
+<p>Considere:</p>
 <p><span class="math display">\[
-\mathbf{x}=
+\mathbf{x}
+=
 \begin{bmatrix}
 1\\
 2\\
 3
-\end{bmatrix}
+\end{bmatrix}.
 \]</span></p>
+<p>No <code>R</code>, um vetor numérico não possui orientação explícita
+de linha ou coluna. Quando a orientação for importante, podemos
+transformá-lo em uma matriz.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJEY21saGJtUnZJSFZ0SUhabGRHOXlYRzU0SUQwZ1l5Z3hMRElzTXlsY2JuaGNibUJnWUNKOSAtLT5cblxuYGBgclxuIyBDcmlhbmRvIHVtIHZldG9yXG54ID0gYygxLDIsMylcbnhcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDcmlhbmRvIHVtIHZldG9yXG54ID0gYygxLDIsMylcbnhcbmBgYCJ9 -->
-<pre class="r"><code># Criando um vetor
-x = c(1,2,3)
-x</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Por sua vez, uma matriz <span class="math inline">\(n \times
-m\)</span> é escrita da seguinte forma:</p>
-<p><span class="math display">\[
-\mathbf{A}=
-\begin{bmatrix}
-a_{11} &amp; a_{12} &amp; \ldots &amp; a_{1m}\\
-a_{21} &amp; a_{22} &amp; \ldots &amp; a_{2m}\\
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
-a_{n1} &amp; a_{n2} &amp; \ldots &amp; a_{nm}
-\end{bmatrix}
-\]</span></p>
-<p>No caso em que <span class="math inline">\(n = m\)</span>, temos uma
-matriz denominada como <strong>matriz quadrada</strong>.</p>
-<p><strong>EXEMPLO</strong></p>
-<p>Vamos criar a matriz</p>
-<p><span class="math display">\[
-\mathbf{A}=
-\begin{bmatrix}
-2 &amp; 3 &amp; 5 \\
-6 &amp; 1 &amp; 3
-\end{bmatrix}
-\]</span></p>
-<p>No <code>R</code> a criação de matrizes pode ser realziada com a
-função:</p>
-<p><code>matrix(value, nrow, ncol, byrow, dimnames)</code></p>
-<p>Os parâmetros são:</p>
-<ul>
-<li><code>value</code>: especifica a entrada do vetor, ou seja, cada
-entrada especifica os elementos em uma matriz.</li>
-<li><code>nrow</code>: especifica o tamanho da linha na matriz.</li>
-<li><code>ncol</code>: especifica o tamanho da coluna na matriz.</li>
-<li><code>byrow</code>: tem como entrada um valor booleano (TRUE ou
-FALSE). Se TRUE, os elementos da matriz são organizados na linha,
-enquanto FALSE organizará o elemento por coluna.</li>
-<li><code>dimnames</code>: especifica o nome dado a cada elemento de
-linhas e colunas de uma matriz.</li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVRU0E5SUcxaGRISnBlQ2hrWVhSaFBXTW9NaXd6TERVc05pd3hMRE1wTEc1eWIzYzlNaXh1WTI5c1BUTXNZbmx5YjNjOVZGSlZSU2xjYm5CeWFXNTBLRUVwWEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG5BID0gbWF0cml4KGRhdGE9YygyLDMsNSw2LDEsMyksbnJvdz0yLG5jb2w9MyxieXJvdz1UUlVFKVxucHJpbnQoQSlcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQSA9IG1hdHJpeChkYXRhPWMoMiwzLDUsNiwxLDMpLG5yb3c9MixuY29sPTMsYnlyb3c9VFJVRSlcbnByaW50KEEpXG5gYGAifQ== -->
-<pre class="r"><code>A = matrix(data=c(2,3,5,6,1,3),nrow=2,ncol=3,byrow=TRUE)
-print(A)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Vejamos outro exemplo:</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVRaUE4TFNCdFlYUnlhWGdvWXlneExDQTFMQ0EzTENCY2JpQWdJQ0FnSUNBZ0lDQWdJQ0FnTFRFc0lEQXNJRFFzSUZ4dUlDQWdJQ0FnSUNBZ0lDQWdJQ0E0TENBNUxDQXhNU2tzSUZ4dUlDQWdJQ0FnSUNBZ0lDQWdibkp2ZHowekxDQmNiaUFnSUNBZ0lDQWdJQ0FnSUdKNWNtOTNJRDBnVkZKVlJTd2dYRzRnSUNBZ0lDQWdJQ0FnSUNCa2FXMXVZVzFsY3lBOUlHeHBjM1FvWXloY0luSXhYQ0lzWENKeU1sd2lMRndpY2pOY0lpa3NJR01vWENKak1Wd2lMRndpWXpKY0lpeGNJbU16WENJcEtTbGNibkJ5YVc1MEtFSXBYRzVnWUdBaWZRPT0gLS0+XG5cbmBgYHJcbkIgPC0gbWF0cml4KGMoMSwgNSwgNywgXG4gICAgICAgICAgICAgIC0xLCAwLCA0LCBcbiAgICAgICAgICAgICAgOCwgOSwgMTEpLCBcbiAgICAgICAgICAgIG5yb3c9MywgXG4gICAgICAgICAgICBieXJvdyA9IFRSVUUsIFxuICAgICAgICAgICAgZGltbmFtZXMgPSBsaXN0KGMoXCJyMVwiLFwicjJcIixcInIzXCIpLCBjKFwiYzFcIixcImMyXCIsXCJjM1wiKSkpXG5wcmludChCKVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQiA8LSBtYXRyaXgoYygxLCA1LCA3LCBcbiAgICAgICAgICAgICAgLTEsIDAsIDQsIFxuICAgICAgICAgICAgICA4LCA5LCAxMSksIFxuICAgICAgICAgICAgbnJvdz0zLCBcbiAgICAgICAgICAgIGJ5cm93ID0gVFJVRSwgXG4gICAgICAgICAgICBkaW1uYW1lcyA9IGxpc3QoYyhcInIxXCIsXCJyMlwiLFwicjNcIiksIGMoXCJjMVwiLFwiYzJcIixcImMzXCIpKSlcbnByaW50KEIpXG5gYGAifQ== -->
-<pre class="r"><code>B &lt;- matrix(c(1, 5, 7, 
-              -1, 0, 4, 
-              8, 9, 11), 
-            nrow=3, 
-            byrow = TRUE, 
-            dimnames = list(c(&quot;r1&quot;,&quot;r2&quot;,&quot;r3&quot;), c(&quot;c1&quot;,&quot;c2&quot;,&quot;c3&quot;)))
-print(B)</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJXWlhSdmNpQnVkVzNEcVhKcFkyOWNibmdnUEMwZ1l5Z3hMQ0F5TENBektWeHVlRnh1WEc0aklGSmxjSEpsYzJWdWRHSERwOE9qYnlCbGVIQnN3NjFqYVhSaElHTnZiVzhnZG1WMGIzSXRZMjlzZFc1aFhHNTRYMk52YkhWdVlTQThMU0J0WVhSeWFYZ29lQ3dnYm1OdmJDQTlJREVwWEc1NFgyTnZiSFZ1WVZ4dVhHNGpJRkpsY0hKbGMyVnVkR0hEcDhPamJ5QmxlSEJzdzYxamFYUmhJR052Ylc4Z2RtVjBiM0l0YkdsdWFHRmNibmhmYkdsdWFHRWdQQzBnZENoNFgyTnZiSFZ1WVNsY2JuaGZiR2x1YUdGY2JtQmdZQ0o5IC0tPlxuXG5gYGByXG4jIFZldG9yIG51bcOpcmljb1xueCA8LSBjKDEsIDIsIDMpXG54XG5cbiMgUmVwcmVzZW50YcOnw6NvIGV4cGzDrWNpdGEgY29tbyB2ZXRvci1jb2x1bmFcbnhfY29sdW5hIDwtIG1hdHJpeCh4LCBuY29sID0gMSlcbnhfY29sdW5hXG5cbiMgUmVwcmVzZW50YcOnw6NvIGV4cGzDrWNpdGEgY29tbyB2ZXRvci1saW5oYVxueF9saW5oYSA8LSB0KHhfY29sdW5hKVxueF9saW5oYVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBWZXRvciBudW3DqXJpY29cbnggPC0gYygxLCAyLCAzKVxueFxuXG4jIFJlcHJlc2VudGHDp8OjbyBleHBsw61jaXRhIGNvbW8gdmV0b3ItY29sdW5hXG54X2NvbHVuYSA8LSBtYXRyaXgoeCwgbmNvbCA9IDEpXG54X2NvbHVuYVxuXG4jIFJlcHJlc2VudGHDp8OjbyBleHBsw61jaXRhIGNvbW8gdmV0b3ItbGluaGFcbnhfbGluaGEgPC0gdCh4X2NvbHVuYSlcbnhfbGluaGFcbmBgYCJ9 -->
+<pre class="r"><code># Vetor numérico
+x &lt;- c(1, 2, 3)
+x
+
+# Representação explícita como vetor-coluna
+x_coluna &lt;- matrix(x, ncol = 1)
+x_coluna
+
+# Representação explícita como vetor-linha
+x_linha &lt;- t(x_coluna)
+x_linha</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="operações-básicas" class="section level2">
-<h2>2. Operações básicas</h2>
-<p>As operações algébricas básicas com matrizes são operações de soma e
-multiplicação.</p>
-<div id="soma-e-diferença" class="section level3">
-<h3>Soma (e diferença)</h3>
+<div id="matrizes" class="section level3">
+<h3>1.2 Matrizes</h3>
+<p>Uma matriz com <span class="math inline">\(n\)</span> linhas e <span class="math inline">\(k\)</span> colunas é escrita como:</p>
 <p><span class="math display">\[
-\mathbf{A} = \left[\begin{array}{cc}
-a_{11} &amp; a_{12}\\
-a_{21} &amp; a_{22}
-\end{array}\right],~
-\mathbf{B} = \left[\begin{array}{cc}
-b_{11} &amp; b_{12}\\
-b_{21} &amp; b_{22}
-\end{array}\right],~
-\mathbf{A}+\mathbf{B} = \left[\begin{array}{cc}
-a_{11}+b_{11} &amp; a_{12}+b_{12}\\
-a_{21}+b_{21} &amp; a_{22}+b_{22}
-\end{array}\right]
+\mathbf{A}
+=
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1k}\\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2k}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nk}
+\end{bmatrix}_{n\times k}.
+\]</span></p>
+<p>O primeiro índice identifica a linha; o segundo identifica a coluna.
+Quando <span class="math inline">\(n=k\)</span>, a matriz é denominada
+<strong>quadrada</strong>.</p>
+<p><strong>EXEMPLO</strong></p>
+<p><span class="math display">\[
+\mathbf{A}
+=
+\begin{bmatrix}
+2 &amp; 3 &amp; 5\\
+6 &amp; 1 &amp; 3
+\end{bmatrix}_{2\times3}.
+\]</span></p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJEY21saGJtUnZJR0VnYldGMGNtbDZJSEJ2Y2lCc2FXNW9ZWE5jYmtFZ1BDMGdiV0YwY21sNEtGeHVJQ0JqS0RJc0lETXNJRFVzWEc0Z0lDQWdOaXdnTVN3Z015a3NYRzRnSUc1eWIzY2dQU0F5TEZ4dUlDQmllWEp2ZHlBOUlGUlNWVVZjYmlsY2JseHVRVnh1WEc0aklGWmxjbWxtYVdOaGJtUnZJSE4xWVhNZ1pHbHRaVzV6dzdWbGMxeHVaR2x0S0VFcFhHNXVjbTkzS0VFcFhHNXVZMjlzS0VFcFhHNWdZR0FpZlE9PSAtLT5cblxuYGBgclxuIyBDcmlhbmRvIGEgbWF0cml6IHBvciBsaW5oYXNcbkEgPC0gbWF0cml4KFxuICBjKDIsIDMsIDUsXG4gICAgNiwgMSwgMyksXG4gIG5yb3cgPSAyLFxuICBieXJvdyA9IFRSVUVcbilcblxuQVxuXG4jIFZlcmlmaWNhbmRvIHN1YXMgZGltZW5zw7Vlc1xuZGltKEEpXG5ucm93KEEpXG5uY29sKEEpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDcmlhbmRvIGEgbWF0cml6IHBvciBsaW5oYXNcbkEgPC0gbWF0cml4KFxuICBjKDIsIDMsIDUsXG4gICAgNiwgMSwgMyksXG4gIG5yb3cgPSAyLFxuICBieXJvdyA9IFRSVUVcbilcblxuQVxuXG4jIFZlcmlmaWNhbmRvIHN1YXMgZGltZW5zw7Vlc1xuZGltKEEpXG5ucm93KEEpXG5uY29sKEEpXG5gYGAifQ== -->
+<pre class="r"><code># Criando a matriz por linhas
+A &lt;- matrix(
+  c(2, 3, 5,
+    6, 1, 3),
+  nrow = 2,
+  byrow = TRUE
+)
+
+A
+
+# Verificando suas dimensões
+dim(A)
+nrow(A)
+ncol(A)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>As dimensões determinam quais operações matriciais são possíveis.
+Antes de efetuar um produto, é recomendável identificar as dimensões de
+cada objeto.</p>
+<blockquote>
+<p><strong>Por que isso importa para a Econometria?</strong><br />
+Em uma regressão com <span class="math inline">\(n\)</span> observações
+e <span class="math inline">\(k\)</span> parâmetros, teremos normalmente
+<span class="math inline">\(\mathbf y_{n\times1}\)</span>, <span class="math inline">\(\mathbf X_{n\times k}\)</span>, <span class="math inline">\(\boldsymbol\beta_{k\times1}\)</span> e <span class="math inline">\(\mathbf u_{n\times1}\)</span>.</p>
+</blockquote>
+</div>
+</div>
+<div id="soma-diferença-e-multiplicação-por-escalar" class="section level2">
+<h2>2. Soma, diferença e multiplicação por escalar</h2>
+<p>Duas matrizes somente podem ser somadas ou subtraídas quando possuem
+as mesmas dimensões.</p>
+<p>Se <span class="math inline">\(\mathbf A\)</span> e <span class="math inline">\(\mathbf B\)</span> são matrizes <span class="math inline">\(n\times k\)</span>, então:</p>
+<p><span class="math display">\[
+(\mathbf A+\mathbf B)_{ij}=a_{ij}+b_{ij}.
 \]</span></p>
 <p><strong>EXEMPLO</strong></p>
-<p>Para as matrizes</p>
 <p><span class="math display">\[
-\mathbf{A}=\begin{bmatrix}
-4 &amp; 9\\
-2 &amp; 1
-\end{bmatrix}, \quad
-\mathbf{B}=\begin{bmatrix}
-2 &amp; 0\\
-0 &amp; 7
-\end{bmatrix}
-\]</span></p>
-<p>No caso de uma adição, temos:</p>
-<p><span class="math display">\[
-\mathbf{A+B} = \begin{bmatrix}
-4 &amp; 9\\
-2 &amp; 1
-\end{bmatrix} + \begin{bmatrix}
-2 &amp; 0\\
-0 &amp; 7
-\end{bmatrix} =
+\mathbf A=
 \begin{bmatrix}
-4+2 &amp; 9+0\\
-2+0 &amp; 1+7
-\end{bmatrix} =
+4 &amp; 9\\
+2 &amp; 1
+\end{bmatrix},
+\qquad
+\mathbf B=
+\begin{bmatrix}
+2 &amp; 0\\
+0 &amp; 7
+\end{bmatrix}.
+\]</span></p>
+<p>Logo:</p>
+<p><span class="math display">\[
+\mathbf A+\mathbf B
+=
 \begin{bmatrix}
 6 &amp; 9\\
 2 &amp; 8
-\end{bmatrix}
-\]</span> No caso de uma diferença:</p>
-<p><span class="math display">\[
-\mathbf{A-B} = \begin{bmatrix}
-4 &amp; 9\\
-2 &amp; 1
-\end{bmatrix} - \begin{bmatrix}
-2 &amp; 0\\
-0 &amp; 7
-\end{bmatrix} = \begin{bmatrix}
-4-2 &amp; 9-0\\
-2-0 &amp; 1-7
-\end{bmatrix} = \begin{bmatrix}
+\end{bmatrix},
+\qquad
+\mathbf A-\mathbf B
+=
+\begin{bmatrix}
 2 &amp; 9\\
 2 &amp; -6
-\end{bmatrix}
+\end{bmatrix}.
 \]</span></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJFWldacGJtbkRwOE9qYnlCa1lYTWdiV0YwY21sNlpYTmNia0VnUFNCdFlYUnlhWGdvWXlnMExEa3NNaXd4S1N3eUxESXNZbmx5YjNjOVZGSlZSU2xjYmtJZ1BTQnRZWFJ5YVhnb1l5Z3lMREFzTUN3M0tTd3lMRElzWW5seWIzYzlWRkpWUlNsY2JseHVJeUJUYjIxaFhHNXpiMjFoSUQwZ1FTdENYRzV6YjIxaFhHNWNiaU1nVTNWaWRISmh3NmZEbzI5Y2JtUnBaaUE5SUVFdFFseHVaR2xtWEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG4jIERlZmluacOnw6NvIGRhcyBtYXRyaXplc1xuQSA9IG1hdHJpeChjKDQsOSwyLDEpLDIsMixieXJvdz1UUlVFKVxuQiA9IG1hdHJpeChjKDIsMCwwLDcpLDIsMixieXJvdz1UUlVFKVxuXG4jIFNvbWFcbnNvbWEgPSBBK0JcbnNvbWFcblxuIyBTdWJ0cmHDp8Ojb1xuZGlmID0gQS1CXG5kaWZcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEZWZpbmnDp8OjbyBkYXMgbWF0cml6ZXNcbkEgPSBtYXRyaXgoYyg0LDksMiwxKSwyLDIsYnlyb3c9VFJVRSlcbkIgPSBtYXRyaXgoYygyLDAsMCw3KSwyLDIsYnlyb3c9VFJVRSlcblxuIyBTb21hXG5zb21hID0gQStCXG5zb21hXG5cbiMgU3VidHJhw6fDo29cbmRpZiA9IEEtQlxuZGlmXG5gYGAifQ== -->
-<pre class="r"><code># Definição das matrizes
-A = matrix(c(4,9,2,1),2,2,byrow=TRUE)
-B = matrix(c(2,0,0,7),2,2,byrow=TRUE)
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJFWldacGJtbHVaRzhnWkhWaGN5QnRZWFJ5YVhwbGN5QmpiMjBnWVhNZ2JXVnpiV0Z6SUdScGJXVnVjOE8xWlhOY2JrRWdQQzBnYldGMGNtbDRLR01vTkN3Z09TeGNiaUFnSUNBZ0lDQWdJQ0FnSUNBZ01pd2dNU2tzSUc1eWIzY2dQU0F5TENCaWVYSnZkeUE5SUZSU1ZVVXBYRzVjYmtJZ1BDMGdiV0YwY21sNEtHTW9NaXdnTUN4Y2JpQWdJQ0FnSUNBZ0lDQWdJQ0FnTUN3Z055a3NJRzV5YjNjZ1BTQXlMQ0JpZVhKdmR5QTlJRlJTVlVVcFhHNWNiaU1nVTI5dFlTQmxJR1JwWm1WeVpXN0RwMkZjYmtFZ0t5QkNYRzVCSUMwZ1FseHVZR0JnSW4wPSAtLT5cblxuYGBgclxuIyBEZWZpbmluZG8gZHVhcyBtYXRyaXplcyBjb20gYXMgbWVzbWFzIGRpbWVuc8O1ZXNcbkEgPC0gbWF0cml4KGMoNCwgOSxcbiAgICAgICAgICAgICAgMiwgMSksIG5yb3cgPSAyLCBieXJvdyA9IFRSVUUpXG5cbkIgPC0gbWF0cml4KGMoMiwgMCxcbiAgICAgICAgICAgICAgMCwgNyksIG5yb3cgPSAyLCBieXJvdyA9IFRSVUUpXG5cbiMgU29tYSBlIGRpZmVyZW7Dp2FcbkEgKyBCXG5BIC0gQlxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEZWZpbmluZG8gZHVhcyBtYXRyaXplcyBjb20gYXMgbWVzbWFzIGRpbWVuc8O1ZXNcbkEgPC0gbWF0cml4KGMoNCwgOSxcbiAgICAgICAgICAgICAgMiwgMSksIG5yb3cgPSAyLCBieXJvdyA9IFRSVUUpXG5cbkIgPC0gbWF0cml4KGMoMiwgMCxcbiAgICAgICAgICAgICAgMCwgNyksIG5yb3cgPSAyLCBieXJvdyA9IFRSVUUpXG5cbiMgU29tYSBlIGRpZmVyZW7Dp2FcbkEgKyBCXG5BIC0gQlxuYGBgIn0= -->
+<pre class="r"><code># Definindo duas matrizes com as mesmas dimensões
+A &lt;- matrix(c(4, 9,
+              2, 1), nrow = 2, byrow = TRUE)
 
-# Soma
-soma = A+B
-soma
+B &lt;- matrix(c(2, 0,
+              0, 7), nrow = 2, byrow = TRUE)
 
-# Subtração
-dif = A-B
-dif</code></pre>
+# Soma e diferença
+A + B
+A - B</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p><strong>Propriedades da soma de matrizes</strong></p>
-<ul>
-<li><p>Associação: <span class="math inline">\((A+B)+C = A +
-(B+C)\)</span></p></li>
-<li><p>Comutação: <span class="math inline">\((A+B) =
-(B+A)\)</span></p></li>
-<li><p>Elemento neutro: <span class="math inline">\(A + 0 =
-A\)</span></p></li>
-</ul>
-</div>
-<div id="multiplicação-por-um-escalar" class="section level3">
-<h3>Multiplicação por um escalar</h3>
-<p>Seja uma matriz <span class="math inline">\(\mathbf{A}\)</span></p>
+<p>Para um escalar <span class="math inline">\(c\)</span>:</p>
 <p><span class="math display">\[
-\mathbf{A} = \begin{bmatrix}
-a_{11} &amp; a_{12}\\
-a_{21} &amp; a_{22}
-\end{bmatrix}
+c\mathbf A
+=
+\begin{bmatrix}
+ca_{11} &amp; \cdots &amp; ca_{1k}\\
+\vdots &amp; \ddots &amp; \vdots\\
+ca_{n1} &amp; \cdots &amp; ca_{nk}
+\end{bmatrix}.
 \]</span></p>
-<p>Dado um escalar <span class="math inline">\(k\)</span>, a
-multiplicação de <span class="math inline">\(A\)</span> por este escalar
-é definida como:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJOZFd4MGFYQnNhV05odzZmRG8yOGdaR1VnZFcxaElHMWhkSEpwZWlCd2IzSWdkVzBnWlhOallXeGhjbHh1WTE5bGMyTmhiR0Z5SUR3dElESmNibU5mWlhOallXeGhjaUFxSUVGY2JtQmdZQ0o5IC0tPlxuXG5gYGByXG4jIE11bHRpcGxpY2HDp8OjbyBkZSB1bWEgbWF0cml6IHBvciB1bSBlc2NhbGFyXG5jX2VzY2FsYXIgPC0gMlxuY19lc2NhbGFyICogQVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBNdWx0aXBsaWNhw6fDo28gZGUgdW1hIG1hdHJpeiBwb3IgdW0gZXNjYWxhclxuY19lc2NhbGFyIDwtIDJcbmNfZXNjYWxhciAqIEFcbmBgYCJ9 -->
+<pre class="r"><code># Multiplicação de uma matriz por um escalar
+c_escalar &lt;- 2
+c_escalar * A</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>As principais propriedades são:</p>
 <p><span class="math display">\[
-k \cdot \mathbf{A} = \begin{bmatrix}
-k \cdot a_{11} &amp; k \cdot a_{12}\\
-k \cdot a_{21} &amp; k \cdot a_{22}
-\end{bmatrix}
+\mathbf A+\mathbf B=\mathbf B+\mathbf A,
+\]</span></p>
+<p><span class="math display">\[
+(\mathbf A+\mathbf B)+\mathbf C
+=
+\mathbf A+(\mathbf B+\mathbf C),
+\]</span></p>
+<p><span class="math display">\[
+c(\mathbf A+\mathbf B)=c\mathbf A+c\mathbf B.
+\]</span></p>
+</div>
+<div id="transposição" class="section level2">
+<h2>3. Transposição</h2>
+<p>A transposta de uma matriz <span class="math inline">\(\mathbf
+A_{n\times k}\)</span>, indicada por <span class="math inline">\(\mathbf
+A&#39;\)</span>, possui dimensão <span class="math inline">\(k\times
+n\)</span>. Suas linhas correspondem às colunas da matriz original.</p>
+<p><strong>EXEMPLO</strong></p>
+<p><span class="math display">\[
+\mathbf A=
+\begin{bmatrix}
+4 &amp; 5\\
+3 &amp; 1\\
+5 &amp; 0
+\end{bmatrix}_{3\times2}
+\quad\Longrightarrow\quad
+\mathbf A&#39;
+=
+\begin{bmatrix}
+4 &amp; 3 &amp; 5\\
+5 &amp; 1 &amp; 0
+\end{bmatrix}_{2\times3}.
+\]</span></p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJOWVhSeWFYb2dNeUI0SURKY2JrRWdQQzBnYldGMGNtbDRLRnh1SUNCaktEUXNJRFVzWEc0Z0lDQWdNeXdnTVN4Y2JpQWdJQ0ExTENBd0tTeGNiaUFnYm5KdmR5QTlJRE1zWEc0Z0lHSjVjbTkzSUQwZ1ZGSlZSVnh1S1Z4dVhHNUJYRzUwS0VFcFhHNWdZR0FpZlE9PSAtLT5cblxuYGBgclxuIyBNYXRyaXogMyB4IDJcbkEgPC0gbWF0cml4KFxuICBjKDQsIDUsXG4gICAgMywgMSxcbiAgICA1LCAwKSxcbiAgbnJvdyA9IDMsXG4gIGJ5cm93ID0gVFJVRVxuKVxuXG5BXG50KEEpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBNYXRyaXogMyB4IDJcbkEgPC0gbWF0cml4KFxuICBjKDQsIDUsXG4gICAgMywgMSxcbiAgICA1LCAwKSxcbiAgbnJvdyA9IDMsXG4gIGJ5cm93ID0gVFJVRVxuKVxuXG5BXG50KEEpXG5gYGAifQ== -->
+<pre class="r"><code># Matriz 3 x 2
+A &lt;- matrix(
+  c(4, 5,
+    3, 1,
+    5, 0),
+  nrow = 3,
+  byrow = TRUE
+)
+
+A
+t(A)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="propriedades" class="section level3">
+<h3>3.1 Propriedades</h3>
+<p><span class="math display">\[
+(\mathbf A&#39;)&#39;=\mathbf A,
+\]</span></p>
+<p><span class="math display">\[
+(\mathbf A+\mathbf B)&#39;=\mathbf A&#39;+\mathbf B&#39;,
+\]</span></p>
+<p><span class="math display">\[
+(c\mathbf A)&#39;=c\mathbf A&#39;,
+\]</span></p>
+<p><span class="math display">\[
+(\mathbf A\mathbf B)&#39;=\mathbf B&#39;\mathbf A&#39;.
+\]</span></p>
+<p>A última propriedade merece atenção: a transposição de um produto
+inverte a ordem das matrizes.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJOWVhSeWFYcGxjeUJqYjI1bWIzSnR3NkYyWldselhHNUJJRHd0SUcxaGRISnBlQ2d4T2pZc0lHNXliM2NnUFNBeUxDQmllWEp2ZHlBOUlGUlNWVVVwWEc1Q0lEd3RJRzFoZEhKcGVDZzNPakV5TENCdWNtOTNJRDBnTXl3Z1lubHliM2NnUFNCVVVsVkZLVnh1WEc0aklGWmxjbWxtYVdOaGJtUnZJQ2hCUWlrbklEMGdRaWRCSjF4dWRDaEJJQ1VxSlNCQ0tWeHVkQ2hDS1NBbEtpVWdkQ2hCS1Z4dVlHQmdJbjA9IC0tPlxuXG5gYGByXG4jIE1hdHJpemVzIGNvbmZvcm3DoXZlaXNcbkEgPC0gbWF0cml4KDE6NiwgbnJvdyA9IDIsIGJ5cm93ID0gVFJVRSlcbkIgPC0gbWF0cml4KDc6MTIsIG5yb3cgPSAzLCBieXJvdyA9IFRSVUUpXG5cbiMgVmVyaWZpY2FuZG8gKEFCKScgPSBCJ0EnXG50KEEgJSolIEIpXG50KEIpICUqJSB0KEEpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBNYXRyaXplcyBjb25mb3Jtw6F2ZWlzXG5BIDwtIG1hdHJpeCgxOjYsIG5yb3cgPSAyLCBieXJvdyA9IFRSVUUpXG5CIDwtIG1hdHJpeCg3OjEyLCBucm93ID0gMywgYnlyb3cgPSBUUlVFKVxuXG4jIFZlcmlmaWNhbmRvIChBQiknID0gQidBJ1xudChBICUqJSBCKVxudChCKSAlKiUgdChBKVxuYGBgIn0= -->
+<pre class="r"><code># Matrizes conformáveis
+A &lt;- matrix(1:6, nrow = 2, byrow = TRUE)
+B &lt;- matrix(7:12, nrow = 3, byrow = TRUE)
+
+# Verificando (AB)&#39; = B&#39;A&#39;
+t(A %*% B)
+t(B) %*% t(A)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<blockquote>
+<p><strong>Por que isso importa para a Econometria?</strong><br />
+Produtos como <span class="math inline">\(\mathbf X&#39;\mathbf
+X\)</span> e <span class="math inline">\(\mathbf X&#39;\mathbf
+y\)</span> aparecem na fórmula do estimador de MQO. A propriedade <span class="math inline">\((\mathbf X&#39;\mathbf X)&#39;=\mathbf
+X&#39;\mathbf X\)</span> mostra que <span class="math inline">\(\mathbf
+X&#39;\mathbf X\)</span> é simétrica.</p>
+</blockquote>
+</div>
+</div>
+<div id="multiplicação-de-matrizes" class="section level2">
+<h2>4. Multiplicação de matrizes</h2>
+<p>Se <span class="math inline">\(\mathbf A\)</span> possui dimensão
+<span class="math inline">\(m\times n\)</span> e <span class="math inline">\(\mathbf B\)</span> possui dimensão <span class="math inline">\(n\times p\)</span>, então o produto <span class="math inline">\(\mathbf A\mathbf B\)</span> existe e possui
+dimensão <span class="math inline">\(m\times p\)</span>:</p>
+<p><span class="math display">\[
+\underset{m\times n}{\mathbf A}
+\underset{n\times p}{\mathbf B}
+=
+\underset{m\times p}{\mathbf C}.
+\]</span></p>
+<p>O elemento <span class="math inline">\(c_{ij}\)</span> é o produto
+interno entre a linha <span class="math inline">\(i\)</span> de <span class="math inline">\(\mathbf A\)</span> e a coluna <span class="math inline">\(j\)</span> de <span class="math inline">\(\mathbf
+B\)</span>:</p>
+<p><span class="math display">\[
+c_{ij}=\sum_{\ell=1}^{n}a_{i\ell}b_{\ell j}.
 \]</span></p>
 <p><strong>EXEMPLO</strong></p>
 <p><span class="math display">\[
-\mathbf{A}=\begin{bmatrix}
-3 &amp; -1\\
-0 &amp; 5
-\end{bmatrix}
-\]</span></p>
-<p>com $k = 2 $, temos:</p>
-<p><span class="math display">\[
-2 \cdot \begin{bmatrix}
-3 &amp; -1\\
-0 &amp; 5
-\end{bmatrix} =
+\mathbf A=
 \begin{bmatrix}
-2\cdot 3 &amp; 2\cdot (-1)\\
-2\cdot 0 &amp; 2\cdot5
-\end{bmatrix} =
-\begin{bmatrix}
-6 &amp; -2\\
-0 &amp; 10
-\end{bmatrix}
-\]</span></p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJFWldacGJtbHlJR0VnYldGMGNtbDZJRUZjYmtFZ1BTQnRZWFJ5YVhnb1l5Z3pMQzB4TERBc05Ta3NJRElzSURJc0lHSjVjbTkzUFZSU1ZVVXBYRzVjYmlNZ1JHVm1hVzVwY2lCMWJTQmxjMk5oYkdGeVhHNXJJRDBnTWx4dVhHNGpJRkJ5YjJSMWRHOGdaR0VnYldGMGNtbDZJRUVnY0c5eUlIVnRJR1Z6WTJGc1lYSmNia01nUFNCcktrRmNia05jYm1CZ1lDSjkgLS0+XG5cbmBgYHJcbiMgRGVmaW5pciBhIG1hdHJpeiBBXG5BID0gbWF0cml4KGMoMywtMSwwLDUpLCAyLCAyLCBieXJvdz1UUlVFKVxuXG4jIERlZmluaXIgdW0gZXNjYWxhclxuayA9IDJcblxuIyBQcm9kdXRvIGRhIG1hdHJpeiBBIHBvciB1bSBlc2NhbGFyXG5DID0gaypBXG5DXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEZWZpbmlyIGEgbWF0cml6IEFcbkEgPSBtYXRyaXgoYygzLC0xLDAsNSksIDIsIDIsIGJ5cm93PVRSVUUpXG5cbiMgRGVmaW5pciB1bSBlc2NhbGFyXG5rID0gMlxuXG4jIFByb2R1dG8gZGEgbWF0cml6IEEgcG9yIHVtIGVzY2FsYXJcbkMgPSBrKkFcbkNcbmBgYCJ9 -->
-<pre class="r"><code># Definir a matriz A
-A = matrix(c(3,-1,0,5), 2, 2, byrow=TRUE)
-
-# Definir um escalar
-k = 2
-
-# Produto da matriz A por um escalar
-C = k*A
-C</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="transposição" class="section level3">
-<h3>Transposição</h3>
-<p>A transposição de uma matriz <span class="math inline">\(m \times
-n\)</span> é indicada por <span class="math inline">\(\mathbf{A}&#39;\)</span> e possui dimensão <span class="math inline">\(n \times m\)</span>.</p>
-<p><strong>EXEMPLO</strong></p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJFWldacGJtbHVaRzhnWVNCdFlYUnlhWG9nUVNBemVETmNia0VnUEMwZ2JXRjBjbWw0S0dNb05Dd2dOU3dnWEc0Z0lDQWdJQ0FnSUNBZ0lDQWdJRE1zSURFc1hHNGdJQ0FnSUNBZ0lDQWdJQ0FnSURVc0lEQXBMQ0J1Y205M0lEMGdNeXdnWW5seWIzY2dQU0JVVWxWRktWeHVYRzRqSUVsdGNISnBiV2x1Wkc4Z1lTQnRZWFJ5YVhvZ1FWeHVZMkYwS0Z3aVRXRjBjbWw2SUVFNlhGeHVYQ0lwWEc1d2NtbHVkQ2hCS1Z4dVlHQmdJbjA9IC0tPlxuXG5gYGByXG4jIERlZmluaW5kbyBhIG1hdHJpeiBBIDN4M1xuQSA8LSBtYXRyaXgoYyg0LCA1LCBcbiAgICAgICAgICAgICAgMywgMSxcbiAgICAgICAgICAgICAgNSwgMCksIG5yb3cgPSAzLCBieXJvdyA9IFRSVUUpXG5cbiMgSW1wcmltaW5kbyBhIG1hdHJpeiBBXG5jYXQoXCJNYXRyaXogQTpcXG5cIilcbnByaW50KEEpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEZWZpbmluZG8gYSBtYXRyaXogQSAzeDNcbkEgPC0gbWF0cml4KGMoNCwgNSwgXG4gICAgICAgICAgICAgIDMsIDEsXG4gICAgICAgICAgICAgIDUsIDApLCBucm93ID0gMywgYnlyb3cgPSBUUlVFKVxuXG4jIEltcHJpbWluZG8gYSBtYXRyaXogQVxuY2F0KFwiTWF0cml6IEE6XFxuXCIpXG5wcmludChBKVxuYGBgIn0= -->
-<pre class="r"><code># Definindo a matriz A 3x3
-A &lt;- matrix(c(4, 5, 
-              3, 1,
-              5, 0), nrow = 3, byrow = TRUE)
-
-# Imprimindo a matriz A
-cat(&quot;Matriz A:\n&quot;)
-print(A)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>A transposta é obtida com o operador <code>t()</code>.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJEWVd4amRXeGhibVJ2SUdFZ2RISmhibk53YjNOMFlTQmtaU0JCWEc1QlgzUnlZVzV6SUR3dElIUW9RU2xjYmx4dUl5QkpiWEJ5YVcxcGJtUnZJR0VnZEhKaGJuTndiM04wWVNCa1pTQkJYRzVqWVhRb1hDSmNYRzVVY21GdWMzQnZjM1JoSUdSbElFRTZYRnh1WENJcFhHNXdjbWx1ZENoQlgzUnlZVzV6S1Z4dVlHQmdJbjA9IC0tPlxuXG5gYGByXG4jIENhbGN1bGFuZG8gYSB0cmFuc3Bvc3RhIGRlIEFcbkFfdHJhbnMgPC0gdChBKVxuXG4jIEltcHJpbWluZG8gYSB0cmFuc3Bvc3RhIGRlIEFcbmNhdChcIlxcblRyYW5zcG9zdGEgZGUgQTpcXG5cIilcbnByaW50KEFfdHJhbnMpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjdWxhbmRvIGEgdHJhbnNwb3N0YSBkZSBBXG5BX3RyYW5zIDwtIHQoQSlcblxuIyBJbXByaW1pbmRvIGEgdHJhbnNwb3N0YSBkZSBBXG5jYXQoXCJcXG5UcmFuc3Bvc3RhIGRlIEE6XFxuXCIpXG5wcmludChBX3RyYW5zKVxuYGBgIn0= -->
-<pre class="r"><code># Calculando a transposta de A
-A_trans &lt;- t(A)
-
-# Imprimindo a transposta de A
-cat(&quot;\nTransposta de A:\n&quot;)
-print(A_trans)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Também é importante nos acostumarmos com a transposição de
-vetores.</p>
-<p>Dado um vetor coluna <span class="math display">\[ \mathbf{b}=
-\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}\]</span> Sua versão
-trasposta é dada por um vetor linha</p>
-<p><span class="math display">\[ \mathbf{b}&#39;= \begin{bmatrix} b_1
-&amp; b_2 &amp; b_3 \end{bmatrix}\]</span></p>
-</div>
-<div id="multiplicação-de-matrizes" class="section level3">
-<h3>Multiplicação de matrizes</h3>
-<p>Sejam as matrizes</p>
-<p><span class="math display">\[
-\mathbf{A} = \begin{bmatrix}
-a_{11} &amp; a_{12} &amp; a_{13} \\
-a_{21} &amp; a_{22} &amp; a_{23}
-\end{bmatrix}_{2 \times 3} ; \quad
-\mathbf{D} = \begin{bmatrix}
-d_{11} &amp; d_{12} \\
-d_{21} &amp; d_{22} \\
-d_{31} &amp; d_{32}
-\end{bmatrix}_{3 \times 2}
-\]</span></p>
-<p><span class="math inline">\(\mathbf{A}\)</span> é uma matriz <span class="math inline">\(2 \times 3\)</span> e <span class="math inline">\(\mathbf{D}\)</span> é uma matriz <span class="math inline">\(3 \times 2\)</span>, então as dimensões internas
-coincidem e temos:</p>
-<p><span class="math display">\[
-\mathbf{C} = \mathbf{A} \times \mathbf{D} =
-\begin{bmatrix}
-a_{11}d_{11} + a_{12}d_{21} + a_{13}d_{31} &amp; a_{11}d_{12} +
-a_{12}d_{22} + a_{13}d_{32} \\
-a_{21}d_{11} + a_{22}d_{21} + a_{23}d_{31} &amp; a_{21}d_{12} +
-a_{22}d_{22} + a_{23}d_{32}
-\end{bmatrix}
-\]</span></p>
-<p><strong>EXEMPLO</strong></p>
-<p>Considere as duas matrizes a seguir:</p>
-<p><span class="math display">\[
-\mathbf{A}=\left[\begin{array}{cc}
 1 &amp; 2\\
 3 &amp; 4
-\end{array}\right]\textrm{ e  }
-\mathbf{B}=\left[\begin{array}{ccc}
+\end{bmatrix},
+\qquad
+\mathbf B=
+\begin{bmatrix}
 1 &amp; 2 &amp; 1\\
 3 &amp; 4 &amp; 2
-\end{array}\right].
+\end{bmatrix}.
 \]</span></p>
-<p>Por sua vez, o produto de duas matrizes é dado por:</p>
+<p>Então:</p>
 <p><span class="math display">\[
-\begin{align*}
-\mathbf{C} =
-\mathbf{A}\cdot\mathbf{B} &amp; =\left[\begin{array}{cc}
-1 &amp; 2\\
-3 &amp; 4
-\end{array}\right]\cdot\left[\begin{array}{ccc}
-1 &amp; 2 &amp; 1\\
-3 &amp; 4 &amp; 2
-\end{array}\right]\\
-&amp; =\left[\begin{array}{ccc}
-1\cdot1+2\cdot3 &amp; 1\cdot2+2\cdot4 &amp; 1\cdot1+2\cdot2\\
-3\cdot1+4\cdot3 &amp; 3\cdot2+4\cdot4 &amp; 3\cdot1+4\cdot2
-\end{array}\right]\\
-&amp; =\left[\begin{array}{ccc}
+\mathbf A\mathbf B
+=
+\begin{bmatrix}
 7 &amp; 10 &amp; 5\\
 15 &amp; 22 &amp; 11
-\end{array}\right]
-\end{align*}
+\end{bmatrix}.
 \]</span></p>
-<p>Cuidado com o operador <code>∗</code> quando trabalhando com vetores
-e matrizes no <code>R</code>; a multiplicação de matrizes é feita usando
-o operador <code>%*%</code>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJFWldacGJtbHVaRzhnWVNCdFlYUnlhWG9nUVZ4dVFTQTlJRzFoZEhKcGVDZ3hPalFzTWl3eUxDQmllWEp2ZHoxVVVsVkZLVnh1WTJGMEtGd2lRU0E5WEZ4dVhDSXBYRzV3Y21sdWRDaEJLVnh1WEc0aklFUmxabWx1YVc1a2J5QmhJRzFoZEhKcGVpQkNYRzVDSUQwZ2JXRjBjbWw0S0dNb01Td3lMREVzTXl3MExESXBMRElzTXl4aWVYSnZkejFVVWxWRktWeHVZMkYwS0Z3aVFpQTlYRnh1WENJcFhHNXdjbWx1ZENoQ0tWeHVYRzVnWUdBaWZRPT0gLS0+XG5cbmBgYHJcbiMgRGVmaW5pbmRvIGEgbWF0cml6IEFcbkEgPSBtYXRyaXgoMTo0LDIsMiwgYnlyb3c9VFJVRSlcbmNhdChcIkEgPVxcblwiKVxucHJpbnQoQSlcblxuIyBEZWZpbmluZG8gYSBtYXRyaXogQlxuQiA9IG1hdHJpeChjKDEsMiwxLDMsNCwyKSwyLDMsYnlyb3c9VFJVRSlcbmNhdChcIkIgPVxcblwiKVxucHJpbnQoQilcblxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEZWZpbmluZG8gYSBtYXRyaXogQVxuQSA9IG1hdHJpeCgxOjQsMiwyLCBieXJvdz1UUlVFKVxuY2F0KFwiQSA9XFxuXCIpXG5wcmludChBKVxuXG4jIERlZmluaW5kbyBhIG1hdHJpeiBCXG5CID0gbWF0cml4KGMoMSwyLDEsMyw0LDIpLDIsMyxieXJvdz1UUlVFKVxuY2F0KFwiQiA9XFxuXCIpXG5wcmludChCKVxuXG5gYGAifQ== -->
-<pre class="r"><code># Definindo a matriz A
-A = matrix(1:4,2,2, byrow=TRUE)
-cat(&quot;A =\n&quot;)
-print(A)
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJOWVhSeWFYb2dRVG9nTWlCNElESmNia0VnUEMwZ2JXRjBjbWw0S0dNb01Td2dNaXhjYmlBZ0lDQWdJQ0FnSUNBZ0lDQWdNeXdnTkNrc0lHNXliM2NnUFNBeUxDQmllWEp2ZHlBOUlGUlNWVVVwWEc1Y2JpTWdUV0YwY21sNklFSTZJRElnZUNBelhHNUNJRHd0SUcxaGRISnBlQ2hqS0RFc0lESXNJREVzWEc0Z0lDQWdJQ0FnSUNBZ0lDQWdJRE1zSURRc0lESXBMQ0J1Y205M0lEMGdNaXdnWW5seWIzY2dQU0JVVWxWRktWeHVYRzRqSUZCeWIyUjFkRzhnYldGMGNtbGphV0ZzT2lBeUlIZ2dNMXh1UVNBbEtpVWdRbHh1WUdCZ0luMD0gLS0+XG5cbmBgYHJcbiMgTWF0cml6IEE6IDIgeCAyXG5BIDwtIG1hdHJpeChjKDEsIDIsXG4gICAgICAgICAgICAgIDMsIDQpLCBucm93ID0gMiwgYnlyb3cgPSBUUlVFKVxuXG4jIE1hdHJpeiBCOiAyIHggM1xuQiA8LSBtYXRyaXgoYygxLCAyLCAxLFxuICAgICAgICAgICAgICAzLCA0LCAyKSwgbnJvdyA9IDIsIGJ5cm93ID0gVFJVRSlcblxuIyBQcm9kdXRvIG1hdHJpY2lhbDogMiB4IDNcbkEgJSolIEJcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBNYXRyaXogQTogMiB4IDJcbkEgPC0gbWF0cml4KGMoMSwgMixcbiAgICAgICAgICAgICAgMywgNCksIG5yb3cgPSAyLCBieXJvdyA9IFRSVUUpXG5cbiMgTWF0cml6IEI6IDIgeCAzXG5CIDwtIG1hdHJpeChjKDEsIDIsIDEsXG4gICAgICAgICAgICAgIDMsIDQsIDIpLCBucm93ID0gMiwgYnlyb3cgPSBUUlVFKVxuXG4jIFByb2R1dG8gbWF0cmljaWFsOiAyIHggM1xuQSAlKiUgQlxuYGBgIn0= -->
+<pre class="r"><code># Matriz A: 2 x 2
+A &lt;- matrix(c(1, 2,
+              3, 4), nrow = 2, byrow = TRUE)
 
-# Definindo a matriz B
-B = matrix(c(1,2,1,3,4,2),2,3,byrow=TRUE)
-cat(&quot;B =\n&quot;)
-print(B)
-</code></pre>
+# Matriz B: 2 x 3
+B &lt;- matrix(c(1, 2, 1,
+              3, 4, 2), nrow = 2, byrow = TRUE)
+
+# Produto matricial: 2 x 3
+A %*% B</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>O produto de <span class="math inline">\(\mathbf{A}\)</span> e <span class="math inline">\(\mathbf{B}\)</span> é dado por:</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVReUE5SUVFbEtpVkNYRzVEWEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG5DID0gQSUqJUJcbkNcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQyA9IEElKiVCXG5DXG5gYGAifQ== -->
-<pre class="r"><code>C = A%*%B
-C</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p><strong>Propriedades da multiplicação</strong></p>
+<div id="produto-matricial-e-produto-elemento-a-elemento" class="section level3">
+<h3>4.1 Produto matricial e produto elemento a elemento</h3>
+<p>No <code>R</code>, os operadores possuem significados diferentes:</p>
 <ul>
-<li><p>Associação: <span class="math inline">\((AB)C =
-A(BC)\)</span></p></li>
-<li><p>Distribuição: <span class="math inline">\(A(B + C) = AB +
-AC\)</span> e <span class="math inline">\((A+B)C = AC +
-BC\)</span></p></li>
-<li><p>Elemento Neutro: se <span class="math inline">\(A\)</span> é uma
-matriz quadrada <span class="math inline">\(AI = A\)</span></p></li>
+<li><code>A %*% B</code>: produto matricial;</li>
+<li><code>A * B</code>: multiplicação elemento a elemento.</li>
 </ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJFZFdGeklHMWhkSEpwZW1WeklESWdlQ0F5WEc1RElEd3RJRzFoZEhKcGVDaGpLREVzSURJc1hHNGdJQ0FnSUNBZ0lDQWdJQ0FnSURNc0lEUXBMQ0J1Y205M0lEMGdNaXdnWW5seWIzY2dQU0JVVWxWRktWeHVYRzVFSUR3dElHMWhkSEpwZUNoaktEVXNJRFlzWEc0Z0lDQWdJQ0FnSUNBZ0lDQWdJRGNzSURncExDQnVjbTkzSUQwZ01pd2dZbmx5YjNjZ1BTQlVVbFZGS1Z4dVhHNGpJRkJ5YjJSMWRHOGdaV3hsYldWdWRHOGdZU0JsYkdWdFpXNTBiMXh1UXlBcUlFUmNibHh1SXlCUWNtOWtkWFJ2SUcxaGRISnBZMmxoYkZ4dVF5QWxLaVVnUkZ4dVlHQmdJbjA9IC0tPlxuXG5gYGByXG4jIER1YXMgbWF0cml6ZXMgMiB4IDJcbkMgPC0gbWF0cml4KGMoMSwgMixcbiAgICAgICAgICAgICAgMywgNCksIG5yb3cgPSAyLCBieXJvdyA9IFRSVUUpXG5cbkQgPC0gbWF0cml4KGMoNSwgNixcbiAgICAgICAgICAgICAgNywgOCksIG5yb3cgPSAyLCBieXJvdyA9IFRSVUUpXG5cbiMgUHJvZHV0byBlbGVtZW50byBhIGVsZW1lbnRvXG5DICogRFxuXG4jIFByb2R1dG8gbWF0cmljaWFsXG5DICUqJSBEXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEdWFzIG1hdHJpemVzIDIgeCAyXG5DIDwtIG1hdHJpeChjKDEsIDIsXG4gICAgICAgICAgICAgIDMsIDQpLCBucm93ID0gMiwgYnlyb3cgPSBUUlVFKVxuXG5EIDwtIG1hdHJpeChjKDUsIDYsXG4gICAgICAgICAgICAgIDcsIDgpLCBucm93ID0gMiwgYnlyb3cgPSBUUlVFKVxuXG4jIFByb2R1dG8gZWxlbWVudG8gYSBlbGVtZW50b1xuQyAqIERcblxuIyBQcm9kdXRvIG1hdHJpY2lhbFxuQyAlKiUgRFxuYGBgIn0= -->
+<pre class="r"><code># Duas matrizes 2 x 2
+C &lt;- matrix(c(1, 2,
+              3, 4), nrow = 2, byrow = TRUE)
+
+D &lt;- matrix(c(5, 6,
+              7, 8), nrow = 2, byrow = TRUE)
+
+# Produto elemento a elemento
+C * D
+
+# Produto matricial
+C %*% D</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 </div>
+<div id="a-multiplicação-não-é-comutativa" class="section level3">
+<h3>4.2 A multiplicação não é comutativa</h3>
+<p>Em geral:</p>
+<p><span class="math display">\[
+\mathbf A\mathbf B\neq\mathbf B\mathbf A.
+\]</span></p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJQY3lCa2IybHpJSEJ5YjJSMWRHOXpJR1Y0YVhOMFpXMHNJRzFoY3lCd2NtOWtkWHBsYlNCeVpYTjFiSFJoWkc5eklHUnBabVZ5Wlc1MFpYTmNia01nSlNvbElFUmNia1FnSlNvbElFTmNibUJnWUNKOSAtLT5cblxuYGBgclxuIyBPcyBkb2lzIHByb2R1dG9zIGV4aXN0ZW0sIG1hcyBwcm9kdXplbSByZXN1bHRhZG9zIGRpZmVyZW50ZXNcbkMgJSolIERcbkQgJSolIENcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBPcyBkb2lzIHByb2R1dG9zIGV4aXN0ZW0sIG1hcyBwcm9kdXplbSByZXN1bHRhZG9zIGRpZmVyZW50ZXNcbkMgJSolIERcbkQgJSolIENcbmBgYCJ9 -->
+<pre class="r"><code># Os dois produtos existem, mas produzem resultados diferentes
+C %*% D
+D %*% C</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Também pode ocorrer de <span class="math inline">\(\mathbf A\mathbf
+B\)</span> existir, mas <span class="math inline">\(\mathbf B\mathbf
+A\)</span> não existir.</p>
+<p>As propriedades válidas incluem:</p>
+<p><span class="math display">\[
+(\mathbf A\mathbf B)\mathbf C
+=
+\mathbf A(\mathbf B\mathbf C),
+\]</span></p>
+<p><span class="math display">\[
+\mathbf A(\mathbf B+\mathbf C)
+=
+\mathbf A\mathbf B+\mathbf A\mathbf C,
+\]</span></p>
+<p><span class="math display">\[
+\mathbf I\mathbf A=\mathbf A\mathbf I=\mathbf A,
+\]</span></p>
+<p>quando as dimensões forem conformáveis.</p>
+</div>
+</div>
+<div id="produtos-interno-e-externo" class="section level2">
+<h2>5. Produtos interno e externo</h2>
 <div id="produto-interno" class="section level3">
-<h3>Produto Interno</h3>
-<p>O produto interno de dois vetores <span class="math inline">\(\mathbf{u}\)</span> e <span class="math inline">\(\mathbf{v}\)</span> em <span class="math inline">\(\mathbb{R}^n\)</span> é definido como:</p>
+<h3>5.1 Produto interno</h3>
+<p>Para dois vetores <span class="math inline">\(\mathbf x,\mathbf
+y\in\mathbb R^n\)</span>, o produto interno é:</p>
 <p><span class="math display">\[
-\mathbf{u} \cdot \mathbf{v} =
-u_1 v_1 + u_2 v_2 + \ldots + u_n v_n =
-\sum_{i=1}^n u_i v_i
+\mathbf x&#39;\mathbf y
+=
+\sum_{i=1}^{n}x_i y_i.
 \]</span></p>
-<p>Alternativamente, o produto interno <span class="math inline">\(\mathbf{u} \cdot \mathbf{v}\)</span> é dado pela
-multiplicação <span class="math inline">\(\mathbf{u}&#39;
-\mathbf{v}\)</span>.</p>
+<p>O resultado é um escalar.</p>
+<p><strong>EXEMPLO</strong></p>
 <p><span class="math display">\[
-\mathbf{u}&#39; \mathbf{v} =
-\begin{bmatrix} u_1 &amp; u_2 &amp; \cdots &amp; u_n
-\end{bmatrix}
+\mathbf x=
 \begin{bmatrix}
-v_1 \\
-v_2 \\
-\vdots \\
-v_n
-\end{bmatrix} =
-u_1 v_1 + u_2 v_2 + \cdots + u_n v_n
+3\\-1\\4
+\end{bmatrix},
+\qquad
+\mathbf y=
+\begin{bmatrix}
+2\\5\\-1
+\end{bmatrix}.
 \]</span></p>
-<p><strong>EXEMPLO</strong></p>
-<p>Sejam os vetores</p>
+<p>Logo:</p>
 <p><span class="math display">\[
-\mathbf{u} = \begin{bmatrix}
-3 \\ -1 \\ 4
-\end{bmatrix}, \quad
-\mathbf{v} = \begin{bmatrix}
-2 \\ 5 \\ -1
-\end{bmatrix}
-\]</span></p>
-<p>O produto interno <span class="math inline">\(\mathbf{u} \cdot
-\mathbf{v}\)</span> é calculado como:</p>
-<p><span class="math display">\[
-\mathbf{u} \cdot \mathbf{v} = (3 \cdot 2) + (-1 \cdot 5) + (4 \cdot -1)
-= 6 - 5 - 4 = -3
-\]</span></p>
-<p>Ou, em notação somatória:</p>
-<p><span class="math display">\[
-\mathbf{u} \cdot \mathbf{v} = \sum_{i=1}^3 u_i v_i = u_1 v_1 + u_2 v_2 +
-u_3 v_3 = 6 - 5 - 4 = -3
+\mathbf x&#39;\mathbf y
+=3(2)+(-1)(5)+4(-1)
+=-3.
 \]</span></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJFWldacGJtbHVaRzhnYjNNZ2RtVjBiM0psY3lCMUlHVWdkbHh1ZFNBOExTQmpLRE1zSUMweExDQTBLVnh1WTJGMEtGd2lkbVYwYjNJZ2RUcGNYRzVjSWlsY2JuQnlhVzUwS0hVcFhHNWNibllnUEMwZ1l5Z3lMQ0ExTENBdE1TbGNibU5oZENoY0luWmxkRzl5SUhZNlhGeHVYQ0lwWEc1d2NtbHVkQ2gyS1Z4dVhHNGpJRU5oYkdOMWJHRnVaRzhnYnlCd2NtOWtkWFJ2SUdsdWRHVnlibThnWlc1MGNtVWdkU0JsSUhaY2JuQnBJRHd0SUhOMWJTaDFJQ29nZGlsY2JtTmhkQ2hjSWxCeWIyUjFkRzhnYVc1MFpYSnVieUJrWlNCMUlHVWdkanBjWEc1Y0lpbGNibkJwWEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG4jIERlZmluaW5kbyBvcyB2ZXRvcmVzIHUgZSB2XG51IDwtIGMoMywgLTEsIDQpXG5jYXQoXCJ2ZXRvciB1OlxcblwiKVxucHJpbnQodSlcblxudiA8LSBjKDIsIDUsIC0xKVxuY2F0KFwidmV0b3IgdjpcXG5cIilcbnByaW50KHYpXG5cbiMgQ2FsY3VsYW5kbyBvIHByb2R1dG8gaW50ZXJubyBlbnRyZSB1IGUgdlxucGkgPC0gc3VtKHUgKiB2KVxuY2F0KFwiUHJvZHV0byBpbnRlcm5vIGRlIHUgZSB2OlxcblwiKVxucGlcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEZWZpbmluZG8gb3MgdmV0b3JlcyB1IGUgdlxudSA8LSBjKDMsIC0xLCA0KVxuY2F0KFwidmV0b3IgdTpcXG5cIilcbnByaW50KHUpXG5cbnYgPC0gYygyLCA1LCAtMSlcbmNhdChcInZldG9yIHY6XFxuXCIpXG5wcmludCh2KVxuXG4jIENhbGN1bGFuZG8gbyBwcm9kdXRvIGludGVybm8gZW50cmUgdSBlIHZcbnBpIDwtIHN1bSh1ICogdilcbmNhdChcIlByb2R1dG8gaW50ZXJubyBkZSB1IGUgdjpcXG5cIilcbnBpXG5gYGAifQ== -->
-<pre class="r"><code># Definindo os vetores u e v
-u &lt;- c(3, -1, 4)
-cat(&quot;vetor u:\n&quot;)
-print(u)
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJFWldacGJtbHVaRzhnYjNNZ2RtVjBiM0psYzF4dWVDQThMU0JqS0RNc0lDMHhMQ0EwS1Z4dWVTQThMU0JqS0RJc0lEVXNJQzB4S1Z4dVhHNGpJRVIxWVhNZ1ptOXliV0Z6SUdSbElHTmhiR04xYkdGeUlHOGdjSEp2WkhWMGJ5QnBiblJsY201dlhHNXpkVzBvZUNBcUlIa3BYRzVqY205emMzQnliMlFvZUN3Z2VTbGNibUJnWUNKOSAtLT5cblxuYGBgclxuIyBEZWZpbmluZG8gb3MgdmV0b3Jlc1xueCA8LSBjKDMsIC0xLCA0KVxueSA8LSBjKDIsIDUsIC0xKVxuXG4jIER1YXMgZm9ybWFzIGRlIGNhbGN1bGFyIG8gcHJvZHV0byBpbnRlcm5vXG5zdW0oeCAqIHkpXG5jcm9zc3Byb2QoeCwgeSlcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEZWZpbmluZG8gb3MgdmV0b3Jlc1xueCA8LSBjKDMsIC0xLCA0KVxueSA8LSBjKDIsIDUsIC0xKVxuXG4jIER1YXMgZm9ybWFzIGRlIGNhbGN1bGFyIG8gcHJvZHV0byBpbnRlcm5vXG5zdW0oeCAqIHkpXG5jcm9zc3Byb2QoeCwgeSlcbmBgYCJ9 -->
+<pre class="r"><code># Definindo os vetores
+x &lt;- c(3, -1, 4)
+y &lt;- c(2, 5, -1)
 
-v &lt;- c(2, 5, -1)
-cat(&quot;vetor v:\n&quot;)
-print(v)
-
-# Calculando o produto interno entre u e v
-pi &lt;- sum(u * v)
-cat(&quot;Produto interno de u e v:\n&quot;)
-pi</code></pre>
+# Duas formas de calcular o produto interno
+sum(x * y)
+crossprod(x, y)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Uma aplicação importante do produto interno é a soma de quadrados,
-que pode ser definida como o produto interno de um vetor por ele
-mesmo:</p>
+</div>
+<div id="norma-e-ortogonalidade" class="section level3">
+<h3>5.2 Norma e ortogonalidade</h3>
+<p>A norma euclidiana de <span class="math inline">\(\mathbf x\)</span>
+é:</p>
 <p><span class="math display">\[
-\mathbf{x} \cdot \mathbf{x} = x_1 x_1 + x_2 x_2 + \cdots + x_n x_n =
-\sum_{i=1}^n x_i^2
+\|\mathbf x\|
+=
+\sqrt{\mathbf x&#39;\mathbf x}
+=
+\sqrt{\sum_{i=1}^{n}x_i^2}.
 \]</span></p>
-<p><strong>EXEMPLO</strong></p>
-<p>No <code>R</code> podemos calcular um produto interno com o operador
-<code>%*%</code>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJFWldacGJtbHVaRzhnYnlCMlpYUnZjaUI0SUZ4dWVDQTlJR01vTWl3Z0xURXNJRE1wWEc1allYUW9YQ0oyWlhSdmNpQjRPbHhjYmx3aUtWeHVjSEpwYm5Rb2VDbGNibHh1SXlCV1lXeGpkV3hoYm1SdklHOGdjSEp2WkhWMGJ5QnBiblJsY201dlhHNXdhWGdnUFNCNElDVXFKU0I0WEc1allYUW9YQ0pRY205a2RYUnZJR2x1ZEdWeWJtOGdaR1VnZUNCd2IzSWdlRHBjWEc1Y0lpbGNibkJ5YVc1MEtIQnBlQ2xjYm1CZ1lDSjkgLS0+XG5cbmBgYHJcbiMgRGVmaW5pbmRvIG8gdmV0b3IgeCBcbnggPSBjKDIsIC0xLCAzKVxuY2F0KFwidmV0b3IgeDpcXG5cIilcbnByaW50KHgpXG5cbiMgVmFsY3VsYW5kbyBvIHByb2R1dG8gaW50ZXJub1xucGl4ID0geCAlKiUgeFxuY2F0KFwiUHJvZHV0byBpbnRlcm5vIGRlIHggcG9yIHg6XFxuXCIpXG5wcmludChwaXgpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEZWZpbmluZG8gbyB2ZXRvciB4IFxueCA9IGMoMiwgLTEsIDMpXG5jYXQoXCJ2ZXRvciB4OlxcblwiKVxucHJpbnQoeClcblxuIyBWYWxjdWxhbmRvIG8gcHJvZHV0byBpbnRlcm5vXG5waXggPSB4ICUqJSB4XG5jYXQoXCJQcm9kdXRvIGludGVybm8gZGUgeCBwb3IgeDpcXG5cIilcbnByaW50KHBpeClcbmBgYCJ9 -->
-<pre class="r"><code># Definindo o vetor x 
-x = c(2, -1, 3)
-cat(&quot;vetor x:\n&quot;)
-print(x)
-
-# Valculando o produto interno
-pix = x %*% x
-cat(&quot;Produto interno de x por x:\n&quot;)
-print(pix)</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJPYjNKdFlTQmxkV05zYVdScFlXNWhJR1JsSUhoY2JtNXZjbTFoWDNnZ1BDMGdjM0Z5ZENoaGN5NXVkVzFsY21saktHTnliM056Y0hKdlpDaDRLU2twWEc1dWIzSnRZVjk0WEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG4jIE5vcm1hIGV1Y2xpZGlhbmEgZGUgeFxubm9ybWFfeCA8LSBzcXJ0KGFzLm51bWVyaWMoY3Jvc3Nwcm9kKHgpKSlcbm5vcm1hX3hcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBOb3JtYSBldWNsaWRpYW5hIGRlIHhcbm5vcm1hX3ggPC0gc3FydChhcy5udW1lcmljKGNyb3NzcHJvZCh4KSkpXG5ub3JtYV94XG5gYGAifQ== -->
+<pre class="r"><code># Norma euclidiana de x
+norma_x &lt;- sqrt(as.numeric(crossprod(x)))
+norma_x</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Se <span class="math inline">\(\mathbf{u} \cdot \mathbf{v} =
-0\)</span>, então <span class="math inline">\(\mathbf{u}\)</span> e
-<span class="math inline">\(\mathbf{v}\)</span> são
-<strong>ortogonais</strong>.</p>
+<p>Se:</p>
+<p><span class="math display">\[
+\mathbf x&#39;\mathbf y=0,
+\]</span></p>
+<p>os vetores são <strong>ortogonais</strong>.</p>
+</div>
+<div id="produto-externo" class="section level3">
+<h3>5.3 Produto externo</h3>
+<p>O produto externo entre dois vetores-coluna é:</p>
+<p><span class="math display">\[
+\underset{n\times1}{\mathbf x}
+\underset{1\times m}{\mathbf y&#39;}
+=
+\underset{n\times m}{\mathbf x\mathbf y&#39;}.
+\]</span></p>
+<p><strong>EXEMPLO</strong></p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJRY205a2RYUnZJR1Y0ZEdWeWJtOGdlQ0I1SjF4dWRHTnliM056Y0hKdlpDaDRMQ0I1S1Z4dVhHNGpJRkpsYzNWc2RHRmtieUJsY1hWcGRtRnNaVzUwWlZ4dWJXRjBjbWw0S0hnc0lHNWpiMndnUFNBeEtTQWxLaVVnZENodFlYUnlhWGdvZVN3Z2JtTnZiQ0E5SURFcEtWeHVZR0JnSW4wPSAtLT5cblxuYGBgclxuIyBQcm9kdXRvIGV4dGVybm8geCB5J1xudGNyb3NzcHJvZCh4LCB5KVxuXG4jIFJlc3VsdGFkbyBlcXVpdmFsZW50ZVxubWF0cml4KHgsIG5jb2wgPSAxKSAlKiUgdChtYXRyaXgoeSwgbmNvbCA9IDEpKVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBQcm9kdXRvIGV4dGVybm8geCB5J1xudGNyb3NzcHJvZCh4LCB5KVxuXG4jIFJlc3VsdGFkbyBlcXVpdmFsZW50ZVxubWF0cml4KHgsIG5jb2wgPSAxKSAlKiUgdChtYXRyaXgoeSwgbmNvbCA9IDEpKVxuYGBgIn0= -->
+<pre class="r"><code># Produto externo x y&#39;
+tcrossprod(x, y)
+
+# Resultado equivalente
+matrix(x, ncol = 1) %*% t(matrix(y, ncol = 1))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<blockquote>
+<p><strong>Por que isso importa para a Econometria?</strong><br />
+O produto interno aparece em somas de produtos e somas de quadrados. O
+produto externo aparece em matrizes de momentos, como <span class="math inline">\(\sum_i\mathbf x_i\mathbf x_i&#39;\)</span>, e em
+matrizes de variância-covariância.</p>
+</blockquote>
 </div>
 </div>
 <div id="matrizes-importantes" class="section level2">
-<h2>3. Matrizes importantes</h2>
+<h2>6. Matrizes importantes</h2>
+<div id="matriz-nula" class="section level3">
+<h3>6.1 Matriz nula</h3>
+<p>A matriz nula possui todos os elementos iguais a zero:</p>
+<p><span class="math display">\[
+\mathbf 0_{2\times3}
+=
+\begin{bmatrix}
+0&amp;0&amp;0\\
+0&amp;0&amp;0
+\end{bmatrix}.
+\]</span></p>
+</div>
 <div id="matriz-diagonal" class="section level3">
-<h3>Matriz diagonal</h3>
-<p>Uma <strong>matriz quadrada</strong> com elementos diferentes de zero
-na diagonal principal e zero nas demais posições é denominada matriz
-diagonal.</p>
+<h3>6.2 Matriz diagonal</h3>
+<p>Uma matriz quadrada é diagonal quando todos os elementos fora da
+diagonal principal são iguais a zero. Os elementos diagonais podem ou
+não ser zero.</p>
 <p><span class="math display">\[
-\mathbf{A}_{2 \times 2} =
+\mathbf D
+=
 \begin{bmatrix}
-2 &amp; 0 \\
-0 &amp; 3
-\end{bmatrix} \quad \text{e} \quad
-\mathbf{B}_{3 \times 3} =
-\begin{bmatrix}
--2 &amp; 0 &amp; 0 \\
-0 &amp; 5 &amp; 0 \\
-0 &amp; 0 &amp; 1
-\end{bmatrix}
+d_1&amp;0&amp;0\\
+0&amp;d_2&amp;0\\
+0&amp;0&amp;d_3
+\end{bmatrix}.
 \]</span></p>
-</div>
-<div id="matriz-escalar" class="section level3">
-<h3>Matriz escalar</h3>
-<p>Uma matriz diagnonal cujos elementos diagonais são todos iguais é
-denominada <strong>matriz escalar</strong>.</p>
-<p><span class="math display">\[
-\mathbf{S} = \begin{bmatrix}
-\sigma &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; \sigma &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; \sigma &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; \sigma &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; \sigma
-\end{bmatrix}
-\]</span></p>
-</div>
-<div id="matriz-identidade" class="section level3">
-<h3>Matriz identidade</h3>
-<p>Uma matriz diagonal e escalar cujos elementos diagonais são todos
-iguais a 1 é chamada matriz identidade, e denotada por <span class="math inline">\(\mathbf{I}_n\)</span>.</p>
-<p><span class="math display">\[
-\mathbf{I}_3 =
-\begin{bmatrix}
-1 &amp; 0 &amp; 0 \\
-0 &amp; 1 &amp; 0 \\
-0 &amp; 0 &amp; 1
-\end{bmatrix}
-\quad \text{e} \quad
-\mathbf{I}_4 =
-\begin{bmatrix}
-1 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 1 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 1 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 1
-\end{bmatrix}
-\]</span></p>
-<p>Usando o <code>R</code>, a matriz identidade pode ser gerada com o
-comando <code>diag()</code>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJFWldacGJtbHVaRzhnZFcxaElHMWhkSEpwZWlCcFpHVnVkR2xrWVdSbElHUmxJR1JwYldWdWM4T2pieUF5V0RKY2Jra2dQU0JrYVdGbktESXBYRzVKWEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG4jIERlZmluaW5kbyB1bWEgbWF0cml6IGlkZW50aWRhZGUgZGUgZGltZW5zw6NvIDJYMlxuSSA9IGRpYWcoMilcbklcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEZWZpbmluZG8gdW1hIG1hdHJpeiBpZGVudGlkYWRlIGRlIGRpbWVuc8OjbyAyWDJcbkkgPSBkaWFnKDIpXG5JXG5gYGAifQ== -->
-<pre class="r"><code># Definindo uma matriz identidade de dimensão 2X2
-I = diag(2)
-I</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJEY21saGJtUnZJSFZ0WVNCdFlYUnlhWG9nWkdsaFoyOXVZV3hjYmtRZ1BDMGdaR2xoWnloaktESXNJREFzSURVcEtWeHVSRnh1WUdCZ0luMD0gLS0+XG5cbmBgYHJcbiMgQ3JpYW5kbyB1bWEgbWF0cml6IGRpYWdvbmFsXG5EIDwtIGRpYWcoYygyLCAwLCA1KSlcbkRcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDcmlhbmRvIHVtYSBtYXRyaXogZGlhZ29uYWxcbkQgPC0gZGlhZyhjKDIsIDAsIDUpKVxuRFxuYGBgIn0= -->
+<pre class="r"><code># Criando uma matriz diagonal
+D &lt;- diag(c(2, 0, 5))
+D</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Definida uma matriz</p>
+</div>
+<div id="matriz-escalar-e-identidade" class="section level3">
+<h3>6.3 Matriz escalar e identidade</h3>
+<p>Uma matriz escalar é da forma:</p>
 <p><span class="math display">\[
-\mathbf{A}=
-\begin{bmatrix}
-a_{11} &amp; a_{12}\\
-a_{21} &amp; a_{22}
-\end{bmatrix}
+\mathbf S=c\mathbf I_n.
 \]</span></p>
-<p>Pré multiplicando <span class="math inline">\(\mathbf{A}\)</span>
-pela matriz identidade <span class="math inline">\(\mathbf{I}\)</span>:</p>
+<p>A matriz identidade possui elementos diagonais iguais a 1:</p>
 <p><span class="math display">\[
-\begin{align*}
-\mathbf{I} \cdot \mathbf{A}
-&amp;= \mathbf{A} \\
-&amp;= \begin{bmatrix}
-1 &amp; 0\\
-0 &amp; 1
-\end{bmatrix}
-\cdot \begin{bmatrix}
-a_{11} &amp; a_{12}\\
-a_{21} &amp; a_{22}
-\end{bmatrix} \\
-&amp; = \begin{bmatrix}
-a_{11} &amp; a_{12}\\
-a_{21} &amp; a_{22}
-\end{bmatrix}
-\end{align*}
+\mathbf I_3
+=
+\begin{bmatrix}
+1&amp;0&amp;0\\
+0&amp;1&amp;0\\
+0&amp;0&amp;1
+\end{bmatrix}.
 \]</span></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJFWldacGJtbHVaRzhnZFcxaElHMWhkSEpwZWlCQlhHNUJJRDBnYldGMGNtbDRLR01vTVN3eUxETXNOQ2tzSURJc0lESXNJR0o1Y205M1BWUlNWVVVwWEc1Y2JpTWdVSEpsSUcxMWJIUnBjR3hwWTJGdVpHOGdRU0J3Wld4aElHMWhkSEpwZWlCcFpHVnVkR2xrWVdSbFhHNUpKU29sUVZ4dVlHQmdJbjA9IC0tPlxuXG5gYGByXG4jIERlZmluaW5kbyB1bWEgbWF0cml6IEFcbkEgPSBtYXRyaXgoYygxLDIsMyw0KSwgMiwgMiwgYnlyb3c9VFJVRSlcblxuIyBQcmUgbXVsdGlwbGljYW5kbyBBIHBlbGEgbWF0cml6IGlkZW50aWRhZGVcbkklKiVBXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEZWZpbmluZG8gdW1hIG1hdHJpeiBBXG5BID0gbWF0cml4KGMoMSwyLDMsNCksIDIsIDIsIGJ5cm93PVRSVUUpXG5cbiMgUHJlIG11bHRpcGxpY2FuZG8gQSBwZWxhIG1hdHJpeiBpZGVudGlkYWRlXG5JJSolQVxuYGBgIn0= -->
-<pre class="r"><code># Definindo uma matriz A
-A = matrix(c(1,2,3,4), 2, 2, byrow=TRUE)
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJOWVhSeWFYb2dhV1JsYm5ScFpHRmtaU0JrWlNCdmNtUmxiU0F6WEc1Sk15QThMU0JrYVdGbktETXBYRzVKTTF4dVhHNGpJRTFoZEhKcGVpQmxjMk5oYkdGeUlEUkpYRzQwSUNvZ1NUTmNibUJnWUNKOSAtLT5cblxuYGBgclxuIyBNYXRyaXogaWRlbnRpZGFkZSBkZSBvcmRlbSAzXG5JMyA8LSBkaWFnKDMpXG5JM1xuXG4jIE1hdHJpeiBlc2NhbGFyIDRJXG40ICogSTNcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBNYXRyaXogaWRlbnRpZGFkZSBkZSBvcmRlbSAzXG5JMyA8LSBkaWFnKDMpXG5JM1xuXG4jIE1hdHJpeiBlc2NhbGFyIDRJXG40ICogSTNcbmBgYCJ9 -->
+<pre class="r"><code># Matriz identidade de ordem 3
+I3 &lt;- diag(3)
+I3
 
-# Pre multiplicando A pela matriz identidade
-I%*%A</code></pre>
+# Matriz escalar 4I
+4 * I3</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
 <div id="matriz-simétrica" class="section level3">
-<h3>Matriz simétrica</h3>
-<p>Uma matriz quadrada, <span class="math inline">\(\mathbf{P}\)</span>,
-é simétrica se for igual à sua transposta, ou seja:</p>
+<h3>6.4 Matriz simétrica</h3>
+<p>Uma matriz quadrada <span class="math inline">\(\mathbf A\)</span> é
+simétrica quando:</p>
 <p><span class="math display">\[
-\mathbf{P} = \mathbf{P}&#39;
+\mathbf A&#39;=\mathbf A.
 \]</span></p>
-<p>Isso significa que os elementos da matriz são simétricos em relação à
-diagonal principal, ou seja, <span class="math inline">\(p_{ij} =
-p_{ji}\)</span> para todos os <span class="math inline">\(i\)</span> e
-<span class="math inline">\(j\)</span>.</p>
-<p><strong>EXEMPLO</strong></p>
-<p>Considere a matriz <span class="math inline">\(\mathbf{P}\)</span> de
-ordem <span class="math inline">\(3 \times 3\)</span>:</p>
-<p><span class="math display">\[
-\mathbf{P} =
-\begin{bmatrix}
-4 &amp; 1 &amp; 3 \\
-1 &amp; 5 &amp; 2 \\
-3 &amp; 2 &amp; 6
-\end{bmatrix}
-\]</span></p>
-<p>Essa matriz é simétrica porque <span class="math inline">\(\mathbf{P}
-= \mathbf{P}&#39;\)</span>, ou seja:</p>
-<p><span class="math display">\[
-\mathbf{P}&#39; =
-\begin{bmatrix}
-4 &amp; 1 &amp; 3 \\
-1 &amp; 5 &amp; 2 \\
-3 &amp; 2 &amp; 6
-\end{bmatrix} =
-\mathbf{P}
-\]</span></p>
-</div>
-<div id="submatriz" class="section level3">
-<h3>Submatriz</h3>
-<p>Dada a matriz <span class="math inline">\(\mathbf{A}\)</span> de
-dimensão <span class="math inline">\(m \times n\)</span>, se todas as
-colunas e linhas de <span class="math inline">\(\mathbf{A}\)</span>
-forem eliminadas, com exceção das <span class="math inline">\(r\)</span>
-linhas e <span class="math inline">\(s\)</span> colunas, a matriz
-resultante da ordem <span class="math inline">\(r \times s\)</span> será
-denominada <strong>submatriz</strong> de <span class="math inline">\(\mathbf{A}\)</span>. Sendo assim, se</p>
-<p><span class="math display">\[
-\mathbf{A}_{3 \times 3} =
-\begin{bmatrix}
-3 &amp; 5 &amp; 7 \\
-8 &amp; 2 &amp; 1 \\
-3 &amp; 2 &amp; 1
-\end{bmatrix}
-\]</span></p>
-<p>e se eliminarmos a terceira linha e a terceira coluna de <span class="math inline">\(\mathbf{A}\)</span>, obteremos</p>
-<p><span class="math display">\[
-\mathbf{B}_{2 \times 2} =
-\begin{bmatrix}
-3 &amp; 5 \\
-8 &amp; 2
-\end{bmatrix}
-\]</span></p>
-<p>que corresponde a uma submatriz de <span class="math inline">\(\mathbf{A}\)</span> cuja ordem é <span class="math inline">\(2 \times 2\)</span>.</p>
-</div>
-</div>
-<div id="propriedades-de-uma-matriz" class="section level2">
-<h2>4. Propriedades de uma matriz</h2>
-<div id="determinante-de-uma-matriz" class="section level3">
-<h3>Determinante de uma matriz</h3>
-<p>O determinante de uma matriz quadrada <span class="math inline">\(\mathbf{A}\)</span> de ordem <span class="math inline">\(n \times n\)</span> é um número escalar que
-fornece informações importantes sobre as propriedades da matriz.</p>
-<p>O determinante está relacionado diretamente à invertibilidade da
-matriz, ao volume de transformações lineares e à natureza das soluções
-de sistemas de equações lineares.</p>
-<p>Para uma matriz <span class="math inline">\(2 \times 2\)</span>:</p>
-<p><span class="math display">\[
-\mathbf{A} = \begin{bmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22}
-\end{bmatrix}
-\]</span></p>
-<p>o determinante é calculado como:</p>
-<p><span class="math display">\[
-\det(\mathbf{A})  = a_{11}a_{22} - a_{12}a_{21}
-\]</span></p>
-<p>Para uma matriz <span class="math inline">\(3 \times 3\)</span>:</p>
-<p><span class="math display">\[
-\mathbf{A} = \begin{bmatrix}
-a_{11} &amp; a_{12} &amp; a_{13} \\
-a_{21} &amp; a_{22} &amp; a_{23} \\
-a_{31} &amp; a_{32} &amp; a_{33}
-\end{bmatrix}
-\]</span></p>
-<p>o determinante é calculado usando a regra de Sarrus ou o
-co-fator:</p>
-<p><span class="math display">\[
-\det(\mathbf{A}) = a_{11}a_{22}a_{33} - a_{11}a_{23}a_{32} +
-a_{12}a_{23}a_{31} - a_{12}a_{21}a_{33} + a_{13}a_{21}a_{32} -
-a_{13}a_{22}a_{31}
-\]</span></p>
-<p><strong>Propriedades importantes do determinante</strong></p>
-<ul>
-<li><p><em>Invertibilidade</em>: Uma matriz <span class="math inline">\(\mathbf{A}\)</span> é inversível se, e somente se,
-<span class="math inline">\(\det(\mathbf{A}) \neq 0\)</span>. Caso
-contrário, a matriz é singular (não possui inversa).</p></li>
-<li><p><em>Transformação do Volume</em>: O valor absoluto do
-determinante de <span class="math inline">\(\mathbf{A}\)</span> pode ser
-interpretado como o fator de escala do volume de um objeto geométrico ao
-ser transformado pela matriz <span class="math inline">\(\mathbf{A}\)</span>.</p></li>
-<li><p><em>Multiplicação de Matrizes</em>: O determinante do produto de
-duas matrizes é o produto dos determinantes: <span class="math inline">\(\det(\mathbf{A} \mathbf{B}) = \det(\mathbf{A})
-\cdot \det(\mathbf{B})\)</span>.</p></li>
-<li><p><em>Troca de Linhas</em>: Se duas linhas (ou colunas) de uma
-matriz forem trocadas, o sinal do determinante será invertido.</p></li>
-<li><p><em>Linha (ou Coluna) Zero</em>: Se uma linha (ou coluna) de
-<span class="math inline">\(\mathbf{A}\)</span> é composta inteiramente
-por zeros, então <span class="math inline">\(\det(\mathbf{A}) =
-0\)</span>.</p></li>
-</ul>
-<p><strong>EXEMPLO</strong></p>
-<p>Usando o <code>R</code>, o determinante de uma matriz é calculado com
-a função <code>det()</code>.</p>
+<p>Isso equivale a <span class="math inline">\(a_{ij}=a_{ji}\)</span>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJFWldacGJtbHVaRzhnZFcxaElHMWhkSEpwZWlBemVETmNia0VnUFNCdFlYUnlhWGdvWXlneUxDQTBMQ0F6TENBeExDQXRNU3dnTUN3Z015d2dOU3dnTWlrc0lHNXliM2NnUFNBekxDQmllWEp2ZHlBOUlGUlNWVVVwWEc1allYUW9YQ0pOWVhSeWFYb2dRVHBjWEc1Y0lpbGNia0ZjYmx4dUl5QkRZV3hqZFd4aGJtUnZJRzhnWkdWMFpYSnRhVzVoYm5SbFhHNWpZWFFvWENKRVpYUmxjbTFwYm1GdWRHVWdaR1VnUVRwY1hHNWNJaWxjYm1SbGRDaEJLVnh1WEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG4jIERlZmluaW5kbyB1bWEgbWF0cml6IDN4M1xuQSA9IG1hdHJpeChjKDIsIDQsIDMsIDEsIC0xLCAwLCAzLCA1LCAyKSwgbnJvdyA9IDMsIGJ5cm93ID0gVFJVRSlcbmNhdChcIk1hdHJpeiBBOlxcblwiKVxuQVxuXG4jIENhbGN1bGFuZG8gbyBkZXRlcm1pbmFudGVcbmNhdChcIkRldGVybWluYW50ZSBkZSBBOlxcblwiKVxuZGV0KEEpXG5cbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEZWZpbmluZG8gdW1hIG1hdHJpeiAzeDNcbkEgPSBtYXRyaXgoYygyLCA0LCAzLCAxLCAtMSwgMCwgMywgNSwgMiksIG5yb3cgPSAzLCBieXJvdyA9IFRSVUUpXG5jYXQoXCJNYXRyaXogQTpcXG5cIilcbkFcblxuIyBDYWxjdWxhbmRvIG8gZGV0ZXJtaW5hbnRlXG5jYXQoXCJEZXRlcm1pbmFudGUgZGUgQTpcXG5cIilcbmRldChBKVxuXG5gYGAifQ== -->
-<pre class="r"><code># Definindo uma matriz 3x3
-A = matrix(c(2, 4, 3, 1, -1, 0, 3, 5, 2), nrow = 3, byrow = TRUE)
-cat(&quot;Matriz A:\n&quot;)
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJGZUdWdGNHeHZJR1JsSUcxaGRISnBlaUJ6YVczRHFYUnlhV05oWEc1VElEd3RJRzFoZEhKcGVDaGNiaUFnWXlnMExDQXhMQ0F6TEZ4dUlDQWdJREVzSURVc0lESXNYRzRnSUNBZ015d2dNaXdnTmlrc1hHNGdJRzV5YjNjZ1BTQXpMRnh1SUNCaWVYSnZkeUE5SUZSU1ZVVmNiaWxjYmx4dVUxeHVhWE5UZVcxdFpYUnlhV01vVXlsY2JtQmdZQ0o5IC0tPlxuXG5gYGByXG4jIEV4ZW1wbG8gZGUgbWF0cml6IHNpbcOpdHJpY2FcblMgPC0gbWF0cml4KFxuICBjKDQsIDEsIDMsXG4gICAgMSwgNSwgMixcbiAgICAzLCAyLCA2KSxcbiAgbnJvdyA9IDMsXG4gIGJ5cm93ID0gVFJVRVxuKVxuXG5TXG5pc1N5bW1ldHJpYyhTKVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBFeGVtcGxvIGRlIG1hdHJpeiBzaW3DqXRyaWNhXG5TIDwtIG1hdHJpeChcbiAgYyg0LCAxLCAzLFxuICAgIDEsIDUsIDIsXG4gICAgMywgMiwgNiksXG4gIG5yb3cgPSAzLFxuICBieXJvdyA9IFRSVUVcbilcblxuU1xuaXNTeW1tZXRyaWMoUylcbmBgYCJ9 -->
+<pre class="r"><code># Exemplo de matriz simétrica
+S &lt;- matrix(
+  c(4, 1, 3,
+    1, 5, 2,
+    3, 2, 6),
+  nrow = 3,
+  byrow = TRUE
+)
+
+S
+isSymmetric(S)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Matrizes como <span class="math inline">\(\mathbf X&#39;\mathbf
+X\)</span> e matrizes de variância-covariância são simétricas.</p>
+</div>
+</div>
+<div id="submatrizes-e-indexação-no-r" class="section level2">
+<h2>7. Submatrizes e indexação no R</h2>
+<p>Uma submatriz é obtida selecionando determinadas linhas e colunas de
+uma matriz.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJOWVhSeWFYb2dOQ0I0SUROY2JrRWdQQzBnYldGMGNtbDRLREU2TVRJc0lHNXliM2NnUFNBMExDQmllWEp2ZHlBOUlGUlNWVVVwWEc1QlhHNWNiaU1nVUhKcGJXVnBjbUZ6SUdSMVlYTWdiR2x1YUdGeklHVWdjSEpwYldWcGNtRnpJR1IxWVhNZ1kyOXNkVzVoYzF4dVFWc3hPaklzSURFNk1sMWNibHh1SXlCVFpXeGxZMmx2Ym1GdVpHOGdZU0IwWlhKalpXbHlZU0JqYjJ4MWJtRmNia0ZiTENBelhWeHVYRzRqSUZCeVpYTmxjblpoYm1SdklHRWdaWE4wY25WMGRYSmhJR1JsSUcxaGRISnBlbHh1UVZzc0lETXNJR1J5YjNBZ1BTQkdRVXhUUlYxY2JseHVJeUJGZUdOc2RXbHVaRzhnWVNCelpXZDFibVJoSUd4cGJtaGhYRzVCV3kweUxDQmRYRzVnWUdBaWZRPT0gLS0+XG5cbmBgYHJcbiMgTWF0cml6IDQgeCAzXG5BIDwtIG1hdHJpeCgxOjEyLCBucm93ID0gNCwgYnlyb3cgPSBUUlVFKVxuQVxuXG4jIFByaW1laXJhcyBkdWFzIGxpbmhhcyBlIHByaW1laXJhcyBkdWFzIGNvbHVuYXNcbkFbMToyLCAxOjJdXG5cbiMgU2VsZWNpb25hbmRvIGEgdGVyY2VpcmEgY29sdW5hXG5BWywgM11cblxuIyBQcmVzZXJ2YW5kbyBhIGVzdHJ1dHVyYSBkZSBtYXRyaXpcbkFbLCAzLCBkcm9wID0gRkFMU0VdXG5cbiMgRXhjbHVpbmRvIGEgc2VndW5kYSBsaW5oYVxuQVstMiwgXVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBNYXRyaXogNCB4IDNcbkEgPC0gbWF0cml4KDE6MTIsIG5yb3cgPSA0LCBieXJvdyA9IFRSVUUpXG5BXG5cbiMgUHJpbWVpcmFzIGR1YXMgbGluaGFzIGUgcHJpbWVpcmFzIGR1YXMgY29sdW5hc1xuQVsxOjIsIDE6Ml1cblxuIyBTZWxlY2lvbmFuZG8gYSB0ZXJjZWlyYSBjb2x1bmFcbkFbLCAzXVxuXG4jIFByZXNlcnZhbmRvIGEgZXN0cnV0dXJhIGRlIG1hdHJpelxuQVssIDMsIGRyb3AgPSBGQUxTRV1cblxuIyBFeGNsdWluZG8gYSBzZWd1bmRhIGxpbmhhXG5BWy0yLCBdXG5gYGAifQ== -->
+<pre class="r"><code># Matriz 4 x 3
+A &lt;- matrix(1:12, nrow = 4, byrow = TRUE)
 A
 
-# Calculando o determinante
-cat(&quot;Determinante de A:\n&quot;)
-det(A)
-</code></pre>
+# Primeiras duas linhas e primeiras duas colunas
+A[1:2, 1:2]
+
+# Selecionando a terceira coluna
+A[, 3]
+
+# Preservando a estrutura de matriz
+A[, 3, drop = FALSE]
+
+# Excluindo a segunda linha
+A[-2, ]</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Em econometria, o determinante tem aplicações diretas na resolução de
-sistemas de equações lineares, na análise de matrizes de
-variância-covariância e na estabilidade de estimadores.</p>
+<p>Também podemos construir uma matriz juntando vetores por colunas:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJVY3NPcWN5QjJZWEpwdzZGMlpXbHpJRzlpYzJWeWRtRmtZWE1nWlcwZ1kybHVZMjhnY0hKdmNISnBaV1JoWkdWelhHNWhjbVZoSUR3dElHTW9OREFzSURVMUxDQTJNaXdnTnpBc0lEZzFLVnh1Wm1WeWRHbHNhWHBoYm5SbElEd3RJR01vT0RBc0lEazFMQ0F4TVRBc0lERXlNQ3dnTVRRd0tWeHVZMmgxZG1FZ1BDMGdZeWczTWpBc0lEWTRNQ3dnTnpVd0xDQTNPVEFzSURneE1DbGNibHh1SXlCTllYUnlhWG9nWkdVZ2RtRnlhY09oZG1WcGMxeHVXaUE4TFNCalltbHVaQ2hjYmlBZ1lYSmxZU0E5SUdGeVpXRXNYRzRnSUdabGNuUnBiR2w2WVc1MFpTQTlJR1psY25ScGJHbDZZVzUwWlN4Y2JpQWdZMmgxZG1FZ1BTQmphSFYyWVZ4dUtWeHVYRzVhWEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG4jIFRyw6pzIHZhcmnDoXZlaXMgb2JzZXJ2YWRhcyBlbSBjaW5jbyBwcm9wcmllZGFkZXNcbmFyZWEgPC0gYyg0MCwgNTUsIDYyLCA3MCwgODUpXG5mZXJ0aWxpemFudGUgPC0gYyg4MCwgOTUsIDExMCwgMTIwLCAxNDApXG5jaHV2YSA8LSBjKDcyMCwgNjgwLCA3NTAsIDc5MCwgODEwKVxuXG4jIE1hdHJpeiBkZSB2YXJpw6F2ZWlzXG5aIDwtIGNiaW5kKFxuICBhcmVhID0gYXJlYSxcbiAgZmVydGlsaXphbnRlID0gZmVydGlsaXphbnRlLFxuICBjaHV2YSA9IGNodXZhXG4pXG5cblpcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBUcsOqcyB2YXJpw6F2ZWlzIG9ic2VydmFkYXMgZW0gY2luY28gcHJvcHJpZWRhZGVzXG5hcmVhIDwtIGMoNDAsIDU1LCA2MiwgNzAsIDg1KVxuZmVydGlsaXphbnRlIDwtIGMoODAsIDk1LCAxMTAsIDEyMCwgMTQwKVxuY2h1dmEgPC0gYyg3MjAsIDY4MCwgNzUwLCA3OTAsIDgxMClcblxuIyBNYXRyaXogZGUgdmFyacOhdmVpc1xuWiA8LSBjYmluZChcbiAgYXJlYSA9IGFyZWEsXG4gIGZlcnRpbGl6YW50ZSA9IGZlcnRpbGl6YW50ZSxcbiAgY2h1dmEgPSBjaHV2YVxuKVxuXG5aXG5gYGAifQ== -->
+<pre class="r"><code># Três variáveis observadas em cinco propriedades
+area &lt;- c(40, 55, 62, 70, 85)
+fertilizante &lt;- c(80, 95, 110, 120, 140)
+chuva &lt;- c(720, 680, 750, 790, 810)
+
+# Matriz de variáveis
+Z &lt;- cbind(
+  area = area,
+  fertilizante = fertilizante,
+  chuva = chuva
+)
+
+Z</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 </div>
-<div id="menor" class="section level3">
-<h3>Menor</h3>
-<p>Se a <span class="math inline">\(i\)</span>-ésima linha e a <span class="math inline">\(j\)</span>-ésima coluna de uma matriz <span class="math inline">\(\mathbf{A}\)</span> com dimensão <span class="math inline">\(n \times n\)</span> são excluídas, o determinante
-da submatriz resultante é chamado de o <strong>menor</strong> do
-elemento <span class="math inline">\(a_{ij}\)</span> (o elemento na
-interseção da <span class="math inline">\(i\)</span>-ésima linha e <span class="math inline">\(j\)</span>-ésima coluna) e é denotado por <span class="math inline">\(|M_{ij}|\)</span>.</p>
+<div id="combinações-lineares-independência-e-posto" class="section level2">
+<h2>8. Combinações lineares, independência e posto</h2>
+<div id="combinação-linear" class="section level3">
+<h3>8.1 Combinação linear</h3>
+<p>Um vetor <span class="math inline">\(\mathbf v\)</span> é uma
+combinação linear dos vetores <span class="math inline">\(\mathbf
+x_1,\ldots,\mathbf x_k\)</span> quando existem escalares <span class="math inline">\(c_1,\ldots,c_k\)</span> tais que:</p>
 <p><span class="math display">\[
-\mathbf{A} = \begin{bmatrix}
-a_{11} &amp; a_{12} &amp; a_{13} \\
-a_{21} &amp; a_{22} &amp; a_{23} \\
-a_{31} &amp; a_{32} &amp; a_{33}
-\end{bmatrix}
+\mathbf v
+=
+c_1\mathbf x_1+\cdots+c_k\mathbf x_k.
 \]</span></p>
-<p>O menor de <span class="math inline">\(a_{11}\)</span> é</p>
-<p><span class="math display">\[
-|M_{11}| = \begin{vmatrix} a_{22} &amp; a_{23} \\ a_{32} &amp; a_{33}
-\end{vmatrix} = a_{22}a_{33} - a_{23}a_{32}
-\]</span></p>
-<p>De forma semelhante, o menor de <span class="math inline">\(a_{21}\)</span> é</p>
-<p><span class="math display">\[
-|M_{21}| = \begin{vmatrix} a_{12} &amp; a_{13} \\ a_{32} &amp; a_{33}
-\end{vmatrix} = a_{12}a_{33} - a_{13}a_{32}
-\]</span></p>
-<p>Os menores de outros elementos de <span class="math inline">\(\mathbf{A}\)</span> podem ser encontrados de
-maneira semelhante.</p>
 </div>
-<div id="cofator" class="section level3">
-<h3>Cofator</h3>
-<p>O cofator do elemento <span class="math inline">\(a_{ij}\)</span> de
-uma matriz <span class="math inline">\(\mathbf{A}\)</span> de origem
-<span class="math inline">\(n \times n\)</span>, denotado por <span class="math inline">\(c_{ij}\)</span>, é definido como:</p>
+<div id="independência-linear" class="section level3">
+<h3>8.2 Independência linear</h3>
+<p>Os vetores <span class="math inline">\(\mathbf x_1,\ldots,\mathbf
+x_k\)</span> são linearmente independentes quando:</p>
 <p><span class="math display">\[
-c_{ij} = (-1)^{i+j} |M_{ij}|
+c_1\mathbf x_1+\cdots+c_k\mathbf x_k=\mathbf0
 \]</span></p>
-<p>Em outras palavras, um cofator é um menor “<em>sinalizado</em>”: com
-sinal positivo se <span class="math inline">\(i + j\)</span> for par e
-negativo se <span class="math inline">\(i + j\)</span> for ímpar.</p>
-<ul>
-<li><p>o cofator do elemento <span class="math inline">\(a_{11}\)</span>
-da matriz <span class="math inline">\(\mathbf{A}_{3 \times 3}\)</span>
-anteriormente dada é <span class="math inline">\(a_{22}a_{33} -
-a_{23}a_{32}\)</span>,</p></li>
-<li><p>o cofator do elemento <span class="math inline">\(a_{21}\)</span>
-é <span class="math inline">\(-(a_{12}a_{33} - a_{13}a_{32})\)</span>,
-uma vez que a soma dos subscritos <span class="math inline">\(2\)</span>
-e <span class="math inline">\(1\)</span> é <span class="math inline">\(3\)</span>, que é um número ímpar.</p></li>
-</ul>
-<p><strong>Matriz de Cofator</strong></p>
-<p>Substituindo os elementos <span class="math inline">\(a_{ij}\)</span>
-de uma matriz <span class="math inline">\(\mathbf{A}\)</span> pelos seus
-cofatores, obtemos uma matriz conhecida como <em>matriz de cofator</em>
-de <span class="math inline">\(\mathbf{A}\)</span>, denotada por <span class="math inline">\(\text{cof}(\mathbf{A})\)</span>.</p>
-<p><strong>Matriz Adjunta</strong></p>
-<p>A matriz adjunta, escrita como <span class="math inline">\(\text{adj}(\mathbf{A})\)</span>, é a transposta da
-matriz de cofator: <span class="math inline">\(\text{adj}(\mathbf{A}) =
-(\text{cof}(\mathbf{A}))&#39;\)</span>.</p>
-</div>
-<div id="posto-de-uma-matriz" class="section level3">
-<h3>Posto de uma matriz</h3>
-<p>O posto de uma matriz <span class="math inline">\(\mathbf{A}\)</span>
-é o número máximo de linhas ou colunas linearmente independentes de
-<span class="math inline">\(\mathbf{A}\)</span>.</p>
-<p>Um conjunto de vetores é linearmente independente se nenhum deles
-pode ser escrito como uma combinação linear de um número finito de
-outros vetores do conjunto.</p>
-<p>Outra forma de definir isso é que o posto de uma matriz é a ordem da
-maior submatriz quadrada cujo determinante não é zero.</p>
-<ul>
-<li><p>O posto máximo de uma matriz <span class="math inline">\(m \times
-n\)</span> é <span class="math inline">\(\min(m, n)\)</span>.</p></li>
-<li><p>Uma matriz de posto completo é aquela que possui o maior posto
-possível, ou seja, o posto é igual ao número de linhas ou colunas (o que
-for menor).</p></li>
-<li><p>No caso de uma matriz quadrada <span class="math inline">\(\mathbf{A}_{n \times n}\)</span>, ela é invertível
-se, e somente se, <span class="math inline">\(\mathbf{A}\)</span> tiver
-posto <span class="math inline">\(n\)</span> (isto é, <span class="math inline">\(\mathbf{A}\)</span> tem posto completo).</p></li>
-</ul>
+<p>implica:</p>
+<p><span class="math display">\[
+c_1=\cdots=c_k=0.
+\]</span></p>
+<p>Caso contrário, pelo menos um vetor pode ser escrito como combinação
+linear dos demais.</p>
 <p><strong>EXEMPLO</strong></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJFWldacGJtbHVaRzhnWVNCdFlYUnlhWG9nUWlBemVETWdjWFZsSUc3RG8yOGd3NmtnWkdVZ2NHOXpkRzhnY0d4bGJtOWNia0lnUEMwZ2JXRjBjbWw0S0dNb01Td2dNaXdnTXl4Y2JpQWdJQ0FnSUNBZ0lDQWdJQ0FnTWl3Z05Dd2dOaXhjYmlBZ0lDQWdJQ0FnSUNBZ0lDQWdNeXdnTml3Z09Ta3NJRzV5YjNjZ1BTQXpMQ0JpZVhKdmR5QTlJRlJTVlVVcFhHNWNiaU1nU1cxd2NtbHRhVzVrYnlCaElHMWhkSEpwZWlCQ1hHNWpZWFFvWENKTllYUnlhWG9nUWpwY1hHNWNJaWxjYm5CeWFXNTBLRUlwWEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG4jIERlZmluaW5kbyBhIG1hdHJpeiBCIDN4MyBxdWUgbsOjbyDDqSBkZSBwb3N0byBwbGVub1xuQiA8LSBtYXRyaXgoYygxLCAyLCAzLFxuICAgICAgICAgICAgICAyLCA0LCA2LFxuICAgICAgICAgICAgICAzLCA2LCA5KSwgbnJvdyA9IDMsIGJ5cm93ID0gVFJVRSlcblxuIyBJbXByaW1pbmRvIGEgbWF0cml6IEJcbmNhdChcIk1hdHJpeiBCOlxcblwiKVxucHJpbnQoQilcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEZWZpbmluZG8gYSBtYXRyaXogQiAzeDMgcXVlIG7Do28gw6kgZGUgcG9zdG8gcGxlbm9cbkIgPC0gbWF0cml4KGMoMSwgMiwgMyxcbiAgICAgICAgICAgICAgMiwgNCwgNixcbiAgICAgICAgICAgICAgMywgNiwgOSksIG5yb3cgPSAzLCBieXJvdyA9IFRSVUUpXG5cbiMgSW1wcmltaW5kbyBhIG1hdHJpeiBCXG5jYXQoXCJNYXRyaXogQjpcXG5cIilcbnByaW50KEIpXG5gYGAifQ== -->
-<pre class="r"><code># Definindo a matriz B 3x3 que não é de posto pleno
-B &lt;- matrix(c(1, 2, 3,
-              2, 4, 6,
-              3, 6, 9), nrow = 3, byrow = TRUE)
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJCSUhSbGNtTmxhWEpoSUdOdmJIVnVZU0REcVNCaElITnZiV0VnWkdGeklHUjFZWE1nY0hKcGJXVnBjbUZ6WEc1NE1TQThMU0JqS0RFc0lEQXNJREVwWEc1NE1pQThMU0JqS0RBc0lERXNJREVwWEc1NE15QThMU0I0TVNBcklIZ3lYRzVjYmtGZlpHVndaVzVrWlc1MFpTQThMU0JqWW1sdVpDaDRNU3dnZURJc0lIZ3pLVnh1UVY5a1pYQmxibVJsYm5SbFhHNWNiaU1nVUc5emRHOGdaR0VnYldGMGNtbDZYRzV4Y2loQlgyUmxjR1Z1WkdWdWRHVXBKSEpoYm10Y2JtQmdZQ0o5IC0tPlxuXG5gYGByXG4jIEEgdGVyY2VpcmEgY29sdW5hIMOpIGEgc29tYSBkYXMgZHVhcyBwcmltZWlyYXNcbngxIDwtIGMoMSwgMCwgMSlcbngyIDwtIGMoMCwgMSwgMSlcbngzIDwtIHgxICsgeDJcblxuQV9kZXBlbmRlbnRlIDwtIGNiaW5kKHgxLCB4MiwgeDMpXG5BX2RlcGVuZGVudGVcblxuIyBQb3N0byBkYSBtYXRyaXpcbnFyKEFfZGVwZW5kZW50ZSkkcmFua1xuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBBIHRlcmNlaXJhIGNvbHVuYSDDqSBhIHNvbWEgZGFzIGR1YXMgcHJpbWVpcmFzXG54MSA8LSBjKDEsIDAsIDEpXG54MiA8LSBjKDAsIDEsIDEpXG54MyA8LSB4MSArIHgyXG5cbkFfZGVwZW5kZW50ZSA8LSBjYmluZCh4MSwgeDIsIHgzKVxuQV9kZXBlbmRlbnRlXG5cbiMgUG9zdG8gZGEgbWF0cml6XG5xcihBX2RlcGVuZGVudGUpJHJhbmtcbmBgYCJ9 -->
+<pre class="r"><code># A terceira coluna é a soma das duas primeiras
+x1 &lt;- c(1, 0, 1)
+x2 &lt;- c(0, 1, 1)
+x3 &lt;- x1 + x2
 
-# Imprimindo a matriz B
-cat(&quot;Matriz B:\n&quot;)
-print(B)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Vamos verificar o determinante de <span class="math inline">\(\mathbf{B}\)</span></p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJXWlhKcFptbGpZVzVrYnlCdklHUmxkR1Z5YldsdVlXNTBaU0JrWlNCQ1hHNWtaWFJmUWlBOExTQmtaWFFvUWlsY2JtTmhkQ2hjSWx4Y2JrUmxkR1Z5YldsdVlXNTBaU0JrWlNCQ09sd2lMQ0JrWlhSZlFpd2dYQ0pjWEc1Y0lpbGNibUJnWUNKOSAtLT5cblxuYGBgclxuIyBWZXJpZmljYW5kbyBvIGRldGVybWluYW50ZSBkZSBCXG5kZXRfQiA8LSBkZXQoQilcbmNhdChcIlxcbkRldGVybWluYW50ZSBkZSBCOlwiLCBkZXRfQiwgXCJcXG5cIilcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBWZXJpZmljYW5kbyBvIGRldGVybWluYW50ZSBkZSBCXG5kZXRfQiA8LSBkZXQoQilcbmNhdChcIlxcbkRldGVybWluYW50ZSBkZSBCOlwiLCBkZXRfQiwgXCJcXG5cIilcbmBgYCJ9 -->
-<pre class="r"><code># Verificando o determinante de B
-det_B &lt;- det(B)
-cat(&quot;\nDeterminante de B:&quot;, det_B, &quot;\n&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Note que, uma vez que <span class="math inline">\(\det(\mathbf{B}) =
-0\)</span>, então <span class="math inline">\(\mathbf{B}\)</span> não é
-“posto completo”.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJEWVd4amRXeGhibVJ2SUc4Z2NHOXpkRzhnWkdVZ1FpQjFjMkZ1Wkc4Z1lTQm1kVzdEcDhPamJ5QnhjaWdwSUhCaGNtRWdZMjl1Wm1seWJXSERwOE9qYjF4dWNHOXpkRzlmUWlBOExTQnhjaWhDS1NSeVlXNXJYRzVqWVhRb1hDSlFiM04wYnlCa1lTQnRZWFJ5YVhvZ1FqcGNJaXdnY0c5emRHOWZRaXdnWENKY1hHNWNJaWxjYm1CZ1lDSjkgLS0+XG5cbmBgYHJcbiMgQ2FsY3VsYW5kbyBvIHBvc3RvIGRlIEIgdXNhbmRvIGEgZnVuw6fDo28gcXIoKSBwYXJhIGNvbmZpcm1hw6fDo29cbnBvc3RvX0IgPC0gcXIoQikkcmFua1xuY2F0KFwiUG9zdG8gZGEgbWF0cml6IEI6XCIsIHBvc3RvX0IsIFwiXFxuXCIpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjdWxhbmRvIG8gcG9zdG8gZGUgQiB1c2FuZG8gYSBmdW7Dp8OjbyBxcigpIHBhcmEgY29uZmlybWHDp8Ojb1xucG9zdG9fQiA8LSBxcihCKSRyYW5rXG5jYXQoXCJQb3N0byBkYSBtYXRyaXogQjpcIiwgcG9zdG9fQiwgXCJcXG5cIilcbmBgYCJ9 -->
-<pre class="r"><code># Calculando o posto de B usando a função qr() para confirmação
-posto_B &lt;- qr(B)$rank
-cat(&quot;Posto da matriz B:&quot;, posto_B, &quot;\n&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="traço-de-uma-matriz" class="section level3">
-<h3>Traço de uma matriz</h3>
-<p>O traço de uma matriz <span class="math inline">\(\mathbf{A}_{n
-\times n}\)</span> é a soma dos elementos na diagonal principal:</p>
-<p><span class="math display">\[
-\text{tr}(\mathbf{A}) = a_{11} + a_{22} + \dots + a_{nn} =
-\sum_{i=1}^{n} a_{ii}.
-\]</span></p>
-<p><strong>EXEMPLO</strong></p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJFWldacGJtbHVaRzhnWVNCdFlYUnlhWG9nUXlBemVETmNia01nUEMwZ2JXRjBjbWw0S0dNb05Dd2dNU3dnTXl4Y2JpQWdJQ0FnSUNBZ0lDQWdJQ0FnTWl3Z05Td2dOeXhjYmlBZ0lDQWdJQ0FnSUNBZ0lDQWdNQ3dnTml3Z09Da3NJRzV5YjNjZ1BTQXpMQ0JpZVhKdmR5QTlJRlJTVlVVcFhHNWNiaU1nU1cxd2NtbHRhVzVrYnlCaElHMWhkSEpwZWlCRFhHNWpZWFFvWENKTllYUnlhWG9nUXpwY1hHNWNJaWxjYm5CeWFXNTBLRU1wWEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG4jIERlZmluaW5kbyBhIG1hdHJpeiBDIDN4M1xuQyA8LSBtYXRyaXgoYyg0LCAxLCAzLFxuICAgICAgICAgICAgICAyLCA1LCA3LFxuICAgICAgICAgICAgICAwLCA2LCA4KSwgbnJvdyA9IDMsIGJ5cm93ID0gVFJVRSlcblxuIyBJbXByaW1pbmRvIGEgbWF0cml6IENcbmNhdChcIk1hdHJpeiBDOlxcblwiKVxucHJpbnQoQylcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEZWZpbmluZG8gYSBtYXRyaXogQyAzeDNcbkMgPC0gbWF0cml4KGMoNCwgMSwgMyxcbiAgICAgICAgICAgICAgMiwgNSwgNyxcbiAgICAgICAgICAgICAgMCwgNiwgOCksIG5yb3cgPSAzLCBieXJvdyA9IFRSVUUpXG5cbiMgSW1wcmltaW5kbyBhIG1hdHJpeiBDXG5jYXQoXCJNYXRyaXogQzpcXG5cIilcbnByaW50KEMpXG5gYGAifQ== -->
-<pre class="r"><code># Definindo a matriz C 3x3
-C &lt;- matrix(c(4, 1, 3,
-              2, 5, 7,
-              0, 6, 8), nrow = 3, byrow = TRUE)
+A_dependente &lt;- cbind(x1, x2, x3)
+A_dependente
 
-# Imprimindo a matriz C
-cat(&quot;Matriz C:\n&quot;)
-print(C)</code></pre>
+# Posto da matriz
+qr(A_dependente)$rank</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>No <code>R</code> podemos calcular o traço de uma matriz somando os
-elementos da sua diagonal principal.</p>
+</div>
+<div id="posto" class="section level3">
+<h3>8.3 Posto</h3>
+<p>O posto de uma matriz é o número máximo de linhas ou colunas
+linearmente independentes.</p>
+<p>Para uma matriz <span class="math inline">\(n\times k\)</span>:</p>
+<p><span class="math display">\[
+\operatorname{posto}(\mathbf A)\leq\min(n,k).
+\]</span></p>
+<p>A matriz possui <strong>posto completo de colunas</strong>
+quando:</p>
+<p><span class="math display">\[
+\operatorname{posto}(\mathbf A)=k.
+\]</span></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJEWVd4amRXeGhibVJ2SUc4Z2RISmh3NmR2SUdSbElFTmNiblJ5WVdOdlgwTWdQQzBnYzNWdEtHUnBZV2NvUXlrcFhHNWpZWFFvWENKY1hHNVVjbUhEcDI4Z1pHRWdiV0YwY21sNklFTTZYQ0lzSUhSeVlXTnZYME1zSUZ3aVhGeHVYQ0lwWEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG4jIENhbGN1bGFuZG8gbyB0cmHDp28gZGUgQ1xudHJhY29fQyA8LSBzdW0oZGlhZyhDKSlcbmNhdChcIlxcblRyYcOnbyBkYSBtYXRyaXogQzpcIiwgdHJhY29fQywgXCJcXG5cIilcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjdWxhbmRvIG8gdHJhw6dvIGRlIENcbnRyYWNvX0MgPC0gc3VtKGRpYWcoQykpXG5jYXQoXCJcXG5UcmHDp28gZGEgbWF0cml6IEM6XCIsIHRyYWNvX0MsIFwiXFxuXCIpXG5gYGAifQ== -->
-<pre class="r"><code># Calculando o traço de C
-traco_C &lt;- sum(diag(C))
-cat(&quot;\nTraço da matriz C:&quot;, traco_C, &quot;\n&quot;)</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJGZUdWdGNHeHZJR1JsSUcxaGRISnBlaUJqYjIwZ2NHOXpkRzhnWTI5dGNHeGxkRzhnWkdVZ1kyOXNkVzVoYzF4dVFWOWpiMjF3YkdWMFlTQThMU0J0WVhSeWFYZ29YRzRnSUdNb01Td2dNQ3hjYmlBZ0lDQXdMQ0F4TEZ4dUlDQWdJREVzSURFcExGeHVJQ0J1Y205M0lEMGdNeXhjYmlBZ1lubHliM2NnUFNCVVVsVkZYRzRwWEc1Y2JrRmZZMjl0Y0d4bGRHRmNibkZ5S0VGZlkyOXRjR3hsZEdFcEpISmhibXRjYm1CZ1lDSjkgLS0+XG5cbmBgYHJcbiMgRXhlbXBsbyBkZSBtYXRyaXogY29tIHBvc3RvIGNvbXBsZXRvIGRlIGNvbHVuYXNcbkFfY29tcGxldGEgPC0gbWF0cml4KFxuICBjKDEsIDAsXG4gICAgMCwgMSxcbiAgICAxLCAxKSxcbiAgbnJvdyA9IDMsXG4gIGJ5cm93ID0gVFJVRVxuKVxuXG5BX2NvbXBsZXRhXG5xcihBX2NvbXBsZXRhKSRyYW5rXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBFeGVtcGxvIGRlIG1hdHJpeiBjb20gcG9zdG8gY29tcGxldG8gZGUgY29sdW5hc1xuQV9jb21wbGV0YSA8LSBtYXRyaXgoXG4gIGMoMSwgMCxcbiAgICAwLCAxLFxuICAgIDEsIDEpLFxuICBucm93ID0gMyxcbiAgYnlyb3cgPSBUUlVFXG4pXG5cbkFfY29tcGxldGFcbnFyKEFfY29tcGxldGEpJHJhbmtcbmBgYCJ9 -->
+<pre class="r"><code># Exemplo de matriz com posto completo de colunas
+A_completa &lt;- matrix(
+  c(1, 0,
+    0, 1,
+    1, 1),
+  nrow = 3,
+  byrow = TRUE
+)
+
+A_completa
+qr(A_completa)$rank</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<blockquote>
+<p><strong>Por que isso importa para a Econometria?</strong><br />
+Para identificar separadamente os coeficientes de uma regressão, as
+colunas de <span class="math inline">\(\mathbf X\)</span> não podem
+apresentar dependência linear exata. Essa é a condição de posto completo
+de colunas.</p>
+</blockquote>
 </div>
 </div>
-<div id="inversão-de-matrizes" class="section level2">
-<h2>5. Inversão de matrizes</h2>
-<p>A inversão de uma matriz é uma operação que, para uma matriz quadrada
-<span class="math inline">\(\mathbf{A}\)</span>, busca encontrar outra
-matriz <span class="math inline">\(\mathbf{A}^{-1}\)</span> tal que:</p>
+<div id="determinante-e-invertibilidade" class="section level2">
+<h2>9. Determinante e invertibilidade</h2>
+<p>O determinante é definido para matrizes quadradas. Para uma matriz
+<span class="math inline">\(2\times2\)</span>:</p>
 <p><span class="math display">\[
-\mathbf{A} \cdot \mathbf{A}^{-1} = \mathbf{I}
-\]</span></p>
-<p>onde <span class="math inline">\(\mathbf{I}\)</span> é a matriz
-identidade de mesma ordem que <span class="math inline">\(\mathbf{A}\)</span>.</p>
-<p>Somente matrizes quadradas de posto completo (ou seja, <span class="math inline">\(\det(\mathbf{A}) \neq 0)\)</span> possuem uma
-inversa.</p>
-<p><strong>Propriedades da matriz inversa</strong></p>
-<ul>
-<li><p><em>Unicidade</em>: A inversa de uma matriz, quando existe, é
-única.</p></li>
-<li><p><em>Produto</em>: A inversa do produto de duas matrizes <span class="math inline">\(\mathbf{A}\)</span> e <span class="math inline">\(\mathbf{B}\)</span> é dada por <span class="math inline">\((\mathbf{A} \cdot \mathbf{B})^{-1} =
-\mathbf{B}^{-1} \cdot \mathbf{A}^{-1}\)</span>.</p></li>
-<li><p><em>Transposição</em>: A transposta da inversa de uma matriz é
-igual à inversa da transposta: <span class="math inline">\((\mathbf{A}^{-1})^{\prime} =
-(\mathbf{A}^{\prime})^{-1}\)</span>.</p></li>
-</ul>
-<div id="encontrando-a-inversa-de-uma-matriz-quadrada" class="section level3">
-<h3>Encontrando a inversa de uma matriz quadrada</h3>
-<p>Se <span class="math inline">\(\mathbf{A}\)</span> é quadrada e não
-singular (<span class="math inline">\(\det(\mathbf{A}) \neq 0\)</span>),
-a sua inversa <span class="math inline">\(\mathbf{A}\^{-1}\)</span> pode
-ser encontrada da seguinte forma:</p>
-<p><span class="math display">\[
-\mathbf{A}^{-1} = \frac{1}{\det(\mathbf{A})} (\text{adj} \, \mathbf{A})
-\]</span></p>
-<p>Os passos envolvidos neste cálculo são os seguintes:</p>
-<ol style="list-style-type: decimal">
-<li><p>Descubra o determinante de <span class="math inline">\(\mathbf{A}\)</span>. Se não for zero, execute o
-passo 2.</p></li>
-<li><p>Substitua cada elemento <span class="math inline">\(a_{ij}\)</span> de <span class="math inline">\(\mathbf{A}\)</span> por seu cofator para obter a
-matriz de cofator.</p></li>
-<li><p>Transponha a matriz de cofator para obter a matriz
-adjunta.</p></li>
-<li><p>Divida cada elemento da matriz adjunta por <span class="math inline">\(\det(\mathbf{A})\)</span>.</p></li>
-</ol>
-<p>Para uma matriz <span class="math inline">\(2 \times 2\)</span>, dada
-por:</p>
-<p><span class="math display">\[
-\mathbf{A} = \begin{bmatrix}
-a_{11} &amp; a_{12} \\
-a_{21} &amp; a_{22}
-\end{bmatrix}
-\]</span> Sua inversa é:</p>
-<p><span class="math display">\[
-\mathbf{A}^{-1} =
-\frac{1}{\det(\mathbf{A})}
+\mathbf A
+=
 \begin{bmatrix}
-a_{22} &amp; -a_{12} \\
--a_{21} &amp; a_{11}
-\end{bmatrix}
+a&amp;b\\
+c&amp;d
+\end{bmatrix},
 \]</span></p>
-<p><strong>EXEMPLO</strong></p>
-<p>Vamos calcular a inversa de uma matriz <span class="math inline">\(2
-\times 2\)</span> usando o <code>R</code>. Aqui a inversa de uma matriz
-pode ser calculada com a função <code>solve()</code>.</p>
+<p>temos:</p>
+<p><span class="math display">\[
+\det(\mathbf A)=ad-bc.
+\]</span></p>
+<p>Uma matriz quadrada é invertível se, e somente se:</p>
+<p><span class="math display">\[
+\det(\mathbf A)\neq0.
+\]</span></p>
+<p>Essa condição é equivalente à matriz possuir posto completo.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJFWldacGJtbHVaRzhnZFcxaElHMWhkSEpwZWlBeWVESmNia0VnUFNCdFlYUnlhWGdvWXlnMExDQTNMRnh1SUNBZ0lDQWdJQ0FnSUNBZ0lESXNJRFlwTENCdWNtOTNJRDBnTWl3Z1lubHliM2NnUFNCVVVsVkZLVnh1WTJGMEtGd2lUV0YwY21sNklFRTZYRnh1WENJcFhHNXdjbWx1ZENoQktWeHVYRzRqSUVOaGJHTjFiR0Z1Wkc4Z1lTQnBiblpsY25OaFhHNUJYMmx1ZGlBOUlITnZiSFpsS0VFcFhHNWpZWFFvWENKTllYUnlhWG9nYVc1MlpYSnpZU0JrWlNCQk9seGNibHdpS1Z4dWNISnBiblFvUVY5cGJuWXBYRzVjYmlNZ1ZtVnlhV1pwWTJGdVpHOGdZU0J3Y205d2NtbGxaR0ZrWlRvZ1FTQXFJRUZmYVc1MklEMGdTVnh1U1NBOUlFRWdKU29sSUVGZmFXNTJYRzVqWVhRb1hDSk5ZWFJ5YVhvZ1NXUmxiblJwWkdGa1pUcGNYRzVjSWlsY2JuQnlhVzUwS0VrcFhHNWdZR0FpZlE9PSAtLT5cblxuYGBgclxuIyBEZWZpbmluZG8gdW1hIG1hdHJpeiAyeDJcbkEgPSBtYXRyaXgoYyg0LCA3LFxuICAgICAgICAgICAgIDIsIDYpLCBucm93ID0gMiwgYnlyb3cgPSBUUlVFKVxuY2F0KFwiTWF0cml6IEE6XFxuXCIpXG5wcmludChBKVxuXG4jIENhbGN1bGFuZG8gYSBpbnZlcnNhXG5BX2ludiA9IHNvbHZlKEEpXG5jYXQoXCJNYXRyaXogaW52ZXJzYSBkZSBBOlxcblwiKVxucHJpbnQoQV9pbnYpXG5cbiMgVmVyaWZpY2FuZG8gYSBwcm9wcmllZGFkZTogQSAqIEFfaW52ID0gSVxuSSA9IEEgJSolIEFfaW52XG5jYXQoXCJNYXRyaXogSWRlbnRpZGFkZTpcXG5cIilcbnByaW50KEkpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEZWZpbmluZG8gdW1hIG1hdHJpeiAyeDJcbkEgPSBtYXRyaXgoYyg0LCA3LFxuICAgICAgICAgICAgIDIsIDYpLCBucm93ID0gMiwgYnlyb3cgPSBUUlVFKVxuY2F0KFwiTWF0cml6IEE6XFxuXCIpXG5wcmludChBKVxuXG4jIENhbGN1bGFuZG8gYSBpbnZlcnNhXG5BX2ludiA9IHNvbHZlKEEpXG5jYXQoXCJNYXRyaXogaW52ZXJzYSBkZSBBOlxcblwiKVxucHJpbnQoQV9pbnYpXG5cbiMgVmVyaWZpY2FuZG8gYSBwcm9wcmllZGFkZTogQSAqIEFfaW52ID0gSVxuSSA9IEEgJSolIEFfaW52XG5jYXQoXCJNYXRyaXogSWRlbnRpZGFkZTpcXG5cIilcbnByaW50KEkpXG5gYGAifQ== -->
-<pre class="r"><code># Definindo uma matriz 2x2
-A = matrix(c(4, 7,
-             2, 6), nrow = 2, byrow = TRUE)
-cat(&quot;Matriz A:\n&quot;)
-print(A)
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJOWVhSeWFYb2djWFZoWkhKaFpHRmNia0VnUEMwZ2JXRjBjbWw0S0Z4dUlDQmpLRFFzSURjc1hHNGdJQ0FnTWl3Z05pa3NYRzRnSUc1eWIzY2dQU0F5TEZ4dUlDQmllWEp2ZHlBOUlGUlNWVVZjYmlsY2JseHVRVnh1WkdWMEtFRXBYRzV4Y2loQktTUnlZVzVyWEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG4jIE1hdHJpeiBxdWFkcmFkYVxuQSA8LSBtYXRyaXgoXG4gIGMoNCwgNyxcbiAgICAyLCA2KSxcbiAgbnJvdyA9IDIsXG4gIGJ5cm93ID0gVFJVRVxuKVxuXG5BXG5kZXQoQSlcbnFyKEEpJHJhbmtcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBNYXRyaXogcXVhZHJhZGFcbkEgPC0gbWF0cml4KFxuICBjKDQsIDcsXG4gICAgMiwgNiksXG4gIG5yb3cgPSAyLFxuICBieXJvdyA9IFRSVUVcbilcblxuQVxuZGV0KEEpXG5xcihBKSRyYW5rXG5gYGAifQ== -->
+<pre class="r"><code># Matriz quadrada
+A &lt;- matrix(
+  c(4, 7,
+    2, 6),
+  nrow = 2,
+  byrow = TRUE
+)
 
-# Calculando a inversa
-A_inv = solve(A)
-cat(&quot;Matriz inversa de A:\n&quot;)
-print(A_inv)
-
-# Verificando a propriedade: A * A_inv = I
-I = A %*% A_inv
-cat(&quot;Matriz Identidade:\n&quot;)
-print(I)</code></pre>
+A
+det(A)
+qr(A)$rank</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>No caso de uma matriz <span class="math inline">\(3 \times
-3\)</span>:</p>
+<p>Algumas propriedades são:</p>
+<p><span class="math display">\[
+\det(\mathbf A\mathbf B)
+=
+\det(\mathbf A)\det(\mathbf B),
+\]</span></p>
+<p><span class="math display">\[
+\det(\mathbf A&#39;)=\det(\mathbf A),
+\]</span></p>
+<p><span class="math display">\[
+\det(\mathbf A^{-1})
+=
+\frac{1}{\det(\mathbf A)}.
+\]</span></p>
+<div id="matriz-inversa" class="section level3">
+<h3>9.1 Matriz inversa</h3>
+<p>Quando <span class="math inline">\(\mathbf A\)</span> é quadrada e
+não singular, sua inversa satisfaz:</p>
+<p><span class="math display">\[
+\mathbf A^{-1}\mathbf A
+=
+\mathbf A\mathbf A^{-1}
+=
+\mathbf I.
+\]</span></p>
+<p>Para uma matriz <span class="math inline">\(2\times2\)</span>:</p>
+<p><span class="math display">\[
+\mathbf A^{-1}
+=
+\frac{1}{ad-bc}
+\begin{bmatrix}
+d&amp;-b\\
+-c&amp;a
+\end{bmatrix}.
+\]</span></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJFWldacGJtbHVaRzhnZFcxaElHMWhkSEpwZWlBemVETmNia0lnUFNCdFlYUnlhWGdvWXlneUxDQXhMQ0F6TEZ4dUlDQWdJQ0FnSUNBZ0lDQWdJREVzSUMweExDQXlMRnh1SUNBZ0lDQWdJQ0FnSUNBZ0lETXNJREFzSUMweEtTd2dibkp2ZHlBOUlETXNJR0o1Y205M0lEMGdWRkpWUlNsY2JtTmhkQ2hjSWsxaGRISnBlaUJDT2x4Y2Jsd2lLVnh1Y0hKcGJuUW9RaWxjYmx4dUl5QkRZV3hqZFd4aGJtUnZJR0VnYVc1MlpYSnpZVnh1UWw5cGJuWWdQU0J6YjJ4MlpTaENLVnh1WTJGMEtGd2lUV0YwY21sNklHbHVkbVZ5YzJFZ1pHVWdRanBjWEc1Y0lpbGNibkJ5YVc1MEtFSmZhVzUyS1Z4dVhHNGpJRlpsY21sbWFXTmhibVJ2SUdFZ2NISnZjSEpwWldSaFpHVTZJRUlnS2lCQ1gybHVkaUE5SUVsY2Jra3pJRDBnY205MWJtUW9RaUFsS2lVZ1FsOXBibllzSUdScFoybDBjeUE5SURRcFhHNWpZWFFvWENKTllYUnlhWG9nYVdSbGJuUnBaR0ZrWlRwY1hHNWNJaWxjYm5CeWFXNTBLRWt6S1Z4dVlHQmdJbjA9IC0tPlxuXG5gYGByXG4jIERlZmluaW5kbyB1bWEgbWF0cml6IDN4M1xuQiA9IG1hdHJpeChjKDIsIDEsIDMsXG4gICAgICAgICAgICAgMSwgLTEsIDIsXG4gICAgICAgICAgICAgMywgMCwgLTEpLCBucm93ID0gMywgYnlyb3cgPSBUUlVFKVxuY2F0KFwiTWF0cml6IEI6XFxuXCIpXG5wcmludChCKVxuXG4jIENhbGN1bGFuZG8gYSBpbnZlcnNhXG5CX2ludiA9IHNvbHZlKEIpXG5jYXQoXCJNYXRyaXogaW52ZXJzYSBkZSBCOlxcblwiKVxucHJpbnQoQl9pbnYpXG5cbiMgVmVyaWZpY2FuZG8gYSBwcm9wcmllZGFkZTogQiAqIEJfaW52ID0gSVxuSTMgPSByb3VuZChCICUqJSBCX2ludiwgZGlnaXRzID0gNClcbmNhdChcIk1hdHJpeiBpZGVudGlkYWRlOlxcblwiKVxucHJpbnQoSTMpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEZWZpbmluZG8gdW1hIG1hdHJpeiAzeDNcbkIgPSBtYXRyaXgoYygyLCAxLCAzLFxuICAgICAgICAgICAgIDEsIC0xLCAyLFxuICAgICAgICAgICAgIDMsIDAsIC0xKSwgbnJvdyA9IDMsIGJ5cm93ID0gVFJVRSlcbmNhdChcIk1hdHJpeiBCOlxcblwiKVxucHJpbnQoQilcblxuIyBDYWxjdWxhbmRvIGEgaW52ZXJzYVxuQl9pbnYgPSBzb2x2ZShCKVxuY2F0KFwiTWF0cml6IGludmVyc2EgZGUgQjpcXG5cIilcbnByaW50KEJfaW52KVxuXG4jIFZlcmlmaWNhbmRvIGEgcHJvcHJpZWRhZGU6IEIgKiBCX2ludiA9IElcbkkzID0gcm91bmQoQiAlKiUgQl9pbnYsIGRpZ2l0cyA9IDQpXG5jYXQoXCJNYXRyaXogaWRlbnRpZGFkZTpcXG5cIilcbnByaW50KEkzKVxuYGBgIn0= -->
-<pre class="r"><code># Definindo uma matriz 3x3
-B = matrix(c(2, 1, 3,
-             1, -1, 2,
-             3, 0, -1), nrow = 3, byrow = TRUE)
-cat(&quot;Matriz B:\n&quot;)
-print(B)
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJEWVd4amRXeGhibVJ2SUdFZ2FXNTJaWEp6WVZ4dVFWOXBiblpsY25OaElEd3RJSE52YkhabEtFRXBYRzVCWDJsdWRtVnljMkZjYmx4dUl5QldaWEpwWm1sallXNWtieUJ2SUhKbGMzVnNkR0ZrYjF4dWNtOTFibVFvUVNBbEtpVWdRVjlwYm5abGNuTmhMQ0JrYVdkcGRITWdQU0F4TUNsY2JtQmdZQ0o5IC0tPlxuXG5gYGByXG4jIENhbGN1bGFuZG8gYSBpbnZlcnNhXG5BX2ludmVyc2EgPC0gc29sdmUoQSlcbkFfaW52ZXJzYVxuXG4jIFZlcmlmaWNhbmRvIG8gcmVzdWx0YWRvXG5yb3VuZChBICUqJSBBX2ludmVyc2EsIGRpZ2l0cyA9IDEwKVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjdWxhbmRvIGEgaW52ZXJzYVxuQV9pbnZlcnNhIDwtIHNvbHZlKEEpXG5BX2ludmVyc2FcblxuIyBWZXJpZmljYW5kbyBvIHJlc3VsdGFkb1xucm91bmQoQSAlKiUgQV9pbnZlcnNhLCBkaWdpdHMgPSAxMClcbmBgYCJ9 -->
+<pre class="r"><code># Calculando a inversa
+A_inversa &lt;- solve(A)
+A_inversa
 
-# Calculando a inversa
-B_inv = solve(B)
-cat(&quot;Matriz inversa de B:\n&quot;)
-print(B_inv)
-
-# Verificando a propriedade: B * B_inv = I
-I3 = round(B %*% B_inv, digits = 4)
-cat(&quot;Matriz identidade:\n&quot;)
-print(I3)</code></pre>
+# Verificando o resultado
+round(A %*% A_inversa, digits = 10)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Em aplicações computacionais, geralmente não precisamos calcular a
+inversa explicitamente. Para resolver <span class="math inline">\(\mathbf A\mathbf x=\mathbf b\)</span>, é
+preferível usar <code>solve(A, b)</code>.</p>
 </div>
 </div>
+<div id="uma-ponte-para-a-matriz-de-dados" class="section level2">
+<h2>10. Uma ponte para a matriz de dados</h2>
+<p>Considere uma amostra de cinco propriedades. O vetor de resultados
+é:</p>
+<p><span class="math display">\[
+\underset{5\times1}{\mathbf y}
+=
+\begin{bmatrix}
+y_1\\y_2\\y_3\\y_4\\y_5
+\end{bmatrix}.
+\]</span></p>
+<p>Se o modelo contém intercepto e duas variáveis explicativas, a matriz
+de regressores é:</p>
+<p><span class="math display">\[
+\underset{5\times3}{\mathbf X}
+=
+\begin{bmatrix}
+1&amp;x_{11}&amp;x_{12}\\
+1&amp;x_{21}&amp;x_{22}\\
+1&amp;x_{31}&amp;x_{32}\\
+1&amp;x_{41}&amp;x_{42}\\
+1&amp;x_{51}&amp;x_{52}
+\end{bmatrix}.
+\]</span></p>
+<p>Cada linha corresponde a uma observação. Cada coluna corresponde a um
+regressor. A coluna de uns representa o intercepto.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJFWVdSdmN5QmtaU0JqYVc1amJ5QndjbTl3Y21sbFpHRmtaWE5jYm5rZ1BDMGdiV0YwY21sNEtGeHVJQ0JqS0RJNE1EQXNJRE14TURBc0lETXpOVEFzSURNMk1EQXNJRE01TlRBcExGeHVJQ0J1WTI5c0lEMGdNU3hjYmlBZ1pHbHRibUZ0WlhNZ1BTQnNhWE4wS0U1VlRFd3NJRndpY0hKdlpIVjBhWFpwWkdGa1pWd2lLVnh1S1Z4dVhHNW1aWEowYVd4cGVtRnVkR1VnUEMwZ1l5ZzRNQ3dnT1RVc0lERXhNQ3dnTVRJd0xDQXhOREFwWEc1amFIVjJZU0E4TFNCaktEY3lNQ3dnTmpnd0xDQTNOVEFzSURjNU1Dd2dPREV3S1Z4dVhHNGpJRU52Ym5OMGNuVnBibVJ2SUdFZ2JXRjBjbWw2SUdSbElISmxaM0psYzNOdmNtVnpYRzVZSUR3dElHTmlhVzVrS0Z4dUlDQnBiblJsY21ObGNIUnZJRDBnTVN4Y2JpQWdabVZ5ZEdsc2FYcGhiblJsSUQwZ1ptVnlkR2xzYVhwaGJuUmxMRnh1SUNCamFIVjJZU0E5SUdOb2RYWmhYRzRwWEc1Y2JubGNibGhjYm1CZ1lDSjkgLS0+XG5cbmBgYHJcbiMgRGFkb3MgZGUgY2luY28gcHJvcHJpZWRhZGVzXG55IDwtIG1hdHJpeChcbiAgYygyODAwLCAzMTAwLCAzMzUwLCAzNjAwLCAzOTUwKSxcbiAgbmNvbCA9IDEsXG4gIGRpbW5hbWVzID0gbGlzdChOVUxMLCBcInByb2R1dGl2aWRhZGVcIilcbilcblxuZmVydGlsaXphbnRlIDwtIGMoODAsIDk1LCAxMTAsIDEyMCwgMTQwKVxuY2h1dmEgPC0gYyg3MjAsIDY4MCwgNzUwLCA3OTAsIDgxMClcblxuIyBDb25zdHJ1aW5kbyBhIG1hdHJpeiBkZSByZWdyZXNzb3Jlc1xuWCA8LSBjYmluZChcbiAgaW50ZXJjZXB0byA9IDEsXG4gIGZlcnRpbGl6YW50ZSA9IGZlcnRpbGl6YW50ZSxcbiAgY2h1dmEgPSBjaHV2YVxuKVxuXG55XG5YXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEYWRvcyBkZSBjaW5jbyBwcm9wcmllZGFkZXNcbnkgPC0gbWF0cml4KFxuICBjKDI4MDAsIDMxMDAsIDMzNTAsIDM2MDAsIDM5NTApLFxuICBuY29sID0gMSxcbiAgZGltbmFtZXMgPSBsaXN0KE5VTEwsIFwicHJvZHV0aXZpZGFkZVwiKVxuKVxuXG5mZXJ0aWxpemFudGUgPC0gYyg4MCwgOTUsIDExMCwgMTIwLCAxNDApXG5jaHV2YSA8LSBjKDcyMCwgNjgwLCA3NTAsIDc5MCwgODEwKVxuXG4jIENvbnN0cnVpbmRvIGEgbWF0cml6IGRlIHJlZ3Jlc3NvcmVzXG5YIDwtIGNiaW5kKFxuICBpbnRlcmNlcHRvID0gMSxcbiAgZmVydGlsaXphbnRlID0gZmVydGlsaXphbnRlLFxuICBjaHV2YSA9IGNodXZhXG4pXG5cbnlcblhcbmBgYCJ9 -->
+<pre class="r"><code># Dados de cinco propriedades
+y &lt;- matrix(
+  c(2800, 3100, 3350, 3600, 3950),
+  ncol = 1,
+  dimnames = list(NULL, &quot;produtividade&quot;)
+)
+
+fertilizante &lt;- c(80, 95, 110, 120, 140)
+chuva &lt;- c(720, 680, 750, 790, 810)
+
+# Construindo a matriz de regressores
+X &lt;- cbind(
+  intercepto = 1,
+  fertilizante = fertilizante,
+  chuva = chuva
+)
+
+y
+X</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>As dimensões dos principais produtos são:</p>
+<p><span class="math display">\[
+\underset{3\times5}{\mathbf X&#39;}
+\underset{5\times3}{\mathbf X}
+=
+\underset{3\times3}{\mathbf X&#39;\mathbf X},
+\]</span></p>
+<p>e:</p>
+<p><span class="math display">\[
+\underset{3\times5}{\mathbf X&#39;}
+\underset{5\times1}{\mathbf y}
+=
+\underset{3\times1}{\mathbf X&#39;\mathbf y}.
+\]</span></p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJZSjFoY2JsaDBXQ0E4TFNCamNtOXpjM0J5YjJRb1dDbGNibHh1SXlCWUozbGNibGgwZVNBOExTQmpjbTl6YzNCeWIyUW9XQ3dnZVNsY2JseHVXSFJZWEc1WWRIbGNibHh1SXlCV1pYSnBabWxqWVc1a2J5QmhjeUJrYVcxbGJuUER0V1Z6WEc1a2FXMG9XSFJZS1Z4dVpHbHRLRmgwZVNsY2JtQmdZQ0o5IC0tPlxuXG5gYGByXG4jIFgnWFxuWHRYIDwtIGNyb3NzcHJvZChYKVxuXG4jIFgneVxuWHR5IDwtIGNyb3NzcHJvZChYLCB5KVxuXG5YdFhcblh0eVxuXG4jIFZlcmlmaWNhbmRvIGFzIGRpbWVuc8O1ZXNcbmRpbShYdFgpXG5kaW0oWHR5KVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBYJ1hcblh0WCA8LSBjcm9zc3Byb2QoWClcblxuIyBYJ3lcblh0eSA8LSBjcm9zc3Byb2QoWCwgeSlcblxuWHRYXG5YdHlcblxuIyBWZXJpZmljYW5kbyBhcyBkaW1lbnPDtWVzXG5kaW0oWHRYKVxuZGltKFh0eSlcbmBgYCJ9 -->
+<pre class="r"><code># X&#39;X
+XtX &lt;- crossprod(X)
+
+# X&#39;y
+Xty &lt;- crossprod(X, y)
+
+XtX
+Xty
+
+# Verificando as dimensões
+dim(XtX)
+dim(Xty)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Observe que <span class="math inline">\(\mathbf X&#39;\mathbf
+X\)</span> é quadrada e simétrica.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVhWE5UZVcxdFpYUnlhV01vV0hSWUtWeHVjWElvV0Nra2NtRnVhMXh1WUdCZ0luMD0gLS0+XG5cbmBgYHJcbmlzU3ltbWV0cmljKFh0WClcbnFyKFgpJHJhbmtcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaXNTeW1tZXRyaWMoWHRYKVxucXIoWCkkcmFua1xuYGBgIn0= -->
+<pre class="r"><code>isSymmetric(XtX)
+qr(X)$rank</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>No próximo notebook, esses produtos serão utilizados para derivar o
+estimador de mínimos quadrados ordinários.</p>
+</div>
+<div id="síntese" class="section level2">
+<h2>11. Síntese</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Conceito</th>
+<th align="left">Resultado principal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Transposição</td>
+<td align="left"><span class="math inline">\((\mathbf A\mathbf
+B)&#39;=\mathbf B&#39;\mathbf A&#39;\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Conformabilidade</td>
+<td align="left"><span class="math inline">\((m\times n)(n\times
+p)=(m\times p)\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">Produto interno</td>
+<td align="left"><span class="math inline">\(\mathbf x&#39;\mathbf
+y\)</span> é um escalar</td>
+</tr>
+<tr class="even">
+<td align="left">Produto externo</td>
+<td align="left"><span class="math inline">\(\mathbf x\mathbf
+y&#39;\)</span> é uma matriz</td>
+</tr>
+<tr class="odd">
+<td align="left">Norma</td>
+<td align="left"><span class="math inline">\(\|\mathbf x\|=\sqrt{\mathbf
+x&#39;\mathbf x}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Simetria</td>
+<td align="left"><span class="math inline">\(\mathbf A&#39;=\mathbf
+A\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">Posto completo</td>
+<td align="left">Colunas linearmente independentes</td>
+</tr>
+<tr class="even">
+<td align="left">Invertibilidade</td>
+<td align="left"><span class="math inline">\(\det(\mathbf
+A)\neq0\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">Matriz de dados</td>
+<td align="left">Linhas são observações; colunas são regressores</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="considerações-finais" class="section level1">
+<h1>Considerações finais</h1>
+<p>Vetores e matrizes permitem organizar os dados e condensar muitas
+operações em expressões simples. Para a Econometria, os pontos centrais
+desta primeira parte são a conformabilidade dos produtos, a distinção
+entre produtos interno e externo, a simetria de <span class="math inline">\(\mathbf X&#39;\mathbf X\)</span> e a condição de
+posto completo.</p>
+<p>Esses resultados serão usados na Parte 2 para estudar sistemas
+lineares, centralização, formas quadráticas, diferenciação matricial,
+projeções e a derivação do estimador de MQO.</p>
+<!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlJldmlzw6NvIGRlIMOBbGdlYnJhIExpbmVhciINCnN1YnRpdGxlOiAiRWxlbWVudG9zIGLDoXNpY29zIGUgb3BlcmHDp8O1ZXMgY29tIG1hdHJpemVzIg0KYXV0aG9yOiAiVml0b3IgSHVnbyBNaXJvIg0Kb3V0cHV0Og0KICBodG1sX25vdGVib29rOg0KICAgIHRvYzogdHJ1ZQ0KICAgIHRvY19mbG9hdDogdHJ1ZQ0KLS0tDQoNCiMgSW50cm9kdcOnw6NvDQoNCkEgw6FsZ2VicmEgbGluZWFyIMOpIHVtYSBmZXJyYW1lbnRhIGVzc2VuY2lhbCBwYXJhIGVudGVuZGVyLCBtb2RlbGFyIGUgcmVzb2x2ZXIgcHJvYmxlbWFzIGVtIGVjb25vbWV0cmlhLg0KDQpPIHByZXNlbnRlIG1hdGVyaWFsIG7Do28gcHJldGVuZGUgY29icmlyIHRvZG9zIG9zIHTDs3BpY29zIGRlIGZvcm1hIGludGVncmFsLCBtYXMgZXNwZXJhIHNlciB2w6FsaWRvIHBhcmEgYSByZXZpc8OjbyBkb3MgcHJpbmNpcGFpcyBjb25jZWl0b3MgYXBsaWNhZG9zIGVtIGVjb25vbWV0cmlhLg0KDQojIyAxLiBFbGVtZW50b3MgYsOhc2ljb3M6IHZldG9yZXMgZSBtYXRyaXplcw0KDQpVbSB2ZXRvciBlbSAkXG1hdGhiYntSfV5uJCDDqSBkZWZpbmlkbyBkYSBzZWd1aW50ZSBmb3JtYToNCg0KJCQNClxtYXRoYmZ7eH0gPSANClxiZWdpbntibWF0cml4fQ0KeF8xIFxcDQp4XzIgXFwNClx2ZG90cyBcXA0KeF9uDQpcZW5ke2JtYXRyaXh9DQokJA0KDQoqKkVYRU1QTE8qKg0KDQpWYW1vcyBjcmlhciBvIHZldG9yDQoNCiQkDQpcbWF0aGJme3h9PSANClxiZWdpbntibWF0cml4fQ0KMVxcDQoyXFwNCjMNClxlbmR7Ym1hdHJpeH0NCiQkDQoNCmBgYHtyfQ0KIyBDcmlhbmRvIHVtIHZldG9yDQp4ID0gYygxLDIsMykNCngNCmBgYA0KDQpQb3Igc3VhIHZleiwgdW1hIG1hdHJpeiAkbiBcdGltZXMgbSQgw6kgZXNjcml0YSBkYSBzZWd1aW50ZSBmb3JtYToNCg0KJCQNClxtYXRoYmZ7QX09DQpcYmVnaW57Ym1hdHJpeH0NCmFfezExfSAmIGFfezEyfSAmIFxsZG90cyAmIGFfezFtfVxcDQphX3syMX0gJiBhX3syMn0gJiBcbGRvdHMgJiBhX3sybX1cXA0KXHZkb3RzICYgXHZkb3RzICYgXGRkb3RzICYgXHZkb3RzXFwNCmFfe24xfSAmIGFfe24yfSAmIFxsZG90cyAmIGFfe25tfQ0KXGVuZHtibWF0cml4fQ0KJCQNCg0KTm8gY2FzbyBlbSBxdWUgJG4gPSBtJCwgdGVtb3MgdW1hIG1hdHJpeiBkZW5vbWluYWRhIGNvbW8gKiptYXRyaXogcXVhZHJhZGEqKi4NCg0KKipFWEVNUExPKioNCg0KVmFtb3MgY3JpYXIgYSBtYXRyaXoNCg0KJCQNClxtYXRoYmZ7QX09DQpcYmVnaW57Ym1hdHJpeH0NCjIgJiAzICYgNSBcXA0KNiAmIDEgJiAzDQpcZW5ke2JtYXRyaXh9DQokJA0KDQpObyBgUmAgYSBjcmlhw6fDo28gZGUgbWF0cml6ZXMgcG9kZSBzZXIgcmVhbHppYWRhIGNvbSBhIGZ1bsOnw6NvOg0KDQpgbWF0cml4KHZhbHVlLCBucm93LCBuY29sLCBieXJvdywgZGltbmFtZXMpYA0KDQpPcyBwYXLDom1ldHJvcyBzw6NvOg0KDQotICAgYHZhbHVlYDogZXNwZWNpZmljYSBhIGVudHJhZGEgZG8gdmV0b3IsIG91IHNlamEsIGNhZGEgZW50cmFkYSBlc3BlY2lmaWNhIG9zIGVsZW1lbnRvcyBlbSB1bWEgbWF0cml6Lg0KLSAgIGBucm93YDogZXNwZWNpZmljYSBvIHRhbWFuaG8gZGEgbGluaGEgbmEgbWF0cml6Lg0KLSAgIGBuY29sYDogZXNwZWNpZmljYSBvIHRhbWFuaG8gZGEgY29sdW5hIG5hIG1hdHJpei4NCi0gICBgYnlyb3dgOiB0ZW0gY29tbyBlbnRyYWRhIHVtIHZhbG9yIGJvb2xlYW5vIChUUlVFIG91IEZBTFNFKS4gU2UgVFJVRSwgb3MgZWxlbWVudG9zIGRhIG1hdHJpeiBzw6NvIG9yZ2FuaXphZG9zIG5hIGxpbmhhLCBlbnF1YW50byBGQUxTRSBvcmdhbml6YXLDoSBvIGVsZW1lbnRvIHBvciBjb2x1bmEuDQotICAgYGRpbW5hbWVzYDogZXNwZWNpZmljYSBvIG5vbWUgZGFkbyBhIGNhZGEgZWxlbWVudG8gZGUgbGluaGFzIGUgY29sdW5hcyBkZSB1bWEgbWF0cml6Lg0KDQpgYGB7cn0NCkEgPSBtYXRyaXgoZGF0YT1jKDIsMyw1LDYsMSwzKSxucm93PTIsbmNvbD0zLGJ5cm93PVRSVUUpDQpwcmludChBKQ0KYGBgDQoNClZlamFtb3Mgb3V0cm8gZXhlbXBsbzoNCg0KYGBge3J9DQpCIDwtIG1hdHJpeChjKDEsIDUsIDcsIA0KICAgICAgICAgICAgICAtMSwgMCwgNCwgDQogICAgICAgICAgICAgIDgsIDksIDExKSwgDQogICAgICAgICAgICBucm93PTMsIA0KICAgICAgICAgICAgYnlyb3cgPSBUUlVFLCANCiAgICAgICAgICAgIGRpbW5hbWVzID0gbGlzdChjKCJyMSIsInIyIiwicjMiKSwgYygiYzEiLCJjMiIsImMzIikpKQ0KcHJpbnQoQikNCmBgYA0KDQojIyAyLiBPcGVyYcOnw7VlcyBiw6FzaWNhcw0KDQpBcyBvcGVyYcOnw7VlcyBhbGfDqWJyaWNhcyBiw6FzaWNhcyBjb20gbWF0cml6ZXMgc8OjbyBvcGVyYcOnw7VlcyBkZSBzb21hIGUgbXVsdGlwbGljYcOnw6NvLg0KDQojIyMgU29tYSAoZSBkaWZlcmVuw6dhKQ0KDQokJCANClxtYXRoYmZ7QX0gPSBcbGVmdFtcYmVnaW57YXJyYXl9e2NjfQ0KYV97MTF9ICYgYV97MTJ9XFwNCmFfezIxfSAmIGFfezIyfQ0KXGVuZHthcnJheX1ccmlnaHRdLH4NClxtYXRoYmZ7Qn0gPSBcbGVmdFtcYmVnaW57YXJyYXl9e2NjfQ0KYl97MTF9ICYgYl97MTJ9XFwNCmJfezIxfSAmIGJfezIyfQ0KXGVuZHthcnJheX1ccmlnaHRdLH4NClxtYXRoYmZ7QX0rXG1hdGhiZntCfSA9IFxsZWZ0W1xiZWdpbnthcnJheX17Y2N9DQphX3sxMX0rYl97MTF9ICYgYV97MTJ9K2JfezEyfVxcDQphX3syMX0rYl97MjF9ICYgYV97MjJ9K2JfezIyfQ0KXGVuZHthcnJheX1ccmlnaHRdDQokJA0KDQoqKkVYRU1QTE8qKg0KDQpQYXJhIGFzIG1hdHJpemVzDQoNCiQkDQpcbWF0aGJme0F9PVxiZWdpbntibWF0cml4fQ0KNCAmIDlcXA0KMiAmIDENClxlbmR7Ym1hdHJpeH0sIFxxdWFkDQpcbWF0aGJme0J9PVxiZWdpbntibWF0cml4fQ0KMiAmIDBcXA0KMCAmIDcNClxlbmR7Ym1hdHJpeH0NCiQkDQoNCk5vIGNhc28gZGUgdW1hIGFkacOnw6NvLCB0ZW1vczoNCg0KJCQNClxtYXRoYmZ7QStCfSA9IFxiZWdpbntibWF0cml4fQ0KNCAmIDlcXA0KMiAmIDENClxlbmR7Ym1hdHJpeH0gKyBcYmVnaW57Ym1hdHJpeH0NCjIgJiAwXFwNCjAgJiA3DQpcZW5ke2JtYXRyaXh9ID0NClxiZWdpbntibWF0cml4fQ0KNCsyICYgOSswXFwNCjIrMCAmIDErNw0KXGVuZHtibWF0cml4fSA9DQpcYmVnaW57Ym1hdHJpeH0NCjYgJiA5XFwNCjIgJiA4DQpcZW5ke2JtYXRyaXh9DQokJCBObyBjYXNvIGRlIHVtYSBkaWZlcmVuw6dhOg0KDQokJA0KXG1hdGhiZntBLUJ9ID0gXGJlZ2lue2JtYXRyaXh9DQo0ICYgOVxcDQoyICYgMQ0KXGVuZHtibWF0cml4fSAtIFxiZWdpbntibWF0cml4fQ0KMiAmIDBcXA0KMCAmIDcNClxlbmR7Ym1hdHJpeH0gPSBcYmVnaW57Ym1hdHJpeH0NCjQtMiAmIDktMFxcDQoyLTAgJiAxLTcNClxlbmR7Ym1hdHJpeH0gPSBcYmVnaW57Ym1hdHJpeH0NCjIgJiA5XFwNCjIgJiAtNg0KXGVuZHtibWF0cml4fQ0KJCQNCg0KYGBge3J9DQojIERlZmluacOnw6NvIGRhcyBtYXRyaXplcw0KQSA9IG1hdHJpeChjKDQsOSwyLDEpLDIsMixieXJvdz1UUlVFKQ0KQiA9IG1hdHJpeChjKDIsMCwwLDcpLDIsMixieXJvdz1UUlVFKQ0KDQojIFNvbWENCnNvbWEgPSBBK0INCnNvbWENCg0KIyBTdWJ0cmHDp8Ojbw0KZGlmID0gQS1CDQpkaWYNCmBgYA0KDQoqKlByb3ByaWVkYWRlcyBkYSBzb21hIGRlIG1hdHJpemVzKioNCg0KLSAgIEFzc29jaWHDp8OjbzogJChBK0IpK0MgPSBBICsgKEIrQykkDQoNCi0gICBDb211dGHDp8OjbzogJChBK0IpID0gKEIrQSkkDQoNCi0gICBFbGVtZW50byBuZXV0cm86ICRBICsgMCA9IEEkDQoNCiMjIyBNdWx0aXBsaWNhw6fDo28gcG9yIHVtIGVzY2FsYXINCg0KU2VqYSB1bWEgbWF0cml6ICRcbWF0aGJme0F9JA0KDQokJCANClxtYXRoYmZ7QX0gPSBcYmVnaW57Ym1hdHJpeH0NCmFfezExfSAmIGFfezEyfVxcDQphX3syMX0gJiBhX3syMn0NClxlbmR7Ym1hdHJpeH0NCiQkDQoNCkRhZG8gdW0gZXNjYWxhciAkayQsIGEgbXVsdGlwbGljYcOnw6NvIGRlICRBJCBwb3IgZXN0ZSBlc2NhbGFyIMOpIGRlZmluaWRhIGNvbW86DQoNCiQkIA0KayBcY2RvdCBcbWF0aGJme0F9ID0gXGJlZ2lue2JtYXRyaXh9DQprIFxjZG90IGFfezExfSAmIGsgXGNkb3QgYV97MTJ9XFwNCmsgXGNkb3QgYV97MjF9ICYgayBcY2RvdCBhX3syMn0NClxlbmR7Ym1hdHJpeH0NCiQkDQoNCioqRVhFTVBMTyoqDQoNCiQkDQpcbWF0aGJme0F9PVxiZWdpbntibWF0cml4fQ0KMyAmIC0xXFwNCjAgJiA1DQpcZW5ke2JtYXRyaXh9DQokJA0KDQpjb20gXCRrID0gMiBcJCwgdGVtb3M6DQoNCiQkDQoyIFxjZG90IFxiZWdpbntibWF0cml4fQ0KMyAmIC0xXFwNCjAgJiA1DQpcZW5ke2JtYXRyaXh9ID0gDQpcYmVnaW57Ym1hdHJpeH0NCjJcY2RvdCAzICYgMlxjZG90ICgtMSlcXA0KMlxjZG90IDAgJiAyXGNkb3Q1DQpcZW5ke2JtYXRyaXh9ID0NClxiZWdpbntibWF0cml4fQ0KNiAmIC0yXFwNCjAgJiAxMA0KXGVuZHtibWF0cml4fQ0KJCQNCg0KYGBge3J9DQojIERlZmluaXIgYSBtYXRyaXogQQ0KQSA9IG1hdHJpeChjKDMsLTEsMCw1KSwgMiwgMiwgYnlyb3c9VFJVRSkNCg0KIyBEZWZpbmlyIHVtIGVzY2FsYXINCmsgPSAyDQoNCiMgUHJvZHV0byBkYSBtYXRyaXogQSBwb3IgdW0gZXNjYWxhcg0KQyA9IGsqQQ0KQw0KYGBgDQoNCiMjIyBUcmFuc3Bvc2nDp8Ojbw0KDQpBIHRyYW5zcG9zacOnw6NvIGRlIHVtYSBtYXRyaXogJG0gXHRpbWVzIG4kIMOpIGluZGljYWRhIHBvciAkXG1hdGhiZntBfSckIGUgcG9zc3VpIGRpbWVuc8OjbyAkbiBcdGltZXMgbSQuDQoNCioqRVhFTVBMTyoqDQoNCmBgYHtyfQ0KIyBEZWZpbmluZG8gYSBtYXRyaXogQSAzeDMNCkEgPC0gbWF0cml4KGMoNCwgNSwgDQogICAgICAgICAgICAgIDMsIDEsDQogICAgICAgICAgICAgIDUsIDApLCBucm93ID0gMywgYnlyb3cgPSBUUlVFKQ0KDQojIEltcHJpbWluZG8gYSBtYXRyaXogQQ0KY2F0KCJNYXRyaXogQTpcbiIpDQpwcmludChBKQ0KYGBgDQoNCkEgdHJhbnNwb3N0YSDDqSBvYnRpZGEgY29tIG8gb3BlcmFkb3IgYHQoKWAuDQoNCmBgYHtyfQ0KIyBDYWxjdWxhbmRvIGEgdHJhbnNwb3N0YSBkZSBBDQpBX3RyYW5zIDwtIHQoQSkNCg0KIyBJbXByaW1pbmRvIGEgdHJhbnNwb3N0YSBkZSBBDQpjYXQoIlxuVHJhbnNwb3N0YSBkZSBBOlxuIikNCnByaW50KEFfdHJhbnMpDQpgYGANCg0KVGFtYsOpbSDDqSBpbXBvcnRhbnRlIG5vcyBhY29zdHVtYXJtb3MgY29tIGEgdHJhbnNwb3Npw6fDo28gZGUgdmV0b3Jlcy4NCg0KRGFkbyB1bSB2ZXRvciBjb2x1bmEgJCQgXG1hdGhiZntifT0gXGJlZ2lue2JtYXRyaXh9IGJfMSBcXCBiXzIgXFwgYl8zIFxlbmR7Ym1hdHJpeH0kJCBTdWEgdmVyc8OjbyB0cmFzcG9zdGEgw6kgZGFkYSBwb3IgdW0gdmV0b3IgbGluaGENCg0KJCQgXG1hdGhiZntifSc9IFxiZWdpbntibWF0cml4fSBiXzEgJiBiXzIgJiBiXzMgXGVuZHtibWF0cml4fSQkDQoNCiMjIyBNdWx0aXBsaWNhw6fDo28gZGUgbWF0cml6ZXMNCg0KU2VqYW0gYXMgbWF0cml6ZXMNCg0KJCQNClxtYXRoYmZ7QX0gPSBcYmVnaW57Ym1hdHJpeH0gDQphX3sxMX0gJiBhX3sxMn0gJiBhX3sxM30gXFwgDQphX3syMX0gJiBhX3syMn0gJiBhX3syM30gDQpcZW5ke2JtYXRyaXh9X3syIFx0aW1lcyAzfSA7IFxxdWFkDQpcbWF0aGJme0R9ID0gXGJlZ2lue2JtYXRyaXh9IA0KZF97MTF9ICYgZF97MTJ9IFxcIA0KZF97MjF9ICYgZF97MjJ9IFxcIA0KZF97MzF9ICYgZF97MzJ9IA0KXGVuZHtibWF0cml4fV97MyBcdGltZXMgMn0NCiQkDQoNCiRcbWF0aGJme0F9JCDDqSB1bWEgbWF0cml6ICQyIFx0aW1lcyAzJCBlICRcbWF0aGJme0R9JCDDqSB1bWEgbWF0cml6ICQzIFx0aW1lcyAyJCwgZW50w6NvIGFzIGRpbWVuc8O1ZXMgaW50ZXJuYXMgY29pbmNpZGVtIGUgdGVtb3M6DQoNCiQkDQpcbWF0aGJme0N9ID0gXG1hdGhiZntBfSBcdGltZXMgXG1hdGhiZntEfSA9DQpcYmVnaW57Ym1hdHJpeH0NCmFfezExfWRfezExfSArIGFfezEyfWRfezIxfSArIGFfezEzfWRfezMxfSAmIGFfezExfWRfezEyfSArIGFfezEyfWRfezIyfSArIGFfezEzfWRfezMyfSBcXA0KYV97MjF9ZF97MTF9ICsgYV97MjJ9ZF97MjF9ICsgYV97MjN9ZF97MzF9ICYgYV97MjF9ZF97MTJ9ICsgYV97MjJ9ZF97MjJ9ICsgYV97MjN9ZF97MzJ9DQpcZW5ke2JtYXRyaXh9DQokJA0KDQoqKkVYRU1QTE8qKg0KDQpDb25zaWRlcmUgYXMgZHVhcyBtYXRyaXplcyBhIHNlZ3VpcjoNCg0KJCQNClxtYXRoYmZ7QX09XGxlZnRbXGJlZ2lue2FycmF5fXtjY30NCjEgJiAyXFwNCjMgJiA0DQpcZW5ke2FycmF5fVxyaWdodF1cdGV4dHJteyBlICB9DQpcbWF0aGJme0J9PVxsZWZ0W1xiZWdpbnthcnJheX17Y2NjfQ0KMSAmIDIgJiAxXFwNCjMgJiA0ICYgMg0KXGVuZHthcnJheX1ccmlnaHRdLg0KJCQNCg0KUG9yIHN1YSB2ZXosIG8gcHJvZHV0byBkZSBkdWFzIG1hdHJpemVzIMOpIGRhZG8gcG9yOg0KDQokJA0KXGJlZ2lue2FsaWduKn0NClxtYXRoYmZ7Q30gPSANClxtYXRoYmZ7QX1cY2RvdFxtYXRoYmZ7Qn0gJiA9XGxlZnRbXGJlZ2lue2FycmF5fXtjY30NCjEgJiAyXFwNCjMgJiA0DQpcZW5ke2FycmF5fVxyaWdodF1cY2RvdFxsZWZ0W1xiZWdpbnthcnJheX17Y2NjfQ0KMSAmIDIgJiAxXFwNCjMgJiA0ICYgMg0KXGVuZHthcnJheX1ccmlnaHRdXFwNCiAmID1cbGVmdFtcYmVnaW57YXJyYXl9e2NjY30NCjFcY2RvdDErMlxjZG90MyAmIDFcY2RvdDIrMlxjZG90NCAmIDFcY2RvdDErMlxjZG90MlxcDQozXGNkb3QxKzRcY2RvdDMgJiAzXGNkb3QyKzRcY2RvdDQgJiAzXGNkb3QxKzRcY2RvdDINClxlbmR7YXJyYXl9XHJpZ2h0XVxcDQogJiA9XGxlZnRbXGJlZ2lue2FycmF5fXtjY2N9DQo3ICYgMTAgJiA1XFwNCjE1ICYgMjIgJiAxMQ0KXGVuZHthcnJheX1ccmlnaHRdDQpcZW5ke2FsaWduKn0NCiQkDQoNCkN1aWRhZG8gY29tIG8gb3BlcmFkb3IgYOKIl2AgcXVhbmRvIHRyYWJhbGhhbmRvIGNvbSB2ZXRvcmVzIGUgbWF0cml6ZXMgbm8gYFJgOyBhIG11bHRpcGxpY2HDp8OjbyBkZSBtYXRyaXplcyDDqSBmZWl0YSB1c2FuZG8gbyBvcGVyYWRvciBgJSolYC4NCg0KYGBge3J9DQojIERlZmluaW5kbyBhIG1hdHJpeiBBDQpBID0gbWF0cml4KDE6NCwyLDIsIGJ5cm93PVRSVUUpDQpjYXQoIkEgPVxuIikNCnByaW50KEEpDQoNCiMgRGVmaW5pbmRvIGEgbWF0cml6IEINCkIgPSBtYXRyaXgoYygxLDIsMSwzLDQsMiksMiwzLGJ5cm93PVRSVUUpDQpjYXQoIkIgPVxuIikNCnByaW50KEIpDQoNCmBgYA0KDQpPIHByb2R1dG8gZGUgJFxtYXRoYmZ7QX0kIGUgJFxtYXRoYmZ7Qn0kIMOpIGRhZG8gcG9yOg0KDQpgYGB7cn0NCkMgPSBBJSolQg0KQw0KYGBgDQoNCioqUHJvcHJpZWRhZGVzIGRhIG11bHRpcGxpY2HDp8OjbyoqDQoNCi0gICBBc3NvY2lhw6fDo286ICQoQUIpQyA9IEEoQkMpJA0KDQotICAgRGlzdHJpYnVpw6fDo286ICRBKEIgKyBDKSA9IEFCICsgQUMkIGUgJChBK0IpQyA9IEFDICsgQkMkDQoNCi0gICBFbGVtZW50byBOZXV0cm86IHNlICRBJCDDqSB1bWEgbWF0cml6IHF1YWRyYWRhICRBSSA9IEEkDQoNCiMjIyBQcm9kdXRvIEludGVybm8NCg0KTyBwcm9kdXRvIGludGVybm8gZGUgZG9pcyB2ZXRvcmVzICRcbWF0aGJme3V9JCBlICRcbWF0aGJme3Z9JCBlbSAkXG1hdGhiYntSfV5uJCDDqSBkZWZpbmlkbyBjb21vOg0KDQokJA0KXG1hdGhiZnt1fSBcY2RvdCBcbWF0aGJme3Z9ID0gDQp1XzEgdl8xICsgdV8yIHZfMiArIFxsZG90cyArIHVfbiB2X24gPSANClxzdW1fe2k9MX1ebiB1X2kgdl9pDQokJA0KDQpBbHRlcm5hdGl2YW1lbnRlLCBvIHByb2R1dG8gaW50ZXJubyAkXG1hdGhiZnt1fSBcY2RvdCBcbWF0aGJme3Z9JCDDqSBkYWRvIHBlbGEgbXVsdGlwbGljYcOnw6NvICRcbWF0aGJme3V9JyBcbWF0aGJme3Z9JC4NCg0KJCQNClxtYXRoYmZ7dX0nIFxtYXRoYmZ7dn0gPSANClxiZWdpbntibWF0cml4fSB1XzEgJiB1XzIgJiBcY2RvdHMgJiB1X24gDQpcZW5ke2JtYXRyaXh9IA0KXGJlZ2lue2JtYXRyaXh9IA0Kdl8xIFxcIA0Kdl8yIFxcIA0KXHZkb3RzIFxcIA0Kdl9uIA0KXGVuZHtibWF0cml4fSA9IA0KdV8xIHZfMSArIHVfMiB2XzIgKyBcY2RvdHMgKyB1X24gdl9uIA0KJCQNCg0KKipFWEVNUExPKioNCg0KU2VqYW0gb3MgdmV0b3Jlcw0KDQokJA0KXG1hdGhiZnt1fSA9IFxiZWdpbntibWF0cml4fSANCjMgXFwgLTEgXFwgNCANClxlbmR7Ym1hdHJpeH0sIFxxdWFkIA0KXG1hdGhiZnt2fSA9IFxiZWdpbntibWF0cml4fSANCjIgXFwgNSBcXCAtMSANClxlbmR7Ym1hdHJpeH0NCiQkDQoNCk8gcHJvZHV0byBpbnRlcm5vICRcbWF0aGJme3V9IFxjZG90IFxtYXRoYmZ7dn0kIMOpIGNhbGN1bGFkbyBjb21vOg0KDQokJA0KXG1hdGhiZnt1fSBcY2RvdCBcbWF0aGJme3Z9ID0gKDMgXGNkb3QgMikgKyAoLTEgXGNkb3QgNSkgKyAoNCBcY2RvdCAtMSkgPSA2IC0gNSAtIDQgPSAtMw0KJCQNCg0KT3UsIGVtIG5vdGHDp8OjbyBzb21hdMOzcmlhOg0KDQokJA0KXG1hdGhiZnt1fSBcY2RvdCBcbWF0aGJme3Z9ID0gXHN1bV97aT0xfV4zIHVfaSB2X2kgPSB1XzEgdl8xICsgdV8yIHZfMiArIHVfMyB2XzMgPSA2IC0gNSAtIDQgPSAtMw0KJCQNCg0KYGBge3J9DQojIERlZmluaW5kbyBvcyB2ZXRvcmVzIHUgZSB2DQp1IDwtIGMoMywgLTEsIDQpDQpjYXQoInZldG9yIHU6XG4iKQ0KcHJpbnQodSkNCg0KdiA8LSBjKDIsIDUsIC0xKQ0KY2F0KCJ2ZXRvciB2OlxuIikNCnByaW50KHYpDQoNCiMgQ2FsY3VsYW5kbyBvIHByb2R1dG8gaW50ZXJubyBlbnRyZSB1IGUgdg0KcGkgPC0gc3VtKHUgKiB2KQ0KY2F0KCJQcm9kdXRvIGludGVybm8gZGUgdSBlIHY6XG4iKQ0KcGkNCmBgYA0KDQpVbWEgYXBsaWNhw6fDo28gaW1wb3J0YW50ZSBkbyBwcm9kdXRvIGludGVybm8gw6kgYSBzb21hIGRlIHF1YWRyYWRvcywgcXVlIHBvZGUgc2VyIGRlZmluaWRhIGNvbW8gbyBwcm9kdXRvIGludGVybm8gZGUgdW0gdmV0b3IgcG9yIGVsZSBtZXNtbzoNCg0KJCQNClxtYXRoYmZ7eH0gXGNkb3QgXG1hdGhiZnt4fSA9IHhfMSB4XzEgKyB4XzIgeF8yICsgXGNkb3RzICsgeF9uIHhfbiA9IFxzdW1fe2k9MX1ebiB4X2leMg0KJCQNCg0KKipFWEVNUExPKioNCg0KTm8gYFJgIHBvZGVtb3MgY2FsY3VsYXIgdW0gcHJvZHV0byBpbnRlcm5vIGNvbSBvIG9wZXJhZG9yIGAlKiVgLg0KDQpgYGB7cn0NCiMgRGVmaW5pbmRvIG8gdmV0b3IgeCANCnggPSBjKDIsIC0xLCAzKQ0KY2F0KCJ2ZXRvciB4OlxuIikNCnByaW50KHgpDQoNCiMgVmFsY3VsYW5kbyBvIHByb2R1dG8gaW50ZXJubw0KcGl4ID0geCAlKiUgeA0KY2F0KCJQcm9kdXRvIGludGVybm8gZGUgeCBwb3IgeDpcbiIpDQpwcmludChwaXgpDQpgYGANCg0KU2UgJFxtYXRoYmZ7dX0gXGNkb3QgXG1hdGhiZnt2fSA9IDAkLCBlbnTDo28gJFxtYXRoYmZ7dX0kIGUgJFxtYXRoYmZ7dn0kIHPDo28gKipvcnRvZ29uYWlzKiouDQoNCiMjIDMuIE1hdHJpemVzIGltcG9ydGFudGVzDQoNCiMjIyBNYXRyaXogZGlhZ29uYWwNCg0KVW1hICoqbWF0cml6IHF1YWRyYWRhKiogY29tIGVsZW1lbnRvcyBkaWZlcmVudGVzIGRlIHplcm8gbmEgZGlhZ29uYWwgcHJpbmNpcGFsIGUgemVybyBuYXMgZGVtYWlzIHBvc2nDp8O1ZXMgw6kgZGVub21pbmFkYSBtYXRyaXogZGlhZ29uYWwuDQoNCiQkDQpcbWF0aGJme0F9X3syIFx0aW1lcyAyfSA9IA0KXGJlZ2lue2JtYXRyaXh9IA0KMiAmIDAgXFwgDQowICYgMyANClxlbmR7Ym1hdHJpeH0gXHF1YWQgXHRleHR7ZX0gXHF1YWQgDQpcbWF0aGJme0J9X3szIFx0aW1lcyAzfSA9IA0KXGJlZ2lue2JtYXRyaXh9IA0KLTIgJiAwICYgMCBcXCANCjAgJiA1ICYgMCBcXCANCjAgJiAwICYgMSANClxlbmR7Ym1hdHJpeH0NCiQkDQoNCiMjIyBNYXRyaXogZXNjYWxhcg0KDQpVbWEgbWF0cml6IGRpYWdub25hbCBjdWpvcyBlbGVtZW50b3MgZGlhZ29uYWlzIHPDo28gdG9kb3MgaWd1YWlzIMOpIGRlbm9taW5hZGEgKiptYXRyaXogZXNjYWxhcioqLg0KDQokJA0KXG1hdGhiZntTfSA9IFxiZWdpbntibWF0cml4fSANClxzaWdtYSAmIDAgJiAwICYgMCAmIDAgXFwgDQowICYgXHNpZ21hICYgMCAmIDAgJiAwIFxcIA0KMCAmIDAgJiBcc2lnbWEgJiAwICYgMCBcXCANCjAgJiAwICYgMCAmIFxzaWdtYSAmIDAgXFwgDQowICYgMCAmIDAgJiAwICYgXHNpZ21hIA0KXGVuZHtibWF0cml4fQ0KJCQNCg0KIyMjIE1hdHJpeiBpZGVudGlkYWRlDQoNClVtYSBtYXRyaXogZGlhZ29uYWwgZSBlc2NhbGFyIGN1am9zIGVsZW1lbnRvcyBkaWFnb25haXMgc8OjbyB0b2RvcyBpZ3VhaXMgYSAxIMOpIGNoYW1hZGEgbWF0cml6IGlkZW50aWRhZGUsIGUgZGVub3RhZGEgcG9yICRcbWF0aGJme0l9X24kLg0KDQokJA0KXG1hdGhiZntJfV8zID0gDQpcYmVnaW57Ym1hdHJpeH0gDQoxICYgMCAmIDAgXFwgDQowICYgMSAmIDAgXFwgDQowICYgMCAmIDEgDQpcZW5ke2JtYXRyaXh9IA0KXHF1YWQgXHRleHR7ZX0gXHF1YWQgDQpcbWF0aGJme0l9XzQgPSANClxiZWdpbntibWF0cml4fSANCjEgJiAwICYgMCAmIDAgXFwgDQowICYgMSAmIDAgJiAwIFxcIA0KMCAmIDAgJiAxICYgMCBcXCANCjAgJiAwICYgMCAmIDEgDQpcZW5ke2JtYXRyaXh9DQokJA0KDQpVc2FuZG8gbyBgUmAsIGEgbWF0cml6IGlkZW50aWRhZGUgcG9kZSBzZXIgZ2VyYWRhIGNvbSBvIGNvbWFuZG8gYGRpYWcoKWAuDQoNCmBgYHtyfQ0KIyBEZWZpbmluZG8gdW1hIG1hdHJpeiBpZGVudGlkYWRlIGRlIGRpbWVuc8OjbyAyWDINCkkgPSBkaWFnKDIpDQpJDQpgYGANCg0KRGVmaW5pZGEgdW1hIG1hdHJpeg0KDQokJA0KXG1hdGhiZntBfT0NClxiZWdpbntibWF0cml4fQ0KYV97MTF9ICYgYV97MTJ9XFwNCmFfezIxfSAmIGFfezIyfQ0KXGVuZHtibWF0cml4fQ0KJCQNCg0KUHLDqSBtdWx0aXBsaWNhbmRvICRcbWF0aGJme0F9JCBwZWxhIG1hdHJpeiBpZGVudGlkYWRlICRcbWF0aGJme0l9JDoNCg0KJCQNClxiZWdpbnthbGlnbip9DQpcbWF0aGJme0l9IFxjZG90IFxtYXRoYmZ7QX0gDQomPSBcbWF0aGJme0F9IFxcDQomPSBcYmVnaW57Ym1hdHJpeH0NCjEgJiAwXFwNCjAgJiAxDQpcZW5ke2JtYXRyaXh9DQpcY2RvdCBcYmVnaW57Ym1hdHJpeH0NCmFfezExfSAmIGFfezEyfVxcDQphX3syMX0gJiBhX3syMn0NClxlbmR7Ym1hdHJpeH0gXFwNCiYgPSBcYmVnaW57Ym1hdHJpeH0NCmFfezExfSAmIGFfezEyfVxcDQphX3syMX0gJiBhX3syMn0NClxlbmR7Ym1hdHJpeH0NClxlbmR7YWxpZ24qfQ0KJCQNCg0KYGBge3J9DQojIERlZmluaW5kbyB1bWEgbWF0cml6IEENCkEgPSBtYXRyaXgoYygxLDIsMyw0KSwgMiwgMiwgYnlyb3c9VFJVRSkNCg0KIyBQcmUgbXVsdGlwbGljYW5kbyBBIHBlbGEgbWF0cml6IGlkZW50aWRhZGUNCkklKiVBDQpgYGANCg0KIyMjIE1hdHJpeiBzaW3DqXRyaWNhDQoNClVtYSBtYXRyaXogcXVhZHJhZGEsICRcbWF0aGJme1B9JCwgw6kgc2ltw6l0cmljYSBzZSBmb3IgaWd1YWwgw6Agc3VhIHRyYW5zcG9zdGEsIG91IHNlamE6DQoNCiQkDQpcbWF0aGJme1B9ID0gXG1hdGhiZntQfScNCiQkDQoNCklzc28gc2lnbmlmaWNhIHF1ZSBvcyBlbGVtZW50b3MgZGEgbWF0cml6IHPDo28gc2ltw6l0cmljb3MgZW0gcmVsYcOnw6NvIMOgIGRpYWdvbmFsIHByaW5jaXBhbCwgb3Ugc2VqYSwgJHBfe2lqfSA9IHBfe2ppfSQgcGFyYSB0b2RvcyBvcyAkaSQgZSAkaiQuDQoNCioqRVhFTVBMTyoqDQoNCkNvbnNpZGVyZSBhIG1hdHJpeiAkXG1hdGhiZntQfSQgZGUgb3JkZW0gJDMgXHRpbWVzIDMkOg0KDQokJA0KXG1hdGhiZntQfSA9IA0KXGJlZ2lue2JtYXRyaXh9IA0KNCAmIDEgJiAzIFxcIA0KMSAmIDUgJiAyIFxcIA0KMyAmIDIgJiA2IA0KXGVuZHtibWF0cml4fQ0KJCQNCg0KRXNzYSBtYXRyaXogw6kgc2ltw6l0cmljYSBwb3JxdWUgJFxtYXRoYmZ7UH0gPSBcbWF0aGJme1B9JyQsIG91IHNlamE6DQoNCiQkDQpcbWF0aGJme1B9JyA9IA0KXGJlZ2lue2JtYXRyaXh9IA0KNCAmIDEgJiAzIFxcIA0KMSAmIDUgJiAyIFxcIA0KMyAmIDIgJiA2IA0KXGVuZHtibWF0cml4fSA9IA0KXG1hdGhiZntQfQ0KJCQNCg0KIyMjIFN1Ym1hdHJpeg0KDQpEYWRhIGEgbWF0cml6ICRcbWF0aGJme0F9JCBkZSBkaW1lbnPDo28gJG0gXHRpbWVzIG4kLCBzZSB0b2RhcyBhcyBjb2x1bmFzIGUgbGluaGFzIGRlICRcbWF0aGJme0F9JCBmb3JlbSBlbGltaW5hZGFzLCBjb20gZXhjZcOnw6NvIGRhcyAkciQgbGluaGFzIGUgJHMkIGNvbHVuYXMsIGEgbWF0cml6IHJlc3VsdGFudGUgZGEgb3JkZW0gJHIgXHRpbWVzIHMkIHNlcsOhIGRlbm9taW5hZGEgKipzdWJtYXRyaXoqKiBkZSAkXG1hdGhiZntBfSQuIFNlbmRvIGFzc2ltLCBzZQ0KDQokJA0KXG1hdGhiZntBfV97MyBcdGltZXMgM30gPSANClxiZWdpbntibWF0cml4fSANCjMgJiA1ICYgNyBcXCANCjggJiAyICYgMSBcXCANCjMgJiAyICYgMSANClxlbmR7Ym1hdHJpeH0NCiQkDQoNCmUgc2UgZWxpbWluYXJtb3MgYSB0ZXJjZWlyYSBsaW5oYSBlIGEgdGVyY2VpcmEgY29sdW5hIGRlICRcbWF0aGJme0F9JCwgb2J0ZXJlbW9zDQoNCiQkDQpcbWF0aGJme0J9X3syIFx0aW1lcyAyfSA9IA0KXGJlZ2lue2JtYXRyaXh9IA0KMyAmIDUgXFwgDQo4ICYgMiANClxlbmR7Ym1hdHJpeH0NCiQkDQoNCnF1ZSBjb3JyZXNwb25kZSBhIHVtYSBzdWJtYXRyaXogZGUgJFxtYXRoYmZ7QX0kIGN1amEgb3JkZW0gw6kgJDIgXHRpbWVzIDIkLg0KDQojIyA0LiBQcm9wcmllZGFkZXMgZGUgdW1hIG1hdHJpeg0KDQojIyMgRGV0ZXJtaW5hbnRlIGRlIHVtYSBtYXRyaXoNCg0KTyBkZXRlcm1pbmFudGUgZGUgdW1hIG1hdHJpeiBxdWFkcmFkYSAkXG1hdGhiZntBfSQgZGUgb3JkZW0gJG4gXHRpbWVzIG4kIMOpIHVtIG7Dum1lcm8gZXNjYWxhciBxdWUgZm9ybmVjZSBpbmZvcm1hw6fDtWVzIGltcG9ydGFudGVzIHNvYnJlIGFzIHByb3ByaWVkYWRlcyBkYSBtYXRyaXouDQoNCk8gZGV0ZXJtaW5hbnRlIGVzdMOhIHJlbGFjaW9uYWRvIGRpcmV0YW1lbnRlIMOgIGludmVydGliaWxpZGFkZSBkYSBtYXRyaXosIGFvIHZvbHVtZSBkZSB0cmFuc2Zvcm1hw6fDtWVzIGxpbmVhcmVzIGUgw6AgbmF0dXJlemEgZGFzIHNvbHXDp8O1ZXMgZGUgc2lzdGVtYXMgZGUgZXF1YcOnw7VlcyBsaW5lYXJlcy4NCg0KUGFyYSB1bWEgbWF0cml6ICQyIFx0aW1lcyAyJDoNCg0KJCQNClxtYXRoYmZ7QX0gPSBcYmVnaW57Ym1hdHJpeH0gYV97MTF9ICYgYV97MTJ9IFxcIGFfezIxfSAmIGFfezIyfSBcZW5ke2JtYXRyaXh9DQokJA0KDQpvIGRldGVybWluYW50ZSDDqSBjYWxjdWxhZG8gY29tbzoNCg0KJCQNClxkZXQoXG1hdGhiZntBfSkgID0gYV97MTF9YV97MjJ9IC0gYV97MTJ9YV97MjF9DQokJA0KDQpQYXJhIHVtYSBtYXRyaXogJDMgXHRpbWVzIDMkOg0KDQokJA0KXG1hdGhiZntBfSA9IFxiZWdpbntibWF0cml4fSANCmFfezExfSAmIGFfezEyfSAmIGFfezEzfSBcXCANCmFfezIxfSAmIGFfezIyfSAmIGFfezIzfSBcXCANCmFfezMxfSAmIGFfezMyfSAmIGFfezMzfSANClxlbmR7Ym1hdHJpeH0NCiQkDQoNCm8gZGV0ZXJtaW5hbnRlIMOpIGNhbGN1bGFkbyB1c2FuZG8gYSByZWdyYSBkZSBTYXJydXMgb3UgbyBjby1mYXRvcjoNCg0KJCQNClxkZXQoXG1hdGhiZntBfSkgPSBhX3sxMX1hX3syMn1hX3szM30gLSBhX3sxMX1hX3syM31hX3szMn0gKyBhX3sxMn1hX3syM31hX3szMX0gLSBhX3sxMn1hX3syMX1hX3szM30gKyBhX3sxM31hX3syMX1hX3szMn0gLSBhX3sxM31hX3syMn1hX3szMX0NCiQkDQoNCioqUHJvcHJpZWRhZGVzIGltcG9ydGFudGVzIGRvIGRldGVybWluYW50ZSoqDQoNCi0gICAqSW52ZXJ0aWJpbGlkYWRlKjogVW1hIG1hdHJpeiAkXG1hdGhiZntBfSQgw6kgaW52ZXJzw612ZWwgc2UsIGUgc29tZW50ZSBzZSwgJFxkZXQoXG1hdGhiZntBfSkgXG5lcSAwJC4gQ2FzbyBjb250csOhcmlvLCBhIG1hdHJpeiDDqSBzaW5ndWxhciAobsOjbyBwb3NzdWkgaW52ZXJzYSkuDQoNCi0gICAqVHJhbnNmb3JtYcOnw6NvIGRvIFZvbHVtZSo6IE8gdmFsb3IgYWJzb2x1dG8gZG8gZGV0ZXJtaW5hbnRlIGRlICRcbWF0aGJme0F9JCBwb2RlIHNlciBpbnRlcnByZXRhZG8gY29tbyBvIGZhdG9yIGRlIGVzY2FsYSBkbyB2b2x1bWUgZGUgdW0gb2JqZXRvIGdlb23DqXRyaWNvIGFvIHNlciB0cmFuc2Zvcm1hZG8gcGVsYSBtYXRyaXogJFxtYXRoYmZ7QX0kLg0KDQotICAgKk11bHRpcGxpY2HDp8OjbyBkZSBNYXRyaXplcyo6IE8gZGV0ZXJtaW5hbnRlIGRvIHByb2R1dG8gZGUgZHVhcyBtYXRyaXplcyDDqSBvIHByb2R1dG8gZG9zIGRldGVybWluYW50ZXM6ICRcZGV0KFxtYXRoYmZ7QX0gXG1hdGhiZntCfSkgPSBcZGV0KFxtYXRoYmZ7QX0pIFxjZG90IFxkZXQoXG1hdGhiZntCfSkkLg0KDQotICAgKlRyb2NhIGRlIExpbmhhcyo6IFNlIGR1YXMgbGluaGFzIChvdSBjb2x1bmFzKSBkZSB1bWEgbWF0cml6IGZvcmVtIHRyb2NhZGFzLCBvIHNpbmFsIGRvIGRldGVybWluYW50ZSBzZXLDoSBpbnZlcnRpZG8uDQoNCi0gICAqTGluaGEgKG91IENvbHVuYSkgWmVybyo6IFNlIHVtYSBsaW5oYSAob3UgY29sdW5hKSBkZSAkXG1hdGhiZntBfSQgw6kgY29tcG9zdGEgaW50ZWlyYW1lbnRlIHBvciB6ZXJvcywgZW50w6NvICRcZGV0KFxtYXRoYmZ7QX0pID0gMCQuDQoNCioqRVhFTVBMTyoqDQoNClVzYW5kbyBvIGBSYCwgbyBkZXRlcm1pbmFudGUgZGUgdW1hIG1hdHJpeiDDqSBjYWxjdWxhZG8gY29tIGEgZnVuw6fDo28gYGRldCgpYC4NCg0KYGBge3J9DQojIERlZmluaW5kbyB1bWEgbWF0cml6IDN4Mw0KQSA9IG1hdHJpeChjKDIsIDQsIDMsIDEsIC0xLCAwLCAzLCA1LCAyKSwgbnJvdyA9IDMsIGJ5cm93ID0gVFJVRSkNCmNhdCgiTWF0cml6IEE6XG4iKQ0KQQ0KDQojIENhbGN1bGFuZG8gbyBkZXRlcm1pbmFudGUNCmNhdCgiRGV0ZXJtaW5hbnRlIGRlIEE6XG4iKQ0KZGV0KEEpDQoNCmBgYA0KDQpFbSBlY29ub21ldHJpYSwgbyBkZXRlcm1pbmFudGUgdGVtIGFwbGljYcOnw7VlcyBkaXJldGFzIG5hIHJlc29sdcOnw6NvIGRlIHNpc3RlbWFzIGRlIGVxdWHDp8O1ZXMgbGluZWFyZXMsIG5hIGFuw6FsaXNlIGRlIG1hdHJpemVzIGRlIHZhcmnDom5jaWEtY292YXJpw6JuY2lhIGUgbmEgZXN0YWJpbGlkYWRlIGRlIGVzdGltYWRvcmVzLg0KDQojIyMgTWVub3INCg0KU2UgYSAkaSQtw6lzaW1hIGxpbmhhIGUgYSAkaiQtw6lzaW1hIGNvbHVuYSBkZSB1bWEgbWF0cml6ICRcbWF0aGJme0F9JCBjb20gZGltZW5zw6NvICRuIFx0aW1lcyBuJCBzw6NvIGV4Y2x1w61kYXMsIG8gZGV0ZXJtaW5hbnRlIGRhIHN1Ym1hdHJpeiByZXN1bHRhbnRlIMOpIGNoYW1hZG8gZGUgbyAqKm1lbm9yKiogZG8gZWxlbWVudG8gJGFfe2lqfSQgKG8gZWxlbWVudG8gbmEgaW50ZXJzZcOnw6NvIGRhICRpJC3DqXNpbWEgbGluaGEgZSAkaiQtw6lzaW1hIGNvbHVuYSkgZSDDqSBkZW5vdGFkbyBwb3IgJHxNX3tpan18JC4NCg0KJCQNClxtYXRoYmZ7QX0gPSBcYmVnaW57Ym1hdHJpeH0gDQphX3sxMX0gJiBhX3sxMn0gJiBhX3sxM30gXFwgDQphX3syMX0gJiBhX3syMn0gJiBhX3syM30gXFwgDQphX3szMX0gJiBhX3szMn0gJiBhX3szM30gDQpcZW5ke2JtYXRyaXh9DQokJA0KDQpPIG1lbm9yIGRlICRhX3sxMX0kIMOpDQoNCiQkDQp8TV97MTF9fCA9IFxiZWdpbnt2bWF0cml4fSBhX3syMn0gJiBhX3syM30gXFwgYV97MzJ9ICYgYV97MzN9IFxlbmR7dm1hdHJpeH0gPSBhX3syMn1hX3szM30gLSBhX3syM31hX3szMn0NCiQkDQoNCkRlIGZvcm1hIHNlbWVsaGFudGUsIG8gbWVub3IgZGUgJGFfezIxfSQgw6kNCg0KJCQNCnxNX3syMX18ID0gXGJlZ2lue3ZtYXRyaXh9IGFfezEyfSAmIGFfezEzfSBcXCBhX3szMn0gJiBhX3szM30gXGVuZHt2bWF0cml4fSA9IGFfezEyfWFfezMzfSAtIGFfezEzfWFfezMyfQ0KJCQNCg0KT3MgbWVub3JlcyBkZSBvdXRyb3MgZWxlbWVudG9zIGRlICRcbWF0aGJme0F9JCBwb2RlbSBzZXIgZW5jb250cmFkb3MgZGUgbWFuZWlyYSBzZW1lbGhhbnRlLg0KDQojIyMgQ29mYXRvcg0KDQpPIGNvZmF0b3IgZG8gZWxlbWVudG8gJGFfe2lqfSQgZGUgdW1hIG1hdHJpeiAkXG1hdGhiZntBfSQgZGUgb3JpZ2VtICRuIFx0aW1lcyBuJCwgZGVub3RhZG8gcG9yICRjX3tpan0kLCDDqSBkZWZpbmlkbyBjb21vOg0KDQokJA0KY197aWp9ID0gKC0xKV57aStqfSB8TV97aWp9fA0KJCQNCg0KRW0gb3V0cmFzIHBhbGF2cmFzLCB1bSBjb2ZhdG9yIMOpIHVtIG1lbm9yICIqc2luYWxpemFkbyoiOiBjb20gc2luYWwgcG9zaXRpdm8gc2UgJGkgKyBqJCBmb3IgcGFyIGUgbmVnYXRpdm8gc2UgJGkgKyBqJCBmb3Igw61tcGFyLg0KDQotICAgbyBjb2ZhdG9yIGRvIGVsZW1lbnRvICRhX3sxMX0kIGRhIG1hdHJpeiAkXG1hdGhiZntBfV97MyBcdGltZXMgM30kIGFudGVyaW9ybWVudGUgZGFkYSDDqSAkYV97MjJ9YV97MzN9IC0gYV97MjN9YV97MzJ9JCwNCg0KLSAgIG8gY29mYXRvciBkbyBlbGVtZW50byAkYV97MjF9JCDDqSAkLShhX3sxMn1hX3szM30gLSBhX3sxM31hX3szMn0pJCwgdW1hIHZleiBxdWUgYSBzb21hIGRvcyBzdWJzY3JpdG9zICQyJCBlICQxJCDDqSAkMyQsIHF1ZSDDqSB1bSBuw7ptZXJvIMOtbXBhci4NCg0KKipNYXRyaXogZGUgQ29mYXRvcioqDQoNClN1YnN0aXR1aW5kbyBvcyBlbGVtZW50b3MgJGFfe2lqfSQgZGUgdW1hIG1hdHJpeiAkXG1hdGhiZntBfSQgcGVsb3Mgc2V1cyBjb2ZhdG9yZXMsIG9idGVtb3MgdW1hIG1hdHJpeiBjb25oZWNpZGEgY29tbyAqbWF0cml6IGRlIGNvZmF0b3IqIGRlICRcbWF0aGJme0F9JCwgZGVub3RhZGEgcG9yICRcdGV4dHtjb2Z9KFxtYXRoYmZ7QX0pJC4NCg0KKipNYXRyaXogQWRqdW50YSoqDQoNCkEgbWF0cml6IGFkanVudGEsIGVzY3JpdGEgY29tbyAkXHRleHR7YWRqfShcbWF0aGJme0F9KSQsIMOpIGEgdHJhbnNwb3N0YSBkYSBtYXRyaXogZGUgY29mYXRvcjogJFx0ZXh0e2Fkan0oXG1hdGhiZntBfSkgPSAoXHRleHR7Y29mfShcbWF0aGJme0F9KSknJC4NCg0KIyMjIFBvc3RvIGRlIHVtYSBtYXRyaXoNCg0KTyBwb3N0byBkZSB1bWEgbWF0cml6ICRcbWF0aGJme0F9JCDDqSBvIG7Dum1lcm8gbcOheGltbyBkZSBsaW5oYXMgb3UgY29sdW5hcyBsaW5lYXJtZW50ZSBpbmRlcGVuZGVudGVzIGRlICRcbWF0aGJme0F9JC4NCg0KVW0gY29uanVudG8gZGUgdmV0b3JlcyDDqSBsaW5lYXJtZW50ZSBpbmRlcGVuZGVudGUgc2UgbmVuaHVtIGRlbGVzIHBvZGUgc2VyIGVzY3JpdG8gY29tbyB1bWEgY29tYmluYcOnw6NvIGxpbmVhciBkZSB1bSBuw7ptZXJvIGZpbml0byBkZSBvdXRyb3MgdmV0b3JlcyBkbyBjb25qdW50by4NCg0KT3V0cmEgZm9ybWEgZGUgZGVmaW5pciBpc3NvIMOpIHF1ZSBvIHBvc3RvIGRlIHVtYSBtYXRyaXogZcyBIGEgb3JkZW0gZGEgbWFpb3Igc3VibWF0cml6IHF1YWRyYWRhIGN1am8gZGV0ZXJtaW5hbnRlIG5hzINvIGXMgSB6ZXJvLg0KDQotICAgTyBwb3N0byBtw6F4aW1vIGRlIHVtYSBtYXRyaXogJG0gXHRpbWVzIG4kIMOpICRcbWluKG0sIG4pJC4NCg0KLSAgIFVtYSBtYXRyaXogZGUgcG9zdG8gY29tcGxldG8gw6kgYXF1ZWxhIHF1ZSBwb3NzdWkgbyBtYWlvciBwb3N0byBwb3Nzw612ZWwsIG91IHNlamEsIG8gcG9zdG8gw6kgaWd1YWwgYW8gbsO6bWVybyBkZSBsaW5oYXMgb3UgY29sdW5hcyAobyBxdWUgZm9yIG1lbm9yKS4NCg0KLSAgIE5vIGNhc28gZGUgdW1hIG1hdHJpeiBxdWFkcmFkYSAkXG1hdGhiZntBfV97biBcdGltZXMgbn0kLCBlbGEgw6kgaW52ZXJ0w612ZWwgc2UsIGUgc29tZW50ZSBzZSwgJFxtYXRoYmZ7QX0kIHRpdmVyIHBvc3RvICRuJCAoaXN0byDDqSwgJFxtYXRoYmZ7QX0kIHRlbSBwb3N0byBjb21wbGV0bykuDQoNCioqRVhFTVBMTyoqDQoNCmBgYHtyfQ0KIyBEZWZpbmluZG8gYSBtYXRyaXogQiAzeDMgcXVlIG7Do28gw6kgZGUgcG9zdG8gcGxlbm8NCkIgPC0gbWF0cml4KGMoMSwgMiwgMywNCiAgICAgICAgICAgICAgMiwgNCwgNiwNCiAgICAgICAgICAgICAgMywgNiwgOSksIG5yb3cgPSAzLCBieXJvdyA9IFRSVUUpDQoNCiMgSW1wcmltaW5kbyBhIG1hdHJpeiBCDQpjYXQoIk1hdHJpeiBCOlxuIikNCnByaW50KEIpDQpgYGANCg0KVmFtb3MgdmVyaWZpY2FyIG8gZGV0ZXJtaW5hbnRlIGRlICRcbWF0aGJme0J9JA0KDQpgYGB7cn0NCiMgVmVyaWZpY2FuZG8gbyBkZXRlcm1pbmFudGUgZGUgQg0KZGV0X0IgPC0gZGV0KEIpDQpjYXQoIlxuRGV0ZXJtaW5hbnRlIGRlIEI6IiwgZGV0X0IsICJcbiIpDQpgYGANCg0KTm90ZSBxdWUsIHVtYSB2ZXogcXVlICRcZGV0KFxtYXRoYmZ7Qn0pID0gMCQsIGVudMOjbyAkXG1hdGhiZntCfSQgbsOjbyDDqSAicG9zdG8gY29tcGxldG8iLg0KDQpgYGB7cn0NCiMgQ2FsY3VsYW5kbyBvIHBvc3RvIGRlIEIgdXNhbmRvIGEgZnVuw6fDo28gcXIoKSBwYXJhIGNvbmZpcm1hw6fDo28NCnBvc3RvX0IgPC0gcXIoQikkcmFuaw0KY2F0KCJQb3N0byBkYSBtYXRyaXogQjoiLCBwb3N0b19CLCAiXG4iKQ0KYGBgDQoNCiMjIyBUcmHDp28gZGUgdW1hIG1hdHJpeg0KDQpPIHRyYcOnbyBkZSB1bWEgbWF0cml6ICRcbWF0aGJme0F9X3tuIFx0aW1lcyBufSQgw6kgYSBzb21hIGRvcyBlbGVtZW50b3MgbmEgZGlhZ29uYWwgcHJpbmNpcGFsOg0KDQokJA0KXHRleHR7dHJ9KFxtYXRoYmZ7QX0pID0gYV97MTF9ICsgYV97MjJ9ICsgXGRvdHMgKyBhX3tubn0gPSBcc3VtX3tpPTF9XntufSBhX3tpaX0uDQokJA0KDQoqKkVYRU1QTE8qKg0KDQpgYGB7cn0NCiMgRGVmaW5pbmRvIGEgbWF0cml6IEMgM3gzDQpDIDwtIG1hdHJpeChjKDQsIDEsIDMsDQogICAgICAgICAgICAgIDIsIDUsIDcsDQogICAgICAgICAgICAgIDAsIDYsIDgpLCBucm93ID0gMywgYnlyb3cgPSBUUlVFKQ0KDQojIEltcHJpbWluZG8gYSBtYXRyaXogQw0KY2F0KCJNYXRyaXogQzpcbiIpDQpwcmludChDKQ0KYGBgDQoNCk5vIGBSYCBwb2RlbW9zIGNhbGN1bGFyIG8gdHJhw6dvIGRlIHVtYSBtYXRyaXogc29tYW5kbyBvcyBlbGVtZW50b3MgZGEgc3VhIGRpYWdvbmFsIHByaW5jaXBhbC4NCg0KYGBge3J9DQojIENhbGN1bGFuZG8gbyB0cmHDp28gZGUgQw0KdHJhY29fQyA8LSBzdW0oZGlhZyhDKSkNCmNhdCgiXG5UcmHDp28gZGEgbWF0cml6IEM6IiwgdHJhY29fQywgIlxuIikNCmBgYA0KDQojIyA1LiBJbnZlcnPDo28gZGUgbWF0cml6ZXMNCg0KQSBpbnZlcnPDo28gZGUgdW1hIG1hdHJpeiDDqSB1bWEgb3BlcmHDp8OjbyBxdWUsIHBhcmEgdW1hIG1hdHJpeiBxdWFkcmFkYSAkXG1hdGhiZntBfSQsIGJ1c2NhIGVuY29udHJhciBvdXRyYSBtYXRyaXogJFxtYXRoYmZ7QX1eey0xfSQgdGFsIHF1ZToNCg0KJCQNClxtYXRoYmZ7QX0gXGNkb3QgXG1hdGhiZntBfV57LTF9ID0gXG1hdGhiZntJfQ0KJCQNCg0Kb25kZSAkXG1hdGhiZntJfSQgw6kgYSBtYXRyaXogaWRlbnRpZGFkZSBkZSBtZXNtYSBvcmRlbSBxdWUgJFxtYXRoYmZ7QX0kLg0KDQpTb21lbnRlIG1hdHJpemVzIHF1YWRyYWRhcyBkZSBwb3N0byBjb21wbGV0byAob3Ugc2VqYSwgJFxkZXQoXG1hdGhiZntBfSkgXG5lcSAwKSQgcG9zc3VlbSB1bWEgaW52ZXJzYS4NCg0KKipQcm9wcmllZGFkZXMgZGEgbWF0cml6IGludmVyc2EqKg0KDQotICAgKlVuaWNpZGFkZSo6IEEgaW52ZXJzYSBkZSB1bWEgbWF0cml6LCBxdWFuZG8gZXhpc3RlLCDDqSDDum5pY2EuDQoNCi0gICAqUHJvZHV0byo6IEEgaW52ZXJzYSBkbyBwcm9kdXRvIGRlIGR1YXMgbWF0cml6ZXMgJFxtYXRoYmZ7QX0kIGUgJFxtYXRoYmZ7Qn0kIMOpIGRhZGEgcG9yICQoXG1hdGhiZntBfSBcY2RvdCBcbWF0aGJme0J9KV57LTF9ID0gXG1hdGhiZntCfV57LTF9IFxjZG90IFxtYXRoYmZ7QX1eey0xfSQuDQoNCi0gICAqVHJhbnNwb3Npw6fDo28qOiBBIHRyYW5zcG9zdGEgZGEgaW52ZXJzYSBkZSB1bWEgbWF0cml6IMOpIGlndWFsIMOgIGludmVyc2EgZGEgdHJhbnNwb3N0YTogJChcbWF0aGJme0F9XnstMX0pXntccHJpbWV9ID0gKFxtYXRoYmZ7QX1ee1xwcmltZX0pXnstMX0kLg0KDQojIyMgRW5jb250cmFuZG8gYSBpbnZlcnNhIGRlIHVtYSBtYXRyaXogcXVhZHJhZGENCg0KU2UgJFxtYXRoYmZ7QX0kIMOpIHF1YWRyYWRhIGUgbsOjbyBzaW5ndWxhciAoJFxkZXQoXG1hdGhiZntBfSkgXG5lcSAwJCksIGEgc3VhIGludmVyc2EgJFxtYXRoYmZ7QX1cXnstMX0kIHBvZGUgc2VyIGVuY29udHJhZGEgZGEgc2VndWludGUgZm9ybWE6DQoNCiQkDQpcbWF0aGJme0F9XnstMX0gPSBcZnJhY3sxfXtcZGV0KFxtYXRoYmZ7QX0pfSAoXHRleHR7YWRqfSBcLCBcbWF0aGJme0F9KQ0KJCQNCg0KT3MgcGFzc29zIGVudm9sdmlkb3MgbmVzdGUgY8OhbGN1bG8gc8OjbyBvcyBzZWd1aW50ZXM6DQoNCjEuICBEZXNjdWJyYSBvIGRldGVybWluYW50ZSBkZSAkXG1hdGhiZntBfSQuIFNlIG7Do28gZm9yIHplcm8sIGV4ZWN1dGUgbyBwYXNzbyAyLg0KDQoyLiAgU3Vic3RpdHVhIGNhZGEgZWxlbWVudG8gJGFfe2lqfSQgZGUgJFxtYXRoYmZ7QX0kIHBvciBzZXUgY29mYXRvciBwYXJhIG9idGVyIGEgbWF0cml6IGRlIGNvZmF0b3IuDQoNCjMuICBUcmFuc3BvbmhhIGEgbWF0cml6IGRlIGNvZmF0b3IgcGFyYSBvYnRlciBhIG1hdHJpeiBhZGp1bnRhLg0KDQo0LiAgRGl2aWRhIGNhZGEgZWxlbWVudG8gZGEgbWF0cml6IGFkanVudGEgcG9yICRcZGV0KFxtYXRoYmZ7QX0pJC4NCg0KUGFyYSB1bWEgbWF0cml6ICQyIFx0aW1lcyAyJCwgZGFkYSBwb3I6DQoNCiQkDQpcbWF0aGJme0F9ID0gXGJlZ2lue2JtYXRyaXh9IA0KYV97MTF9ICYgYV97MTJ9IFxcIA0KYV97MjF9ICYgYV97MjJ9IA0KXGVuZHtibWF0cml4fQ0KJCQgU3VhIGludmVyc2Egw6k6DQoNCiQkDQpcbWF0aGJme0F9XnstMX0gPSANClxmcmFjezF9e1xkZXQoXG1hdGhiZntBfSl9IA0KXGJlZ2lue2JtYXRyaXh9IA0KYV97MjJ9ICYgLWFfezEyfSBcXCANCi1hX3syMX0gJiBhX3sxMX0gDQpcZW5ke2JtYXRyaXh9DQokJA0KDQoqKkVYRU1QTE8qKg0KDQpWYW1vcyBjYWxjdWxhciBhIGludmVyc2EgZGUgdW1hIG1hdHJpeiAkMiBcdGltZXMgMiQgdXNhbmRvIG8gYFJgLiBBcXVpIGEgaW52ZXJzYSBkZSB1bWEgbWF0cml6IHBvZGUgc2VyIGNhbGN1bGFkYSBjb20gYSBmdW7Dp8OjbyBgc29sdmUoKWAuDQoNCmBgYHtyfQ0KIyBEZWZpbmluZG8gdW1hIG1hdHJpeiAyeDINCkEgPSBtYXRyaXgoYyg0LCA3LA0KICAgICAgICAgICAgIDIsIDYpLCBucm93ID0gMiwgYnlyb3cgPSBUUlVFKQ0KY2F0KCJNYXRyaXogQTpcbiIpDQpwcmludChBKQ0KDQojIENhbGN1bGFuZG8gYSBpbnZlcnNhDQpBX2ludiA9IHNvbHZlKEEpDQpjYXQoIk1hdHJpeiBpbnZlcnNhIGRlIEE6XG4iKQ0KcHJpbnQoQV9pbnYpDQoNCiMgVmVyaWZpY2FuZG8gYSBwcm9wcmllZGFkZTogQSAqIEFfaW52ID0gSQ0KSSA9IEEgJSolIEFfaW52DQpjYXQoIk1hdHJpeiBJZGVudGlkYWRlOlxuIikNCnByaW50KEkpDQpgYGANCg0KTm8gY2FzbyBkZSB1bWEgbWF0cml6ICQzIFx0aW1lcyAzJDoNCg0KYGBge3J9DQojIERlZmluaW5kbyB1bWEgbWF0cml6IDN4Mw0KQiA9IG1hdHJpeChjKDIsIDEsIDMsDQogICAgICAgICAgICAgMSwgLTEsIDIsDQogICAgICAgICAgICAgMywgMCwgLTEpLCBucm93ID0gMywgYnlyb3cgPSBUUlVFKQ0KY2F0KCJNYXRyaXogQjpcbiIpDQpwcmludChCKQ0KDQojIENhbGN1bGFuZG8gYSBpbnZlcnNhDQpCX2ludiA9IHNvbHZlKEIpDQpjYXQoIk1hdHJpeiBpbnZlcnNhIGRlIEI6XG4iKQ0KcHJpbnQoQl9pbnYpDQoNCiMgVmVyaWZpY2FuZG8gYSBwcm9wcmllZGFkZTogQiAqIEJfaW52ID0gSQ0KSTMgPSByb3VuZChCICUqJSBCX2ludiwgZGlnaXRzID0gNCkNCmNhdCgiTWF0cml6IGlkZW50aWRhZGU6XG4iKQ0KcHJpbnQoSTMpDQpgYGANCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlJldmlzw6NvIGRlIMOBbGdlYnJhIExpbmVhciDigJQgUGFydGUgMSINCnN1YnRpdGxlOiAiVmV0b3JlcywgbWF0cml6ZXMgZSBvcGVyYcOnw7VlcyBmdW5kYW1lbnRhaXMiDQphdXRob3I6ICJWaXRvciBIdWdvIE1pcm8iDQpvdXRwdXQ6DQogIGh0bWxfbm90ZWJvb2s6DQogICAgdG9jOiB0cnVlDQogICAgdG9jX2Zsb2F0OiB0cnVlDQotLS0NCg0KYGBge3IgY29uZmlndXJhY2FvLCBpbmNsdWRlPUZBTFNFfQ0KIyBPcMOnw7VlcyBnZXJhaXMgZG9zIGJsb2NvcyBkZSBjw7NkaWdvDQprbml0cjo6b3B0c19jaHVuayRzZXQoDQogIGVjaG8gPSBUUlVFLA0KICBtZXNzYWdlID0gRkFMU0UsDQogIHdhcm5pbmcgPSBGQUxTRSwNCiAgZmlnLmFsaWduID0gImNlbnRlciINCikNCg0Kb3B0aW9ucyhzY2lwZW4gPSA5OTkpDQpgYGANCg0KIyBJbnRyb2R1w6fDo28NCg0KQSDDoWxnZWJyYSBsaW5lYXIgZm9ybmVjZSB1bWEgbGluZ3VhZ2VtIGNvbXBhY3RhIHBhcmEgcmVwcmVzZW50YXIgZGFkb3MsIGZvcm11bGFyIG1vZGVsb3MgZWNvbm9tw6l0cmljb3MgZSByZWFsaXphciBjw6FsY3Vsb3MgY29tIG11aXRhcyBvYnNlcnZhw6fDtWVzIGUgdmFyacOhdmVpcy4NCg0KRXN0ZSBwcmltZWlybyBtYXRlcmlhbCByZXZpc2Egb3MgY29uY2VpdG9zIGZ1bmRhbWVudGFpczoNCg0KLSAgIHZldG9yZXMsIG1hdHJpemVzIGUgZGltZW5zw7VlczsNCi0gICBzb21hLCB0cmFuc3Bvc2nDp8OjbyBlIG11bHRpcGxpY2HDp8OjbzsNCi0gICBwcm9kdXRvcyBpbnRlcm5vIGUgZXh0ZXJubzsNCi0gICBtYXRyaXplcyBlc3BlY2lhaXM7DQotICAgc3VibWF0cml6ZXMgZSBpbmRleGHDp8OjbzsNCi0gICBpbmRlcGVuZMOqbmNpYSBsaW5lYXIsIHBvc3RvIGUgaW52ZXJ0aWJpbGlkYWRlOw0KLSAgIG9yZ2FuaXphw6fDo28gbWF0cmljaWFsIGRlIHVtYSBiYXNlIGRlIGRhZG9zLg0KDQpPIG9iamV0aXZvIG7Do28gw6kgYXByZXNlbnRhciB1bSBjdXJzbyBjb21wbGV0byBkZSDDgWxnZWJyYSBMaW5lYXIuIEEgw6puZmFzZSByZWNhaXLDoSBzb2JyZSBvcyByZXN1bHRhZG9zIHV0aWxpemFkb3MgcG9zdGVyaW9ybWVudGUgbmEgZm9ybXVsYcOnw6NvIG1hdHJpY2lhbCBkbyBtw6l0b2RvIGRlIG3DrW5pbW9zIHF1YWRyYWRvcyBvcmRpbsOhcmlvcy4NCg0KIyMgMS4gVmV0b3JlcywgbWF0cml6ZXMgZSBkaW1lbnPDtWVzDQoNCiMjIyAxLjEgVmV0b3Jlcw0KDQpVbSB2ZXRvci1jb2x1bmEgY29tICRuJCBlbGVtZW50b3MgcG9kZSBzZXIgcmVwcmVzZW50YWRvIHBvcjoNCg0KJCQNClxtYXRoYmZ7eH0NCj0NClxiZWdpbntibWF0cml4fQ0KeF8xXFwNCnhfMlxcDQpcdmRvdHNcXA0KeF9uDQpcZW5ke2JtYXRyaXh9X3tuXHRpbWVzIDF9Lg0KJCQNCg0KU3VhIHRyYW5zcG9zdGEgw6kgdW0gdmV0b3ItbGluaGE6DQoNCiQkDQpcbWF0aGJme3h9Jw0KPQ0KXGJlZ2lue2JtYXRyaXh9DQp4XzEgJiB4XzIgJiBcY2RvdHMgJiB4X24NClxlbmR7Ym1hdHJpeH1fezFcdGltZXMgbn0uDQokJA0KDQoqKkVYRU1QTE8qKg0KDQpDb25zaWRlcmU6DQoNCiQkDQpcbWF0aGJme3h9DQo9DQpcYmVnaW57Ym1hdHJpeH0NCjFcXA0KMlxcDQozDQpcZW5ke2JtYXRyaXh9Lg0KJCQNCg0KTm8gYFJgLCB1bSB2ZXRvciBudW3DqXJpY28gbsOjbyBwb3NzdWkgb3JpZW50YcOnw6NvIGV4cGzDrWNpdGEgZGUgbGluaGEgb3UgY29sdW5hLiBRdWFuZG8gYSBvcmllbnRhw6fDo28gZm9yIGltcG9ydGFudGUsIHBvZGVtb3MgdHJhbnNmb3Jtw6EtbG8gZW0gdW1hIG1hdHJpei4NCg0KYGBge3IgdmV0b3Jlc30NCiMgVmV0b3IgbnVtw6lyaWNvDQp4IDwtIGMoMSwgMiwgMykNCngNCg0KIyBSZXByZXNlbnRhw6fDo28gZXhwbMOtY2l0YSBjb21vIHZldG9yLWNvbHVuYQ0KeF9jb2x1bmEgPC0gbWF0cml4KHgsIG5jb2wgPSAxKQ0KeF9jb2x1bmENCg0KIyBSZXByZXNlbnRhw6fDo28gZXhwbMOtY2l0YSBjb21vIHZldG9yLWxpbmhhDQp4X2xpbmhhIDwtIHQoeF9jb2x1bmEpDQp4X2xpbmhhDQpgYGANCg0KIyMjIDEuMiBNYXRyaXplcw0KDQpVbWEgbWF0cml6IGNvbSAkbiQgbGluaGFzIGUgJGskIGNvbHVuYXMgw6kgZXNjcml0YSBjb21vOg0KDQokJA0KXG1hdGhiZntBfQ0KPQ0KXGJlZ2lue2JtYXRyaXh9DQphX3sxMX0gJiBhX3sxMn0gJiBcY2RvdHMgJiBhX3sxa31cXA0KYV97MjF9ICYgYV97MjJ9ICYgXGNkb3RzICYgYV97Mmt9XFwNClx2ZG90cyAmIFx2ZG90cyAmIFxkZG90cyAmIFx2ZG90c1xcDQphX3tuMX0gJiBhX3tuMn0gJiBcY2RvdHMgJiBhX3tua30NClxlbmR7Ym1hdHJpeH1fe25cdGltZXMga30uDQokJA0KDQpPIHByaW1laXJvIMOtbmRpY2UgaWRlbnRpZmljYSBhIGxpbmhhOyBvIHNlZ3VuZG8gaWRlbnRpZmljYSBhIGNvbHVuYS4gUXVhbmRvICRuPWskLCBhIG1hdHJpeiDDqSBkZW5vbWluYWRhICoqcXVhZHJhZGEqKi4NCg0KKipFWEVNUExPKioNCg0KJCQNClxtYXRoYmZ7QX0NCj0NClxiZWdpbntibWF0cml4fQ0KMiAmIDMgJiA1XFwNCjYgJiAxICYgMw0KXGVuZHtibWF0cml4fV97Mlx0aW1lczN9Lg0KJCQNCg0KYGBge3IgY3JpYXItbWF0cml6fQ0KIyBDcmlhbmRvIGEgbWF0cml6IHBvciBsaW5oYXMNCkEgPC0gbWF0cml4KA0KICBjKDIsIDMsIDUsDQogICAgNiwgMSwgMyksDQogIG5yb3cgPSAyLA0KICBieXJvdyA9IFRSVUUNCikNCg0KQQ0KDQojIFZlcmlmaWNhbmRvIHN1YXMgZGltZW5zw7Vlcw0KZGltKEEpDQpucm93KEEpDQpuY29sKEEpDQpgYGANCg0KQXMgZGltZW5zw7VlcyBkZXRlcm1pbmFtIHF1YWlzIG9wZXJhw6fDtWVzIG1hdHJpY2lhaXMgc8OjbyBwb3Nzw612ZWlzLiBBbnRlcyBkZSBlZmV0dWFyIHVtIHByb2R1dG8sIMOpIHJlY29tZW5kw6F2ZWwgaWRlbnRpZmljYXIgYXMgZGltZW5zw7VlcyBkZSBjYWRhIG9iamV0by4NCg0KPiAqKlBvciBxdWUgaXNzbyBpbXBvcnRhIHBhcmEgYSBFY29ub21ldHJpYT8qKlwNCj4gRW0gdW1hIHJlZ3Jlc3PDo28gY29tICRuJCBvYnNlcnZhw6fDtWVzIGUgJGskIHBhcsOibWV0cm9zLCB0ZXJlbW9zIG5vcm1hbG1lbnRlICRcbWF0aGJmIHlfe25cdGltZXMxfSQsICRcbWF0aGJmIFhfe25cdGltZXMga30kLCAkXGJvbGRzeW1ib2xcYmV0YV97a1x0aW1lczF9JCBlICRcbWF0aGJmIHVfe25cdGltZXMxfSQuDQoNCiMjIDIuIFNvbWEsIGRpZmVyZW7Dp2EgZSBtdWx0aXBsaWNhw6fDo28gcG9yIGVzY2FsYXINCg0KRHVhcyBtYXRyaXplcyBzb21lbnRlIHBvZGVtIHNlciBzb21hZGFzIG91IHN1YnRyYcOtZGFzIHF1YW5kbyBwb3NzdWVtIGFzIG1lc21hcyBkaW1lbnPDtWVzLg0KDQpTZSAkXG1hdGhiZiBBJCBlICRcbWF0aGJmIEIkIHPDo28gbWF0cml6ZXMgJG5cdGltZXMgayQsIGVudMOjbzoNCg0KJCQNCihcbWF0aGJmIEErXG1hdGhiZiBCKV97aWp9PWFfe2lqfStiX3tpan0uDQokJA0KDQoqKkVYRU1QTE8qKg0KDQokJA0KXG1hdGhiZiBBPQ0KXGJlZ2lue2JtYXRyaXh9DQo0ICYgOVxcDQoyICYgMQ0KXGVuZHtibWF0cml4fSwNClxxcXVhZA0KXG1hdGhiZiBCPQ0KXGJlZ2lue2JtYXRyaXh9DQoyICYgMFxcDQowICYgNw0KXGVuZHtibWF0cml4fS4NCiQkDQoNCkxvZ286DQoNCiQkDQpcbWF0aGJmIEErXG1hdGhiZiBCDQo9DQpcYmVnaW57Ym1hdHJpeH0NCjYgJiA5XFwNCjIgJiA4DQpcZW5ke2JtYXRyaXh9LA0KXHFxdWFkDQpcbWF0aGJmIEEtXG1hdGhiZiBCDQo9DQpcYmVnaW57Ym1hdHJpeH0NCjIgJiA5XFwNCjIgJiAtNg0KXGVuZHtibWF0cml4fS4NCiQkDQoNCmBgYHtyIHNvbWEtc3VidHJhY2FvfQ0KIyBEZWZpbmluZG8gZHVhcyBtYXRyaXplcyBjb20gYXMgbWVzbWFzIGRpbWVuc8O1ZXMNCkEgPC0gbWF0cml4KGMoNCwgOSwNCiAgICAgICAgICAgICAgMiwgMSksIG5yb3cgPSAyLCBieXJvdyA9IFRSVUUpDQoNCkIgPC0gbWF0cml4KGMoMiwgMCwNCiAgICAgICAgICAgICAgMCwgNyksIG5yb3cgPSAyLCBieXJvdyA9IFRSVUUpDQoNCiMgU29tYSBlIGRpZmVyZW7Dp2ENCkEgKyBCDQpBIC0gQg0KYGBgDQoNClBhcmEgdW0gZXNjYWxhciAkYyQ6DQoNCiQkDQpjXG1hdGhiZiBBDQo9DQpcYmVnaW57Ym1hdHJpeH0NCmNhX3sxMX0gJiBcY2RvdHMgJiBjYV97MWt9XFwNClx2ZG90cyAmIFxkZG90cyAmIFx2ZG90c1xcDQpjYV97bjF9ICYgXGNkb3RzICYgY2Ffe25rfQ0KXGVuZHtibWF0cml4fS4NCiQkDQoNCmBgYHtyIG11bHRpcGxpY2FjYW8tZXNjYWxhcn0NCiMgTXVsdGlwbGljYcOnw6NvIGRlIHVtYSBtYXRyaXogcG9yIHVtIGVzY2FsYXINCmNfZXNjYWxhciA8LSAyDQpjX2VzY2FsYXIgKiBBDQpgYGANCg0KQXMgcHJpbmNpcGFpcyBwcm9wcmllZGFkZXMgc8OjbzoNCg0KJCQNClxtYXRoYmYgQStcbWF0aGJmIEI9XG1hdGhiZiBCK1xtYXRoYmYgQSwNCiQkDQoNCiQkDQooXG1hdGhiZiBBK1xtYXRoYmYgQikrXG1hdGhiZiBDDQo9DQpcbWF0aGJmIEErKFxtYXRoYmYgQitcbWF0aGJmIEMpLA0KJCQNCg0KJCQNCmMoXG1hdGhiZiBBK1xtYXRoYmYgQik9Y1xtYXRoYmYgQStjXG1hdGhiZiBCLg0KJCQNCg0KIyMgMy4gVHJhbnNwb3Npw6fDo28NCg0KQSB0cmFuc3Bvc3RhIGRlIHVtYSBtYXRyaXogJFxtYXRoYmYgQV97blx0aW1lcyBrfSQsIGluZGljYWRhIHBvciAkXG1hdGhiZiBBJyQsIHBvc3N1aSBkaW1lbnPDo28gJGtcdGltZXMgbiQuIFN1YXMgbGluaGFzIGNvcnJlc3BvbmRlbSDDoHMgY29sdW5hcyBkYSBtYXRyaXogb3JpZ2luYWwuDQoNCioqRVhFTVBMTyoqDQoNCiQkDQpcbWF0aGJmIEE9DQpcYmVnaW57Ym1hdHJpeH0NCjQgJiA1XFwNCjMgJiAxXFwNCjUgJiAwDQpcZW5ke2JtYXRyaXh9X3szXHRpbWVzMn0NClxxdWFkXExvbmdyaWdodGFycm93XHF1YWQNClxtYXRoYmYgQScNCj0NClxiZWdpbntibWF0cml4fQ0KNCAmIDMgJiA1XFwNCjUgJiAxICYgMA0KXGVuZHtibWF0cml4fV97Mlx0aW1lczN9Lg0KJCQNCg0KYGBge3IgdHJhbnNwb3NpY2FvfQ0KIyBNYXRyaXogMyB4IDINCkEgPC0gbWF0cml4KA0KICBjKDQsIDUsDQogICAgMywgMSwNCiAgICA1LCAwKSwNCiAgbnJvdyA9IDMsDQogIGJ5cm93ID0gVFJVRQ0KKQ0KDQpBDQp0KEEpDQpgYGANCg0KIyMjIDMuMSBQcm9wcmllZGFkZXMNCg0KJCQNCihcbWF0aGJmIEEnKSc9XG1hdGhiZiBBLA0KJCQNCg0KJCQNCihcbWF0aGJmIEErXG1hdGhiZiBCKSc9XG1hdGhiZiBBJytcbWF0aGJmIEInLA0KJCQNCg0KJCQNCihjXG1hdGhiZiBBKSc9Y1xtYXRoYmYgQScsDQokJA0KDQokJA0KKFxtYXRoYmYgQVxtYXRoYmYgQiknPVxtYXRoYmYgQidcbWF0aGJmIEEnLg0KJCQNCg0KQSDDumx0aW1hIHByb3ByaWVkYWRlIG1lcmVjZSBhdGVuw6fDo286IGEgdHJhbnNwb3Npw6fDo28gZGUgdW0gcHJvZHV0byBpbnZlcnRlIGEgb3JkZW0gZGFzIG1hdHJpemVzLg0KDQpgYGB7ciBwcm9wcmllZGFkZXMtdHJhbnNwb3NpY2FvfQ0KIyBNYXRyaXplcyBjb25mb3Jtw6F2ZWlzDQpBIDwtIG1hdHJpeCgxOjYsIG5yb3cgPSAyLCBieXJvdyA9IFRSVUUpDQpCIDwtIG1hdHJpeCg3OjEyLCBucm93ID0gMywgYnlyb3cgPSBUUlVFKQ0KDQojIFZlcmlmaWNhbmRvIChBQiknID0gQidBJw0KdChBICUqJSBCKQ0KdChCKSAlKiUgdChBKQ0KYGBgDQoNCj4gKipQb3IgcXVlIGlzc28gaW1wb3J0YSBwYXJhIGEgRWNvbm9tZXRyaWE/KipcDQo+IFByb2R1dG9zIGNvbW8gJFxtYXRoYmYgWCdcbWF0aGJmIFgkIGUgJFxtYXRoYmYgWCdcbWF0aGJmIHkkIGFwYXJlY2VtIG5hIGbDs3JtdWxhIGRvIGVzdGltYWRvciBkZSBNUU8uIEEgcHJvcHJpZWRhZGUgJChcbWF0aGJmIFgnXG1hdGhiZiBYKSc9XG1hdGhiZiBYJ1xtYXRoYmYgWCQgbW9zdHJhIHF1ZSAkXG1hdGhiZiBYJ1xtYXRoYmYgWCQgw6kgc2ltw6l0cmljYS4NCg0KIyMgNC4gTXVsdGlwbGljYcOnw6NvIGRlIG1hdHJpemVzDQoNClNlICRcbWF0aGJmIEEkIHBvc3N1aSBkaW1lbnPDo28gJG1cdGltZXMgbiQgZSAkXG1hdGhiZiBCJCBwb3NzdWkgZGltZW5zw6NvICRuXHRpbWVzIHAkLCBlbnTDo28gbyBwcm9kdXRvICRcbWF0aGJmIEFcbWF0aGJmIEIkIGV4aXN0ZSBlIHBvc3N1aSBkaW1lbnPDo28gJG1cdGltZXMgcCQ6DQoNCiQkDQpcdW5kZXJzZXR7bVx0aW1lcyBufXtcbWF0aGJmIEF9DQpcdW5kZXJzZXR7blx0aW1lcyBwfXtcbWF0aGJmIEJ9DQo9DQpcdW5kZXJzZXR7bVx0aW1lcyBwfXtcbWF0aGJmIEN9Lg0KJCQNCg0KTyBlbGVtZW50byAkY197aWp9JCDDqSBvIHByb2R1dG8gaW50ZXJubyBlbnRyZSBhIGxpbmhhICRpJCBkZSAkXG1hdGhiZiBBJCBlIGEgY29sdW5hICRqJCBkZSAkXG1hdGhiZiBCJDoNCg0KJCQNCmNfe2lqfT1cc3VtX3tcZWxsPTF9XntufWFfe2lcZWxsfWJfe1xlbGwgan0uDQokJA0KDQoqKkVYRU1QTE8qKg0KDQokJA0KXG1hdGhiZiBBPQ0KXGJlZ2lue2JtYXRyaXh9DQoxICYgMlxcDQozICYgNA0KXGVuZHtibWF0cml4fSwNClxxcXVhZA0KXG1hdGhiZiBCPQ0KXGJlZ2lue2JtYXRyaXh9DQoxICYgMiAmIDFcXA0KMyAmIDQgJiAyDQpcZW5ke2JtYXRyaXh9Lg0KJCQNCg0KRW50w6NvOg0KDQokJA0KXG1hdGhiZiBBXG1hdGhiZiBCDQo9DQpcYmVnaW57Ym1hdHJpeH0NCjcgJiAxMCAmIDVcXA0KMTUgJiAyMiAmIDExDQpcZW5ke2JtYXRyaXh9Lg0KJCQNCg0KYGBge3IgcHJvZHV0by1tYXRyaWNpYWx9DQojIE1hdHJpeiBBOiAyIHggMg0KQSA8LSBtYXRyaXgoYygxLCAyLA0KICAgICAgICAgICAgICAzLCA0KSwgbnJvdyA9IDIsIGJ5cm93ID0gVFJVRSkNCg0KIyBNYXRyaXogQjogMiB4IDMNCkIgPC0gbWF0cml4KGMoMSwgMiwgMSwNCiAgICAgICAgICAgICAgMywgNCwgMiksIG5yb3cgPSAyLCBieXJvdyA9IFRSVUUpDQoNCiMgUHJvZHV0byBtYXRyaWNpYWw6IDIgeCAzDQpBICUqJSBCDQpgYGANCg0KIyMjIDQuMSBQcm9kdXRvIG1hdHJpY2lhbCBlIHByb2R1dG8gZWxlbWVudG8gYSBlbGVtZW50bw0KDQpObyBgUmAsIG9zIG9wZXJhZG9yZXMgcG9zc3VlbSBzaWduaWZpY2Fkb3MgZGlmZXJlbnRlczoNCg0KLSAgIGBBICUqJSBCYDogcHJvZHV0byBtYXRyaWNpYWw7DQotICAgYEEgKiBCYDogbXVsdGlwbGljYcOnw6NvIGVsZW1lbnRvIGEgZWxlbWVudG8uDQoNCmBgYHtyIHByb2R1dG8tZWxlbWVudG99DQojIER1YXMgbWF0cml6ZXMgMiB4IDINCkMgPC0gbWF0cml4KGMoMSwgMiwNCiAgICAgICAgICAgICAgMywgNCksIG5yb3cgPSAyLCBieXJvdyA9IFRSVUUpDQoNCkQgPC0gbWF0cml4KGMoNSwgNiwNCiAgICAgICAgICAgICAgNywgOCksIG5yb3cgPSAyLCBieXJvdyA9IFRSVUUpDQoNCiMgUHJvZHV0byBlbGVtZW50byBhIGVsZW1lbnRvDQpDICogRA0KDQojIFByb2R1dG8gbWF0cmljaWFsDQpDICUqJSBEDQpgYGANCg0KIyMjIDQuMiBBIG11bHRpcGxpY2HDp8OjbyBuw6NvIMOpIGNvbXV0YXRpdmENCg0KRW0gZ2VyYWw6DQoNCiQkDQpcbWF0aGJmIEFcbWF0aGJmIEJcbmVxXG1hdGhiZiBCXG1hdGhiZiBBLg0KJCQNCg0KYGBge3IgbmFvLWNvbXV0YXRpdmlkYWRlfQ0KIyBPcyBkb2lzIHByb2R1dG9zIGV4aXN0ZW0sIG1hcyBwcm9kdXplbSByZXN1bHRhZG9zIGRpZmVyZW50ZXMNCkMgJSolIEQNCkQgJSolIEMNCmBgYA0KDQpUYW1iw6ltIHBvZGUgb2NvcnJlciBkZSAkXG1hdGhiZiBBXG1hdGhiZiBCJCBleGlzdGlyLCBtYXMgJFxtYXRoYmYgQlxtYXRoYmYgQSQgbsOjbyBleGlzdGlyLg0KDQpBcyBwcm9wcmllZGFkZXMgdsOhbGlkYXMgaW5jbHVlbToNCg0KJCQNCihcbWF0aGJmIEFcbWF0aGJmIEIpXG1hdGhiZiBDDQo9DQpcbWF0aGJmIEEoXG1hdGhiZiBCXG1hdGhiZiBDKSwNCiQkDQoNCiQkDQpcbWF0aGJmIEEoXG1hdGhiZiBCK1xtYXRoYmYgQykNCj0NClxtYXRoYmYgQVxtYXRoYmYgQitcbWF0aGJmIEFcbWF0aGJmIEMsDQokJA0KDQokJA0KXG1hdGhiZiBJXG1hdGhiZiBBPVxtYXRoYmYgQVxtYXRoYmYgST1cbWF0aGJmIEEsDQokJA0KDQpxdWFuZG8gYXMgZGltZW5zw7VlcyBmb3JlbSBjb25mb3Jtw6F2ZWlzLg0KDQojIyA1LiBQcm9kdXRvcyBpbnRlcm5vIGUgZXh0ZXJubw0KDQojIyMgNS4xIFByb2R1dG8gaW50ZXJubw0KDQpQYXJhIGRvaXMgdmV0b3JlcyAkXG1hdGhiZiB4LFxtYXRoYmYgeVxpblxtYXRoYmIgUl5uJCwgbyBwcm9kdXRvIGludGVybm8gw6k6DQoNCiQkDQpcbWF0aGJmIHgnXG1hdGhiZiB5DQo9DQpcc3VtX3tpPTF9XntufXhfaSB5X2kuDQokJA0KDQpPIHJlc3VsdGFkbyDDqSB1bSBlc2NhbGFyLg0KDQoqKkVYRU1QTE8qKg0KDQokJA0KXG1hdGhiZiB4PQ0KXGJlZ2lue2JtYXRyaXh9DQozXFwtMVxcNA0KXGVuZHtibWF0cml4fSwNClxxcXVhZA0KXG1hdGhiZiB5PQ0KXGJlZ2lue2JtYXRyaXh9DQoyXFw1XFwtMQ0KXGVuZHtibWF0cml4fS4NCiQkDQoNCkxvZ286DQoNCiQkDQpcbWF0aGJmIHgnXG1hdGhiZiB5DQo9MygyKSsoLTEpKDUpKzQoLTEpDQo9LTMuDQokJA0KDQpgYGB7ciBwcm9kdXRvLWludGVybm99DQojIERlZmluaW5kbyBvcyB2ZXRvcmVzDQp4IDwtIGMoMywgLTEsIDQpDQp5IDwtIGMoMiwgNSwgLTEpDQoNCiMgRHVhcyBmb3JtYXMgZGUgY2FsY3VsYXIgbyBwcm9kdXRvIGludGVybm8NCnN1bSh4ICogeSkNCmNyb3NzcHJvZCh4LCB5KQ0KYGBgDQoNCiMjIyA1LjIgTm9ybWEgZSBvcnRvZ29uYWxpZGFkZQ0KDQpBIG5vcm1hIGV1Y2xpZGlhbmEgZGUgJFxtYXRoYmYgeCQgw6k6DQoNCiQkDQpcfFxtYXRoYmYgeFx8DQo9DQpcc3FydHtcbWF0aGJmIHgnXG1hdGhiZiB4fQ0KPQ0KXHNxcnR7XHN1bV97aT0xfV57bn14X2leMn0uDQokJA0KDQpgYGB7ciBub3JtYX0NCiMgTm9ybWEgZXVjbGlkaWFuYSBkZSB4DQpub3JtYV94IDwtIHNxcnQoYXMubnVtZXJpYyhjcm9zc3Byb2QoeCkpKQ0Kbm9ybWFfeA0KYGBgDQoNClNlOg0KDQokJA0KXG1hdGhiZiB4J1xtYXRoYmYgeT0wLA0KJCQNCg0Kb3MgdmV0b3JlcyBzw6NvICoqb3J0b2dvbmFpcyoqLg0KDQojIyMgNS4zIFByb2R1dG8gZXh0ZXJubw0KDQpPIHByb2R1dG8gZXh0ZXJubyBlbnRyZSBkb2lzIHZldG9yZXMtY29sdW5hIMOpOg0KDQokJA0KXHVuZGVyc2V0e25cdGltZXMxfXtcbWF0aGJmIHh9DQpcdW5kZXJzZXR7MVx0aW1lcyBtfXtcbWF0aGJmIHknfQ0KPQ0KXHVuZGVyc2V0e25cdGltZXMgbX17XG1hdGhiZiB4XG1hdGhiZiB5J30uDQokJA0KDQoqKkVYRU1QTE8qKg0KDQpgYGB7ciBwcm9kdXRvLWV4dGVybm99DQojIFByb2R1dG8gZXh0ZXJubyB4IHknDQp0Y3Jvc3Nwcm9kKHgsIHkpDQoNCiMgUmVzdWx0YWRvIGVxdWl2YWxlbnRlDQptYXRyaXgoeCwgbmNvbCA9IDEpICUqJSB0KG1hdHJpeCh5LCBuY29sID0gMSkpDQpgYGANCg0KPiAqKlBvciBxdWUgaXNzbyBpbXBvcnRhIHBhcmEgYSBFY29ub21ldHJpYT8qKlwNCj4gTyBwcm9kdXRvIGludGVybm8gYXBhcmVjZSBlbSBzb21hcyBkZSBwcm9kdXRvcyBlIHNvbWFzIGRlIHF1YWRyYWRvcy4gTyBwcm9kdXRvIGV4dGVybm8gYXBhcmVjZSBlbSBtYXRyaXplcyBkZSBtb21lbnRvcywgY29tbyAkXHN1bV9pXG1hdGhiZiB4X2lcbWF0aGJmIHhfaSckLCBlIGVtIG1hdHJpemVzIGRlIHZhcmnDom5jaWEtY292YXJpw6JuY2lhLg0KDQojIyA2LiBNYXRyaXplcyBpbXBvcnRhbnRlcw0KDQojIyMgNi4xIE1hdHJpeiBudWxhDQoNCkEgbWF0cml6IG51bGEgcG9zc3VpIHRvZG9zIG9zIGVsZW1lbnRvcyBpZ3VhaXMgYSB6ZXJvOg0KDQokJA0KXG1hdGhiZiAwX3syXHRpbWVzM30NCj0NClxiZWdpbntibWF0cml4fQ0KMCYwJjBcXA0KMCYwJjANClxlbmR7Ym1hdHJpeH0uDQokJA0KDQojIyMgNi4yIE1hdHJpeiBkaWFnb25hbA0KDQpVbWEgbWF0cml6IHF1YWRyYWRhIMOpIGRpYWdvbmFsIHF1YW5kbyB0b2RvcyBvcyBlbGVtZW50b3MgZm9yYSBkYSBkaWFnb25hbCBwcmluY2lwYWwgc8OjbyBpZ3VhaXMgYSB6ZXJvLiBPcyBlbGVtZW50b3MgZGlhZ29uYWlzIHBvZGVtIG91IG7Do28gc2VyIHplcm8uDQoNCiQkDQpcbWF0aGJmIEQNCj0NClxiZWdpbntibWF0cml4fQ0KZF8xJjAmMFxcDQowJmRfMiYwXFwNCjAmMCZkXzMNClxlbmR7Ym1hdHJpeH0uDQokJA0KDQpgYGB7ciBtYXRyaXotZGlhZ29uYWx9DQojIENyaWFuZG8gdW1hIG1hdHJpeiBkaWFnb25hbA0KRCA8LSBkaWFnKGMoMiwgMCwgNSkpDQpEDQpgYGANCg0KIyMjIDYuMyBNYXRyaXogZXNjYWxhciBlIGlkZW50aWRhZGUNCg0KVW1hIG1hdHJpeiBlc2NhbGFyIMOpIGRhIGZvcm1hOg0KDQokJA0KXG1hdGhiZiBTPWNcbWF0aGJmIElfbi4NCiQkDQoNCkEgbWF0cml6IGlkZW50aWRhZGUgcG9zc3VpIGVsZW1lbnRvcyBkaWFnb25haXMgaWd1YWlzIGEgMToNCg0KJCQNClxtYXRoYmYgSV8zDQo9DQpcYmVnaW57Ym1hdHJpeH0NCjEmMCYwXFwNCjAmMSYwXFwNCjAmMCYxDQpcZW5ke2JtYXRyaXh9Lg0KJCQNCg0KYGBge3IgbWF0cml6LWlkZW50aWRhZGV9DQojIE1hdHJpeiBpZGVudGlkYWRlIGRlIG9yZGVtIDMNCkkzIDwtIGRpYWcoMykNCkkzDQoNCiMgTWF0cml6IGVzY2FsYXIgNEkNCjQgKiBJMw0KYGBgDQoNCiMjIyA2LjQgTWF0cml6IHNpbcOpdHJpY2ENCg0KVW1hIG1hdHJpeiBxdWFkcmFkYSAkXG1hdGhiZiBBJCDDqSBzaW3DqXRyaWNhIHF1YW5kbzoNCg0KJCQNClxtYXRoYmYgQSc9XG1hdGhiZiBBLg0KJCQNCg0KSXNzbyBlcXVpdmFsZSBhICRhX3tpan09YV97aml9JC4NCg0KYGBge3IgbWF0cml6LXNpbWV0cmljYX0NCiMgRXhlbXBsbyBkZSBtYXRyaXogc2ltw6l0cmljYQ0KUyA8LSBtYXRyaXgoDQogIGMoNCwgMSwgMywNCiAgICAxLCA1LCAyLA0KICAgIDMsIDIsIDYpLA0KICBucm93ID0gMywNCiAgYnlyb3cgPSBUUlVFDQopDQoNClMNCmlzU3ltbWV0cmljKFMpDQpgYGANCg0KTWF0cml6ZXMgY29tbyAkXG1hdGhiZiBYJ1xtYXRoYmYgWCQgZSBtYXRyaXplcyBkZSB2YXJpw6JuY2lhLWNvdmFyacOibmNpYSBzw6NvIHNpbcOpdHJpY2FzLg0KDQojIyA3LiBTdWJtYXRyaXplcyBlIGluZGV4YcOnw6NvIG5vIFINCg0KVW1hIHN1Ym1hdHJpeiDDqSBvYnRpZGEgc2VsZWNpb25hbmRvIGRldGVybWluYWRhcyBsaW5oYXMgZSBjb2x1bmFzIGRlIHVtYSBtYXRyaXouDQoNCmBgYHtyIGluZGV4YWNhb30NCiMgTWF0cml6IDQgeCAzDQpBIDwtIG1hdHJpeCgxOjEyLCBucm93ID0gNCwgYnlyb3cgPSBUUlVFKQ0KQQ0KDQojIFByaW1laXJhcyBkdWFzIGxpbmhhcyBlIHByaW1laXJhcyBkdWFzIGNvbHVuYXMNCkFbMToyLCAxOjJdDQoNCiMgU2VsZWNpb25hbmRvIGEgdGVyY2VpcmEgY29sdW5hDQpBWywgM10NCg0KIyBQcmVzZXJ2YW5kbyBhIGVzdHJ1dHVyYSBkZSBtYXRyaXoNCkFbLCAzLCBkcm9wID0gRkFMU0VdDQoNCiMgRXhjbHVpbmRvIGEgc2VndW5kYSBsaW5oYQ0KQVstMiwgXQ0KYGBgDQoNClRhbWLDqW0gcG9kZW1vcyBjb25zdHJ1aXIgdW1hIG1hdHJpeiBqdW50YW5kbyB2ZXRvcmVzIHBvciBjb2x1bmFzOg0KDQpgYGB7ciBjb21iaW5hci1jb2x1bmFzfQ0KIyBUcsOqcyB2YXJpw6F2ZWlzIG9ic2VydmFkYXMgZW0gY2luY28gcHJvcHJpZWRhZGVzDQphcmVhIDwtIGMoNDAsIDU1LCA2MiwgNzAsIDg1KQ0KZmVydGlsaXphbnRlIDwtIGMoODAsIDk1LCAxMTAsIDEyMCwgMTQwKQ0KY2h1dmEgPC0gYyg3MjAsIDY4MCwgNzUwLCA3OTAsIDgxMCkNCg0KIyBNYXRyaXogZGUgdmFyacOhdmVpcw0KWiA8LSBjYmluZCgNCiAgYXJlYSA9IGFyZWEsDQogIGZlcnRpbGl6YW50ZSA9IGZlcnRpbGl6YW50ZSwNCiAgY2h1dmEgPSBjaHV2YQ0KKQ0KDQpaDQpgYGANCg0KIyMgOC4gQ29tYmluYcOnw7VlcyBsaW5lYXJlcywgaW5kZXBlbmTDqm5jaWEgZSBwb3N0bw0KDQojIyMgOC4xIENvbWJpbmHDp8OjbyBsaW5lYXINCg0KVW0gdmV0b3IgJFxtYXRoYmYgdiQgw6kgdW1hIGNvbWJpbmHDp8OjbyBsaW5lYXIgZG9zIHZldG9yZXMgJFxtYXRoYmYgeF8xLFxsZG90cyxcbWF0aGJmIHhfayQgcXVhbmRvIGV4aXN0ZW0gZXNjYWxhcmVzICRjXzEsXGxkb3RzLGNfayQgdGFpcyBxdWU6DQoNCiQkDQpcbWF0aGJmIHYNCj0NCmNfMVxtYXRoYmYgeF8xK1xjZG90cytjX2tcbWF0aGJmIHhfay4NCiQkDQoNCiMjIyA4LjIgSW5kZXBlbmTDqm5jaWEgbGluZWFyDQoNCk9zIHZldG9yZXMgJFxtYXRoYmYgeF8xLFxsZG90cyxcbWF0aGJmIHhfayQgc8OjbyBsaW5lYXJtZW50ZSBpbmRlcGVuZGVudGVzIHF1YW5kbzoNCg0KJCQNCmNfMVxtYXRoYmYgeF8xK1xjZG90cytjX2tcbWF0aGJmIHhfaz1cbWF0aGJmMA0KJCQNCg0KaW1wbGljYToNCg0KJCQNCmNfMT1cY2RvdHM9Y19rPTAuDQokJA0KDQpDYXNvIGNvbnRyw6FyaW8sIHBlbG8gbWVub3MgdW0gdmV0b3IgcG9kZSBzZXIgZXNjcml0byBjb21vIGNvbWJpbmHDp8OjbyBsaW5lYXIgZG9zIGRlbWFpcy4NCg0KKipFWEVNUExPKioNCg0KYGBge3IgZGVwZW5kZW5jaWEtbGluZWFyfQ0KIyBBIHRlcmNlaXJhIGNvbHVuYSDDqSBhIHNvbWEgZGFzIGR1YXMgcHJpbWVpcmFzDQp4MSA8LSBjKDEsIDAsIDEpDQp4MiA8LSBjKDAsIDEsIDEpDQp4MyA8LSB4MSArIHgyDQoNCkFfZGVwZW5kZW50ZSA8LSBjYmluZCh4MSwgeDIsIHgzKQ0KQV9kZXBlbmRlbnRlDQoNCiMgUG9zdG8gZGEgbWF0cml6DQpxcihBX2RlcGVuZGVudGUpJHJhbmsNCmBgYA0KDQojIyMgOC4zIFBvc3RvDQoNCk8gcG9zdG8gZGUgdW1hIG1hdHJpeiDDqSBvIG7Dum1lcm8gbcOheGltbyBkZSBsaW5oYXMgb3UgY29sdW5hcyBsaW5lYXJtZW50ZSBpbmRlcGVuZGVudGVzLg0KDQpQYXJhIHVtYSBtYXRyaXogJG5cdGltZXMgayQ6DQoNCiQkDQpcb3BlcmF0b3JuYW1le3Bvc3RvfShcbWF0aGJmIEEpXGxlcVxtaW4obixrKS4NCiQkDQoNCkEgbWF0cml6IHBvc3N1aSAqKnBvc3RvIGNvbXBsZXRvIGRlIGNvbHVuYXMqKiBxdWFuZG86DQoNCiQkDQpcb3BlcmF0b3JuYW1le3Bvc3RvfShcbWF0aGJmIEEpPWsuDQokJA0KDQpgYGB7ciBwb3N0by1jb21wbGV0b30NCiMgRXhlbXBsbyBkZSBtYXRyaXogY29tIHBvc3RvIGNvbXBsZXRvIGRlIGNvbHVuYXMNCkFfY29tcGxldGEgPC0gbWF0cml4KA0KICBjKDEsIDAsDQogICAgMCwgMSwNCiAgICAxLCAxKSwNCiAgbnJvdyA9IDMsDQogIGJ5cm93ID0gVFJVRQ0KKQ0KDQpBX2NvbXBsZXRhDQpxcihBX2NvbXBsZXRhKSRyYW5rDQpgYGANCg0KPiAqKlBvciBxdWUgaXNzbyBpbXBvcnRhIHBhcmEgYSBFY29ub21ldHJpYT8qKlwNCj4gUGFyYSBpZGVudGlmaWNhciBzZXBhcmFkYW1lbnRlIG9zIGNvZWZpY2llbnRlcyBkZSB1bWEgcmVncmVzc8OjbywgYXMgY29sdW5hcyBkZSAkXG1hdGhiZiBYJCBuw6NvIHBvZGVtIGFwcmVzZW50YXIgZGVwZW5kw6puY2lhIGxpbmVhciBleGF0YS4gRXNzYSDDqSBhIGNvbmRpw6fDo28gZGUgcG9zdG8gY29tcGxldG8gZGUgY29sdW5hcy4NCg0KIyMgOS4gRGV0ZXJtaW5hbnRlIGUgaW52ZXJ0aWJpbGlkYWRlDQoNCk8gZGV0ZXJtaW5hbnRlIMOpIGRlZmluaWRvIHBhcmEgbWF0cml6ZXMgcXVhZHJhZGFzLiBQYXJhIHVtYSBtYXRyaXogJDJcdGltZXMyJDoNCg0KJCQNClxtYXRoYmYgQQ0KPQ0KXGJlZ2lue2JtYXRyaXh9DQphJmJcXA0KYyZkDQpcZW5ke2JtYXRyaXh9LA0KJCQNCg0KdGVtb3M6DQoNCiQkDQpcZGV0KFxtYXRoYmYgQSk9YWQtYmMuDQokJA0KDQpVbWEgbWF0cml6IHF1YWRyYWRhIMOpIGludmVydMOtdmVsIHNlLCBlIHNvbWVudGUgc2U6DQoNCiQkDQpcZGV0KFxtYXRoYmYgQSlcbmVxMC4NCiQkDQoNCkVzc2EgY29uZGnDp8OjbyDDqSBlcXVpdmFsZW50ZSDDoCBtYXRyaXogcG9zc3VpciBwb3N0byBjb21wbGV0by4NCg0KYGBge3IgZGV0ZXJtaW5hbnRlfQ0KIyBNYXRyaXogcXVhZHJhZGENCkEgPC0gbWF0cml4KA0KICBjKDQsIDcsDQogICAgMiwgNiksDQogIG5yb3cgPSAyLA0KICBieXJvdyA9IFRSVUUNCikNCg0KQQ0KZGV0KEEpDQpxcihBKSRyYW5rDQpgYGANCg0KQWxndW1hcyBwcm9wcmllZGFkZXMgc8OjbzoNCg0KJCQNClxkZXQoXG1hdGhiZiBBXG1hdGhiZiBCKQ0KPQ0KXGRldChcbWF0aGJmIEEpXGRldChcbWF0aGJmIEIpLA0KJCQNCg0KJCQNClxkZXQoXG1hdGhiZiBBJyk9XGRldChcbWF0aGJmIEEpLA0KJCQNCg0KJCQNClxkZXQoXG1hdGhiZiBBXnstMX0pDQo9DQpcZnJhY3sxfXtcZGV0KFxtYXRoYmYgQSl9Lg0KJCQNCg0KIyMjIDkuMSBNYXRyaXogaW52ZXJzYQ0KDQpRdWFuZG8gJFxtYXRoYmYgQSQgw6kgcXVhZHJhZGEgZSBuw6NvIHNpbmd1bGFyLCBzdWEgaW52ZXJzYSBzYXRpc2ZhejoNCg0KJCQNClxtYXRoYmYgQV57LTF9XG1hdGhiZiBBDQo9DQpcbWF0aGJmIEFcbWF0aGJmIEFeey0xfQ0KPQ0KXG1hdGhiZiBJLg0KJCQNCg0KUGFyYSB1bWEgbWF0cml6ICQyXHRpbWVzMiQ6DQoNCiQkDQpcbWF0aGJmIEFeey0xfQ0KPQ0KXGZyYWN7MX17YWQtYmN9DQpcYmVnaW57Ym1hdHJpeH0NCmQmLWJcXA0KLWMmYQ0KXGVuZHtibWF0cml4fS4NCiQkDQoNCmBgYHtyIG1hdHJpei1pbnZlcnNhfQ0KIyBDYWxjdWxhbmRvIGEgaW52ZXJzYQ0KQV9pbnZlcnNhIDwtIHNvbHZlKEEpDQpBX2ludmVyc2ENCg0KIyBWZXJpZmljYW5kbyBvIHJlc3VsdGFkbw0Kcm91bmQoQSAlKiUgQV9pbnZlcnNhLCBkaWdpdHMgPSAxMCkNCmBgYA0KDQpFbSBhcGxpY2HDp8O1ZXMgY29tcHV0YWNpb25haXMsIGdlcmFsbWVudGUgbsOjbyBwcmVjaXNhbW9zIGNhbGN1bGFyIGEgaW52ZXJzYSBleHBsaWNpdGFtZW50ZS4gUGFyYSByZXNvbHZlciAkXG1hdGhiZiBBXG1hdGhiZiB4PVxtYXRoYmYgYiQsIMOpIHByZWZlcsOtdmVsIHVzYXIgYHNvbHZlKEEsIGIpYC4NCg0KIyMgMTAuIFVtYSBwb250ZSBwYXJhIGEgbWF0cml6IGRlIGRhZG9zDQoNCkNvbnNpZGVyZSB1bWEgYW1vc3RyYSBkZSBjaW5jbyBwcm9wcmllZGFkZXMuIE8gdmV0b3IgZGUgcmVzdWx0YWRvcyDDqToNCg0KJCQNClx1bmRlcnNldHs1XHRpbWVzMX17XG1hdGhiZiB5fQ0KPQ0KXGJlZ2lue2JtYXRyaXh9DQp5XzFcXHlfMlxceV8zXFx5XzRcXHlfNQ0KXGVuZHtibWF0cml4fS4NCiQkDQoNClNlIG8gbW9kZWxvIGNvbnTDqW0gaW50ZXJjZXB0byBlIGR1YXMgdmFyacOhdmVpcyBleHBsaWNhdGl2YXMsIGEgbWF0cml6IGRlIHJlZ3Jlc3NvcmVzIMOpOg0KDQokJA0KXHVuZGVyc2V0ezVcdGltZXMzfXtcbWF0aGJmIFh9DQo9DQpcYmVnaW57Ym1hdHJpeH0NCjEmeF97MTF9JnhfezEyfVxcDQoxJnhfezIxfSZ4X3syMn1cXA0KMSZ4X3szMX0meF97MzJ9XFwNCjEmeF97NDF9JnhfezQyfVxcDQoxJnhfezUxfSZ4X3s1Mn0NClxlbmR7Ym1hdHJpeH0uDQokJA0KDQpDYWRhIGxpbmhhIGNvcnJlc3BvbmRlIGEgdW1hIG9ic2VydmHDp8Ojby4gQ2FkYSBjb2x1bmEgY29ycmVzcG9uZGUgYSB1bSByZWdyZXNzb3IuIEEgY29sdW5hIGRlIHVucyByZXByZXNlbnRhIG8gaW50ZXJjZXB0by4NCg0KYGBge3IgbWF0cml6LWRhZG9zfQ0KIyBEYWRvcyBkZSBjaW5jbyBwcm9wcmllZGFkZXMNCnkgPC0gbWF0cml4KA0KICBjKDI4MDAsIDMxMDAsIDMzNTAsIDM2MDAsIDM5NTApLA0KICBuY29sID0gMSwNCiAgZGltbmFtZXMgPSBsaXN0KE5VTEwsICJwcm9kdXRpdmlkYWRlIikNCikNCg0KZmVydGlsaXphbnRlIDwtIGMoODAsIDk1LCAxMTAsIDEyMCwgMTQwKQ0KY2h1dmEgPC0gYyg3MjAsIDY4MCwgNzUwLCA3OTAsIDgxMCkNCg0KIyBDb25zdHJ1aW5kbyBhIG1hdHJpeiBkZSByZWdyZXNzb3Jlcw0KWCA8LSBjYmluZCgNCiAgaW50ZXJjZXB0byA9IDEsDQogIGZlcnRpbGl6YW50ZSA9IGZlcnRpbGl6YW50ZSwNCiAgY2h1dmEgPSBjaHV2YQ0KKQ0KDQp5DQpYDQpgYGANCg0KQXMgZGltZW5zw7VlcyBkb3MgcHJpbmNpcGFpcyBwcm9kdXRvcyBzw6NvOg0KDQokJA0KXHVuZGVyc2V0ezNcdGltZXM1fXtcbWF0aGJmIFgnfQ0KXHVuZGVyc2V0ezVcdGltZXMzfXtcbWF0aGJmIFh9DQo9DQpcdW5kZXJzZXR7M1x0aW1lczN9e1xtYXRoYmYgWCdcbWF0aGJmIFh9LA0KJCQNCg0KZToNCg0KJCQNClx1bmRlcnNldHszXHRpbWVzNX17XG1hdGhiZiBYJ30NClx1bmRlcnNldHs1XHRpbWVzMX17XG1hdGhiZiB5fQ0KPQ0KXHVuZGVyc2V0ezNcdGltZXMxfXtcbWF0aGJmIFgnXG1hdGhiZiB5fS4NCiQkDQoNCmBgYHtyIHByb2R1dG9zLW1hdHJpei1kYWRvc30NCiMgWCdYDQpYdFggPC0gY3Jvc3Nwcm9kKFgpDQoNCiMgWCd5DQpYdHkgPC0gY3Jvc3Nwcm9kKFgsIHkpDQoNClh0WA0KWHR5DQoNCiMgVmVyaWZpY2FuZG8gYXMgZGltZW5zw7Vlcw0KZGltKFh0WCkNCmRpbShYdHkpDQpgYGANCg0KT2JzZXJ2ZSBxdWUgJFxtYXRoYmYgWCdcbWF0aGJmIFgkIMOpIHF1YWRyYWRhIGUgc2ltw6l0cmljYS4NCg0KYGBge3IgcHJvcHJpZWRhZGVzLXh0eH0NCmlzU3ltbWV0cmljKFh0WCkNCnFyKFgpJHJhbmsNCmBgYA0KDQpObyBwcsOzeGltbyBub3RlYm9vaywgZXNzZXMgcHJvZHV0b3Mgc2Vyw6NvIHV0aWxpemFkb3MgcGFyYSBkZXJpdmFyIG8gZXN0aW1hZG9yIGRlIG3DrW5pbW9zIHF1YWRyYWRvcyBvcmRpbsOhcmlvcy4NCg0KIyMgMTEuIFPDrW50ZXNlDQoNCnwgQ29uY2VpdG8gICAgICAgICB8IFJlc3VsdGFkbyBwcmluY2lwYWwgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwNCnw6LS0tLS0tLS0tLS0tLS0tLS18Oi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLXwNCnwgVHJhbnNwb3Npw6fDo28gICAgIHwgJChcbWF0aGJmIEFcbWF0aGJmIEIpJz1cbWF0aGJmIEInXG1hdGhiZiBBJyQgICAgfA0KfCBDb25mb3JtYWJpbGlkYWRlIHwgJChtXHRpbWVzIG4pKG5cdGltZXMgcCk9KG1cdGltZXMgcCkkICAgICAgICAgICAgfA0KfCBQcm9kdXRvIGludGVybm8gIHwgJFxtYXRoYmYgeCdcbWF0aGJmIHkkIMOpIHVtIGVzY2FsYXIgICAgICAgICAgICAgIHwNCnwgUHJvZHV0byBleHRlcm5vICB8ICRcbWF0aGJmIHhcbWF0aGJmIHknJCDDqSB1bWEgbWF0cml6ICAgICAgICAgICAgICB8DQp8IE5vcm1hICAgICAgICAgICAgfCAkXHxcbWF0aGJmIHhcfD1cc3FydHtcbWF0aGJmIHgnXG1hdGhiZiB4fSQgICAgICB8DQp8IFNpbWV0cmlhICAgICAgICAgfCAkXG1hdGhiZiBBJz1cbWF0aGJmIEEkICAgICAgICAgICAgICAgICAgICAgICAgICB8DQp8IFBvc3RvIGNvbXBsZXRvICAgfCBDb2x1bmFzIGxpbmVhcm1lbnRlIGluZGVwZW5kZW50ZXMgICAgICAgICAgICAgICB8DQp8IEludmVydGliaWxpZGFkZSAgfCAkXGRldChcbWF0aGJmIEEpXG5lcTAkICAgICAgICAgICAgICAgICAgICAgICAgICB8DQp8IE1hdHJpeiBkZSBkYWRvcyAgfCBMaW5oYXMgc8OjbyBvYnNlcnZhw6fDtWVzOyBjb2x1bmFzIHPDo28gcmVncmVzc29yZXMgfA0KDQoNCiMgQ29uc2lkZXJhw6fDtWVzIGZpbmFpcw0KDQpWZXRvcmVzIGUgbWF0cml6ZXMgcGVybWl0ZW0gb3JnYW5pemFyIG9zIGRhZG9zIGUgY29uZGVuc2FyIG11aXRhcyBvcGVyYcOnw7VlcyBlbSBleHByZXNzw7VlcyBzaW1wbGVzLiBQYXJhIGEgRWNvbm9tZXRyaWEsIG9zIHBvbnRvcyBjZW50cmFpcyBkZXN0YSBwcmltZWlyYSBwYXJ0ZSBzw6NvIGEgY29uZm9ybWFiaWxpZGFkZSBkb3MgcHJvZHV0b3MsIGEgZGlzdGluw6fDo28gZW50cmUgcHJvZHV0b3MgaW50ZXJubyBlIGV4dGVybm8sIGEgc2ltZXRyaWEgZGUgJFxtYXRoYmYgWCdcbWF0aGJmIFgkIGUgYSBjb25kacOnw6NvIGRlIHBvc3RvIGNvbXBsZXRvLg0KDQpFc3NlcyByZXN1bHRhZG9zIHNlcsOjbyB1c2Fkb3MgbmEgUGFydGUgMiBwYXJhIGVzdHVkYXIgc2lzdGVtYXMgbGluZWFyZXMsIGNlbnRyYWxpemHDp8OjbywgZm9ybWFzIHF1YWRyw6F0aWNhcywgZGlmZXJlbmNpYcOnw6NvIG1hdHJpY2lhbCwgcHJvamXDp8O1ZXMgZSBhIGRlcml2YcOnw6NvIGRvIGVzdGltYWRvciBkZSBNUU8uDQo=</div>
 
 
 </div>
@@ -3955,7 +3974,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("Revisao_ALp1.Rmd");
+  window.initializeSourceEmbed("Revisao_AL_1.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

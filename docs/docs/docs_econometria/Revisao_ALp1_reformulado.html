@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vitor Hugo Miro">
+
+<title>Revisão de Álgebra Linear — Parte 1 – Vitor Hugo Miro</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ddd961a2510921635943dfbbd19534c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Vitor Hugo Miro</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">Sobre</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../ensino.html"> 
+<span class="menu-text">Ensino</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../pesquisa.html"> 
+<span class="menu-text">Pesquisa</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html"> 
+<span class="menu-text">Posts</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a>
+  <ul class="collapse">
+  <li><a href="#vetores-matrizes-e-dimensões" id="toc-vetores-matrizes-e-dimensões" class="nav-link" data-scroll-target="#vetores-matrizes-e-dimensões">1. Vetores, matrizes e dimensões</a>
+  <ul class="collapse">
+  <li><a href="#vetores" id="toc-vetores" class="nav-link" data-scroll-target="#vetores">1.1 Vetores</a></li>
+  <li><a href="#matrizes" id="toc-matrizes" class="nav-link" data-scroll-target="#matrizes">1.2 Matrizes</a></li>
+  </ul></li>
+  <li><a href="#soma-diferença-e-multiplicação-por-escalar" id="toc-soma-diferença-e-multiplicação-por-escalar" class="nav-link" data-scroll-target="#soma-diferença-e-multiplicação-por-escalar">2. Soma, diferença e multiplicação por escalar</a></li>
+  <li><a href="#transposição" id="toc-transposição" class="nav-link" data-scroll-target="#transposição">3. Transposição</a>
+  <ul class="collapse">
+  <li><a href="#propriedades" id="toc-propriedades" class="nav-link" data-scroll-target="#propriedades">3.1 Propriedades</a></li>
+  </ul></li>
+  <li><a href="#multiplicação-de-matrizes" id="toc-multiplicação-de-matrizes" class="nav-link" data-scroll-target="#multiplicação-de-matrizes">4. Multiplicação de matrizes</a>
+  <ul class="collapse">
+  <li><a href="#produto-matricial-e-produto-elemento-a-elemento" id="toc-produto-matricial-e-produto-elemento-a-elemento" class="nav-link" data-scroll-target="#produto-matricial-e-produto-elemento-a-elemento">4.1 Produto matricial e produto elemento a elemento</a></li>
+  <li><a href="#a-multiplicação-não-é-comutativa" id="toc-a-multiplicação-não-é-comutativa" class="nav-link" data-scroll-target="#a-multiplicação-não-é-comutativa">4.2 A multiplicação não é comutativa</a></li>
+  </ul></li>
+  <li><a href="#produtos-interno-e-externo" id="toc-produtos-interno-e-externo" class="nav-link" data-scroll-target="#produtos-interno-e-externo">5. Produtos interno e externo</a>
+  <ul class="collapse">
+  <li><a href="#produto-interno" id="toc-produto-interno" class="nav-link" data-scroll-target="#produto-interno">5.1 Produto interno</a></li>
+  <li><a href="#norma-e-ortogonalidade" id="toc-norma-e-ortogonalidade" class="nav-link" data-scroll-target="#norma-e-ortogonalidade">5.2 Norma e ortogonalidade</a></li>
+  <li><a href="#produto-externo" id="toc-produto-externo" class="nav-link" data-scroll-target="#produto-externo">5.3 Produto externo</a></li>
+  </ul></li>
+  <li><a href="#matrizes-importantes" id="toc-matrizes-importantes" class="nav-link" data-scroll-target="#matrizes-importantes">6. Matrizes importantes</a>
+  <ul class="collapse">
+  <li><a href="#matriz-nula" id="toc-matriz-nula" class="nav-link" data-scroll-target="#matriz-nula">6.1 Matriz nula</a></li>
+  <li><a href="#matriz-diagonal" id="toc-matriz-diagonal" class="nav-link" data-scroll-target="#matriz-diagonal">6.2 Matriz diagonal</a></li>
+  <li><a href="#matriz-escalar-e-identidade" id="toc-matriz-escalar-e-identidade" class="nav-link" data-scroll-target="#matriz-escalar-e-identidade">6.3 Matriz escalar e identidade</a></li>
+  <li><a href="#matriz-simétrica" id="toc-matriz-simétrica" class="nav-link" data-scroll-target="#matriz-simétrica">6.4 Matriz simétrica</a></li>
+  </ul></li>
+  <li><a href="#submatrizes-e-indexação-no-r" id="toc-submatrizes-e-indexação-no-r" class="nav-link" data-scroll-target="#submatrizes-e-indexação-no-r">7. Submatrizes e indexação no R</a></li>
+  <li><a href="#combinações-lineares-independência-e-posto" id="toc-combinações-lineares-independência-e-posto" class="nav-link" data-scroll-target="#combinações-lineares-independência-e-posto">8. Combinações lineares, independência e posto</a>
+  <ul class="collapse">
+  <li><a href="#combinação-linear" id="toc-combinação-linear" class="nav-link" data-scroll-target="#combinação-linear">8.1 Combinação linear</a></li>
+  <li><a href="#independência-linear" id="toc-independência-linear" class="nav-link" data-scroll-target="#independência-linear">8.2 Independência linear</a></li>
+  <li><a href="#posto" id="toc-posto" class="nav-link" data-scroll-target="#posto">8.3 Posto</a></li>
+  </ul></li>
+  <li><a href="#determinante-e-invertibilidade" id="toc-determinante-e-invertibilidade" class="nav-link" data-scroll-target="#determinante-e-invertibilidade">9. Determinante e invertibilidade</a>
+  <ul class="collapse">
+  <li><a href="#matriz-inversa" id="toc-matriz-inversa" class="nav-link" data-scroll-target="#matriz-inversa">9.1 Matriz inversa</a></li>
+  </ul></li>
+  <li><a href="#uma-ponte-para-a-matriz-de-dados" id="toc-uma-ponte-para-a-matriz-de-dados" class="nav-link" data-scroll-target="#uma-ponte-para-a-matriz-de-dados">10. Uma ponte para a matriz de dados</a></li>
+  <li><a href="#síntese" id="toc-síntese" class="nav-link" data-scroll-target="#síntese">11. Síntese</a></li>
+  <li><a href="#exercícios-propostos" id="toc-exercícios-propostos" class="nav-link" data-scroll-target="#exercícios-propostos">12. Exercícios propostos</a>
+  <ul class="collapse">
+  <li><a href="#exercício-1-dimensões" id="toc-exercício-1-dimensões" class="nav-link" data-scroll-target="#exercício-1-dimensões">Exercício 1 — Dimensões</a></li>
+  <li><a href="#exercício-2-produto-matricial-no-r" id="toc-exercício-2-produto-matricial-no-r" class="nav-link" data-scroll-target="#exercício-2-produto-matricial-no-r">Exercício 2 — Produto matricial no R</a></li>
+  <li><a href="#exercício-3-produtos-interno-e-externo" id="toc-exercício-3-produtos-interno-e-externo" class="nav-link" data-scroll-target="#exercício-3-produtos-interno-e-externo">Exercício 3 — Produtos interno e externo</a></li>
+  <li><a href="#exercício-4-dependência-linear" id="toc-exercício-4-dependência-linear" class="nav-link" data-scroll-target="#exercício-4-dependência-linear">Exercício 4 — Dependência linear</a></li>
+  <li><a href="#exercício-5-matriz-de-regressores" id="toc-exercício-5-matriz-de-regressores" class="nav-link" data-scroll-target="#exercício-5-matriz-de-regressores">Exercício 5 — Matriz de regressores</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#considerações-finais" id="toc-considerações-finais" class="nav-link" data-scroll-target="#considerações-finais">Considerações finais</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Revisão de Álgebra Linear — Parte 1</h1>
+<p class="subtitle lead">Vetores, matrizes e operações fundamentais</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Vitor Hugo Miro </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introdução" class="level1">
+<h1>Introdução</h1>
+<p>A álgebra linear fornece uma linguagem compacta para representar dados, formular modelos econométricos e realizar cálculos com muitas observações e variáveis.</p>
+<p>Este primeiro material revisa os conceitos fundamentais:</p>
+<ul>
+<li>vetores, matrizes e dimensões;</li>
+<li>soma, transposição e multiplicação;</li>
+<li>produtos interno e externo;</li>
+<li>matrizes especiais;</li>
+<li>submatrizes e indexação;</li>
+<li>independência linear, posto e invertibilidade;</li>
+<li>organização matricial de uma base de dados.</li>
+</ul>
+<p>O objetivo não é apresentar um curso completo de Álgebra Linear. A ênfase recairá sobre os resultados utilizados posteriormente na formulação matricial do método de mínimos quadrados ordinários.</p>
+<section id="vetores-matrizes-e-dimensões" class="level2">
+<h2 class="anchored" data-anchor-id="vetores-matrizes-e-dimensões">1. Vetores, matrizes e dimensões</h2>
+<section id="vetores" class="level3">
+<h3 class="anchored" data-anchor-id="vetores">1.1 Vetores</h3>
+<p>Um vetor-coluna com <span class="math inline">\(n\)</span> elementos pode ser representado por:</p>
+<p><span class="math display">\[
+\mathbf{x}
+=
+\begin{bmatrix}
+x_1\\
+x_2\\
+\vdots\\
+x_n
+\end{bmatrix}_{n\times 1}.
+\]</span></p>
+<p>Sua transposta é um vetor-linha:</p>
+<p><span class="math display">\[
+\mathbf{x}'
+=
+\begin{bmatrix}
+x_1 &amp; x_2 &amp; \cdots &amp; x_n
+\end{bmatrix}_{1\times n}.
+\]</span></p>
+<p><strong>EXEMPLO</strong></p>
+<p>Considere:</p>
+<p><span class="math display">\[
+\mathbf{x}
+=
+\begin{bmatrix}
+1\\
+2\\
+3
+\end{bmatrix}.
+\]</span></p>
+<p>No <code>R</code>, um vetor numérico não possui orientação explícita de linha ou coluna. Quando a orientação for importante, podemos transformá-lo em uma matriz.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vetor numérico</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Representação explícita como vetor-coluna</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x_coluna <span class="ot">&lt;-</span> <span class="fu">matrix</span>(x, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>x_coluna</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]
+[1,]    1
+[2,]    2
+[3,]    3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Representação explícita como vetor-linha</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>x_linha <span class="ot">&lt;-</span> <span class="fu">t</span>(x_coluna)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>x_linha</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    2    3</code></pre>
+</div>
+</div>
+</section>
+<section id="matrizes" class="level3">
+<h3 class="anchored" data-anchor-id="matrizes">1.2 Matrizes</h3>
+<p>Uma matriz com <span class="math inline">\(n\)</span> linhas e <span class="math inline">\(k\)</span> colunas é escrita como:</p>
+<p><span class="math display">\[
+\mathbf{A}
+=
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1k}\\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2k}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nk}
+\end{bmatrix}_{n\times k}.
+\]</span></p>
+<p>O primeiro índice identifica a linha; o segundo identifica a coluna. Quando <span class="math inline">\(n=k\)</span>, a matriz é denominada <strong>quadrada</strong>.</p>
+<p><strong>EXEMPLO</strong></p>
+<p><span class="math display">\[
+\mathbf{A}
+=
+\begin{bmatrix}
+2 &amp; 3 &amp; 5\\
+6 &amp; 1 &amp; 3
+\end{bmatrix}_{2\times3}.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Criando a matriz por linhas</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">3</span>),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">2</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    2    3    5
+[2,]    6    1    3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificando suas dimensões</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>As dimensões determinam quais operações matriciais são possíveis. Antes de efetuar um produto, é recomendável identificar as dimensões de cada objeto.</p>
+<blockquote class="blockquote">
+<p><strong>Por que isso importa para a Econometria?</strong><br>
+Em uma regressão com <span class="math inline">\(n\)</span> observações e <span class="math inline">\(k\)</span> parâmetros, teremos normalmente <span class="math inline">\(\mathbf y_{n\times1}\)</span>, <span class="math inline">\(\mathbf X_{n\times k}\)</span>, <span class="math inline">\(\boldsymbol\beta_{k\times1}\)</span> e <span class="math inline">\(\mathbf u_{n\times1}\)</span>.</p>
+</blockquote>
+</section>
+</section>
+<section id="soma-diferença-e-multiplicação-por-escalar" class="level2">
+<h2 class="anchored" data-anchor-id="soma-diferença-e-multiplicação-por-escalar">2. Soma, diferença e multiplicação por escalar</h2>
+<p>Duas matrizes somente podem ser somadas ou subtraídas quando possuem as mesmas dimensões.</p>
+<p>Se <span class="math inline">\(\mathbf A\)</span> e <span class="math inline">\(\mathbf B\)</span> são matrizes <span class="math inline">\(n\times k\)</span>, então:</p>
+<p><span class="math display">\[
+(\mathbf A+\mathbf B)_{ij}=a_{ij}+b_{ij}.
+\]</span></p>
+<p><strong>EXEMPLO</strong></p>
+<p><span class="math display">\[
+\mathbf A=
+\begin{bmatrix}
+4 &amp; 9\\
+2 &amp; 1
+\end{bmatrix},
+\qquad
+\mathbf B=
+\begin{bmatrix}
+2 &amp; 0\\
+0 &amp; 7
+\end{bmatrix}.
+\]</span></p>
+<p>Logo:</p>
+<p><span class="math display">\[
+\mathbf A+\mathbf B
+=
+\begin{bmatrix}
+6 &amp; 9\\
+2 &amp; 8
+\end{bmatrix},
+\qquad
+\mathbf A-\mathbf B
+=
+\begin{bmatrix}
+2 &amp; 9\\
+2 &amp; -6
+\end{bmatrix}.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definindo duas matrizes com as mesmas dimensões</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">9</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>              <span class="dv">2</span>, <span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>              <span class="dv">0</span>, <span class="dv">7</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Soma e diferença</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>A <span class="sc">+</span> B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    6    9
+[2,]    2    8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>A <span class="sc">-</span> B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    2    9
+[2,]    2   -6</code></pre>
+</div>
+</div>
+<p>Para um escalar <span class="math inline">\(c\)</span>:</p>
+<p><span class="math display">\[
+c\mathbf A
+=
+\begin{bmatrix}
+ca_{11} &amp; \cdots &amp; ca_{1k}\\
+\vdots &amp; \ddots &amp; \vdots\\
+ca_{n1} &amp; \cdots &amp; ca_{nk}
+\end{bmatrix}.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiplicação de uma matriz por um escalar</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>c_escalar <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>c_escalar <span class="sc">*</span> A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    8   18
+[2,]    4    2</code></pre>
+</div>
+</div>
+<p>As principais propriedades são:</p>
+<p><span class="math display">\[
+\mathbf A+\mathbf B=\mathbf B+\mathbf A,
+\]</span></p>
+<p><span class="math display">\[
+(\mathbf A+\mathbf B)+\mathbf C
+=
+\mathbf A+(\mathbf B+\mathbf C),
+\]</span></p>
+<p><span class="math display">\[
+c(\mathbf A+\mathbf B)=c\mathbf A+c\mathbf B.
+\]</span></p>
+</section>
+<section id="transposição" class="level2">
+<h2 class="anchored" data-anchor-id="transposição">3. Transposição</h2>
+<p>A transposta de uma matriz <span class="math inline">\(\mathbf A_{n\times k}\)</span>, indicada por <span class="math inline">\(\mathbf A'\)</span>, possui dimensão <span class="math inline">\(k\times n\)</span>. Suas linhas correspondem às colunas da matriz original.</p>
+<p><strong>EXEMPLO</strong></p>
+<p><span class="math display">\[
+\mathbf A=
+\begin{bmatrix}
+4 &amp; 5\\
+3 &amp; 1\\
+5 &amp; 0
+\end{bmatrix}_{3\times2}
+\quad\Longrightarrow\quad
+\mathbf A'
+=
+\begin{bmatrix}
+4 &amp; 3 &amp; 5\\
+5 &amp; 1 &amp; 0
+\end{bmatrix}_{2\times3}.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz 3 x 2</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>, <span class="dv">1</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>, <span class="dv">0</span>),</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">3</span>,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    4    5
+[2,]    3    1
+[3,]    5    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    4    3    5
+[2,]    5    1    0</code></pre>
+</div>
+</div>
+<section id="propriedades" class="level3">
+<h3 class="anchored" data-anchor-id="propriedades">3.1 Propriedades</h3>
+<p><span class="math display">\[
+(\mathbf A')'=\mathbf A,
+\]</span></p>
+<p><span class="math display">\[
+(\mathbf A+\mathbf B)'=\mathbf A'+\mathbf B',
+\]</span></p>
+<p><span class="math display">\[
+(c\mathbf A)'=c\mathbf A',
+\]</span></p>
+<p><span class="math display">\[
+(\mathbf A\mathbf B)'=\mathbf B'\mathbf A'.
+\]</span></p>
+<p>A última propriedade merece atenção: a transposição de um produto inverte a ordem das matrizes.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrizes conformáveis</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">7</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificando (AB)' = B'A'</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(A <span class="sc">%*%</span> B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]   58  139
+[2,]   64  154</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(B) <span class="sc">%*%</span> <span class="fu">t</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]   58  139
+[2,]   64  154</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Por que isso importa para a Econometria?</strong><br>
+Produtos como <span class="math inline">\(\mathbf X'\mathbf X\)</span> e <span class="math inline">\(\mathbf X'\mathbf y\)</span> aparecem na fórmula do estimador de MQO. A propriedade <span class="math inline">\((\mathbf X'\mathbf X)'=\mathbf X'\mathbf X\)</span> mostra que <span class="math inline">\(\mathbf X'\mathbf X\)</span> é simétrica.</p>
+</blockquote>
+</section>
+</section>
+<section id="multiplicação-de-matrizes" class="level2">
+<h2 class="anchored" data-anchor-id="multiplicação-de-matrizes">4. Multiplicação de matrizes</h2>
+<p>Se <span class="math inline">\(\mathbf A\)</span> possui dimensão <span class="math inline">\(m\times n\)</span> e <span class="math inline">\(\mathbf B\)</span> possui dimensão <span class="math inline">\(n\times p\)</span>, então o produto <span class="math inline">\(\mathbf A\mathbf B\)</span> existe e possui dimensão <span class="math inline">\(m\times p\)</span>:</p>
+<p><span class="math display">\[
+\underset{m\times n}{\mathbf A}
+\underset{n\times p}{\mathbf B}
+=
+\underset{m\times p}{\mathbf C}.
+\]</span></p>
+<p>O elemento <span class="math inline">\(c_{ij}\)</span> é o produto interno entre a linha <span class="math inline">\(i\)</span> de <span class="math inline">\(\mathbf A\)</span> e a coluna <span class="math inline">\(j\)</span> de <span class="math inline">\(\mathbf B\)</span>:</p>
+<p><span class="math display">\[
+c_{ij}=\sum_{\ell=1}^{n}a_{i\ell}b_{\ell j}.
+\]</span></p>
+<p><strong>EXEMPLO</strong></p>
+<p><span class="math display">\[
+\mathbf A=
+\begin{bmatrix}
+1 &amp; 2\\
+3 &amp; 4
+\end{bmatrix},
+\qquad
+\mathbf B=
+\begin{bmatrix}
+1 &amp; 2 &amp; 1\\
+3 &amp; 4 &amp; 2
+\end{bmatrix}.
+\]</span></p>
+<p>Então:</p>
+<p><span class="math display">\[
+\mathbf A\mathbf B
+=
+\begin{bmatrix}
+7 &amp; 10 &amp; 5\\
+15 &amp; 22 &amp; 11
+\end{bmatrix}.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz A: 2 x 2</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>              <span class="dv">3</span>, <span class="dv">4</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz B: 2 x 3</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>              <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">2</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Produto matricial: 2 x 3</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    7   10    5
+[2,]   15   22   11</code></pre>
+</div>
+</div>
+<section id="produto-matricial-e-produto-elemento-a-elemento" class="level3">
+<h3 class="anchored" data-anchor-id="produto-matricial-e-produto-elemento-a-elemento">4.1 Produto matricial e produto elemento a elemento</h3>
+<p>No <code>R</code>, os operadores possuem significados diferentes:</p>
+<ul>
+<li><code>A %*% B</code>: produto matricial;</li>
+<li><code>A * B</code>: multiplicação elemento a elemento.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Duas matrizes 2 x 2</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>              <span class="dv">3</span>, <span class="dv">4</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>              <span class="dv">7</span>, <span class="dv">8</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Produto elemento a elemento</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>C <span class="sc">*</span> D</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    5   12
+[2,]   21   32</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Produto matricial</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>C <span class="sc">%*%</span> D</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]   19   22
+[2,]   43   50</code></pre>
+</div>
+</div>
+</section>
+<section id="a-multiplicação-não-é-comutativa" class="level3">
+<h3 class="anchored" data-anchor-id="a-multiplicação-não-é-comutativa">4.2 A multiplicação não é comutativa</h3>
+<p>Em geral:</p>
+<p><span class="math display">\[
+\mathbf A\mathbf B\neq\mathbf B\mathbf A.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Os dois produtos existem, mas produzem resultados diferentes</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>C <span class="sc">%*%</span> D</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]   19   22
+[2,]   43   50</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%*%</span> C</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]   23   34
+[2,]   31   46</code></pre>
+</div>
+</div>
+<p>Também pode ocorrer de <span class="math inline">\(\mathbf A\mathbf B\)</span> existir, mas <span class="math inline">\(\mathbf B\mathbf A\)</span> não existir.</p>
+<p>As propriedades válidas incluem:</p>
+<p><span class="math display">\[
+(\mathbf A\mathbf B)\mathbf C
+=
+\mathbf A(\mathbf B\mathbf C),
+\]</span></p>
+<p><span class="math display">\[
+\mathbf A(\mathbf B+\mathbf C)
+=
+\mathbf A\mathbf B+\mathbf A\mathbf C,
+\]</span></p>
+<p><span class="math display">\[
+\mathbf I\mathbf A=\mathbf A\mathbf I=\mathbf A,
+\]</span></p>
+<p>quando as dimensões forem conformáveis.</p>
+</section>
+</section>
+<section id="produtos-interno-e-externo" class="level2">
+<h2 class="anchored" data-anchor-id="produtos-interno-e-externo">5. Produtos interno e externo</h2>
+<section id="produto-interno" class="level3">
+<h3 class="anchored" data-anchor-id="produto-interno">5.1 Produto interno</h3>
+<p>Para dois vetores <span class="math inline">\(\mathbf x,\mathbf y\in\mathbb R^n\)</span>, o produto interno é:</p>
+<p><span class="math display">\[
+\mathbf x'\mathbf y
+=
+\sum_{i=1}^{n}x_i y_i.
+\]</span></p>
+<p>O resultado é um escalar.</p>
+<p><strong>EXEMPLO</strong></p>
+<p><span class="math display">\[
+\mathbf x=
+\begin{bmatrix}
+3\\-1\\4
+\end{bmatrix},
+\qquad
+\mathbf y=
+\begin{bmatrix}
+2\\5\\-1
+\end{bmatrix}.
+\]</span></p>
+<p>Logo:</p>
+<p><span class="math display">\[
+\mathbf x'\mathbf y
+=3(2)+(-1)(5)+4(-1)
+=-3.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definindo os vetores</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">4</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Duas formas de calcular o produto interno</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x <span class="sc">*</span> y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crossprod</span>(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]
+[1,]   -3</code></pre>
+</div>
+</div>
+</section>
+<section id="norma-e-ortogonalidade" class="level3">
+<h3 class="anchored" data-anchor-id="norma-e-ortogonalidade">5.2 Norma e ortogonalidade</h3>
+<p>A norma euclidiana de <span class="math inline">\(\mathbf x\)</span> é:</p>
+<p><span class="math display">\[
+\|\mathbf x\|
+=
+\sqrt{\mathbf x'\mathbf x}
+=
+\sqrt{\sum_{i=1}^{n}x_i^2}.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Norma euclidiana de x</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>norma_x <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">as.numeric</span>(<span class="fu">crossprod</span>(x)))</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>norma_x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.09902</code></pre>
+</div>
+</div>
+<p>Se:</p>
+<p><span class="math display">\[
+\mathbf x'\mathbf y=0,
+\]</span></p>
+<p>os vetores são <strong>ortogonais</strong>.</p>
+</section>
+<section id="produto-externo" class="level3">
+<h3 class="anchored" data-anchor-id="produto-externo">5.3 Produto externo</h3>
+<p>O produto externo entre dois vetores-coluna é:</p>
+<p><span class="math display">\[
+\underset{n\times1}{\mathbf x}
+\underset{1\times m}{\mathbf y'}
+=
+\underset{n\times m}{\mathbf x\mathbf y'}.
+\]</span></p>
+<p><strong>EXEMPLO</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Produto externo x y'</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tcrossprod</span>(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    6   15   -3
+[2,]   -2   -5    1
+[3,]    8   20   -4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultado equivalente</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(x, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">%*%</span> <span class="fu">t</span>(<span class="fu">matrix</span>(y, <span class="at">ncol =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    6   15   -3
+[2,]   -2   -5    1
+[3,]    8   20   -4</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Por que isso importa para a Econometria?</strong><br>
+O produto interno aparece em somas de produtos e somas de quadrados. O produto externo aparece em matrizes de momentos, como <span class="math inline">\(\sum_i\mathbf x_i\mathbf x_i'\)</span>, e em matrizes de variância-covariância.</p>
+</blockquote>
+</section>
+</section>
+<section id="matrizes-importantes" class="level2">
+<h2 class="anchored" data-anchor-id="matrizes-importantes">6. Matrizes importantes</h2>
+<section id="matriz-nula" class="level3">
+<h3 class="anchored" data-anchor-id="matriz-nula">6.1 Matriz nula</h3>
+<p>A matriz nula possui todos os elementos iguais a zero:</p>
+<p><span class="math display">\[
+\mathbf 0_{2\times3}
+=
+\begin{bmatrix}
+0&amp;0&amp;0\\
+0&amp;0&amp;0
+\end{bmatrix}.
+\]</span></p>
+</section>
+<section id="matriz-diagonal" class="level3">
+<h3 class="anchored" data-anchor-id="matriz-diagonal">6.2 Matriz diagonal</h3>
+<p>Uma matriz quadrada é diagonal quando todos os elementos fora da diagonal principal são iguais a zero. Os elementos diagonais podem ou não ser zero.</p>
+<p><span class="math display">\[
+\mathbf D
+=
+\begin{bmatrix}
+d_1&amp;0&amp;0\\
+0&amp;d_2&amp;0\\
+0&amp;0&amp;d_3
+\end{bmatrix}.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Criando uma matriz diagonal</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">5</span>))</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>D</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    2    0    0
+[2,]    0    0    0
+[3,]    0    0    5</code></pre>
+</div>
+</div>
+</section>
+<section id="matriz-escalar-e-identidade" class="level3">
+<h3 class="anchored" data-anchor-id="matriz-escalar-e-identidade">6.3 Matriz escalar e identidade</h3>
+<p>Uma matriz escalar é da forma:</p>
+<p><span class="math display">\[
+\mathbf S=c\mathbf I_n.
+\]</span></p>
+<p>A matriz identidade possui elementos diagonais iguais a 1:</p>
+<p><span class="math display">\[
+\mathbf I_3
+=
+\begin{bmatrix}
+1&amp;0&amp;0\\
+0&amp;1&amp;0\\
+0&amp;0&amp;1
+\end{bmatrix}.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz identidade de ordem 3</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>I3 <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="dv">3</span>)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>I3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    0    0
+[2,]    0    1    0
+[3,]    0    0    1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz escalar 4I</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="sc">*</span> I3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    4    0    0
+[2,]    0    4    0
+[3,]    0    0    4</code></pre>
+</div>
+</div>
+</section>
+<section id="matriz-simétrica" class="level3">
+<h3 class="anchored" data-anchor-id="matriz-simétrica">6.4 Matriz simétrica</h3>
+<p>Uma matriz quadrada <span class="math inline">\(\mathbf A\)</span> é simétrica quando:</p>
+<p><span class="math display">\[
+\mathbf A'=\mathbf A.
+\]</span></p>
+<p>Isso equivale a <span class="math inline">\(a_{ij}=a_{ji}\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemplo de matriz simétrica</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">3</span>,</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>,</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">6</span>),</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">3</span>,</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    4    1    3
+[2,]    1    5    2
+[3,]    3    2    6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">isSymmetric</span>(S)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>Matrizes como <span class="math inline">\(\mathbf X'\mathbf X\)</span> e matrizes de variância-covariância são simétricas.</p>
+</section>
+</section>
+<section id="submatrizes-e-indexação-no-r" class="level2">
+<h2 class="anchored" data-anchor-id="submatrizes-e-indexação-no-r">7. Submatrizes e indexação no R</h2>
+<p>Uma submatriz é obtida selecionando determinadas linhas e colunas de uma matriz.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz 4 x 3</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6
+[3,]    7    8    9
+[4,]   10   11   12</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Primeiras duas linhas e primeiras duas colunas</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    1    2
+[2,]    4    5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecionando a terceira coluna</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>A[, <span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  3  6  9 12</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Preservando a estrutura de matriz</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>A[, <span class="dv">3</span>, drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]
+[1,]    3
+[2,]    6
+[3,]    9
+[4,]   12</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Excluindo a segunda linha</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>A[<span class="sc">-</span><span class="dv">2</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    7    8    9
+[3,]   10   11   12</code></pre>
+</div>
+</div>
+<p>Também podemos construir uma matriz juntando vetores por colunas:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Três variáveis observadas em cinco propriedades</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>area <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">55</span>, <span class="dv">62</span>, <span class="dv">70</span>, <span class="dv">85</span>)</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>fertilizante <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">80</span>, <span class="dv">95</span>, <span class="dv">110</span>, <span class="dv">120</span>, <span class="dv">140</span>)</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>chuva <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">720</span>, <span class="dv">680</span>, <span class="dv">750</span>, <span class="dv">790</span>, <span class="dv">810</span>)</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de variáveis</span></span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">area =</span> area,</span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">fertilizante =</span> fertilizante,</span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">chuva =</span> chuva</span>
+<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-13"><a href="#cb69-13" aria-hidden="true" tabindex="-1"></a>Z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     area fertilizante chuva
+[1,]   40           80   720
+[2,]   55           95   680
+[3,]   62          110   750
+[4,]   70          120   790
+[5,]   85          140   810</code></pre>
+</div>
+</div>
+</section>
+<section id="combinações-lineares-independência-e-posto" class="level2">
+<h2 class="anchored" data-anchor-id="combinações-lineares-independência-e-posto">8. Combinações lineares, independência e posto</h2>
+<section id="combinação-linear" class="level3">
+<h3 class="anchored" data-anchor-id="combinação-linear">8.1 Combinação linear</h3>
+<p>Um vetor <span class="math inline">\(\mathbf v\)</span> é uma combinação linear dos vetores <span class="math inline">\(\mathbf x_1,\ldots,\mathbf x_k\)</span> quando existem escalares <span class="math inline">\(c_1,\ldots,c_k\)</span> tais que:</p>
+<p><span class="math display">\[
+\mathbf v
+=
+c_1\mathbf x_1+\cdots+c_k\mathbf x_k.
+\]</span></p>
+</section>
+<section id="independência-linear" class="level3">
+<h3 class="anchored" data-anchor-id="independência-linear">8.2 Independência linear</h3>
+<p>Os vetores <span class="math inline">\(\mathbf x_1,\ldots,\mathbf x_k\)</span> são linearmente independentes quando:</p>
+<p><span class="math display">\[
+c_1\mathbf x_1+\cdots+c_k\mathbf x_k=\mathbf0
+\]</span></p>
+<p>implica:</p>
+<p><span class="math display">\[
+c_1=\cdots=c_k=0.
+\]</span></p>
+<p>Caso contrário, pelo menos um vetor pode ser escrito como combinação linear dos demais.</p>
+<p><strong>EXEMPLO</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A terceira coluna é a soma das duas primeiras</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> x1 <span class="sc">+</span> x2</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>A_dependente <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x1, x2, x3)</span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>A_dependente</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     x1 x2 x3
+[1,]  1  0  1
+[2,]  0  1  1
+[3,]  1  1  2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Posto da matriz</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qr</span>(A_dependente)<span class="sc">$</span>rank</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+</section>
+<section id="posto" class="level3">
+<h3 class="anchored" data-anchor-id="posto">8.3 Posto</h3>
+<p>O posto de uma matriz é o número máximo de linhas ou colunas linearmente independentes.</p>
+<p>Para uma matriz <span class="math inline">\(n\times k\)</span>:</p>
+<p><span class="math display">\[
+\operatorname{posto}(\mathbf A)\leq\min(n,k).
+\]</span></p>
+<p>A matriz possui <strong>posto completo de colunas</strong> quando:</p>
+<p><span class="math display">\[
+\operatorname{posto}(\mathbf A)=k.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemplo de matriz com posto completo de colunas</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>A_completa <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>,</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">1</span>,</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">3</span>,</span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a>A_completa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    1    0
+[2,]    0    1
+[3,]    1    1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qr</span>(A_completa)<span class="sc">$</span>rank</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Por que isso importa para a Econometria?</strong><br>
+Para identificar separadamente os coeficientes de uma regressão, as colunas de <span class="math inline">\(\mathbf X\)</span> não podem apresentar dependência linear exata. Essa é a condição de posto completo de colunas.</p>
+</blockquote>
+</section>
+</section>
+<section id="determinante-e-invertibilidade" class="level2">
+<h2 class="anchored" data-anchor-id="determinante-e-invertibilidade">9. Determinante e invertibilidade</h2>
+<p>O determinante é definido para matrizes quadradas. Para uma matriz <span class="math inline">\(2\times2\)</span>:</p>
+<p><span class="math display">\[
+\mathbf A
+=
+\begin{bmatrix}
+a&amp;b\\
+c&amp;d
+\end{bmatrix},
+\]</span></p>
+<p>temos:</p>
+<p><span class="math display">\[
+\det(\mathbf A)=ad-bc.
+\]</span></p>
+<p>Uma matriz quadrada é invertível se, e somente se:</p>
+<p><span class="math display">\[
+\det(\mathbf A)\neq0.
+\]</span></p>
+<p>Essa condição é equivalente à matriz possuir posto completo.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz quadrada</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">7</span>,</span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>, <span class="dv">6</span>),</span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">2</span>,</span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    4    7
+[2,]    2    6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">det</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qr</span>(A)<span class="sc">$</span>rank</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<p>Algumas propriedades são:</p>
+<p><span class="math display">\[
+\det(\mathbf A\mathbf B)
+=
+\det(\mathbf A)\det(\mathbf B),
+\]</span></p>
+<p><span class="math display">\[
+\det(\mathbf A')=\det(\mathbf A),
+\]</span></p>
+<p><span class="math display">\[
+\det(\mathbf A^{-1})
+=
+\frac{1}{\det(\mathbf A)}.
+\]</span></p>
+<section id="matriz-inversa" class="level3">
+<h3 class="anchored" data-anchor-id="matriz-inversa">9.1 Matriz inversa</h3>
+<p>Quando <span class="math inline">\(\mathbf A\)</span> é quadrada e não singular, sua inversa satisfaz:</p>
+<p><span class="math display">\[
+\mathbf A^{-1}\mathbf A
+=
+\mathbf A\mathbf A^{-1}
+=
+\mathbf I.
+\]</span></p>
+<p>Para uma matriz <span class="math inline">\(2\times2\)</span>:</p>
+<p><span class="math display">\[
+\mathbf A^{-1}
+=
+\frac{1}{ad-bc}
+\begin{bmatrix}
+d&amp;-b\\
+-c&amp;a
+\end{bmatrix}.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculando a inversa</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>A_inversa <span class="ot">&lt;-</span> <span class="fu">solve</span>(A)</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>A_inversa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]  0.6 -0.7
+[2,] -0.2  0.4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificando o resultado</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(A <span class="sc">%*%</span> A_inversa, <span class="at">digits =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    1    0
+[2,]    0    1</code></pre>
+</div>
+</div>
+<p>Em aplicações computacionais, geralmente não precisamos calcular a inversa explicitamente. Para resolver <span class="math inline">\(\mathbf A\mathbf x=\mathbf b\)</span>, é preferível usar <code>solve(A, b)</code>.</p>
+</section>
+</section>
+<section id="uma-ponte-para-a-matriz-de-dados" class="level2">
+<h2 class="anchored" data-anchor-id="uma-ponte-para-a-matriz-de-dados">10. Uma ponte para a matriz de dados</h2>
+<p>Considere uma amostra de cinco propriedades. O vetor de resultados é:</p>
+<p><span class="math display">\[
+\underset{5\times1}{\mathbf y}
+=
+\begin{bmatrix}
+y_1\\y_2\\y_3\\y_4\\y_5
+\end{bmatrix}.
+\]</span></p>
+<p>Se o modelo contém intercepto e duas variáveis explicativas, a matriz de regressores é:</p>
+<p><span class="math display">\[
+\underset{5\times3}{\mathbf X}
+=
+\begin{bmatrix}
+1&amp;x_{11}&amp;x_{12}\\
+1&amp;x_{21}&amp;x_{22}\\
+1&amp;x_{31}&amp;x_{32}\\
+1&amp;x_{41}&amp;x_{42}\\
+1&amp;x_{51}&amp;x_{52}
+\end{bmatrix}.
+\]</span></p>
+<p>Cada linha corresponde a uma observação. Cada coluna corresponde a um regressor. A coluna de uns representa o intercepto.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dados de cinco propriedades</span></span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">2800</span>, <span class="dv">3100</span>, <span class="dv">3350</span>, <span class="dv">3600</span>, <span class="dv">3950</span>),</span>
+<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">1</span>,</span>
+<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="cn">NULL</span>, <span class="st">"produtividade"</span>)</span>
+<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb89-7"><a href="#cb89-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-8"><a href="#cb89-8" aria-hidden="true" tabindex="-1"></a>fertilizante <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">80</span>, <span class="dv">95</span>, <span class="dv">110</span>, <span class="dv">120</span>, <span class="dv">140</span>)</span>
+<span id="cb89-9"><a href="#cb89-9" aria-hidden="true" tabindex="-1"></a>chuva <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">720</span>, <span class="dv">680</span>, <span class="dv">750</span>, <span class="dv">790</span>, <span class="dv">810</span>)</span>
+<span id="cb89-10"><a href="#cb89-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-11"><a href="#cb89-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Construindo a matriz de regressores</span></span>
+<span id="cb89-12"><a href="#cb89-12" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
+<span id="cb89-13"><a href="#cb89-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">intercepto =</span> <span class="dv">1</span>,</span>
+<span id="cb89-14"><a href="#cb89-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">fertilizante =</span> fertilizante,</span>
+<span id="cb89-15"><a href="#cb89-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">chuva =</span> chuva</span>
+<span id="cb89-16"><a href="#cb89-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb89-17"><a href="#cb89-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-18"><a href="#cb89-18" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     produtividade
+[1,]          2800
+[2,]          3100
+[3,]          3350
+[4,]          3600
+[5,]          3950</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>X</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     intercepto fertilizante chuva
+[1,]          1           80   720
+[2,]          1           95   680
+[3,]          1          110   750
+[4,]          1          120   790
+[5,]          1          140   810</code></pre>
+</div>
+</div>
+<p>As dimensões dos principais produtos são:</p>
+<p><span class="math display">\[
+\underset{3\times5}{\mathbf X'}
+\underset{5\times3}{\mathbf X}
+=
+\underset{3\times3}{\mathbf X'\mathbf X},
+\]</span></p>
+<p>e:</p>
+<p><span class="math display">\[
+\underset{3\times5}{\mathbf X'}
+\underset{5\times1}{\mathbf y}
+=
+\underset{3\times1}{\mathbf X'\mathbf y}.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># X'X</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>XtX <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(X)</span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="co"># X'y</span></span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a>Xty <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(X, y)</span>
+<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-7"><a href="#cb93-7" aria-hidden="true" tabindex="-1"></a>XtX</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             intercepto fertilizante   chuva
+intercepto            5          545    3750
+fertilizante        545        61525  412900
+chuva              3750       412900 2823500</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>Xty</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             produtividade
+intercepto           16800
+fertilizante       1872000
+chuva             12680000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificando as dimensões</span></span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(XtX)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Xty)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3 1</code></pre>
+</div>
+</div>
+<p>Observe que <span class="math inline">\(\mathbf X'\mathbf X\)</span> é quadrada e simétrica.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">isSymmetric</span>(XtX)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qr</span>(X)<span class="sc">$</span>rank</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>No próximo notebook, esses produtos serão utilizados para derivar o estimador de mínimos quadrados ordinários.</p>
+</section>
+<section id="síntese" class="level2">
+<h2 class="anchored" data-anchor-id="síntese">11. Síntese</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Conceito</th>
+<th style="text-align: left;">Resultado principal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Transposição</td>
+<td style="text-align: left;"><span class="math inline">\((\mathbf A\mathbf B)'=\mathbf B'\mathbf A'\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Conformabilidade</td>
+<td style="text-align: left;"><span class="math inline">\((m\times n)(n\times p)=(m\times p)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Produto interno</td>
+<td style="text-align: left;"><span class="math inline">\(\mathbf x'\mathbf y\)</span> é um escalar</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Produto externo</td>
+<td style="text-align: left;"><span class="math inline">\(\mathbf x\mathbf y'\)</span> é uma matriz</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Norma</td>
+<td style="text-align: left;"><span class="math inline">\(\|\mathbf x\|=\sqrt{\mathbf x'\mathbf x}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Simetria</td>
+<td style="text-align: left;"><span class="math inline">\(\mathbf A'=\mathbf A\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Posto completo</td>
+<td style="text-align: left;">Colunas linearmente independentes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Invertibilidade</td>
+<td style="text-align: left;"><span class="math inline">\(\det(\mathbf A)\neq0\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Matriz de dados</td>
+<td style="text-align: left;">Linhas são observações; colunas são regressores</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="exercícios-propostos" class="level2">
+<h2 class="anchored" data-anchor-id="exercícios-propostos">12. Exercícios propostos</h2>
+<section id="exercício-1-dimensões" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-1-dimensões">Exercício 1 — Dimensões</h3>
+<p>Considere <span class="math inline">\(\mathbf A_{4\times3}\)</span>, <span class="math inline">\(\mathbf B_{3\times2}\)</span>, <span class="math inline">\(\mathbf C_{2\times4}\)</span> e <span class="math inline">\(\mathbf x_{3\times1}\)</span>.</p>
+<ol type="1">
+<li>Quais produtos entre esses objetos são possíveis?</li>
+<li>Indique a dimensão de cada produto possível.</li>
+<li>Explique por que <span class="math inline">\(\mathbf A\mathbf C\)</span> não está definido.</li>
+</ol>
+</section>
+<section id="exercício-2-produto-matricial-no-r" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-2-produto-matricial-no-r">Exercício 2 — Produto matricial no R</h3>
+<p>Crie:</p>
+<p><span class="math display">\[
+\mathbf A=
+\begin{bmatrix}
+1&amp;2\\
+3&amp;4
+\end{bmatrix},
+\qquad
+\mathbf B=
+\begin{bmatrix}
+2&amp;0\\
+1&amp;5
+\end{bmatrix}.
+\]</span></p>
+<p>Calcule <span class="math inline">\(\mathbf A\mathbf B\)</span>, <span class="math inline">\(\mathbf B\mathbf A\)</span> e o produto elemento a elemento. Compare os resultados.</p>
+</section>
+<section id="exercício-3-produtos-interno-e-externo" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-3-produtos-interno-e-externo">Exercício 3 — Produtos interno e externo</h3>
+<p>Para <span class="math inline">\(\mathbf x=(1,2,3)'\)</span> e <span class="math inline">\(\mathbf y=(2,-1,4)'\)</span>:</p>
+<ol type="1">
+<li>calcule <span class="math inline">\(\mathbf x'\mathbf y\)</span>;</li>
+<li>calcule <span class="math inline">\(\mathbf x\mathbf y'\)</span>;</li>
+<li>indique a dimensão de cada resultado;</li>
+<li>calcule <span class="math inline">\(\|\mathbf x\|\)</span>.</li>
+</ol>
+</section>
+<section id="exercício-4-dependência-linear" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-4-dependência-linear">Exercício 4 — Dependência linear</h3>
+<p>Considere:</p>
+<p><span class="math display">\[
+\mathbf A=
+\begin{bmatrix}
+1&amp;2&amp;3\\
+2&amp;4&amp;6\\
+1&amp;1&amp;2
+\end{bmatrix}.
+\]</span></p>
+<ol type="1">
+<li>Verifique o posto de <span class="math inline">\(\mathbf A\)</span> no <code>R</code>.</li>
+<li>Identifique uma relação linear entre suas colunas.</li>
+<li>A matriz é invertível?</li>
+</ol>
+</section>
+<section id="exercício-5-matriz-de-regressores" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-5-matriz-de-regressores">Exercício 5 — Matriz de regressores</h3>
+<p>Construa uma matriz <span class="math inline">\(\mathbf X\)</span> para uma amostra com quatro observações, intercepto e duas variáveis explicativas.</p>
+<ol type="1">
+<li>Qual é a dimensão de <span class="math inline">\(\mathbf X\)</span>?</li>
+<li>Qual é a dimensão de <span class="math inline">\(\mathbf X'\mathbf X\)</span>?</li>
+<li>Use <code>qr(X)$rank</code> para verificar se <span class="math inline">\(\mathbf X\)</span> possui posto completo de colunas.</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="considerações-finais" class="level1">
+<h1>Considerações finais</h1>
+<p>Vetores e matrizes permitem organizar os dados e condensar muitas operações em expressões simples. Para a Econometria, os pontos centrais desta primeira parte são a conformabilidade dos produtos, a distinção entre produtos interno e externo, a simetria de <span class="math inline">\(\mathbf X'\mathbf X\)</span> e a condição de posto completo.</p>
+<p>Esses resultados serão usados na Parte 2 para estudar sistemas lineares, centralização, formas quadráticas, diferenciação matricial, projeções e a derivação do estimador de MQO.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

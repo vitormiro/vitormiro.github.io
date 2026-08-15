@@ -510,7 +510,7 @@ $$
 \sum_{i=1}^{n} (x_i - \bar{x})^2 = 
 (\textbf{x} - {\textbf{i}}\bar{x})' (\textbf{x} - {\textbf{i}}\bar{x}) = 
 (\mathbf{M^0} \textbf{x})' (\mathbf{M^0} \textbf{x}) = 
-\textbf{x}' \mathbf{M^0}' \mathbf{M^0} \textbf{x}
+\textbf{x}'\mathbf{M^0}' \mathbf{M^0} \textbf{x}
 $$
 
 A matriz $\mathbf{M^0}$ possui a propriedade de ser idempotente, ou seja, $\mathbf{M^0}' \mathbf{M^0} = \mathbf{M^0}$.

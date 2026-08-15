@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vitor Hugo Miro">
+
+<title>Revisão de Probabilidade e Estatística – Vitor Hugo Miro</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ddd961a2510921635943dfbbd19534c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Vitor Hugo Miro</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">Sobre</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../ensino.html"> 
+<span class="menu-text">Ensino</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../pesquisa.html"> 
+<span class="menu-text">Pesquisa</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html"> 
+<span class="menu-text">Posts</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a>
+  <ul class="collapse">
+  <li><a href="#variáveis-aleatórias-e-distribuições-de-probabilidade" id="toc-variáveis-aleatórias-e-distribuições-de-probabilidade" class="nav-link" data-scroll-target="#variáveis-aleatórias-e-distribuições-de-probabilidade">1. Variáveis aleatórias e distribuições de probabilidade</a>
+  <ul class="collapse">
+  <li><a href="#distribuição-de-uma-variável-aleatória-discreta" id="toc-distribuição-de-uma-variável-aleatória-discreta" class="nav-link" data-scroll-target="#distribuição-de-uma-variável-aleatória-discreta">1.1 Distribuição de uma variável aleatória discreta</a></li>
+  </ul></li>
+  <li><a href="#valor-esperado" id="toc-valor-esperado" class="nav-link" data-scroll-target="#valor-esperado">2. Valor esperado</a>
+  <ul class="collapse">
+  <li><a href="#calculando-o-valor-esperado" id="toc-calculando-o-valor-esperado" class="nav-link" data-scroll-target="#calculando-o-valor-esperado">2.1 Calculando o valor esperado</a></li>
+  <li><a href="#valor-esperado-de-uma-função" id="toc-valor-esperado-de-uma-função" class="nav-link" data-scroll-target="#valor-esperado-de-uma-função">2.2 Valor esperado de uma função</a></li>
+  <li><a href="#propriedades-do-valor-esperado" id="toc-propriedades-do-valor-esperado" class="nav-link" data-scroll-target="#propriedades-do-valor-esperado">2.3 Propriedades do valor esperado</a></li>
+  <li><a href="#valor-esperado-e-média-amostral" id="toc-valor-esperado-e-média-amostral" class="nav-link" data-scroll-target="#valor-esperado-e-média-amostral">2.4 Valor esperado e média amostral</a></li>
+  </ul></li>
+  <li><a href="#variância-e-desvio-padrão" id="toc-variância-e-desvio-padrão" class="nav-link" data-scroll-target="#variância-e-desvio-padrão">3. Variância e desvio-padrão</a>
+  <ul class="collapse">
+  <li><a href="#calculando-a-variância" id="toc-calculando-a-variância" class="nav-link" data-scroll-target="#calculando-a-variância">3.1 Calculando a variância</a></li>
+  <li><a href="#variância-amostral" id="toc-variância-amostral" class="nav-link" data-scroll-target="#variância-amostral">3.2 Variância amostral</a></li>
+  <li><a href="#propriedades-da-variância" id="toc-propriedades-da-variância" class="nav-link" data-scroll-target="#propriedades-da-variância">3.3 Propriedades da variância</a></li>
+  </ul></li>
+  <li><a href="#covariância-e-correlação" id="toc-covariância-e-correlação" class="nav-link" data-scroll-target="#covariância-e-correlação">4. Covariância e correlação</a>
+  <ul class="collapse">
+  <li><a href="#covariância-amostral" id="toc-covariância-amostral" class="nav-link" data-scroll-target="#covariância-amostral">4.1 Covariância amostral</a></li>
+  <li><a href="#correlação" id="toc-correlação" class="nav-link" data-scroll-target="#correlação">4.2 Correlação</a></li>
+  <li><a href="#covariância-zero-não-implica-independência" id="toc-covariância-zero-não-implica-independência" class="nav-link" data-scroll-target="#covariância-zero-não-implica-independência">4.3 Covariância zero não implica independência</a></li>
+  </ul></li>
+  <li><a href="#esperança-condicional" id="toc-esperança-condicional" class="nav-link" data-scroll-target="#esperança-condicional">5. Esperança condicional</a>
+  <ul class="collapse">
+  <li><a href="#exemplo-irrigação-e-produtividade" id="toc-exemplo-irrigação-e-produtividade" class="nav-link" data-scroll-target="#exemplo-irrigação-e-produtividade">5.1 Exemplo: irrigação e produtividade</a></li>
+  <li><a href="#esperança-condicional-em-uma-amostra" id="toc-esperança-condicional-em-uma-amostra" class="nav-link" data-scroll-target="#esperança-condicional-em-uma-amostra">5.2 Esperança condicional em uma amostra</a></li>
+  <li><a href="#propriedades-importantes" id="toc-propriedades-importantes" class="nav-link" data-scroll-target="#propriedades-importantes">5.3 Propriedades importantes</a></li>
+  <li><a href="#esperança-condicional-como-melhor-preditor" id="toc-esperança-condicional-como-melhor-preditor" class="nav-link" data-scroll-target="#esperança-condicional-como-melhor-preditor">5.4 Esperança condicional como melhor preditor</a></li>
+  </ul></li>
+  <li><a href="#lei-das-expectativas-iteradas" id="toc-lei-das-expectativas-iteradas" class="nav-link" data-scroll-target="#lei-das-expectativas-iteradas">6. Lei das Expectativas Iteradas</a>
+  <ul class="collapse">
+  <li><a href="#verificação-no-exemplo-da-irrigação" id="toc-verificação-no-exemplo-da-irrigação" class="nav-link" data-scroll-target="#verificação-no-exemplo-da-irrigação">6.1 Verificação no exemplo da irrigação</a></li>
+  <li><a href="#uma-consequência-importante" id="toc-uma-consequência-importante" class="nav-link" data-scroll-target="#uma-consequência-importante">6.2 Uma consequência importante</a></li>
+  </ul></li>
+  <li><a href="#decomposição-da-variância" id="toc-decomposição-da-variância" class="nav-link" data-scroll-target="#decomposição-da-variância">7. Decomposição da variância</a>
+  <ul class="collapse">
+  <li><a href="#aplicação-ao-exemplo-da-irrigação" id="toc-aplicação-ao-exemplo-da-irrigação" class="nav-link" data-scroll-target="#aplicação-ao-exemplo-da-irrigação">7.1 Aplicação ao exemplo da irrigação</a></li>
+  </ul></li>
+  <li><a href="#uma-ponte-para-o-modelo-de-regressão" id="toc-uma-ponte-para-o-modelo-de-regressão" class="nav-link" data-scroll-target="#uma-ponte-para-o-modelo-de-regressão">8. Uma ponte para o modelo de regressão</a>
+  <ul class="collapse">
+  <li><a href="#simulação" id="toc-simulação" class="nav-link" data-scroll-target="#simulação">8.1 Simulação</a></li>
+  </ul></li>
+  <li><a href="#síntese-dos-principais-conceitos" id="toc-síntese-dos-principais-conceitos" class="nav-link" data-scroll-target="#síntese-dos-principais-conceitos">9. Síntese dos principais conceitos</a></li>
+  </ul></li>
+  <li><a href="#considerações-finais" id="toc-considerações-finais" class="nav-link" data-scroll-target="#considerações-finais">Considerações finais</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Revisão de Probabilidade e Estatística</h1>
+<p class="subtitle lead">Valor esperado, variância, covariância e esperança condicional</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Vitor Hugo Miro </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introdução" class="level1">
+<h1>Introdução</h1>
+<p>A probabilidade e a estatística fornecem a linguagem utilizada para descrever incerteza, formular modelos econométricos e avaliar evidências empíricas.</p>
+<p>Este material não pretende apresentar uma revisão completa de Estatística. O objetivo é retomar alguns conceitos utilizados com frequência em Econometria:</p>
+<ul>
+<li>variável aleatória e distribuição de probabilidade;</li>
+<li>valor esperado;</li>
+<li>variância e desvio-padrão;</li>
+<li>covariância e correlação;</li>
+<li>esperança condicional;</li>
+<li>Lei das Expectativas Iteradas.</li>
+</ul>
+<p>Ao longo do texto, combinaremos definições matemáticas, exemplos numéricos e pequenas aplicações no <code>R</code>.</p>
+<section id="variáveis-aleatórias-e-distribuições-de-probabilidade" class="level2">
+<h2 class="anchored" data-anchor-id="variáveis-aleatórias-e-distribuições-de-probabilidade">1. Variáveis aleatórias e distribuições de probabilidade</h2>
+<p>Uma <strong>variável aleatória</strong> associa um valor numérico a cada resultado possível de um evento aleatório.</p>
+<p>Como exemplo, considere a produtividade de uma cultura em uma propriedade escolhida aleatoriamente. Antes de observarmos a propriedade, a produtividade é desconhecida e pode ser representada por uma variável aleatória <span class="math inline">\(X\)</span>.</p>
+<p>Uma variável aleatória pode ser:</p>
+<ul>
+<li><strong>discreta</strong>, quando assume um conjunto finito ou enumerável de valores;</li>
+<li><strong>contínua</strong>, quando pode assumir qualquer valor em determinado intervalo.</li>
+</ul>
+<section id="distribuição-de-uma-variável-aleatória-discreta" class="level3">
+<h3 class="anchored" data-anchor-id="distribuição-de-uma-variável-aleatória-discreta">1.1 Distribuição de uma variável aleatória discreta</h3>
+<p>Para uma variável aleatória discreta, a função de probabilidade associa uma probabilidade a cada valor possível:</p>
+<p><span class="math display">\[
+p(x)=P(X=x).
+\]</span></p>
+<p>As probabilidades devem satisfazer:</p>
+<p><span class="math display">\[
+p(x)\geq 0
+\quad\text{e}\quad
+\sum_x p(x)=1.
+\]</span></p>
+<p><strong>EXEMPLO</strong></p>
+<p>Suponha que a produtividade <span class="math inline">\(X\)</span>, medida em toneladas por hectare, apresente a seguinte distribuição:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Produtividade <span class="math inline">\(x\)</span></th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(P(X=x)\)</span></td>
+<td style="text-align: center;">0,2</td>
+<td style="text-align: center;">0,5</td>
+<td style="text-align: center;">0,3</td>
+</tr>
+</tbody>
+</table>
+<p>No <code>R</code>, podemos representar essa distribuição usando dois vetores.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores possíveis da produtividade, em toneladas por hectare</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Probabilidade associada a cada valor</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>probabilidade <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.3</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Organizando a distribuição em uma tabela</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>distribuicao <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">produtividade =</span> x,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">probabilidade =</span> probabilidade</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>distribuicao</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  produtividade probabilidade
+1             2           0.2
+2             3           0.5
+3             4           0.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificando se as probabilidades somam 1</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(probabilidade)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<p>Também podemos sortear observações dessa distribuição.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sorteando a produtividade de 20 propriedades</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>amostra_x <span class="ot">&lt;-</span> <span class="fu">sample</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">20</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> probabilidade</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>amostra_x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 4 4 3 3 4 3 3 2 3 4 3 4 3 2 3 3 4 3 3 3</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Por que isso importa para a Econometria?</strong><br>
+Em Econometria, tratamos variáveis como renda, produtividade, escolaridade e preços como realizações de variáveis aleatórias. As propriedades dos estimadores dependem das distribuições dessas variáveis.</p>
+</blockquote>
+</section>
+</section>
+<section id="valor-esperado" class="level2">
+<h2 class="anchored" data-anchor-id="valor-esperado">2. Valor esperado</h2>
+<p>O <strong>valor esperado</strong> representa o centro da distribuição de uma variável aleatória. Ele também pode ser interpretado como a média que observaríamos em um grande número de repetições do mesmo evento.</p>
+<p>Para uma variável aleatória discreta <span class="math inline">\(X\)</span>,</p>
+<p><span class="math display">\[
+\mathbb{E}(X)=\sum_x xP(X=x).
+\]</span></p>
+<p>Para uma variável aleatória contínua com função densidade <span class="math inline">\(f(x)\)</span>,</p>
+<p><span class="math display">\[
+\mathbb{E}(X)=\int_{-\infty}^{+\infty}x f(x)\,dx.
+\]</span></p>
+<p>Neste material, os cálculos manuais serão apresentados principalmente com variáveis discretas, pois tornam a lógica mais transparente.</p>
+<section id="calculando-o-valor-esperado" class="level3">
+<h3 class="anchored" data-anchor-id="calculando-o-valor-esperado">2.1 Calculando o valor esperado</h3>
+<p>Retomando a distribuição da produtividade,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb{E}(X)
+&amp;=2(0{,}2)+3(0{,}5)+4(0{,}3)\\
+&amp;=3{,}1 \text{ toneladas por hectare}.
+\end{aligned}
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valor esperado: soma dos valores ponderados pelas probabilidades</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>esperanca_x <span class="ot">&lt;-</span> <span class="fu">sum</span>(x <span class="sc">*</span> probabilidade)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>esperanca_x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.1</code></pre>
+</div>
+</div>
+<p>O valor esperado não precisa ser um dos resultados possíveis. Neste exemplo, <span class="math inline">\(X\)</span> somente assume os valores 2, 3 ou 4, mas seu valor esperado é 3,1.</p>
+</section>
+<section id="valor-esperado-de-uma-função" class="level3">
+<h3 class="anchored" data-anchor-id="valor-esperado-de-uma-função">2.2 Valor esperado de uma função</h3>
+<p>Se <span class="math inline">\(g(X)\)</span> é uma função da variável aleatória <span class="math inline">\(X\)</span>, então:</p>
+<p><span class="math display">\[
+\mathbb{E}[g(X)]=\sum_x g(x)P(X=x).
+\]</span></p>
+<p>Por exemplo, o segundo momento de <span class="math inline">\(X\)</span> é:</p>
+<p><span class="math display">\[
+\mathbb{E}(X^2)=\sum_x x^2P(X=x).
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Segundo momento da produtividade</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>esperanca_x2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(x<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> probabilidade)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>esperanca_x2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10.1</code></pre>
+</div>
+</div>
+<p>O segundo momento será utilizado no cálculo da variância.</p>
+</section>
+<section id="propriedades-do-valor-esperado" class="level3">
+<h3 class="anchored" data-anchor-id="propriedades-do-valor-esperado">2.3 Propriedades do valor esperado</h3>
+<p>Para constantes <span class="math inline">\(a\)</span> e <span class="math inline">\(b\)</span>,</p>
+<p><span class="math display">\[
+\mathbb{E}(a+bX)=a+b\mathbb{E}(X).
+\]</span></p>
+<p>Mais geralmente, para duas variáveis aleatórias <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>,</p>
+<p><span class="math display">\[
+\mathbb{E}(aX+bY)=a\mathbb{E}(X)+b\mathbb{E}(Y).
+\]</span></p>
+<p>Essa propriedade é denominada <strong>linearidade do valor esperado</strong>. Ela é válida mesmo quando <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span> não são independentes.</p>
+<p><strong>EXEMPLO</strong></p>
+<p>Suponha que a receita por hectare, em centenas de reais, seja dada por:</p>
+<p><span class="math display">\[
+R=5+2X.
+\]</span></p>
+<p>Logo,</p>
+<p><span class="math display">\[
+\mathbb{E}(R)=5+2\mathbb{E}(X)=5+2(3{,}1)=11{,}2.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Receita correspondente a cada nível de produtividade</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>receita <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> x</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo direto do valor esperado da receita</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>esperanca_receita_direta <span class="ot">&lt;-</span> <span class="fu">sum</span>(receita <span class="sc">*</span> probabilidade)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo usando a linearidade do valor esperado</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>esperanca_receita_linear <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> esperanca_x</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">calculo_direto =</span> esperanca_receita_direta,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">pela_linearidade =</span> esperanca_receita_linear</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  calculo_direto pela_linearidade 
+            11.2             11.2 </code></pre>
+</div>
+</div>
+</section>
+<section id="valor-esperado-e-média-amostral" class="level3">
+<h3 class="anchored" data-anchor-id="valor-esperado-e-média-amostral">2.4 Valor esperado e média amostral</h3>
+<p>O valor esperado é uma característica da população ou do modelo probabilístico. A <strong>média amostral</strong> é calculada a partir dos dados:</p>
+<p><span class="math display">\[
+\bar{X}=\frac{1}{n}\sum_{i=1}^n X_i.
+\]</span></p>
+<p>Quando a amostra cresce, a média amostral tende a se aproximar de <span class="math inline">\(\mathbb{E}(X)\)</span>. Esse resultado será estudado posteriormente como a <strong>Lei dos Grandes Números</strong>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gerando uma amostra grande da distribuição de X</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>amostra_grande <span class="ot">&lt;-</span> <span class="fu">sample</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">10000</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> probabilidade</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">valor_esperado =</span> esperanca_x,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">media_amostral =</span> <span class="fu">mean</span>(amostra_grande)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>valor_esperado media_amostral 
+        3.1000         3.0999 </code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Por que isso importa para a Econometria?</strong><br>
+Hipóteses como <span class="math inline">\(\mathbb{E}(u)=0\)</span> e <span class="math inline">\(\mathbb{E}(u\mid X)=0\)</span> são formuladas em termos de valor esperado. Além disso, muitos estimadores econométricos são médias ou funções de médias amostrais.</p>
+</blockquote>
+</section>
+</section>
+<section id="variância-e-desvio-padrão" class="level2">
+<h2 class="anchored" data-anchor-id="variância-e-desvio-padrão">3. Variância e desvio-padrão</h2>
+<p>O valor esperado informa o centro da distribuição, mas não descreve sua dispersão. A <strong>variância</strong> mede o afastamento quadrático médio de <span class="math inline">\(X\)</span> em relação ao seu valor esperado:</p>
+<p><span class="math display">\[
+\operatorname{Var}(X)
+=\mathbb{E}\left[(X-\mathbb{E}(X))^2\right].
+\]</span></p>
+<p>Uma forma equivalente é:</p>
+<p><span class="math display">\[
+\operatorname{Var}(X)=\mathbb{E}(X^2)-[\mathbb{E}(X)]^2.
+\]</span></p>
+<section id="calculando-a-variância" class="level3">
+<h3 class="anchored" data-anchor-id="calculando-a-variância">3.1 Calculando a variância</h3>
+<p>Para a distribuição da produtividade,</p>
+<p><span class="math display">\[
+\operatorname{Var}(X)
+=10{,}1-(3{,}1)^2
+=0{,}49.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forma 1: definição da variância</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>variancia_x_definicao <span class="ot">&lt;-</span> <span class="fu">sum</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  (x <span class="sc">-</span> esperanca_x)<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> probabilidade</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Forma 2: diferença entre o segundo momento e a média ao quadrado</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>variancia_x_momentos <span class="ot">&lt;-</span> esperanca_x2 <span class="sc">-</span> esperanca_x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">pela_definicao =</span> variancia_x_definicao,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">pelos_momentos =</span> variancia_x_momentos</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>pela_definicao pelos_momentos 
+          0.49           0.49 </code></pre>
+</div>
+</div>
+<p>A variância é expressa na unidade original elevada ao quadrado. O <strong>desvio-padrão</strong> retorna à unidade original:</p>
+<p><span class="math display">\[
+\operatorname{DP}(X)=\sqrt{\operatorname{Var}(X)}.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Desvio-padrão da produtividade</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>desvio_padrao_x <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(variancia_x_definicao)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>desvio_padrao_x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7</code></pre>
+</div>
+</div>
+</section>
+<section id="variância-amostral" class="level3">
+<h3 class="anchored" data-anchor-id="variância-amostral">3.2 Variância amostral</h3>
+<p>Em uma amostra, a variância é normalmente calculada como:</p>
+<p><span class="math display">\[
+s_X^2=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2.
+\]</span></p>
+<p>O denominador <span class="math inline">\(n-1\)</span> é utilizado para que <span class="math inline">\(s_X^2\)</span> seja um estimador não viesado da variância populacional, sob amostragem aleatória.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pequena amostra observada de produtividades</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>produtividade_observada <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.8</span>, <span class="fl">3.3</span>, <span class="fl">2.9</span>, <span class="fl">4.1</span>, <span class="fl">3.6</span>, <span class="fl">3.0</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Variância e desvio-padrão amostrais</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(produtividade_observada)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2456667</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(produtividade_observada)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4956477</code></pre>
+</div>
+</div>
+</section>
+<section id="propriedades-da-variância" class="level3">
+<h3 class="anchored" data-anchor-id="propriedades-da-variância">3.3 Propriedades da variância</h3>
+<p>Para constantes <span class="math inline">\(a\)</span> e <span class="math inline">\(b\)</span>,</p>
+<p><span class="math display">\[
+\operatorname{Var}(a+bX)=b^2\operatorname{Var}(X).
+\]</span></p>
+<p>Somar uma constante altera o centro da distribuição, mas não sua dispersão. Multiplicar <span class="math inline">\(X\)</span> por <span class="math inline">\(b\)</span> multiplica a variância por <span class="math inline">\(b^2\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformação linear da produtividade</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Variância calculada diretamente</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>variancia_transformada_direta <span class="ot">&lt;-</span> <span class="fu">sum</span>(</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  ((a <span class="sc">+</span> b <span class="sc">*</span> x) <span class="sc">-</span> (a <span class="sc">+</span> b <span class="sc">*</span> esperanca_x))<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> probabilidade</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Variância calculada pela propriedade</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>variancia_transformada_propriedade <span class="ot">&lt;-</span> b<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> variancia_x_definicao</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">calculo_direto =</span> variancia_transformada_direta,</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">pela_propriedade =</span> variancia_transformada_propriedade</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  calculo_direto pela_propriedade 
+            1.96             1.96 </code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Por que isso importa para a Econometria?</strong><br>
+A variância é central para avaliar a precisão de um estimador. Estimadores com menor variância produzem estimativas mais concentradas em torno do valor verdadeiro. Erros-padrão são construídos a partir de variâncias estimadas.</p>
+</blockquote>
+</section>
+</section>
+<section id="covariância-e-correlação" class="level2">
+<h2 class="anchored" data-anchor-id="covariância-e-correlação">4. Covariância e correlação</h2>
+<p>A <strong>covariância</strong> mede como duas variáveis aleatórias variam conjuntamente:</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X,Y)
+=\mathbb{E}\left[(X-\mathbb{E}(X))(Y-\mathbb{E}(Y))\right].
+\]</span></p>
+<p>Uma expressão equivalente é:</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X,Y)
+=\mathbb{E}(XY)-\mathbb{E}(X)\mathbb{E}(Y).
+\]</span></p>
+<p>Em geral:</p>
+<ul>
+<li><span class="math inline">\(\operatorname{Cov}(X,Y)&gt;0\)</span>: valores elevados de <span class="math inline">\(X\)</span> tendem a ocorrer com valores elevados de <span class="math inline">\(Y\)</span>;</li>
+<li><span class="math inline">\(\operatorname{Cov}(X,Y)&lt;0\)</span>: valores elevados de <span class="math inline">\(X\)</span> tendem a ocorrer com valores reduzidos de <span class="math inline">\(Y\)</span>;</li>
+<li><span class="math inline">\(\operatorname{Cov}(X,Y)=0\)</span>: não há associação <strong>linear</strong> entre as variáveis.</li>
+</ul>
+<section id="covariância-amostral" class="level3">
+<h3 class="anchored" data-anchor-id="covariância-amostral">4.1 Covariância amostral</h3>
+<p>Para uma amostra com <span class="math inline">\(n\)</span> observações,</p>
+<p><span class="math display">\[
+s_{XY}=\frac{1}{n-1}
+\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y}).
+\]</span></p>
+<p><strong>EXEMPLO</strong></p>
+<p>Considere informações sobre aplicação de fertilizante e produtividade em cinco propriedades.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quantidade de fertilizante aplicada, em kg/ha</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>fertilizante <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">90</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Produtividade observada, em kg/ha</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>produtividade <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2800</span>, <span class="dv">3000</span>, <span class="dv">3100</span>, <span class="dv">3500</span>, <span class="dv">3600</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>dados_agricolas <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">fertilizante =</span> fertilizante,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">produtividade =</span> produtividade</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>dados_agricolas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  fertilizante produtividade
+1           50          2800
+2           60          3000
+3           70          3100
+4           80          3500
+5           90          3600</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Covariância calculada pela função do R</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>covariancia_amostral <span class="ot">&lt;-</span> <span class="fu">cov</span>(fertilizante, produtividade)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo manual da covariância amostral</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(fertilizante)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>covariancia_manual <span class="ot">&lt;-</span> <span class="fu">sum</span>(</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  (fertilizante <span class="sc">-</span> <span class="fu">mean</span>(fertilizante)) <span class="sc">*</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    (produtividade <span class="sc">-</span> <span class="fu">mean</span>(produtividade))</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>) <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">funcao_cov =</span> covariancia_amostral,</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">calculo_manual =</span> covariancia_manual</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    funcao_cov calculo_manual 
+          5250           5250 </code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagrama de dispersão</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  fertilizante,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  produtividade,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"#274C77"</span>,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Fertilizante (kg/ha)"</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Produtividade (kg/ha)"</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Reta de regressão apenas para auxiliar a visualização</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(produtividade <span class="sc">~</span> fertilizante),</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"#8B1E3F"</span>,</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">2</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Revisao_Estatistica_1_files/figure-html/grafico-covariancia-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="correlação" class="level3">
+<h3 class="anchored" data-anchor-id="correlação">4.2 Correlação</h3>
+<p>A magnitude da covariância depende das unidades de medida. A <strong>correlação</strong> padroniza a covariância:</p>
+<p><span class="math display">\[
+\operatorname{Corr}(X,Y)
+=\frac{\operatorname{Cov}(X,Y)}
+{\sqrt{\operatorname{Var}(X)}\sqrt{\operatorname{Var}(Y)}}.
+\]</span></p>
+<p>Seu valor está sempre entre <span class="math inline">\(-1\)</span> e <span class="math inline">\(1\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlação calculada pela função do R</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>correlacao_amostral <span class="ot">&lt;-</span> <span class="fu">cor</span>(fertilizante, produtividade)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo a partir da covariância e dos desvios-padrão</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>correlacao_manual <span class="ot">&lt;-</span> <span class="fu">cov</span>(fertilizante, produtividade) <span class="sc">/</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">sd</span>(fertilizante) <span class="sc">*</span> <span class="fu">sd</span>(produtividade))</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">funcao_cor =</span> correlacao_amostral,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">calculo_manual =</span> correlacao_manual</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    funcao_cor calculo_manual 
+       0.97913        0.97913 </code></pre>
+</div>
+</div>
+</section>
+<section id="covariância-zero-não-implica-independência" class="level3">
+<h3 class="anchored" data-anchor-id="covariância-zero-não-implica-independência">4.3 Covariância zero não implica independência</h3>
+<p>Se duas variáveis são independentes e possuem momentos finitos, sua covariância é zero. A recíproca, entretanto, não é necessariamente verdadeira.</p>
+<p>Considere <span class="math inline">\(X\in\{-1,0,1\}\)</span>, com valores igualmente prováveis, e <span class="math inline">\(Y=X^2\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores possíveis de X e probabilidades</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>x_exemplo <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>p_exemplo <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Y depende completamente de X</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>y_exemplo <span class="ot">&lt;-</span> x_exemplo<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Momentos necessários para a covariância</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>ex <span class="ot">&lt;-</span> <span class="fu">sum</span>(x_exemplo <span class="sc">*</span> p_exemplo)</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>ey <span class="ot">&lt;-</span> <span class="fu">sum</span>(y_exemplo <span class="sc">*</span> p_exemplo)</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>exy <span class="ot">&lt;-</span> <span class="fu">sum</span>(x_exemplo <span class="sc">*</span> y_exemplo <span class="sc">*</span> p_exemplo)</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>cov_xy <span class="ot">&lt;-</span> exy <span class="sc">-</span> ex <span class="sc">*</span> ey</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>cov_xy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>A covariância é zero, mas <span class="math inline">\(Y\)</span> é determinada por <span class="math inline">\(X\)</span>. Portanto, ausência de correlação linear não significa ausência de relação entre as variáveis.</p>
+<blockquote class="blockquote">
+<p><strong>Por que isso importa para a Econometria?</strong><br>
+A inclinação da regressão linear simples depende da covariância entre <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>. Além disso, hipóteses de exogeneidade são frequentemente apresentadas por meio de restrições sobre a relação entre os regressores e o erro.</p>
+</blockquote>
+</section>
+</section>
+<section id="esperança-condicional" class="level2">
+<h2 class="anchored" data-anchor-id="esperança-condicional">5. Esperança condicional</h2>
+<p>A <strong>esperança condicional</strong> de <span class="math inline">\(Y\)</span> dado <span class="math inline">\(X=x\)</span> é a média de <span class="math inline">\(Y\)</span> na subpopulação em que <span class="math inline">\(X=x\)</span>:</p>
+<p><span class="math display">\[
+\mathbb{E}(Y\mid X=x)
+=\sum_y yP(Y=y\mid X=x),
+\]</span></p>
+<p>no caso discreto.</p>
+<p>Enquanto <span class="math inline">\(\mathbb{E}(Y)\)</span> é um único número, <span class="math inline">\(\mathbb{E}(Y\mid X)\)</span> é uma função de <span class="math inline">\(X\)</span>. Ela associa uma média de <span class="math inline">\(Y\)</span> a cada valor possível de <span class="math inline">\(X\)</span>.</p>
+<section id="exemplo-irrigação-e-produtividade" class="level3">
+<h3 class="anchored" data-anchor-id="exemplo-irrigação-e-produtividade">5.1 Exemplo: irrigação e produtividade</h3>
+<p>Considere <span class="math inline">\(I\)</span>, uma variável binária que indica o uso de irrigação:</p>
+<p><span class="math display">\[
+I=\begin{cases}
+1, &amp; \text{se a propriedade utiliza irrigação};\\
+0, &amp; \text{caso contrário}.
+\end{cases}
+\]</span></p>
+<p>A distribuição conjunta de <span class="math inline">\(I\)</span> e da produtividade <span class="math inline">\(Y\)</span> é apresentada abaixo.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribuição conjunta de irrigação e produtividade</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>dados_conjuntos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">irrigacao =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">produtividade =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>),</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob_conjunta =</span> <span class="fu">c</span>(<span class="fl">0.12</span>, <span class="fl">0.36</span>, <span class="fl">0.12</span>, <span class="fl">0.10</span>, <span class="fl">0.20</span>, <span class="fl">0.10</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>dados_conjuntos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  irrigacao produtividade prob_conjunta
+1         0             2          0.12
+2         0             3          0.36
+3         0             4          0.12
+4         1             4          0.10
+5         1             5          0.20
+6         1             6          0.10</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conferindo a soma das probabilidades conjuntas</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(dados_conjuntos<span class="sc">$</span>prob_conjunta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<p>Primeiro, calculamos as probabilidades marginais dos dois grupos:</p>
+<p><span class="math display">\[
+P(I=0)=0{,}60
+\quad\text{e}\quad
+P(I=1)=0{,}40.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Probabilidade total de cada grupo</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>prob_grupo <span class="ot">&lt;-</span> <span class="fu">tapply</span>(</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  dados_conjuntos<span class="sc">$</span>prob_conjunta,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  dados_conjuntos<span class="sc">$</span>irrigacao,</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  sum</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>prob_grupo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  0   1 
+0.6 0.4 </code></pre>
+</div>
+</div>
+<p>Para obter <span class="math inline">\(\mathbb{E}(Y\mid I=i)\)</span>, ponderamos os valores de <span class="math inline">\(Y\)</span> pelas probabilidades condicionais dentro de cada grupo.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Numerador: soma de y vezes a probabilidade conjunta em cada grupo</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>numerador_condicional <span class="ot">&lt;-</span> <span class="fu">tapply</span>(</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  dados_conjuntos<span class="sc">$</span>produtividade <span class="sc">*</span> dados_conjuntos<span class="sc">$</span>prob_conjunta,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  dados_conjuntos<span class="sc">$</span>irrigacao,</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  sum</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Média condicional em cada grupo</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>media_condicional <span class="ot">&lt;-</span> numerador_condicional <span class="sc">/</span> prob_grupo</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>media_condicional</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0 1 
+3 5 </code></pre>
+</div>
+</div>
+<p>Assim,</p>
+<p><span class="math display">\[
+\mathbb{E}(Y\mid I=0)=3
+\quad\text{e}\quad
+\mathbb{E}(Y\mid I=1)=5.
+\]</span></p>
+<p>Isso não significa, por si só, que a irrigação cause um aumento de duas toneladas na produtividade. A diferença também pode refletir solo, clima, tecnologia, seleção das propriedades ou outras características.</p>
+</section>
+<section id="esperança-condicional-em-uma-amostra" class="level3">
+<h3 class="anchored" data-anchor-id="esperança-condicional-em-uma-amostra">5.2 Esperança condicional em uma amostra</h3>
+<p>Em dados amostrais, uma forma simples de estimar esperanças condicionais para uma variável categórica é calcular a média de cada grupo.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemplo de uma pequena amostra de propriedades</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>amostra_fazendas <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">irrigacao =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">produtividade =</span> <span class="fu">c</span>(<span class="fl">2.7</span>, <span class="fl">3.1</span>, <span class="fl">3.0</span>, <span class="fl">3.4</span>, <span class="fl">4.5</span>, <span class="fl">5.2</span>, <span class="fl">4.8</span>, <span class="fl">5.5</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Média geral da produtividade</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(amostra_fazendas<span class="sc">$</span>produtividade)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.025</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Médias condicionais ao uso de irrigação</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  amostra_fazendas<span class="sc">$</span>produtividade,</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  amostra_fazendas<span class="sc">$</span>irrigacao,</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  mean</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   0    1 
+3.05 5.00 </code></pre>
+</div>
+</div>
+</section>
+<section id="propriedades-importantes" class="level3">
+<h3 class="anchored" data-anchor-id="propriedades-importantes">5.3 Propriedades importantes</h3>
+<p>Para constantes <span class="math inline">\(a\)</span> e <span class="math inline">\(b\)</span>,</p>
+<p><span class="math display">\[
+\mathbb{E}(a+bY\mid X)
+=a+b\mathbb{E}(Y\mid X).
+\]</span></p>
+<p>Se <span class="math inline">\(g(X)\)</span> é uma função conhecida de <span class="math inline">\(X\)</span>, então:</p>
+<p><span class="math display">\[
+\mathbb{E}[g(X)\mid X]=g(X),
+\]</span></p>
+<p>e</p>
+<p><span class="math display">\[
+\mathbb{E}[g(X)Y\mid X]
+=g(X)\mathbb{E}(Y\mid X).
+\]</span></p>
+<p>A função <span class="math inline">\(g(X)\)</span> pode ser colocada fora da esperança condicional porque, depois que condicionamos em <span class="math inline">\(X\)</span>, seu valor é conhecido.</p>
+</section>
+<section id="esperança-condicional-como-melhor-preditor" class="level3">
+<h3 class="anchored" data-anchor-id="esperança-condicional-como-melhor-preditor">5.4 Esperança condicional como melhor preditor</h3>
+<p>Entre todas as funções de <span class="math inline">\(X\)</span>, a esperança condicional minimiza o erro quadrático médio de previsão:</p>
+<p><span class="math display">\[
+\mathbb{E}(Y\mid X)
+=\arg\min_{g(X)}
+\mathbb{E}\left[(Y-g(X))^2\right].
+\]</span></p>
+<p>No exemplo amostral, podemos comparar duas previsões:</p>
+<ol type="1">
+<li>usar a média geral para todas as propriedades;</li>
+<li>usar a média específica de cada grupo de irrigação.</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Previsão 1: a mesma média geral para todas as propriedades</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>previsao_geral <span class="ot">&lt;-</span> <span class="fu">rep</span>(</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(amostra_fazendas<span class="sc">$</span>produtividade),</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(amostra_fazendas)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Previsão 2: a média correspondente ao grupo da propriedade</span></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>medias_grupos <span class="ot">&lt;-</span> <span class="fu">tapply</span>(</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>  amostra_fazendas<span class="sc">$</span>produtividade,</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>  amostra_fazendas<span class="sc">$</span>irrigacao,</span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>  mean</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>previsao_condicional <span class="ot">&lt;-</span> medias_grupos[</span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>(amostra_fazendas<span class="sc">$</span>irrigacao)</span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Erro quadrático médio de cada previsão</span></span>
+<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a>eqm_geral <span class="ot">&lt;-</span> <span class="fu">mean</span>(</span>
+<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a>  (amostra_fazendas<span class="sc">$</span>produtividade <span class="sc">-</span> previsao_geral)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb46-22"><a href="#cb46-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-23"><a href="#cb46-23" aria-hidden="true" tabindex="-1"></a>eqm_condicional <span class="ot">&lt;-</span> <span class="fu">mean</span>(</span>
+<span id="cb46-24"><a href="#cb46-24" aria-hidden="true" tabindex="-1"></a>  (amostra_fazendas<span class="sc">$</span>produtividade <span class="sc">-</span> previsao_condicional)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb46-25"><a href="#cb46-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb46-26"><a href="#cb46-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-27"><a href="#cb46-27" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb46-28"><a href="#cb46-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">media_geral =</span> eqm_geral,</span>
+<span id="cb46-29"><a href="#cb46-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">media_condicional =</span> eqm_condicional</span>
+<span id="cb46-30"><a href="#cb46-30" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      media_geral media_condicional 
+         1.054375          0.103750 </code></pre>
+</div>
+</div>
+<p>Neste exemplo, conhecer o grupo de irrigação permite construir uma previsão com menor erro quadrático médio.</p>
+<blockquote class="blockquote">
+<p><strong>Por que isso importa para a Econometria?</strong><br>
+A função de esperança condicional <span class="math inline">\(\mathbb{E}(Y\mid X)\)</span> descreve como a média de <span class="math inline">\(Y\)</span> varia com <span class="math inline">\(X\)</span>. A regressão busca caracterizar ou aproximar essa relação. Uma diferença condicional, contudo, não deve ser interpretada automaticamente como efeito causal.</p>
+</blockquote>
+</section>
+</section>
+<section id="lei-das-expectativas-iteradas" class="level2">
+<h2 class="anchored" data-anchor-id="lei-das-expectativas-iteradas">6. Lei das Expectativas Iteradas</h2>
+<p>A <strong>Lei das Expectativas Iteradas</strong> afirma que:</p>
+<p><span class="math display">\[
+\mathbb{E}\left[\mathbb{E}(Y\mid X)\right]
+=\mathbb{E}(Y).
+\]</span></p>
+<p>Em palavras: podemos calcular a média geral em duas etapas.</p>
+<ol type="1">
+<li>Calculamos a média de <span class="math inline">\(Y\)</span> em cada grupo definido por <span class="math inline">\(X\)</span>.</li>
+<li>Calculamos a média dessas médias condicionais, ponderando cada grupo por sua probabilidade.</li>
+</ol>
+<section id="verificação-no-exemplo-da-irrigação" class="level3">
+<h3 class="anchored" data-anchor-id="verificação-no-exemplo-da-irrigação">6.1 Verificação no exemplo da irrigação</h3>
+<p>No exemplo anterior,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb{E}(Y)
+&amp;=\mathbb{E}[\mathbb{E}(Y\mid I)]\\
+&amp;=\mathbb{E}(Y\mid I=0)P(I=0)
+  +\mathbb{E}(Y\mid I=1)P(I=1)\\
+&amp;=3(0{,}60)+5(0{,}40)\\
+&amp;=3{,}8.
+\end{aligned}
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forma 1: valor esperado calculado diretamente da distribuição conjunta</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>esperanca_y_direta <span class="ot">&lt;-</span> <span class="fu">sum</span>(</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  dados_conjuntos<span class="sc">$</span>produtividade <span class="sc">*</span> dados_conjuntos<span class="sc">$</span>prob_conjunta</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Forma 2: média ponderada das esperanças condicionais</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>esperanca_y_iterada <span class="ot">&lt;-</span> <span class="fu">sum</span>(media_condicional <span class="sc">*</span> prob_grupo)</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">calculo_direto =</span> esperanca_y_direta,</span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">expectativas_iteradas =</span> esperanca_y_iterada</span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       calculo_direto expectativas_iteradas 
+                  3.8                   3.8 </code></pre>
+</div>
+</div>
+<p>A igualdade mostra que a média geral pode ser decomposta a partir das médias dos diferentes grupos da população.</p>
+</section>
+<section id="uma-consequência-importante" class="level3">
+<h3 class="anchored" data-anchor-id="uma-consequência-importante">6.2 Uma consequência importante</h3>
+<p>Se</p>
+<p><span class="math display">\[
+\mathbb{E}(u\mid X)=0,
+\]</span></p>
+<p>então, pela Lei das Expectativas Iteradas,</p>
+<p><span class="math display">\[
+\mathbb{E}(u)
+=\mathbb{E}[\mathbb{E}(u\mid X)]
+=0.
+\]</span></p>
+<p>Além disso,</p>
+<p><span class="math display">\[
+\mathbb{E}(Xu)
+=\mathbb{E}[\mathbb{E}(Xu\mid X)]
+=\mathbb{E}[X\mathbb{E}(u\mid X)]
+=0.
+\]</span></p>
+<p>Portanto, a hipótese de média condicional zero implica média incondicional zero e ausência de correlação entre <span class="math inline">\(X\)</span> e <span class="math inline">\(u\)</span>, quando os momentos existem. A recíproca não é garantida: <span class="math inline">\(\mathbb{E}(Xu)=0\)</span> é uma restrição mais fraca do que <span class="math inline">\(\mathbb{E}(u\mid X)=0\)</span>.</p>
+<blockquote class="blockquote">
+<p><strong>Por que isso importa para a Econometria?</strong><br>
+A Lei das Expectativas Iteradas permite deduzir condições de momento a partir de hipóteses condicionais. Essa passagem será utilizada para estudar MQO, exogeneidade e propriedades dos estimadores.</p>
+</blockquote>
+</section>
+</section>
+<section id="decomposição-da-variância" class="level2">
+<h2 class="anchored" data-anchor-id="decomposição-da-variância">7. Decomposição da variância</h2>
+<p>Uma extensão útil das ideias anteriores é a <strong>Lei da Variância Total</strong>:</p>
+<p><span class="math display">\[
+\operatorname{Var}(Y)
+=\mathbb{E}[\operatorname{Var}(Y\mid X)]
++\operatorname{Var}[\mathbb{E}(Y\mid X)].
+\]</span></p>
+<p>A variância total de <span class="math inline">\(Y\)</span> pode ser dividida em:</p>
+<ul>
+<li>variação de <span class="math inline">\(Y\)</span> <strong>dentro dos grupos</strong> definidos por <span class="math inline">\(X\)</span>;</li>
+<li>variação <strong>entre as médias dos grupos</strong>.</li>
+</ul>
+<section id="aplicação-ao-exemplo-da-irrigação" class="level3">
+<h3 class="anchored" data-anchor-id="aplicação-ao-exemplo-da-irrigação">7.1 Aplicação ao exemplo da irrigação</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Média geral de Y</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>media_y <span class="ot">&lt;-</span> esperanca_y_direta</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Variância total de Y</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>variancia_total_y <span class="ot">&lt;-</span> <span class="fu">sum</span>(</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  (dados_conjuntos<span class="sc">$</span>produtividade <span class="sc">-</span> media_y)<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>    dados_conjuntos<span class="sc">$</span>prob_conjunta</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Variância condicional dentro de cada grupo</span></span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>variancia_condicional <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="cf">function</span>(grupo) {</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>  selecionados <span class="ot">&lt;-</span> dados_conjuntos<span class="sc">$</span>irrigacao <span class="sc">==</span> grupo</span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>  y_grupo <span class="ot">&lt;-</span> dados_conjuntos<span class="sc">$</span>produtividade[selecionados]</span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>  p_conjunta_grupo <span class="ot">&lt;-</span> dados_conjuntos<span class="sc">$</span>prob_conjunta[selecionados]</span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>  p_condicional_grupo <span class="ot">&lt;-</span> p_conjunta_grupo <span class="sc">/</span> <span class="fu">sum</span>(p_conjunta_grupo)</span>
+<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>  media_grupo <span class="ot">&lt;-</span> media_condicional[<span class="fu">as.character</span>(grupo)]</span>
+<span id="cb50-18"><a href="#cb50-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-19"><a href="#cb50-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>((y_grupo <span class="sc">-</span> media_grupo)<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> p_condicional_grupo)</span>
+<span id="cb50-20"><a href="#cb50-20" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb50-21"><a href="#cb50-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-22"><a href="#cb50-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Média das variâncias condicionais: variação dentro dos grupos</span></span>
+<span id="cb50-23"><a href="#cb50-23" aria-hidden="true" tabindex="-1"></a>variacao_dentro <span class="ot">&lt;-</span> <span class="fu">sum</span>(variancia_condicional <span class="sc">*</span> prob_grupo)</span>
+<span id="cb50-24"><a href="#cb50-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-25"><a href="#cb50-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Variância das médias condicionais: variação entre os grupos</span></span>
+<span id="cb50-26"><a href="#cb50-26" aria-hidden="true" tabindex="-1"></a>variacao_entre <span class="ot">&lt;-</span> <span class="fu">sum</span>(</span>
+<span id="cb50-27"><a href="#cb50-27" aria-hidden="true" tabindex="-1"></a>  (media_condicional <span class="sc">-</span> media_y)<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> prob_grupo</span>
+<span id="cb50-28"><a href="#cb50-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb50-29"><a href="#cb50-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-30"><a href="#cb50-30" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb50-31"><a href="#cb50-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">variancia_total =</span> variancia_total_y,</span>
+<span id="cb50-32"><a href="#cb50-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">variacao_dentro =</span> variacao_dentro,</span>
+<span id="cb50-33"><a href="#cb50-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">variacao_entre =</span> variacao_entre,</span>
+<span id="cb50-34"><a href="#cb50-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">soma_das_parcelas =</span> variacao_dentro <span class="sc">+</span> variacao_entre</span>
+<span id="cb50-35"><a href="#cb50-35" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  variancia_total   variacao_dentro    variacao_entre soma_das_parcelas 
+             1.40              0.44              0.96              1.40 </code></pre>
+</div>
+</div>
+<p>Essa decomposição ajuda a entender por que o conhecimento de <span class="math inline">\(X\)</span> pode melhorar a previsão de <span class="math inline">\(Y\)</span>: quanto maior a variação entre as médias condicionais, maior é a parcela da variação de <span class="math inline">\(Y\)</span> que pode ser associada às diferenças entre os grupos definidos por <span class="math inline">\(X\)</span>.</p>
+</section>
+</section>
+<section id="uma-ponte-para-o-modelo-de-regressão" class="level2">
+<h2 class="anchored" data-anchor-id="uma-ponte-para-o-modelo-de-regressão">8. Uma ponte para o modelo de regressão</h2>
+<p>Considere o modelo populacional:</p>
+<p><span class="math display">\[
+Y=\beta_0+\beta_1X+u,
+\]</span></p>
+<p>com</p>
+<p><span class="math display">\[
+\mathbb{E}(u\mid X)=0.
+\]</span></p>
+<p>Aplicando a esperança condicional aos dois lados,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb{E}(Y\mid X)
+&amp;=\mathbb{E}(\beta_0+\beta_1X+u\mid X)\\
+&amp;=\beta_0+\beta_1X+\mathbb{E}(u\mid X)\\
+&amp;=\beta_0+\beta_1X.
+\end{aligned}
+\]</span></p>
+<p>Assim, sob a hipótese de média condicional zero, a função de esperança condicional é linear em <span class="math inline">\(X\)</span>.</p>
+<section id="simulação" class="level3">
+<h3 class="anchored" data-anchor-id="simulação">8.1 Simulação</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tamanho da amostra</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>n_sim <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Regressor: quantidade de insumo</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>x_sim <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_sim, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Erro com média condicional zero</span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>u_sim <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_sim, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fl">1.5</span>)</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultado gerado pelo modelo populacional</span></span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>y_sim <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">+</span> <span class="fl">0.8</span> <span class="sc">*</span> x_sim <span class="sc">+</span> u_sim</span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificações amostrais aproximadas</span></span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">media_erro =</span> <span class="fu">mean</span>(u_sim),</span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">covariancia_x_erro =</span> <span class="fu">cov</span>(x_sim, u_sim)</span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        media_erro covariancia_x_erro 
+        0.05997055        -0.10018323 </code></pre>
+</div>
+</div>
+<p>Na população simulada, os valores verdadeiros são <span class="math inline">\(\beta_0=5\)</span> e <span class="math inline">\(\beta_1=0{,}8\)</span>. Podemos estimá-los por MQO.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimando uma regressão linear simples</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>modelo_simulado <span class="ot">&lt;-</span> <span class="fu">lm</span>(y_sim <span class="sc">~</span> x_sim)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(modelo_simulado)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)       x_sim 
+  5.2944915   0.7766686 </code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exibindo somente parte das observações para facilitar a visualização</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>indices <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq_len</span>(n_sim), <span class="at">size =</span> <span class="dv">300</span>)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>  x_sim[indices],</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>  y_sim[indices],</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">39</span> <span class="sc">/</span> <span class="dv">255</span>, <span class="dv">76</span> <span class="sc">/</span> <span class="dv">255</span>, <span class="dv">119</span> <span class="sc">/</span> <span class="dv">255</span>, <span class="fl">0.45</span>),</span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"X"</span>,</span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Y"</span></span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Função de esperança condicional verdadeira</span></span>
+<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">5</span>, <span class="at">b =</span> <span class="fl">0.8</span>, <span class="at">col =</span> <span class="st">"#8B1E3F"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Revisao_Estatistica_1_files/figure-html/grafico-regressao-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="síntese-dos-principais-conceitos" class="level2">
+<h2 class="anchored" data-anchor-id="síntese-dos-principais-conceitos">9. Síntese dos principais conceitos</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 82%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Conceito</th>
+<th style="text-align: left;">Definição ou resultado principal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Valor esperado</td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb{E}(X)=\sum_x xP(X=x)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Segundo momento</td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb{E}(X^2)=\sum_x x^2P(X=x)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Variância</td>
+<td style="text-align: left;"><span class="math inline">\(\operatorname{Var}(X)=\mathbb{E}(X^2)-[\mathbb{E}(X)]^2\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Covariância</td>
+<td style="text-align: left;"><span class="math inline">\(\operatorname{Cov}(X,Y)=\mathbb{E}(XY)-\mathbb{E}(X)\mathbb{E}(Y)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Correlação</td>
+<td style="text-align: left;"><span class="math inline">\(\operatorname{Corr}(X,Y)=\operatorname{Cov}(X,Y)/(\sigma_X\sigma_Y)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Esperança condicional</td>
+<td style="text-align: left;">Média de <span class="math inline">\(Y\)</span> na subpopulação definida por <span class="math inline">\(X\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Expectativas iteradas</td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb{E}[\mathbb{E}(Y\mid X)]=\mathbb{E}(Y)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Variância total</td>
+<td style="text-align: left;"><span class="math inline">\(\operatorname{Var}(Y)=\mathbb{E}[\operatorname{Var}(Y\mid X)]+\operatorname{Var}[\mathbb{E}(Y\mid X)]\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="considerações-finais" class="level1">
+<h1>Considerações finais</h1>
+<p>Os conceitos revisados neste material formam a base probabilística da Econometria. O valor esperado descreve o centro de uma distribuição; a variância caracteriza sua dispersão; a covariância mede associação linear; e a esperança condicional descreve como a média de uma variável se modifica com a informação disponível.</p>
+<p>A Lei das Expectativas Iteradas conecta médias condicionais e incondicionais e permite transformar hipóteses condicionais em condições de momento. Esses resultados serão retomados no estudo da função de esperança condicional, do melhor preditor linear e do método de mínimos quadrados ordinários.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

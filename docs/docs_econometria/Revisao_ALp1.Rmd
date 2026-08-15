@@ -839,8 +839,7 @@ Somente matrizes quadradas de posto completo (ou seja, $\det(\mathbf{A}) \neq 0)
 
 ### Encontrando a inversa de uma matriz quadrada
 
-Se $\mathbf{A}$ é quadrada e não singular ($\det(\mathbf{A}) \neq 0$), a sua inversa 
-$\mathbf{A}\^{-1}$ pode ser encontrada da seguinte forma:
+Se $\mathbf{A}$ é quadrada e não singular ($\det(\mathbf{A}) \neq 0$), a sua inversa $\mathbf{A}\^{-1}$ pode ser encontrada da seguinte forma:
 
 $$
 \mathbf{A}^{-1} = \frac{1}{\det(\mathbf{A})} (\text{adj} \, \mathbf{A})

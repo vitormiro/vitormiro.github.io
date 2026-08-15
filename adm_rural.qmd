@@ -1,0 +1,9 @@
+---
+title: "Administração Rural<br>(Economia e Gestão de Empresas Rurais)"
+author: "Vitor Hugo Miro"
+title-block: false
+---
+
+Disciplina ofertada pelo Departamento de Economia Agrícola da Universidade Federal do Ceará.
+
+- [Programa da Disciplina (2026)](docs/docs_adm_rural/programa_2026.pdf)

@@ -1,0 +1,908 @@
+---
+title: "Revisão de Probabilidade e Estatística"
+subtitle: "Valor esperado, variância, covariância e esperança condicional"
+author: "Vitor Hugo Miro"
+output:
+  html_notebook:
+    toc: true
+    toc_float: true
+---
+
+```{r configuracao, include=FALSE}
+# Opções gerais dos blocos de código
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  fig.align = "center",
+  fig.width = 7,
+  fig.height = 4.5
+)
+
+# Evita a exibição automática de números em notação científica
+options(scipen = 999)
+
+# Garante que as simulações possam ser reproduzidas
+set.seed(2026)
+```
+
+# Introdução
+
+A probabilidade e a estatística fornecem a linguagem utilizada para descrever incerteza, formular modelos econométricos e avaliar evidências empíricas.
+
+Este material não pretende apresentar uma revisão completa de Estatística. O objetivo é retomar alguns conceitos utilizados com frequência em Econometria:
+
+-   variável aleatória e distribuição de probabilidade;
+-   valor esperado;
+-   variância e desvio-padrão;
+-   covariância e correlação;
+-   esperança condicional;
+-   Lei das Expectativas Iteradas.
+
+Ao longo do texto, combinaremos definições matemáticas, exemplos numéricos e pequenas aplicações no `R`.
+
+## 1. Variáveis aleatórias e distribuições de probabilidade
+
+Uma **variável aleatória** associa um valor numérico a cada resultado possível de um evento aleatório.
+
+Como exemplo, considere a produtividade de uma cultura em uma propriedade escolhida aleatoriamente. Antes de observarmos a propriedade, a produtividade é desconhecida e pode ser representada por uma variável aleatória $X$.
+
+Uma variável aleatória pode ser:
+
+-   **discreta**, quando assume um conjunto finito ou enumerável de valores;
+-   **contínua**, quando pode assumir qualquer valor em determinado intervalo.
+
+### 1.1 Distribuição de uma variável aleatória discreta
+
+Para uma variável aleatória discreta, a função de probabilidade associa uma probabilidade a cada valor possível:
+
+$$
+p(x)=P(X=x).
+$$
+
+As probabilidades devem satisfazer:
+
+$$
+p(x)\geq 0
+\quad\text{e}\quad
+\sum_x p(x)=1.
+$$
+
+**EXEMPLO**
+
+Suponha que a produtividade $X$, medida em toneladas por hectare, apresente a seguinte distribuição:
+
+| Produtividade $x$ |  2  |  3  |  4  |
+|:-----------------:|:---:|:---:|:---:|
+|     $P(X=x)$      | 0,2 | 0,5 | 0,3 |
+
+No `R`, podemos representar essa distribuição usando dois vetores.
+
+```{r distribuicao-discreta}
+# Valores possíveis da produtividade, em toneladas por hectare
+x <- c(2, 3, 4)
+
+# Probabilidade associada a cada valor
+probabilidade <- c(0.2, 0.5, 0.3)
+
+# Organizando a distribuição em uma tabela
+distribuicao <- data.frame(
+  produtividade = x,
+  probabilidade = probabilidade
+)
+
+distribuicao
+
+# Verificando se as probabilidades somam 1
+sum(probabilidade)
+```
+
+Também podemos sortear observações dessa distribuição.
+
+```{r amostra-distribuicao}
+# Sorteando a produtividade de 20 propriedades
+amostra_x <- sample(
+  x = x,
+  size = 20,
+  replace = TRUE,
+  prob = probabilidade
+)
+
+amostra_x
+```
+
+> **Por que isso importa para a Econometria?**\
+> Em Econometria, tratamos variáveis como renda, produtividade, escolaridade e preços como realizações de variáveis aleatórias. As propriedades dos estimadores dependem das distribuições dessas variáveis.
+
+## 2. Valor esperado
+
+O **valor esperado** representa o centro da distribuição de uma variável aleatória. Ele também pode ser interpretado como a média que observaríamos em um grande número de repetições do mesmo evento.
+
+Para uma variável aleatória discreta $X$,
+
+$$
+\mathbb{E}(X)=\sum_x xP(X=x).
+$$
+
+Para uma variável aleatória contínua com função densidade $f(x)$,
+
+$$
+\mathbb{E}(X)=\int_{-\infty}^{+\infty}x f(x)\,dx.
+$$
+
+Neste material, os cálculos manuais serão apresentados principalmente com variáveis discretas, pois tornam a lógica mais transparente.
+
+### 2.1 Calculando o valor esperado
+
+Retomando a distribuição da produtividade,
+
+$$
+\begin{aligned}
+\mathbb{E}(X)
+&=2(0{,}2)+3(0{,}5)+4(0{,}3)\\
+&=3{,}1 \text{ toneladas por hectare}.
+\end{aligned}
+$$
+
+```{r valor-esperado}
+# Valor esperado: soma dos valores ponderados pelas probabilidades
+esperanca_x <- sum(x * probabilidade)
+
+esperanca_x
+```
+
+O valor esperado não precisa ser um dos resultados possíveis. Neste exemplo, $X$ somente assume os valores 2, 3 ou 4, mas seu valor esperado é 3,1.
+
+### 2.2 Valor esperado de uma função
+
+Se $g(X)$ é uma função da variável aleatória $X$, então:
+
+$$
+\mathbb{E}[g(X)]=\sum_x g(x)P(X=x).
+$$
+
+Por exemplo, o segundo momento de $X$ é:
+
+$$
+\mathbb{E}(X^2)=\sum_x x^2P(X=x).
+$$
+
+```{r segundo-momento}
+# Segundo momento da produtividade
+esperanca_x2 <- sum(x^2 * probabilidade)
+
+esperanca_x2
+```
+
+O segundo momento será utilizado no cálculo da variância.
+
+### 2.3 Propriedades do valor esperado
+
+Para constantes $a$ e $b$,
+
+$$
+\mathbb{E}(a+bX)=a+b\mathbb{E}(X).
+$$
+
+Mais geralmente, para duas variáveis aleatórias $X$ e $Y$,
+
+$$
+\mathbb{E}(aX+bY)=a\mathbb{E}(X)+b\mathbb{E}(Y).
+$$
+
+Essa propriedade é denominada **linearidade do valor esperado**. Ela é válida mesmo quando $X$ e $Y$ não são independentes.
+
+**EXEMPLO**
+
+Suponha que a receita por hectare, em centenas de reais, seja dada por:
+
+$$
+R=5+2X.
+$$
+
+Logo,
+
+$$
+\mathbb{E}(R)=5+2\mathbb{E}(X)=5+2(3{,}1)=11{,}2.
+$$
+
+```{r linearidade-esperanca}
+# Receita correspondente a cada nível de produtividade
+receita <- 5 + 2 * x
+
+# Cálculo direto do valor esperado da receita
+esperanca_receita_direta <- sum(receita * probabilidade)
+
+# Cálculo usando a linearidade do valor esperado
+esperanca_receita_linear <- 5 + 2 * esperanca_x
+
+c(
+  calculo_direto = esperanca_receita_direta,
+  pela_linearidade = esperanca_receita_linear
+)
+```
+
+### 2.4 Valor esperado e média amostral
+
+O valor esperado é uma característica da população ou do modelo probabilístico. A **média amostral** é calculada a partir dos dados:
+
+$$
+\bar{X}=\frac{1}{n}\sum_{i=1}^n X_i.
+$$
+
+Quando a amostra cresce, a média amostral tende a se aproximar de $\mathbb{E}(X)$. Esse resultado será estudado posteriormente como a **Lei dos Grandes Números**.
+
+```{r media-amostral}
+# Gerando uma amostra grande da distribuição de X
+amostra_grande <- sample(
+  x = x,
+  size = 10000,
+  replace = TRUE,
+  prob = probabilidade
+)
+
+c(
+  valor_esperado = esperanca_x,
+  media_amostral = mean(amostra_grande)
+)
+```
+
+> **Por que isso importa para a Econometria?**\
+> Hipóteses como $\mathbb{E}(u)=0$ e $\mathbb{E}(u\mid X)=0$ são formuladas em termos de valor esperado. Além disso, muitos estimadores econométricos são médias ou funções de médias amostrais.
+
+## 3. Variância e desvio-padrão
+
+O valor esperado informa o centro da distribuição, mas não descreve sua dispersão. A **variância** mede o afastamento quadrático médio de $X$ em relação ao seu valor esperado:
+
+$$
+\operatorname{Var}(X)
+=\mathbb{E}\left[(X-\mathbb{E}(X))^2\right].
+$$
+
+Uma forma equivalente é:
+
+$$
+\operatorname{Var}(X)=\mathbb{E}(X^2)-[\mathbb{E}(X)]^2.
+$$
+
+### 3.1 Calculando a variância
+
+Para a distribuição da produtividade,
+
+$$
+\operatorname{Var}(X)
+=10{,}1-(3{,}1)^2
+=0{,}49.
+$$
+
+```{r variancia-populacional}
+# Forma 1: definição da variância
+variancia_x_definicao <- sum(
+  (x - esperanca_x)^2 * probabilidade
+)
+
+# Forma 2: diferença entre o segundo momento e a média ao quadrado
+variancia_x_momentos <- esperanca_x2 - esperanca_x^2
+
+c(
+  pela_definicao = variancia_x_definicao,
+  pelos_momentos = variancia_x_momentos
+)
+```
+
+A variância é expressa na unidade original elevada ao quadrado. O **desvio-padrão** retorna à unidade original:
+
+$$
+\operatorname{DP}(X)=\sqrt{\operatorname{Var}(X)}.
+$$
+
+```{r desvio-padrao-populacional}
+# Desvio-padrão da produtividade
+desvio_padrao_x <- sqrt(variancia_x_definicao)
+
+desvio_padrao_x
+```
+
+### 3.2 Variância amostral
+
+Em uma amostra, a variância é normalmente calculada como:
+
+$$
+s_X^2=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2.
+$$
+
+O denominador $n-1$ é utilizado para que $s_X^2$ seja um estimador não viesado da variância populacional, sob amostragem aleatória.
+
+```{r variancia-amostral}
+# Pequena amostra observada de produtividades
+produtividade_observada <- c(2.8, 3.3, 2.9, 4.1, 3.6, 3.0)
+
+# Variância e desvio-padrão amostrais
+var(produtividade_observada)
+sd(produtividade_observada)
+```
+
+### 3.3 Propriedades da variância
+
+Para constantes $a$ e $b$,
+
+$$
+\operatorname{Var}(a+bX)=b^2\operatorname{Var}(X).
+$$
+
+Somar uma constante altera o centro da distribuição, mas não sua dispersão. Multiplicar $X$ por $b$ multiplica a variância por $b^2$.
+
+```{r propriedade-variancia}
+# Transformação linear da produtividade
+a <- 5
+b <- 2
+
+# Variância calculada diretamente
+variancia_transformada_direta <- sum(
+  ((a + b * x) - (a + b * esperanca_x))^2 * probabilidade
+)
+
+# Variância calculada pela propriedade
+variancia_transformada_propriedade <- b^2 * variancia_x_definicao
+
+c(
+  calculo_direto = variancia_transformada_direta,
+  pela_propriedade = variancia_transformada_propriedade
+)
+```
+
+> **Por que isso importa para a Econometria?**\
+> A variância é central para avaliar a precisão de um estimador. Estimadores com menor variância produzem estimativas mais concentradas em torno do valor verdadeiro. Erros-padrão são construídos a partir de variâncias estimadas.
+
+## 4. Covariância e correlação
+
+A **covariância** mede como duas variáveis aleatórias variam conjuntamente:
+
+$$
+\operatorname{Cov}(X,Y)
+=\mathbb{E}\left[(X-\mathbb{E}(X))(Y-\mathbb{E}(Y))\right].
+$$
+
+Uma expressão equivalente é:
+
+$$
+\operatorname{Cov}(X,Y)
+=\mathbb{E}(XY)-\mathbb{E}(X)\mathbb{E}(Y).
+$$
+
+Em geral:
+
+-   $\operatorname{Cov}(X,Y)>0$: valores elevados de $X$ tendem a ocorrer com valores elevados de $Y$;
+-   $\operatorname{Cov}(X,Y)<0$: valores elevados de $X$ tendem a ocorrer com valores reduzidos de $Y$;
+-   $\operatorname{Cov}(X,Y)=0$: não há associação **linear** entre as variáveis.
+
+### 4.1 Covariância amostral
+
+Para uma amostra com $n$ observações,
+
+$$
+s_{XY}=\frac{1}{n-1}
+\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y}).
+$$
+
+**EXEMPLO**
+
+Considere informações sobre aplicação de fertilizante e produtividade em cinco propriedades.
+
+```{r dados-covariancia}
+# Quantidade de fertilizante aplicada, em kg/ha
+fertilizante <- c(50, 60, 70, 80, 90)
+
+# Produtividade observada, em kg/ha
+produtividade <- c(2800, 3000, 3100, 3500, 3600)
+
+dados_agricolas <- data.frame(
+  fertilizante = fertilizante,
+  produtividade = produtividade
+)
+
+dados_agricolas
+```
+
+```{r calculo-covariancia}
+# Covariância calculada pela função do R
+covariancia_amostral <- cov(fertilizante, produtividade)
+
+# Cálculo manual da covariância amostral
+n <- length(fertilizante)
+
+covariancia_manual <- sum(
+  (fertilizante - mean(fertilizante)) *
+    (produtividade - mean(produtividade))
+) / (n - 1)
+
+c(
+  funcao_cov = covariancia_amostral,
+  calculo_manual = covariancia_manual
+)
+```
+
+```{r grafico-covariancia}
+# Diagrama de dispersão
+plot(
+  fertilizante,
+  produtividade,
+  pch = 19,
+  col = "#274C77",
+  xlab = "Fertilizante (kg/ha)",
+  ylab = "Produtividade (kg/ha)"
+)
+
+# Reta de regressão apenas para auxiliar a visualização
+abline(
+  lm(produtividade ~ fertilizante),
+  col = "#8B1E3F",
+  lwd = 2
+)
+```
+
+### 4.2 Correlação
+
+A magnitude da covariância depende das unidades de medida. A **correlação** padroniza a covariância:
+
+$$
+\operatorname{Corr}(X,Y)
+=\frac{\operatorname{Cov}(X,Y)}
+{\sqrt{\operatorname{Var}(X)}\sqrt{\operatorname{Var}(Y)}}.
+$$
+
+Seu valor está sempre entre $-1$ e $1$.
+
+```{r correlacao}
+# Correlação calculada pela função do R
+correlacao_amostral <- cor(fertilizante, produtividade)
+
+# Cálculo a partir da covariância e dos desvios-padrão
+correlacao_manual <- cov(fertilizante, produtividade) /
+  (sd(fertilizante) * sd(produtividade))
+
+c(
+  funcao_cor = correlacao_amostral,
+  calculo_manual = correlacao_manual
+)
+```
+
+### 4.3 Covariância zero não implica independência
+
+Se duas variáveis são independentes e possuem momentos finitos, sua covariância é zero. A recíproca, entretanto, não é necessariamente verdadeira.
+
+Considere $X\in\{-1,0,1\}$, com valores igualmente prováveis, e $Y=X^2$.
+
+```{r covariancia-zero}
+# Valores possíveis de X e probabilidades
+x_exemplo <- c(-1, 0, 1)
+p_exemplo <- rep(1 / 3, 3)
+
+# Y depende completamente de X
+y_exemplo <- x_exemplo^2
+
+# Momentos necessários para a covariância
+ex <- sum(x_exemplo * p_exemplo)
+ey <- sum(y_exemplo * p_exemplo)
+exy <- sum(x_exemplo * y_exemplo * p_exemplo)
+
+cov_xy <- exy - ex * ey
+
+cov_xy
+```
+
+A covariância é zero, mas $Y$ é determinada por $X$. Portanto, ausência de correlação linear não significa ausência de relação entre as variáveis.
+
+> **Por que isso importa para a Econometria?**\
+> A inclinação da regressão linear simples depende da covariância entre $X$ e $Y$. Além disso, hipóteses de exogeneidade são frequentemente apresentadas por meio de restrições sobre a relação entre os regressores e o erro.
+
+## 5. Esperança condicional
+
+A **esperança condicional** de $Y$ dado $X=x$ é a média de $Y$ na subpopulação em que $X=x$:
+
+$$
+\mathbb{E}(Y\mid X=x)
+=\sum_y yP(Y=y\mid X=x),
+$$
+
+no caso discreto.
+
+Enquanto $\mathbb{E}(Y)$ é um único número, $\mathbb{E}(Y\mid X)$ é uma função de $X$. Ela associa uma média de $Y$ a cada valor possível de $X$.
+
+### 5.1 Exemplo: irrigação e produtividade
+
+Considere $I$, uma variável binária que indica o uso de irrigação:
+
+$$
+I=\begin{cases}
+1, & \text{se a propriedade utiliza irrigação};\\
+0, & \text{caso contrário}.
+\end{cases}
+$$
+
+A distribuição conjunta de $I$ e da produtividade $Y$ é apresentada abaixo.
+
+```{r distribuicao-conjunta}
+# Distribuição conjunta de irrigação e produtividade
+dados_conjuntos <- data.frame(
+  irrigacao = c(0, 0, 0, 1, 1, 1),
+  produtividade = c(2, 3, 4, 4, 5, 6),
+  prob_conjunta = c(0.12, 0.36, 0.12, 0.10, 0.20, 0.10)
+)
+
+dados_conjuntos
+
+# Conferindo a soma das probabilidades conjuntas
+sum(dados_conjuntos$prob_conjunta)
+```
+
+Primeiro, calculamos as probabilidades marginais dos dois grupos:
+
+$$
+P(I=0)=0{,}60
+\quad\text{e}\quad
+P(I=1)=0{,}40.
+$$
+
+```{r probabilidades-marginais}
+# Probabilidade total de cada grupo
+prob_grupo <- tapply(
+  dados_conjuntos$prob_conjunta,
+  dados_conjuntos$irrigacao,
+  sum
+)
+
+prob_grupo
+```
+
+Para obter $\mathbb{E}(Y\mid I=i)$, ponderamos os valores de $Y$ pelas probabilidades condicionais dentro de cada grupo.
+
+```{r esperanca-condicional}
+# Numerador: soma de y vezes a probabilidade conjunta em cada grupo
+numerador_condicional <- tapply(
+  dados_conjuntos$produtividade * dados_conjuntos$prob_conjunta,
+  dados_conjuntos$irrigacao,
+  sum
+)
+
+# Média condicional em cada grupo
+media_condicional <- numerador_condicional / prob_grupo
+
+media_condicional
+```
+
+Assim,
+
+$$
+\mathbb{E}(Y\mid I=0)=3
+\quad\text{e}\quad
+\mathbb{E}(Y\mid I=1)=5.
+$$
+
+Isso não significa, por si só, que a irrigação cause um aumento de duas toneladas na produtividade. A diferença também pode refletir solo, clima, tecnologia, seleção das propriedades ou outras características.
+
+### 5.2 Esperança condicional em uma amostra
+
+Em dados amostrais, uma forma simples de estimar esperanças condicionais para uma variável categórica é calcular a média de cada grupo.
+
+```{r medias-por-grupo}
+# Exemplo de uma pequena amostra de propriedades
+amostra_fazendas <- data.frame(
+  irrigacao = c(0, 0, 0, 0, 1, 1, 1, 1),
+  produtividade = c(2.7, 3.1, 3.0, 3.4, 4.5, 5.2, 4.8, 5.5)
+)
+
+# Média geral da produtividade
+mean(amostra_fazendas$produtividade)
+
+# Médias condicionais ao uso de irrigação
+tapply(
+  amostra_fazendas$produtividade,
+  amostra_fazendas$irrigacao,
+  mean
+)
+```
+
+### 5.3 Propriedades importantes
+
+Para constantes $a$ e $b$,
+
+$$
+\mathbb{E}(a+bY\mid X)
+=a+b\mathbb{E}(Y\mid X).
+$$
+
+Se $g(X)$ é uma função conhecida de $X$, então:
+
+$$
+\mathbb{E}[g(X)\mid X]=g(X),
+$$
+
+e
+
+$$
+\mathbb{E}[g(X)Y\mid X]
+=g(X)\mathbb{E}(Y\mid X).
+$$
+
+A função $g(X)$ pode ser colocada fora da esperança condicional porque, depois que condicionamos em $X$, seu valor é conhecido.
+
+### 5.4 Esperança condicional como melhor preditor
+
+Entre todas as funções de $X$, a esperança condicional minimiza o erro quadrático médio de previsão:
+
+$$
+\mathbb{E}(Y\mid X)
+=\arg\min_{g(X)}
+\mathbb{E}\left[(Y-g(X))^2\right].
+$$
+
+No exemplo amostral, podemos comparar duas previsões:
+
+1.  usar a média geral para todas as propriedades;
+2.  usar a média específica de cada grupo de irrigação.
+
+```{r previsao-condicional}
+# Previsão 1: a mesma média geral para todas as propriedades
+previsao_geral <- rep(
+  mean(amostra_fazendas$produtividade),
+  nrow(amostra_fazendas)
+)
+
+# Previsão 2: a média correspondente ao grupo da propriedade
+medias_grupos <- tapply(
+  amostra_fazendas$produtividade,
+  amostra_fazendas$irrigacao,
+  mean
+)
+
+previsao_condicional <- medias_grupos[
+  as.character(amostra_fazendas$irrigacao)
+]
+
+# Erro quadrático médio de cada previsão
+eqm_geral <- mean(
+  (amostra_fazendas$produtividade - previsao_geral)^2
+)
+
+eqm_condicional <- mean(
+  (amostra_fazendas$produtividade - previsao_condicional)^2
+)
+
+c(
+  media_geral = eqm_geral,
+  media_condicional = eqm_condicional
+)
+```
+
+Neste exemplo, conhecer o grupo de irrigação permite construir uma previsão com menor erro quadrático médio.
+
+> **Por que isso importa para a Econometria?**\
+> A função de esperança condicional $\mathbb{E}(Y\mid X)$ descreve como a média de $Y$ varia com $X$. A regressão busca caracterizar ou aproximar essa relação. Uma diferença condicional, contudo, não deve ser interpretada automaticamente como efeito causal.
+
+## 6. Lei das Expectativas Iteradas
+
+A **Lei das Expectativas Iteradas** afirma que:
+
+$$
+\mathbb{E}\left[\mathbb{E}(Y\mid X)\right]
+=\mathbb{E}(Y).
+$$
+
+Em palavras: podemos calcular a média geral em duas etapas.
+
+1.  Calculamos a média de $Y$ em cada grupo definido por $X$.
+2.  Calculamos a média dessas médias condicionais, ponderando cada grupo por sua probabilidade.
+
+### 6.1 Verificação no exemplo da irrigação
+
+No exemplo anterior,
+
+$$
+\begin{aligned}
+\mathbb{E}(Y)
+&=\mathbb{E}[\mathbb{E}(Y\mid I)]\\
+&=\mathbb{E}(Y\mid I=0)P(I=0)
+  +\mathbb{E}(Y\mid I=1)P(I=1)\\
+&=3(0{,}60)+5(0{,}40)\\
+&=3{,}8.
+\end{aligned}
+$$
+
+```{r lei-expectativas-iteradas}
+# Forma 1: valor esperado calculado diretamente da distribuição conjunta
+esperanca_y_direta <- sum(
+  dados_conjuntos$produtividade * dados_conjuntos$prob_conjunta
+)
+
+# Forma 2: média ponderada das esperanças condicionais
+esperanca_y_iterada <- sum(media_condicional * prob_grupo)
+
+c(
+  calculo_direto = esperanca_y_direta,
+  expectativas_iteradas = esperanca_y_iterada
+)
+```
+
+A igualdade mostra que a média geral pode ser decomposta a partir das médias dos diferentes grupos da população.
+
+### 6.2 Uma consequência importante
+
+Se
+
+$$
+\mathbb{E}(u\mid X)=0,
+$$
+
+então, pela Lei das Expectativas Iteradas,
+
+$$
+\mathbb{E}(u)
+=\mathbb{E}[\mathbb{E}(u\mid X)]
+=0.
+$$
+
+Além disso,
+
+$$
+\mathbb{E}(Xu)
+=\mathbb{E}[\mathbb{E}(Xu\mid X)]
+=\mathbb{E}[X\mathbb{E}(u\mid X)]
+=0.
+$$
+
+Portanto, a hipótese de média condicional zero implica média incondicional zero e ausência de correlação entre $X$ e $u$, quando os momentos existem. A recíproca não é garantida: $\mathbb{E}(Xu)=0$ é uma restrição mais fraca do que $\mathbb{E}(u\mid X)=0$.
+
+> **Por que isso importa para a Econometria?**\
+> A Lei das Expectativas Iteradas permite deduzir condições de momento a partir de hipóteses condicionais. Essa passagem será utilizada para estudar MQO, exogeneidade e propriedades dos estimadores.
+
+## 7. Decomposição da variância
+
+Uma extensão útil das ideias anteriores é a **Lei da Variância Total**:
+
+$$
+\operatorname{Var}(Y)
+=\mathbb{E}[\operatorname{Var}(Y\mid X)]
++\operatorname{Var}[\mathbb{E}(Y\mid X)].
+$$
+
+A variância total de $Y$ pode ser dividida em:
+
+-   variação de $Y$ **dentro dos grupos** definidos por $X$;
+-   variação **entre as médias dos grupos**.
+
+### 7.1 Aplicação ao exemplo da irrigação
+
+```{r variancia-total}
+# Média geral de Y
+media_y <- esperanca_y_direta
+
+# Variância total de Y
+variancia_total_y <- sum(
+  (dados_conjuntos$produtividade - media_y)^2 *
+    dados_conjuntos$prob_conjunta
+)
+
+# Variância condicional dentro de cada grupo
+variancia_condicional <- sapply(c(0, 1), function(grupo) {
+  selecionados <- dados_conjuntos$irrigacao == grupo
+
+  y_grupo <- dados_conjuntos$produtividade[selecionados]
+  p_conjunta_grupo <- dados_conjuntos$prob_conjunta[selecionados]
+  p_condicional_grupo <- p_conjunta_grupo / sum(p_conjunta_grupo)
+  media_grupo <- media_condicional[as.character(grupo)]
+
+  sum((y_grupo - media_grupo)^2 * p_condicional_grupo)
+})
+
+# Média das variâncias condicionais: variação dentro dos grupos
+variacao_dentro <- sum(variancia_condicional * prob_grupo)
+
+# Variância das médias condicionais: variação entre os grupos
+variacao_entre <- sum(
+  (media_condicional - media_y)^2 * prob_grupo
+)
+
+c(
+  variancia_total = variancia_total_y,
+  variacao_dentro = variacao_dentro,
+  variacao_entre = variacao_entre,
+  soma_das_parcelas = variacao_dentro + variacao_entre
+)
+```
+
+Essa decomposição ajuda a entender por que o conhecimento de $X$ pode melhorar a previsão de $Y$: quanto maior a variação entre as médias condicionais, maior é a parcela da variação de $Y$ que pode ser associada às diferenças entre os grupos definidos por $X$.
+
+## 8. Uma ponte para o modelo de regressão
+
+Considere o modelo populacional:
+
+$$
+Y=\beta_0+\beta_1X+u,
+$$
+
+com
+
+$$
+\mathbb{E}(u\mid X)=0.
+$$
+
+Aplicando a esperança condicional aos dois lados,
+
+$$
+\begin{aligned}
+\mathbb{E}(Y\mid X)
+&=\mathbb{E}(\beta_0+\beta_1X+u\mid X)\\
+&=\beta_0+\beta_1X+\mathbb{E}(u\mid X)\\
+&=\beta_0+\beta_1X.
+\end{aligned}
+$$
+
+Assim, sob a hipótese de média condicional zero, a função de esperança condicional é linear em $X$.
+
+### 8.1 Simulação
+
+```{r simulacao-regressao}
+# Tamanho da amostra
+n_sim <- 1000
+
+# Regressor: quantidade de insumo
+x_sim <- rnorm(n_sim, mean = 10, sd = 2)
+
+# Erro com média condicional zero
+u_sim <- rnorm(n_sim, mean = 0, sd = 1.5)
+
+# Resultado gerado pelo modelo populacional
+y_sim <- 5 + 0.8 * x_sim + u_sim
+
+# Verificações amostrais aproximadas
+c(
+  media_erro = mean(u_sim),
+  covariancia_x_erro = cov(x_sim, u_sim)
+)
+```
+
+Na população simulada, os valores verdadeiros são $\beta_0=5$ e $\beta_1=0{,}8$. Podemos estimá-los por MQO.
+
+```{r estimacao-regressao}
+# Estimando uma regressão linear simples
+modelo_simulado <- lm(y_sim ~ x_sim)
+
+coef(modelo_simulado)
+```
+
+```{r grafico-regressao}
+# Exibindo somente parte das observações para facilitar a visualização
+indices <- sample(seq_len(n_sim), size = 300)
+
+plot(
+  x_sim[indices],
+  y_sim[indices],
+  pch = 19,
+  col = rgb(39 / 255, 76 / 255, 119 / 255, 0.45),
+  xlab = "X",
+  ylab = "Y"
+)
+
+# Função de esperança condicional verdadeira
+abline(a = 5, b = 0.8, col = "#8B1E3F", lwd = 2)
+```
+
+## 9. Síntese dos principais conceitos
+
+| Conceito              | Definição ou resultado principal                                                                        |
+|:----------------------|:--------------------------------------------------------------------------------------------------------|
+| Valor esperado        | $\mathbb{E}(X)=\sum_x xP(X=x)$                                                                          |
+| Segundo momento       | $\mathbb{E}(X^2)=\sum_x x^2P(X=x)$                                                                      |
+| Variância             | $\operatorname{Var}(X)=\mathbb{E}(X^2)-[\mathbb{E}(X)]^2$                                               |
+| Covariância           | $\operatorname{Cov}(X,Y)=\mathbb{E}(XY)-\mathbb{E}(X)\mathbb{E}(Y)$                                     |
+| Correlação            | $\operatorname{Corr}(X,Y)=\operatorname{Cov}(X,Y)/(\sigma_X\sigma_Y)$                                   |
+| Esperança condicional | Média de $Y$ na subpopulação definida por $X$                                                           |
+| Expectativas iteradas | $\mathbb{E}[\mathbb{E}(Y\mid X)]=\mathbb{E}(Y)$                                                         |
+| Variância total       | $\operatorname{Var}(Y)=\mathbb{E}[\operatorname{Var}(Y\mid X)]+\operatorname{Var}[\mathbb{E}(Y\mid X)]$ |
+
+# Considerações finais
+
+Os conceitos revisados neste material formam a base probabilística da Econometria. O valor esperado descreve o centro de uma distribuição; a variância caracteriza sua dispersão; a covariância mede associação linear; e a esperança condicional descreve como a média de uma variável se modifica com a informação disponível.
+
+A Lei das Expectativas Iteradas conecta médias condicionais e incondicionais e permite transformar hipóteses condicionais em condições de momento. Esses resultados serão retomados no estudo da função de esperança condicional, do melhor preditor linear e do método de mínimos quadrados ordinários.

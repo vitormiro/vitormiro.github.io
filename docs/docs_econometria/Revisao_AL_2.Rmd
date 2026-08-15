@@ -1,0 +1,1237 @@
+---
+title: "Revisão de Álgebra Linear — Parte 2"
+subtitle: "Ferramentas matriciais para mínimos quadrados ordinários"
+author: "Vitor Hugo Miro"
+output:
+  html_notebook:
+    toc: true
+    toc_float: true
+---
+
+```{r configuracao, include=FALSE}
+# Opções gerais dos blocos de código
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  fig.align = "center",
+  fig.width = 7,
+  fig.height = 4.5
+)
+
+options(scipen = 999)
+set.seed(2026)
+```
+
+# Introdução
+
+Na Parte 1, revisamos vetores, matrizes, produtos, posto e invertibilidade. Neste segundo material, aplicaremos esses conceitos à formulação matricial do método de mínimos quadrados ordinários (MQO).
+
+Os principais tópicos são:
+
+-   sistemas de equações lineares;
+-   representação matricial do modelo de regressão;
+-   somatórios, médias e centralização;
+-   formas lineares, bilineares e quadráticas;
+-   matrizes definidas positivas e autovalores;
+-   diferenciação matricial;
+-   derivação do estimador de MQO;
+-   matrizes de projeção e de resíduos;
+-   decomposição da soma de quadrados;
+-   posto, autovalores e multicolinearidade.
+
+## 1. Sistemas de equações lineares
+
+Um sistema de $n$ equações em $k$ incógnitas pode ser representado por:
+
+$$
+\begin{aligned}
+a_{11}x_1+a_{12}x_2+\cdots+a_{1k}x_k&=b_1,\\
+a_{21}x_1+a_{22}x_2+\cdots+a_{2k}x_k&=b_2,\\
+&\vdots\\
+a_{n1}x_1+a_{n2}x_2+\cdots+a_{nk}x_k&=b_n.
+\end{aligned}
+$$
+
+Em notação matricial:
+
+$$
+\underset{n\times k}{\mathbf A}
+\underset{k\times1}{\mathbf x}
+=
+\underset{n\times1}{\mathbf b}.
+$$
+
+Ou:
+
+$$
+\mathbf A\mathbf x=\mathbf b.
+$$
+
+### 1.1 Existência e unicidade da solução
+
+A expressão:
+
+$$
+\mathbf x=\mathbf A^{-1}\mathbf b
+$$
+
+somente pode ser utilizada quando $\mathbf A$ é quadrada e não singular.
+
+Mais geralmente:
+
+-   se $\operatorname{posto}(\mathbf A)=k$ e o sistema é compatível, a solução é única;
+-   se há dependência linear entre as colunas, podem existir infinitas soluções;
+-   se $\mathbf b$ não pertence ao espaço gerado pelas colunas de $\mathbf A$, não existe solução exata.
+
+### 1.2 Exemplo com solução única
+
+Considere:
+
+$$
+\begin{aligned}
+x_1+x_2+x_3&=5,\\
+2x_1-x_2+6x_3&=12,\\
+x_1+3x_2+5x_3&=17.
+\end{aligned}
+$$
+
+Na forma matricial:
+
+$$
+\begin{bmatrix}
+1&1&1\\
+2&-1&6\\
+1&3&5
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\x_2\\x_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+5\\12\\17
+\end{bmatrix}.
+$$
+
+```{r sistema-linear}
+# Matriz de coeficientes
+A <- matrix(
+  c(1,  1, 1,
+    2, -1, 6,
+    1,  3, 5),
+  nrow = 3,
+  byrow = TRUE
+)
+
+# Vetor de constantes
+b <- matrix(c(5, 12, 17), ncol = 1)
+
+# Resolvendo Ax = b
+# solve(A, b) é preferível a solve(A) %*% b
+x_solucao <- solve(A, b)
+rownames(x_solucao) <- c("x1", "x2", "x3")
+
+x_solucao
+```
+
+Podemos verificar a solução substituindo-a no sistema:
+
+```{r verificar-sistema}
+A %*% x_solucao
+b
+```
+
+A solução é $x_1=1$, $x_2=2$ e $x_3=2$.
+
+> **Por que isso importa para a Econometria?**\
+> A minimização da soma dos quadrados gera um sistema linear chamado de **equações normais**: $\mathbf X'\mathbf X\widehat{\boldsymbol\beta}=\mathbf X'\mathbf y$.
+
+## 2. Representação matricial da regressão
+
+O modelo de regressão linear múltipla pode ser escrito como:
+
+$$
+\underset{n\times1}{\mathbf y}
+=
+\underset{n\times k}{\mathbf X}
+\underset{k\times1}{\boldsymbol\beta}
++
+\underset{n\times1}{\mathbf u}.
+$$
+
+Em que:
+
+$$
+\mathbf y=
+\begin{bmatrix}
+y_1\\y_2\\\vdots\\y_n
+\end{bmatrix},
+\qquad
+\boldsymbol\beta=
+\begin{bmatrix}
+\beta_1\\\beta_2\\\vdots\\\beta_k
+\end{bmatrix},
+\qquad
+\mathbf u=
+\begin{bmatrix}
+u_1\\u_2\\\vdots\\u_n
+\end{bmatrix}.
+$$
+
+A matriz de regressores é:
+
+$$
+\mathbf X=
+\begin{bmatrix}
+x_{11}&x_{12}&\cdots&x_{1k}\\
+x_{21}&x_{22}&\cdots&x_{2k}\\
+\vdots&\vdots&\ddots&\vdots\\
+x_{n1}&x_{n2}&\cdots&x_{nk}
+\end{bmatrix}.
+$$
+
+Se $\mathbf x_i$ representa o vetor-coluna de covariáveis da observação $i$, então:
+
+$$
+\mathbf X=
+\begin{bmatrix}
+\mathbf x_1'\\
+\mathbf x_2'\\
+\vdots\\
+\mathbf x_n'
+\end{bmatrix}
+$$
+
+e cada equação individual é:
+
+$$
+y_i=\mathbf x_i'\boldsymbol\beta+u_i.
+$$
+
+### 2.1 Exemplo de matriz de regressão
+
+Considere dados de oito propriedades rurais.
+
+```{r dados-regressao}
+# Variável dependente: produtividade em kg/ha
+y <- matrix(
+  c(2820, 3010, 3190, 3430, 3520, 3740, 3910, 4080),
+  ncol = 1,
+  dimnames = list(NULL, "produtividade")
+)
+
+# Variáveis explicativas
+fertilizante <- c(70, 80, 90, 105, 115, 125, 140, 150)
+chuva <- c(680, 720, 700, 760, 790, 770, 830, 850)
+
+# Matriz de regressores com intercepto
+X <- cbind(
+  intercepto = 1,
+  fertilizante = fertilizante,
+  chuva = chuva
+)
+
+y
+X
+```
+
+```{r dimensoes-regressao}
+# Número de observações e parâmetros
+n <- nrow(X)
+k <- ncol(X)
+
+c(n = n, k = k)
+dim(y)
+dim(X)
+```
+
+Para que todos os parâmetros sejam identificados, precisamos de:
+
+$$
+\operatorname{posto}(\mathbf X)=k.
+$$
+
+```{r posto-regressao}
+qr(X)$rank
+```
+
+## 3. Somatórios, médias e centralização
+
+### 3.1 Vetor de uns
+
+Denote por $\mathbf 1_n$ o vetor-coluna com $n$ elementos iguais a 1:
+
+$$
+\mathbf 1_n=
+\begin{bmatrix}
+1\\
+\vdots\\
+1
+\end{bmatrix}_{n\times1}.
+$$
+
+Para um vetor $\mathbf x$:
+
+$$
+\mathbf 1_n'\mathbf x
+=
+\sum_{i=1}^{n}x_i.
+$$
+
+Consequentemente:
+
+$$
+\bar x
+=
+\frac{1}{n}\mathbf 1_n'\mathbf x.
+$$
+
+```{r soma-media}
+# Vetor de exemplo
+x <- matrix(c(4, 5, 6, 3, 7), ncol = 1)
+n_x <- nrow(x)
+um <- matrix(1, nrow = n_x, ncol = 1)
+
+# Soma por produto interno
+soma_x <- as.numeric(crossprod(um, x))
+
+# Média por produto interno
+media_x <- as.numeric(crossprod(um, x) / n_x)
+
+c(
+  soma_matricial = soma_x,
+  soma_R = sum(x),
+  media_matricial = media_x,
+  media_R = mean(x)
+)
+```
+
+### 3.2 Matriz de centralização
+
+O vetor contendo os desvios em relação à média é:
+
+$$
+\mathbf x-\bar x\mathbf 1_n.
+$$
+
+Como:
+
+$$
+\bar x\mathbf 1_n
+=
+\frac{1}{n}\mathbf 1_n\mathbf 1_n'\mathbf x,
+$$
+
+podemos escrever:
+
+$$
+\mathbf x-\bar x\mathbf 1_n
+=
+\left(
+\mathbf I_n-\frac{1}{n}\mathbf 1_n\mathbf 1_n'
+\right)\mathbf x.
+$$
+
+Definimos a **matriz de centralização**:
+
+$$
+\mathbf M_0
+=
+\mathbf I_n-\frac{1}{n}\mathbf 1_n\mathbf 1_n'.
+$$
+
+Assim:
+
+$$
+\mathbf M_0\mathbf x
+=
+\mathbf x-\bar x\mathbf 1_n.
+$$
+
+```{r matriz-centralizacao}
+# Matriz identidade e vetor de uns
+I <- diag(n_x)
+um <- matrix(1, nrow = n_x, ncol = 1)
+
+# Matriz de centralização
+M0 <- I - (1 / n_x) * tcrossprod(um)
+
+# Desvios em relação à média
+desvios <- M0 %*% x
+
+cbind(
+  x = x,
+  desvios_matriciais = desvios,
+  desvios_diretos = x - mean(x)
+)
+```
+
+### 3.3 Propriedades da matriz de centralização
+
+A matriz $\mathbf M_0$ é:
+
+1.  **simétrica**:
+
+$$
+\mathbf M_0'=\mathbf M_0;
+$$
+
+2.  **idempotente**:
+
+$$
+\mathbf M_0^2=\mathbf M_0;
+$$
+
+3.  ortogonal ao vetor de uns:
+
+$$
+\mathbf M_0\mathbf 1_n=\mathbf0.
+$$
+
+```{r propriedades-centralizacao}
+# Simetria
+isSymmetric(M0)
+
+# Idempotência
+round(M0 %*% M0 - M0, digits = 10)
+
+# M0 elimina o vetor de uns
+round(M0 %*% um, digits = 10)
+```
+
+### 3.4 Soma de quadrados dos desvios
+
+Como $\mathbf M_0$ é simétrica e idempotente:
+
+$$
+\begin{aligned}
+\sum_{i=1}^{n}(x_i-\bar x)^2
+&=
+(\mathbf M_0\mathbf x)'(\mathbf M_0\mathbf x)\\
+&=
+\mathbf x'\mathbf M_0'\mathbf M_0\mathbf x\\
+&=
+\mathbf x'\mathbf M_0\mathbf x.
+\end{aligned}
+$$
+
+```{r soma-quadrados-centralizada}
+# Forma matricial
+sq_matricial <- as.numeric(crossprod(x, M0 %*% x))
+
+# Cálculo direto
+sq_direta <- sum((x - mean(x))^2)
+
+c(
+  forma_matricial = sq_matricial,
+  forma_direta = sq_direta
+)
+```
+
+A variância amostral pode ser escrita como:
+
+$$
+s_x^2
+=
+\frac{1}{n-1}\mathbf x'\mathbf M_0\mathbf x.
+$$
+
+> **Por que isso importa para a Econometria?**\
+> A matriz $\mathbf M_0$ permite escrever a soma total de quadrados de $\mathbf y$ e será utilizada na definição matricial do $R^2$.
+
+## 4. Formas lineares, bilineares e quadráticas
+
+### 4.1 Forma linear
+
+Uma forma linear é uma função do tipo:
+
+$$
+f(\mathbf x)=\mathbf a'\mathbf x.
+$$
+
+O resultado é um escalar.
+
+```{r forma-linear}
+a <- matrix(c(2, -1, 3), ncol = 1)
+x_forma <- matrix(c(4, 2, 1), ncol = 1)
+
+as.numeric(crossprod(a, x_forma))
+```
+
+### 4.2 Forma bilinear
+
+Uma forma bilinear é:
+
+$$
+f(\mathbf x,\mathbf y)
+=
+\mathbf x'\mathbf A\mathbf y.
+$$
+
+```{r forma-bilinear}
+A_forma <- matrix(
+  c(1, 2,
+    3, 4,
+    5, 6),
+  nrow = 3,
+  byrow = TRUE
+)
+
+x_forma <- matrix(c(1, 2, 3), ncol = 1)
+y_forma <- matrix(c(2, -1), ncol = 1)
+
+as.numeric(t(x_forma) %*% A_forma %*% y_forma)
+```
+
+### 4.3 Forma quadrática
+
+Uma forma quadrática é:
+
+$$
+Q(\mathbf x)
+=
+\mathbf x'\mathbf A\mathbf x.
+$$
+
+Quando $\mathbf A$ é simétrica:
+
+$$
+Q(\mathbf x)
+=
+\sum_{i=1}^{n}\sum_{j=1}^{n}a_{ij}x_i x_j.
+$$
+
+Para:
+
+$$
+\mathbf A=
+\begin{bmatrix}
+a&c\\
+c&b
+\end{bmatrix},
+\qquad
+\mathbf x=
+\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix},
+$$
+
+temos:
+
+$$
+\mathbf x'\mathbf A\mathbf x
+=
+ax_1^2+2cx_1x_2+bx_2^2.
+$$
+
+```{r forma-quadratica}
+A_q <- matrix(
+  c(2, 1,
+    1, 3),
+  nrow = 2,
+  byrow = TRUE
+)
+
+x_q <- matrix(c(2, -1), ncol = 1)
+
+Q_x <- as.numeric(t(x_q) %*% A_q %*% x_q)
+Q_x
+```
+
+### 4.4 A parte simétrica de uma matriz
+
+Se $\mathbf A$ não é simétrica, a forma quadrática depende somente de sua parte simétrica:
+
+$$
+\mathbf A_s
+=
+\frac{\mathbf A+\mathbf A'}{2}.
+$$
+
+Então:
+
+$$
+\mathbf x'\mathbf A\mathbf x
+=
+\mathbf x'\mathbf A_s\mathbf x.
+$$
+
+```{r simetrizacao}
+# Matriz não simétrica
+A_ns <- matrix(
+  c(-3, 5,
+     4, -2),
+  nrow = 2,
+  byrow = TRUE
+)
+
+# Parte simétrica
+A_s <- (A_ns + t(A_ns)) / 2
+
+c(
+  forma_original = as.numeric(t(x_q) %*% A_ns %*% x_q),
+  forma_simetrica = as.numeric(t(x_q) %*% A_s %*% x_q)
+)
+```
+
+## 5. Matrizes definidas positivas
+
+Seja $\mathbf A$ uma matriz real simétrica.
+
+-   $\mathbf A$ é **definida positiva** se:
+
+$$
+\mathbf x'\mathbf A\mathbf x>0
+\quad\text{para todo }\mathbf x\neq\mathbf0;
+$$
+
+-   $\mathbf A$ é **semidefinida positiva** se:
+
+$$
+\mathbf x'\mathbf A\mathbf x\geq0
+\quad\text{para todo }\mathbf x;
+$$
+
+-   $\mathbf A$ é **definida negativa** se:
+
+$$
+\mathbf x'\mathbf A\mathbf x<0
+\quad\text{para todo }\mathbf x\neq\mathbf0;
+$$
+
+-   $\mathbf A$ é **indefinida** se a forma quadrática assume valores positivos e negativos.
+
+### 5.1 A matriz $\mathbf X'\mathbf X$
+
+Para qualquer vetor $\mathbf a$:
+
+$$
+\begin{aligned}
+\mathbf a'\mathbf X'\mathbf X\mathbf a
+&=
+(\mathbf X\mathbf a)'(\mathbf X\mathbf a)\\
+&=
+\|\mathbf X\mathbf a\|^2\\
+&\geq0.
+\end{aligned}
+$$
+
+Portanto, $\mathbf X'\mathbf X$ é sempre semidefinida positiva. Se $\mathbf X$ possui posto completo de colunas, então:
+
+$$
+\mathbf a'\mathbf X'\mathbf X\mathbf a>0
+\quad\text{para todo }\mathbf a\neq\mathbf0,
+$$
+
+e $\mathbf X'\mathbf X$ é definida positiva e invertível.
+
+> **Por que isso importa para a Econometria?**\
+> O posto completo de $\mathbf X$ garante uma solução única para as equações normais e, portanto, uma estimativa única de cada coeficiente de MQO.
+
+## 6. Autovalores e autovetores
+
+Para uma matriz quadrada $\mathbf A$, um escalar $\lambda$ e um vetor não nulo $\mathbf v$ satisfazem:
+
+$$
+\mathbf A\mathbf v=\lambda\mathbf v.
+$$
+
+O escalar $\lambda$ é um **autovalor** e $\mathbf v$ é um **autovetor** associado.
+
+Para uma matriz real simétrica:
+
+-   todos os autovalores são reais;
+-   existe uma base ortonormal de autovetores;
+-   a matriz pode ser diagonalizada ortogonalmente:
+
+$$
+\mathbf A
+=
+\mathbf P\boldsymbol\Lambda\mathbf P',
+\qquad
+\mathbf P'\mathbf P=\mathbf I.
+$$
+
+Isso é válido mesmo quando há autovalores repetidos.
+
+### 6.1 Exemplo
+
+Considere:
+
+$$
+\mathbf A=
+\begin{bmatrix}
+3&1\\
+1&2
+\end{bmatrix}.
+$$
+
+O polinômio característico é:
+
+$$
+\det(\mathbf A-\lambda\mathbf I)
+=
+\lambda^2-5\lambda+5.
+$$
+
+Seus autovalores são:
+
+$$
+\lambda_1=\frac{5+\sqrt5}{2},
+\qquad
+\lambda_2=\frac{5-\sqrt5}{2}.
+$$
+
+```{r autovalores}
+# Matriz simétrica 2 x 2
+A_eig <- matrix(
+  c(3, 1,
+    1, 2),
+  nrow = 2,
+  byrow = TRUE
+)
+
+# Decomposição espectral
+decomposicao <- eigen(A_eig)
+
+autovalores <- decomposicao$values
+autovetores <- decomposicao$vectors
+
+autovalores
+autovetores
+```
+
+Verificando $\mathbf A\mathbf v=\lambda\mathbf v$ para o primeiro par:
+
+```{r verificar-autovetor}
+lambda_1 <- autovalores[1]
+v_1 <- autovetores[, 1, drop = FALSE]
+
+A_eig %*% v_1
+lambda_1 * v_1
+```
+
+Verificando a diagonalização:
+
+```{r diagonalizacao}
+P <- autovetores
+Lambda <- diag(autovalores)
+
+round(P %*% Lambda %*% t(P), digits = 10)
+A_eig
+```
+
+Para uma matriz simétrica:
+
+-   definida positiva $\Longleftrightarrow$ todos os autovalores são positivos;
+-   semidefinida positiva $\Longleftrightarrow$ todos os autovalores são não negativos;
+-   indefinida $\Longleftrightarrow$ existem autovalores positivos e negativos.
+
+Além disso:
+
+$$
+\det(\mathbf A)=\prod_{j=1}^{n}\lambda_j,
+\qquad
+\operatorname{tr}(\mathbf A)=\sum_{j=1}^{n}\lambda_j.
+$$
+
+## 7. Diferenciação matricial
+
+### 7.1 Forma linear
+
+Se:
+
+$$
+f(\mathbf x)=\mathbf a'\mathbf x,
+$$
+
+então:
+
+$$
+\frac{\partial f(\mathbf x)}{\partial\mathbf x}
+=
+\mathbf a.
+$$
+
+### 7.2 Forma quadrática
+
+Para:
+
+$$
+f(\mathbf x)=\mathbf x'\mathbf A\mathbf x,
+$$
+
+o gradiente geral é:
+
+$$
+\frac{\partial f(\mathbf x)}{\partial\mathbf x}
+=
+(\mathbf A+\mathbf A')\mathbf x.
+$$
+
+Se $\mathbf A$ é simétrica:
+
+$$
+\frac{\partial f(\mathbf x)}{\partial\mathbf x}
+=
+2\mathbf A\mathbf x.
+$$
+
+A matriz de segundas derivadas, ou Hessiana, é:
+
+$$
+\frac{\partial^2 f(\mathbf x)}
+{\partial\mathbf x\,\partial\mathbf x'}
+=
+\mathbf A+\mathbf A'.
+$$
+
+Para $\mathbf A$ simétrica:
+
+$$
+\mathbf H=2\mathbf A.
+$$
+
+### 7.3 Regra útil para mínimos quadrados
+
+Considere:
+
+$$
+f(\boldsymbol\beta)
+=
+(\mathbf y-\mathbf X\boldsymbol\beta)'
+(\mathbf y-\mathbf X\boldsymbol\beta).
+$$
+
+Então:
+
+$$
+\frac{\partial f(\boldsymbol\beta)}
+{\partial\boldsymbol\beta}
+=
+-2\mathbf X'(\mathbf y-\mathbf X\boldsymbol\beta).
+$$
+
+Essa expressão será utilizada na próxima seção.
+
+## 8. Derivação matricial do estimador de MQO
+
+O estimador de MQO escolhe $\boldsymbol\beta$ para minimizar a soma dos quadrados dos resíduos:
+
+$$
+S(\boldsymbol\beta)
+=
+(\mathbf y-\mathbf X\boldsymbol\beta)'
+(\mathbf y-\mathbf X\boldsymbol\beta).
+$$
+
+### 8.1 Expandindo a função objetivo
+
+$$
+\begin{aligned}
+S(\boldsymbol\beta)
+&=
+\mathbf y'\mathbf y
+-\mathbf y'\mathbf X\boldsymbol\beta
+-\boldsymbol\beta'\mathbf X'\mathbf y
++\boldsymbol\beta'\mathbf X'\mathbf X\boldsymbol\beta.
+\end{aligned}
+$$
+
+Os dois termos cruzados são escalares iguais:
+
+$$
+\mathbf y'\mathbf X\boldsymbol\beta
+=
+\boldsymbol\beta'\mathbf X'\mathbf y.
+$$
+
+Portanto:
+
+$$
+S(\boldsymbol\beta)
+=
+\mathbf y'\mathbf y
+-2\boldsymbol\beta'\mathbf X'\mathbf y
++\boldsymbol\beta'\mathbf X'\mathbf X\boldsymbol\beta.
+$$
+
+### 8.2 Condições de primeira ordem
+
+Derivando em relação a $\boldsymbol\beta$:
+
+$$
+\frac{\partial S(\boldsymbol\beta)}
+{\partial\boldsymbol\beta}
+=
+-2\mathbf X'\mathbf y
++2\mathbf X'\mathbf X\boldsymbol\beta.
+$$
+
+Igualando a zero:
+
+$$
+\mathbf X'\mathbf X\widehat{\boldsymbol\beta}
+=
+\mathbf X'\mathbf y.
+$$
+
+Essas são as **equações normais**.
+
+Se $\mathbf X$ possui posto completo de colunas, $\mathbf X'\mathbf X$ é invertível e:
+
+$$
+\boxed{
+\widehat{\boldsymbol\beta}
+=
+(\mathbf X'\mathbf X)^{-1}\mathbf X'\mathbf y
+}.
+$$
+
+### 8.3 Condição de segunda ordem
+
+A Hessiana é:
+
+$$
+\frac{\partial^2 S(\boldsymbol\beta)}
+{\partial\boldsymbol\beta\,\partial\boldsymbol\beta'}
+=
+2\mathbf X'\mathbf X.
+$$
+
+Quando $\mathbf X$ possui posto completo de colunas, $\mathbf X'\mathbf X$ é definida positiva. Portanto, a solução das equações normais é o mínimo único da soma dos quadrados.
+
+### 8.4 Cálculo no R
+
+```{r estimador-mqo}
+# Estimador de MQO calculado com operações matriciais
+beta_mqo <- solve(
+  crossprod(X),
+  crossprod(X, y)
+)
+
+rownames(beta_mqo) <- colnames(X)
+beta_mqo
+```
+
+Comparando com `lm()`:
+
+```{r comparar-lm}
+# Modelo estimado pela função lm()
+modelo_lm <- lm(
+  as.numeric(y) ~ fertilizante + chuva
+)
+
+cbind(
+  calculo_matricial = as.numeric(beta_mqo),
+  funcao_lm = coef(modelo_lm)
+)
+```
+
+As pequenas diferenças que eventualmente aparecem em exemplos maiores decorrem de métodos numéricos distintos. A função `lm()` utiliza uma decomposição QR, que tende a ser numericamente mais estável do que formar explicitamente $(\mathbf X'\mathbf X)^{-1}$.
+
+> **Por que isso importa para a Econometria?**\
+> A fórmula matricial mostra simultaneamente o papel da variação dos regressores, da relação entre $\mathbf X$ e $\mathbf y$ e da condição de posto completo.
+
+## 9. Valores ajustados, resíduos e projeções
+
+### 9.1 Matriz de projeção
+
+Os valores ajustados são:
+
+$$
+\widehat{\mathbf y}
+=
+\mathbf X\widehat{\boldsymbol\beta}.
+$$
+
+Substituindo a fórmula de MQO:
+
+$$
+\widehat{\mathbf y}
+=
+\mathbf X(\mathbf X'\mathbf X)^{-1}\mathbf X'\mathbf y.
+$$
+
+Definimos a matriz de projeção:
+
+$$
+\mathbf P_X
+=
+\mathbf X(\mathbf X'\mathbf X)^{-1}\mathbf X'.
+$$
+
+Assim:
+
+$$
+\widehat{\mathbf y}=\mathbf P_X\mathbf y.
+$$
+
+### 9.2 Matriz geradora de resíduos
+
+O vetor de resíduos é:
+
+$$
+\widehat{\mathbf u}
+=
+\mathbf y-\widehat{\mathbf y}.
+$$
+
+Logo:
+
+$$
+\widehat{\mathbf u}
+=
+(\mathbf I_n-\mathbf P_X)\mathbf y.
+$$
+
+Definimos:
+
+$$
+\mathbf M_X
+=
+\mathbf I_n-\mathbf P_X.
+$$
+
+Portanto:
+
+$$
+\widehat{\mathbf u}=\mathbf M_X\mathbf y.
+$$
+
+```{r matrizes-projecao}
+# Matriz de projeção
+P_X <- X %*% solve(crossprod(X)) %*% t(X)
+
+# Matriz geradora de resíduos
+M_X <- diag(n) - P_X
+
+# Valores ajustados e resíduos
+y_ajustado <- P_X %*% y
+residuos <- M_X %*% y
+
+cbind(
+  observado = y,
+  ajustado = y_ajustado,
+  residuo = residuos
+)
+```
+
+### 9.3 Propriedades
+
+As matrizes $\mathbf P_X$ e $\mathbf M_X$ são simétricas e idempotentes:
+
+$$
+\mathbf P_X'=\mathbf P_X,
+\qquad
+\mathbf P_X^2=\mathbf P_X,
+$$
+
+$$
+\mathbf M_X'=\mathbf M_X,
+\qquad
+\mathbf M_X^2=\mathbf M_X.
+$$
+
+Também:
+
+$$
+\mathbf P_X\mathbf M_X=\mathbf0.
+$$
+
+```{r verificar-projecoes}
+# Simetria
+c(
+  P_simetrica = isSymmetric(P_X),
+  M_simetrica = isSymmetric(M_X)
+)
+
+# Idempotência e ortogonalidade
+max(abs(P_X %*% P_X - P_X))
+max(abs(M_X %*% M_X - M_X))
+max(abs(P_X %*% M_X))
+```
+
+### 9.4 Ortogonalidade dos resíduos
+
+As equações normais implicam:
+
+$$
+\mathbf X'\widehat{\mathbf u}=\mathbf0.
+$$
+
+Assim, os resíduos são ortogonais a cada coluna de $\mathbf X$.
+
+```{r ortogonalidade-residuos}
+# Produtos entre os regressores e os resíduos
+round(crossprod(X, residuos), digits = 10)
+```
+
+Quando o modelo contém intercepto, uma coluna de $\mathbf X$ é o vetor de uns. Portanto:
+
+$$
+\sum_{i=1}^{n}\widehat u_i=0.
+$$
+
+```{r soma-residuos}
+sum(residuos)
+```
+
+Geometricamente, $\widehat{\mathbf y}$ é a projeção de $\mathbf y$ no espaço gerado pelas colunas de $\mathbf X$, enquanto $\widehat{\mathbf u}$ pertence ao espaço ortogonal.
+
+## 10. Decomposição da soma de quadrados
+
+Quando o modelo contém intercepto:
+
+$$
+\mathbf y-\bar y\mathbf1_n
+=
+(\widehat{\mathbf y}-\bar y\mathbf1_n)
++\widehat{\mathbf u}.
+$$
+
+Como os valores ajustados são ortogonais aos resíduos:
+
+$$
+\underbrace{
+\sum_{i=1}^{n}(y_i-\bar y)^2
+}_{\text{SQT}}
+=
+\underbrace{
+\sum_{i=1}^{n}(\widehat y_i-\bar y)^2
+}_{\text{SQE}}
++
+\underbrace{
+\sum_{i=1}^{n}\widehat u_i^2
+}_{\text{SQR}}.
+$$
+
+Em notação matricial:
+
+$$
+\mathbf y'\mathbf M_0\mathbf y
+=
+\widehat{\mathbf y}'\mathbf M_0\widehat{\mathbf y}
++\widehat{\mathbf u}'\widehat{\mathbf u}.
+$$
+
+```{r decomposicao-somas-quadrados}
+# Matriz de centralização adequada ao vetor y
+um_n <- matrix(1, nrow = n, ncol = 1)
+M0_y <- diag(n) - (1 / n) * tcrossprod(um_n)
+
+# Soma total de quadrados
+SQT <- as.numeric(t(y) %*% M0_y %*% y)
+
+# Soma explicada de quadrados
+SQE <- as.numeric(t(y_ajustado) %*% M0_y %*% y_ajustado)
+
+# Soma dos quadrados dos resíduos
+SQR <- as.numeric(crossprod(residuos))
+
+c(
+  SQT = SQT,
+  SQE = SQE,
+  SQR = SQR,
+  SQE_mais_SQR = SQE + SQR
+)
+```
+
+O coeficiente de determinação é:
+
+$$
+R^2
+=
+\frac{\text{SQE}}{\text{SQT}}
+=
+1-\frac{\text{SQR}}{\text{SQT}}.
+$$
+
+```{r r-quadrado}
+R2_matricial <- 1 - SQR / SQT
+R2_lm <- summary(modelo_lm)$r.squared
+
+c(
+  calculo_matricial = R2_matricial,
+  funcao_lm = R2_lm
+)
+```
+
+## 11. Autovalores, posto e multicolinearidade
+
+Se as colunas de $\mathbf X$ são linearmente dependentes:
+
+$$
+\operatorname{posto}(\mathbf X)<k,
+$$
+
+e $\mathbf X'\mathbf X$ possui pelo menos um autovalor igual a zero. Nesse caso, $\mathbf X'\mathbf X$ é singular e o estimador não possui solução única.
+
+### 11.1 Colinearidade exata
+
+```{r colinearidade-exata}
+# A terceira coluna é duas vezes a segunda
+X_exata <- cbind(
+  intercepto = 1,
+  x1 = 1:6,
+  x2 = 2 * (1:6)
+)
+
+c(
+  numero_colunas = ncol(X_exata),
+  posto = qr(X_exata)$rank
+)
+
+eigen(crossprod(X_exata), symmetric = TRUE)$values
+```
+
+### 11.2 Quase multicolinearidade
+
+Na prática, uma coluna pode ser aproximadamente uma combinação linear das demais. Então $\mathbf X'\mathbf X$ é invertível, mas apresenta um autovalor muito pequeno.
+
+```{r quase-colinearidade}
+# Dois regressores quase linearmente dependentes
+x1 <- seq(1, 10, length.out = 100)
+x2 <- 2 * x1 + rnorm(100, sd = 0.01)
+
+X_quase <- cbind(
+  intercepto = 1,
+  x1 = x1,
+  x2 = x2
+)
+
+# Autovalores de X'X
+eigen(crossprod(X_quase), symmetric = TRUE)$values
+
+# Número de condição
+kappa(X_quase)
+```
+
+Um número de condição elevado indica que pequenas mudanças nos dados podem provocar grandes alterações nas estimativas. Não existe, contudo, um único limiar universal que determine quando a multicolinearidade é grave.
+
+> **Por que isso importa para a Econometria?**\
+> A multicolinearidade exata impede a estimação separada dos coeficientes. A quase multicolinearidade não impede a estimação, mas pode aumentar os erros-padrão e tornar os coeficientes instáveis.
+
+## 12. Síntese
+
+| Conceito             | Resultado principal                                                 |
+|:-----------------|:----------------------------------------------------|
+| Sistema linear       | $\mathbf A\mathbf x=\mathbf b$                                      |
+| Modelo de regressão  | $\mathbf y=\mathbf X\boldsymbol\beta+\mathbf u$                     |
+| Média                | $\bar x=n^{-1}\mathbf1_n'\mathbf x$                                 |
+| Centralização        | $\mathbf M_0=\mathbf I_n-n^{-1}\mathbf1_n\mathbf1_n'$               |
+| Forma quadrática     | $\mathbf x'\mathbf A\mathbf x$                                      |
+| Gradiente quadrático | $(\mathbf A+\mathbf A')\mathbf x$                                   |
+| Equações normais     | $\mathbf X'\mathbf X\widehat{\boldsymbol\beta}=\mathbf X'\mathbf y$ |
+| Estimador de MQO     | $(\mathbf X'\mathbf X)^{-1}\mathbf X'\mathbf y$                     |
+| Valores ajustados    | $\widehat{\mathbf y}=\mathbf P_X\mathbf y$                          |
+| Resíduos             | $\widehat{\mathbf u}=\mathbf M_X\mathbf y$                          |
+| Ortogonalidade       | $\mathbf X'\widehat{\mathbf u}=\mathbf0$                            |
+| Decomposição         | $\text{SQT}=\text{SQE}+\text{SQR}$                                  |
+
+
+# Considerações finais
+
+Os principais resultados da álgebra linear aparecem de forma integrada no método de mínimos quadrados. A condição de posto completo garante a invertibilidade de $\mathbf X'\mathbf X$; as formas quadráticas representam somas de quadrados; a diferenciação matricial produz as equações normais; e as matrizes de projeção revelam a geometria da regressão.
+
+Essas ferramentas serão retomadas no estudo das propriedades do estimador de MQO, do teorema de Gauss--Markov, da regressão particionada e da inferência em modelos lineares.

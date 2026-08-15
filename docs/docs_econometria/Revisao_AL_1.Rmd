@@ -1,0 +1,928 @@
+---
+title: "Revisão de Álgebra Linear — Parte 1"
+subtitle: "Vetores, matrizes e operações fundamentais"
+author: "Vitor Hugo Miro"
+output:
+  html_notebook:
+    toc: true
+    toc_float: true
+---
+
+```{r configuracao, include=FALSE}
+# Opções gerais dos blocos de código
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  fig.align = "center"
+)
+
+options(scipen = 999)
+```
+
+# Introdução
+
+A álgebra linear fornece uma linguagem compacta para representar dados, formular modelos econométricos e realizar cálculos com muitas observações e variáveis.
+
+Este primeiro material revisa os conceitos fundamentais:
+
+-   vetores, matrizes e dimensões;
+-   soma, transposição e multiplicação;
+-   produtos interno e externo;
+-   matrizes especiais;
+-   submatrizes e indexação;
+-   independência linear, posto e invertibilidade;
+-   organização matricial de uma base de dados.
+
+O objetivo não é apresentar um curso completo de Álgebra Linear. A ênfase recairá sobre os resultados utilizados posteriormente na formulação matricial do método de mínimos quadrados ordinários.
+
+## 1. Vetores, matrizes e dimensões
+
+### 1.1 Vetores
+
+Um vetor-coluna com $n$ elementos pode ser representado por:
+
+$$
+\mathbf{x}
+=
+\begin{bmatrix}
+x_1\\
+x_2\\
+\vdots\\
+x_n
+\end{bmatrix}_{n\times 1}.
+$$
+
+Sua transposta é um vetor-linha:
+
+$$
+\mathbf{x}'
+=
+\begin{bmatrix}
+x_1 & x_2 & \cdots & x_n
+\end{bmatrix}_{1\times n}.
+$$
+
+**EXEMPLO**
+
+Considere:
+
+$$
+\mathbf{x}
+=
+\begin{bmatrix}
+1\\
+2\\
+3
+\end{bmatrix}.
+$$
+
+No `R`, um vetor numérico não possui orientação explícita de linha ou coluna. Quando a orientação for importante, podemos transformá-lo em uma matriz.
+
+```{r vetores}
+# Vetor numérico
+x <- c(1, 2, 3)
+x
+
+# Representação explícita como vetor-coluna
+x_coluna <- matrix(x, ncol = 1)
+x_coluna
+
+# Representação explícita como vetor-linha
+x_linha <- t(x_coluna)
+x_linha
+```
+
+### 1.2 Matrizes
+
+Uma matriz com $n$ linhas e $k$ colunas é escrita como:
+
+$$
+\mathbf{A}
+=
+\begin{bmatrix}
+a_{11} & a_{12} & \cdots & a_{1k}\\
+a_{21} & a_{22} & \cdots & a_{2k}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{n1} & a_{n2} & \cdots & a_{nk}
+\end{bmatrix}_{n\times k}.
+$$
+
+O primeiro índice identifica a linha; o segundo identifica a coluna. Quando $n=k$, a matriz é denominada **quadrada**.
+
+**EXEMPLO**
+
+$$
+\mathbf{A}
+=
+\begin{bmatrix}
+2 & 3 & 5\\
+6 & 1 & 3
+\end{bmatrix}_{2\times3}.
+$$
+
+```{r criar-matriz}
+# Criando a matriz por linhas
+A <- matrix(
+  c(2, 3, 5,
+    6, 1, 3),
+  nrow = 2,
+  byrow = TRUE
+)
+
+A
+
+# Verificando suas dimensões
+dim(A)
+nrow(A)
+ncol(A)
+```
+
+As dimensões determinam quais operações matriciais são possíveis. Antes de efetuar um produto, é recomendável identificar as dimensões de cada objeto.
+
+> **Por que isso importa para a Econometria?**\
+> Em uma regressão com $n$ observações e $k$ parâmetros, teremos normalmente $\mathbf y_{n\times1}$, $\mathbf X_{n\times k}$, $\boldsymbol\beta_{k\times1}$ e $\mathbf u_{n\times1}$.
+
+## 2. Soma, diferença e multiplicação por escalar
+
+Duas matrizes somente podem ser somadas ou subtraídas quando possuem as mesmas dimensões.
+
+Se $\mathbf A$ e $\mathbf B$ são matrizes $n\times k$, então:
+
+$$
+(\mathbf A+\mathbf B)_{ij}=a_{ij}+b_{ij}.
+$$
+
+**EXEMPLO**
+
+$$
+\mathbf A=
+\begin{bmatrix}
+4 & 9\\
+2 & 1
+\end{bmatrix},
+\qquad
+\mathbf B=
+\begin{bmatrix}
+2 & 0\\
+0 & 7
+\end{bmatrix}.
+$$
+
+Logo:
+
+$$
+\mathbf A+\mathbf B
+=
+\begin{bmatrix}
+6 & 9\\
+2 & 8
+\end{bmatrix},
+\qquad
+\mathbf A-\mathbf B
+=
+\begin{bmatrix}
+2 & 9\\
+2 & -6
+\end{bmatrix}.
+$$
+
+```{r soma-subtracao}
+# Definindo duas matrizes com as mesmas dimensões
+A <- matrix(c(4, 9,
+              2, 1), nrow = 2, byrow = TRUE)
+
+B <- matrix(c(2, 0,
+              0, 7), nrow = 2, byrow = TRUE)
+
+# Soma e diferença
+A + B
+A - B
+```
+
+Para um escalar $c$:
+
+$$
+c\mathbf A
+=
+\begin{bmatrix}
+ca_{11} & \cdots & ca_{1k}\\
+\vdots & \ddots & \vdots\\
+ca_{n1} & \cdots & ca_{nk}
+\end{bmatrix}.
+$$
+
+```{r multiplicacao-escalar}
+# Multiplicação de uma matriz por um escalar
+c_escalar <- 2
+c_escalar * A
+```
+
+As principais propriedades são:
+
+$$
+\mathbf A+\mathbf B=\mathbf B+\mathbf A,
+$$
+
+$$
+(\mathbf A+\mathbf B)+\mathbf C
+=
+\mathbf A+(\mathbf B+\mathbf C),
+$$
+
+$$
+c(\mathbf A+\mathbf B)=c\mathbf A+c\mathbf B.
+$$
+
+## 3. Transposição
+
+A transposta de uma matriz $\mathbf A_{n\times k}$, indicada por $\mathbf A'$, possui dimensão $k\times n$. Suas linhas correspondem às colunas da matriz original.
+
+**EXEMPLO**
+
+$$
+\mathbf A=
+\begin{bmatrix}
+4 & 5\\
+3 & 1\\
+5 & 0
+\end{bmatrix}_{3\times2}
+\quad\Longrightarrow\quad
+\mathbf A'
+=
+\begin{bmatrix}
+4 & 3 & 5\\
+5 & 1 & 0
+\end{bmatrix}_{2\times3}.
+$$
+
+```{r transposicao}
+# Matriz 3 x 2
+A <- matrix(
+  c(4, 5,
+    3, 1,
+    5, 0),
+  nrow = 3,
+  byrow = TRUE
+)
+
+A
+t(A)
+```
+
+### 3.1 Propriedades
+
+$$
+(\mathbf A')'=\mathbf A,
+$$
+
+$$
+(\mathbf A+\mathbf B)'=\mathbf A'+\mathbf B',
+$$
+
+$$
+(c\mathbf A)'=c\mathbf A',
+$$
+
+$$
+(\mathbf A\mathbf B)'=\mathbf B'\mathbf A'.
+$$
+
+A última propriedade merece atenção: a transposição de um produto inverte a ordem das matrizes.
+
+```{r propriedades-transposicao}
+# Matrizes conformáveis
+A <- matrix(1:6, nrow = 2, byrow = TRUE)
+B <- matrix(7:12, nrow = 3, byrow = TRUE)
+
+# Verificando (AB)' = B'A'
+t(A %*% B)
+t(B) %*% t(A)
+```
+
+> **Por que isso importa para a Econometria?**\
+> Produtos como $\mathbf X'\mathbf X$ e $\mathbf X'\mathbf y$ aparecem na fórmula do estimador de MQO. A propriedade $(\mathbf X'\mathbf X)'=\mathbf X'\mathbf X$ mostra que $\mathbf X'\mathbf X$ é simétrica.
+
+## 4. Multiplicação de matrizes
+
+Se $\mathbf A$ possui dimensão $m\times n$ e $\mathbf B$ possui dimensão $n\times p$, então o produto $\mathbf A\mathbf B$ existe e possui dimensão $m\times p$:
+
+$$
+\underset{m\times n}{\mathbf A}
+\underset{n\times p}{\mathbf B}
+=
+\underset{m\times p}{\mathbf C}.
+$$
+
+O elemento $c_{ij}$ é o produto interno entre a linha $i$ de $\mathbf A$ e a coluna $j$ de $\mathbf B$:
+
+$$
+c_{ij}=\sum_{\ell=1}^{n}a_{i\ell}b_{\ell j}.
+$$
+
+**EXEMPLO**
+
+$$
+\mathbf A=
+\begin{bmatrix}
+1 & 2\\
+3 & 4
+\end{bmatrix},
+\qquad
+\mathbf B=
+\begin{bmatrix}
+1 & 2 & 1\\
+3 & 4 & 2
+\end{bmatrix}.
+$$
+
+Então:
+
+$$
+\mathbf A\mathbf B
+=
+\begin{bmatrix}
+7 & 10 & 5\\
+15 & 22 & 11
+\end{bmatrix}.
+$$
+
+```{r produto-matricial}
+# Matriz A: 2 x 2
+A <- matrix(c(1, 2,
+              3, 4), nrow = 2, byrow = TRUE)
+
+# Matriz B: 2 x 3
+B <- matrix(c(1, 2, 1,
+              3, 4, 2), nrow = 2, byrow = TRUE)
+
+# Produto matricial: 2 x 3
+A %*% B
+```
+
+### 4.1 Produto matricial e produto elemento a elemento
+
+No `R`, os operadores possuem significados diferentes:
+
+-   `A %*% B`: produto matricial;
+-   `A * B`: multiplicação elemento a elemento.
+
+```{r produto-elemento}
+# Duas matrizes 2 x 2
+C <- matrix(c(1, 2,
+              3, 4), nrow = 2, byrow = TRUE)
+
+D <- matrix(c(5, 6,
+              7, 8), nrow = 2, byrow = TRUE)
+
+# Produto elemento a elemento
+C * D
+
+# Produto matricial
+C %*% D
+```
+
+### 4.2 A multiplicação não é comutativa
+
+Em geral:
+
+$$
+\mathbf A\mathbf B\neq\mathbf B\mathbf A.
+$$
+
+```{r nao-comutatividade}
+# Os dois produtos existem, mas produzem resultados diferentes
+C %*% D
+D %*% C
+```
+
+Também pode ocorrer de $\mathbf A\mathbf B$ existir, mas $\mathbf B\mathbf A$ não existir.
+
+As propriedades válidas incluem:
+
+$$
+(\mathbf A\mathbf B)\mathbf C
+=
+\mathbf A(\mathbf B\mathbf C),
+$$
+
+$$
+\mathbf A(\mathbf B+\mathbf C)
+=
+\mathbf A\mathbf B+\mathbf A\mathbf C,
+$$
+
+$$
+\mathbf I\mathbf A=\mathbf A\mathbf I=\mathbf A,
+$$
+
+quando as dimensões forem conformáveis.
+
+## 5. Produtos interno e externo
+
+### 5.1 Produto interno
+
+Para dois vetores $\mathbf x,\mathbf y\in\mathbb R^n$, o produto interno é:
+
+$$
+\mathbf x'\mathbf y
+=
+\sum_{i=1}^{n}x_i y_i.
+$$
+
+O resultado é um escalar.
+
+**EXEMPLO**
+
+$$
+\mathbf x=
+\begin{bmatrix}
+3\\-1\\4
+\end{bmatrix},
+\qquad
+\mathbf y=
+\begin{bmatrix}
+2\\5\\-1
+\end{bmatrix}.
+$$
+
+Logo:
+
+$$
+\mathbf x'\mathbf y
+=3(2)+(-1)(5)+4(-1)
+=-3.
+$$
+
+```{r produto-interno}
+# Definindo os vetores
+x <- c(3, -1, 4)
+y <- c(2, 5, -1)
+
+# Duas formas de calcular o produto interno
+sum(x * y)
+crossprod(x, y)
+```
+
+### 5.2 Norma e ortogonalidade
+
+A norma euclidiana de $\mathbf x$ é:
+
+$$
+\|\mathbf x\|
+=
+\sqrt{\mathbf x'\mathbf x}
+=
+\sqrt{\sum_{i=1}^{n}x_i^2}.
+$$
+
+```{r norma}
+# Norma euclidiana de x
+norma_x <- sqrt(as.numeric(crossprod(x)))
+norma_x
+```
+
+Se:
+
+$$
+\mathbf x'\mathbf y=0,
+$$
+
+os vetores são **ortogonais**.
+
+### 5.3 Produto externo
+
+O produto externo entre dois vetores-coluna é:
+
+$$
+\underset{n\times1}{\mathbf x}
+\underset{1\times m}{\mathbf y'}
+=
+\underset{n\times m}{\mathbf x\mathbf y'}.
+$$
+
+**EXEMPLO**
+
+```{r produto-externo}
+# Produto externo x y'
+tcrossprod(x, y)
+
+# Resultado equivalente
+matrix(x, ncol = 1) %*% t(matrix(y, ncol = 1))
+```
+
+> **Por que isso importa para a Econometria?**\
+> O produto interno aparece em somas de produtos e somas de quadrados. O produto externo aparece em matrizes de momentos, como $\sum_i\mathbf x_i\mathbf x_i'$, e em matrizes de variância-covariância.
+
+## 6. Matrizes importantes
+
+### 6.1 Matriz nula
+
+A matriz nula possui todos os elementos iguais a zero:
+
+$$
+\mathbf 0_{2\times3}
+=
+\begin{bmatrix}
+0&0&0\\
+0&0&0
+\end{bmatrix}.
+$$
+
+### 6.2 Matriz diagonal
+
+Uma matriz quadrada é diagonal quando todos os elementos fora da diagonal principal são iguais a zero. Os elementos diagonais podem ou não ser zero.
+
+$$
+\mathbf D
+=
+\begin{bmatrix}
+d_1&0&0\\
+0&d_2&0\\
+0&0&d_3
+\end{bmatrix}.
+$$
+
+```{r matriz-diagonal}
+# Criando uma matriz diagonal
+D <- diag(c(2, 0, 5))
+D
+```
+
+### 6.3 Matriz escalar e identidade
+
+Uma matriz escalar é da forma:
+
+$$
+\mathbf S=c\mathbf I_n.
+$$
+
+A matriz identidade possui elementos diagonais iguais a 1:
+
+$$
+\mathbf I_3
+=
+\begin{bmatrix}
+1&0&0\\
+0&1&0\\
+0&0&1
+\end{bmatrix}.
+$$
+
+```{r matriz-identidade}
+# Matriz identidade de ordem 3
+I3 <- diag(3)
+I3
+
+# Matriz escalar 4I
+4 * I3
+```
+
+### 6.4 Matriz simétrica
+
+Uma matriz quadrada $\mathbf A$ é simétrica quando:
+
+$$
+\mathbf A'=\mathbf A.
+$$
+
+Isso equivale a $a_{ij}=a_{ji}$.
+
+```{r matriz-simetrica}
+# Exemplo de matriz simétrica
+S <- matrix(
+  c(4, 1, 3,
+    1, 5, 2,
+    3, 2, 6),
+  nrow = 3,
+  byrow = TRUE
+)
+
+S
+isSymmetric(S)
+```
+
+Matrizes como $\mathbf X'\mathbf X$ e matrizes de variância-covariância são simétricas.
+
+## 7. Submatrizes e indexação no R
+
+Uma submatriz é obtida selecionando determinadas linhas e colunas de uma matriz.
+
+```{r indexacao}
+# Matriz 4 x 3
+A <- matrix(1:12, nrow = 4, byrow = TRUE)
+A
+
+# Primeiras duas linhas e primeiras duas colunas
+A[1:2, 1:2]
+
+# Selecionando a terceira coluna
+A[, 3]
+
+# Preservando a estrutura de matriz
+A[, 3, drop = FALSE]
+
+# Excluindo a segunda linha
+A[-2, ]
+```
+
+Também podemos construir uma matriz juntando vetores por colunas:
+
+```{r combinar-colunas}
+# Três variáveis observadas em cinco propriedades
+area <- c(40, 55, 62, 70, 85)
+fertilizante <- c(80, 95, 110, 120, 140)
+chuva <- c(720, 680, 750, 790, 810)
+
+# Matriz de variáveis
+Z <- cbind(
+  area = area,
+  fertilizante = fertilizante,
+  chuva = chuva
+)
+
+Z
+```
+
+## 8. Combinações lineares, independência e posto
+
+### 8.1 Combinação linear
+
+Um vetor $\mathbf v$ é uma combinação linear dos vetores $\mathbf x_1,\ldots,\mathbf x_k$ quando existem escalares $c_1,\ldots,c_k$ tais que:
+
+$$
+\mathbf v
+=
+c_1\mathbf x_1+\cdots+c_k\mathbf x_k.
+$$
+
+### 8.2 Independência linear
+
+Os vetores $\mathbf x_1,\ldots,\mathbf x_k$ são linearmente independentes quando:
+
+$$
+c_1\mathbf x_1+\cdots+c_k\mathbf x_k=\mathbf0
+$$
+
+implica:
+
+$$
+c_1=\cdots=c_k=0.
+$$
+
+Caso contrário, pelo menos um vetor pode ser escrito como combinação linear dos demais.
+
+**EXEMPLO**
+
+```{r dependencia-linear}
+# A terceira coluna é a soma das duas primeiras
+x1 <- c(1, 0, 1)
+x2 <- c(0, 1, 1)
+x3 <- x1 + x2
+
+A_dependente <- cbind(x1, x2, x3)
+A_dependente
+
+# Posto da matriz
+qr(A_dependente)$rank
+```
+
+### 8.3 Posto
+
+O posto de uma matriz é o número máximo de linhas ou colunas linearmente independentes.
+
+Para uma matriz $n\times k$:
+
+$$
+\operatorname{posto}(\mathbf A)\leq\min(n,k).
+$$
+
+A matriz possui **posto completo de colunas** quando:
+
+$$
+\operatorname{posto}(\mathbf A)=k.
+$$
+
+```{r posto-completo}
+# Exemplo de matriz com posto completo de colunas
+A_completa <- matrix(
+  c(1, 0,
+    0, 1,
+    1, 1),
+  nrow = 3,
+  byrow = TRUE
+)
+
+A_completa
+qr(A_completa)$rank
+```
+
+> **Por que isso importa para a Econometria?**\
+> Para identificar separadamente os coeficientes de uma regressão, as colunas de $\mathbf X$ não podem apresentar dependência linear exata. Essa é a condição de posto completo de colunas.
+
+## 9. Determinante e invertibilidade
+
+O determinante é definido para matrizes quadradas. Para uma matriz $2\times2$:
+
+$$
+\mathbf A
+=
+\begin{bmatrix}
+a&b\\
+c&d
+\end{bmatrix},
+$$
+
+temos:
+
+$$
+\det(\mathbf A)=ad-bc.
+$$
+
+Uma matriz quadrada é invertível se, e somente se:
+
+$$
+\det(\mathbf A)\neq0.
+$$
+
+Essa condição é equivalente à matriz possuir posto completo.
+
+```{r determinante}
+# Matriz quadrada
+A <- matrix(
+  c(4, 7,
+    2, 6),
+  nrow = 2,
+  byrow = TRUE
+)
+
+A
+det(A)
+qr(A)$rank
+```
+
+Algumas propriedades são:
+
+$$
+\det(\mathbf A\mathbf B)
+=
+\det(\mathbf A)\det(\mathbf B),
+$$
+
+$$
+\det(\mathbf A')=\det(\mathbf A),
+$$
+
+$$
+\det(\mathbf A^{-1})
+=
+\frac{1}{\det(\mathbf A)}.
+$$
+
+### 9.1 Matriz inversa
+
+Quando $\mathbf A$ é quadrada e não singular, sua inversa satisfaz:
+
+$$
+\mathbf A^{-1}\mathbf A
+=
+\mathbf A\mathbf A^{-1}
+=
+\mathbf I.
+$$
+
+Para uma matriz $2\times2$:
+
+$$
+\mathbf A^{-1}
+=
+\frac{1}{ad-bc}
+\begin{bmatrix}
+d&-b\\
+-c&a
+\end{bmatrix}.
+$$
+
+```{r matriz-inversa}
+# Calculando a inversa
+A_inversa <- solve(A)
+A_inversa
+
+# Verificando o resultado
+round(A %*% A_inversa, digits = 10)
+```
+
+Em aplicações computacionais, geralmente não precisamos calcular a inversa explicitamente. Para resolver $\mathbf A\mathbf x=\mathbf b$, é preferível usar `solve(A, b)`.
+
+## 10. Uma ponte para a matriz de dados
+
+Considere uma amostra de cinco propriedades. O vetor de resultados é:
+
+$$
+\underset{5\times1}{\mathbf y}
+=
+\begin{bmatrix}
+y_1\\y_2\\y_3\\y_4\\y_5
+\end{bmatrix}.
+$$
+
+Se o modelo contém intercepto e duas variáveis explicativas, a matriz de regressores é:
+
+$$
+\underset{5\times3}{\mathbf X}
+=
+\begin{bmatrix}
+1&x_{11}&x_{12}\\
+1&x_{21}&x_{22}\\
+1&x_{31}&x_{32}\\
+1&x_{41}&x_{42}\\
+1&x_{51}&x_{52}
+\end{bmatrix}.
+$$
+
+Cada linha corresponde a uma observação. Cada coluna corresponde a um regressor. A coluna de uns representa o intercepto.
+
+```{r matriz-dados}
+# Dados de cinco propriedades
+y <- matrix(
+  c(2800, 3100, 3350, 3600, 3950),
+  ncol = 1,
+  dimnames = list(NULL, "produtividade")
+)
+
+fertilizante <- c(80, 95, 110, 120, 140)
+chuva <- c(720, 680, 750, 790, 810)
+
+# Construindo a matriz de regressores
+X <- cbind(
+  intercepto = 1,
+  fertilizante = fertilizante,
+  chuva = chuva
+)
+
+y
+X
+```
+
+As dimensões dos principais produtos são:
+
+$$
+\underset{3\times5}{\mathbf X'}
+\underset{5\times3}{\mathbf X}
+=
+\underset{3\times3}{\mathbf X'\mathbf X},
+$$
+
+e:
+
+$$
+\underset{3\times5}{\mathbf X'}
+\underset{5\times1}{\mathbf y}
+=
+\underset{3\times1}{\mathbf X'\mathbf y}.
+$$
+
+```{r produtos-matriz-dados}
+# X'X
+XtX <- crossprod(X)
+
+# X'y
+Xty <- crossprod(X, y)
+
+XtX
+Xty
+
+# Verificando as dimensões
+dim(XtX)
+dim(Xty)
+```
+
+Observe que $\mathbf X'\mathbf X$ é quadrada e simétrica.
+
+```{r propriedades-xtx}
+isSymmetric(XtX)
+qr(X)$rank
+```
+
+No próximo notebook, esses produtos serão utilizados para derivar o estimador de mínimos quadrados ordinários.
+
+## 11. Síntese
+
+| Conceito         | Resultado principal                             |
+|:-----------------|:------------------------------------------------|
+| Transposição     | $(\mathbf A\mathbf B)'=\mathbf B'\mathbf A'$    |
+| Conformabilidade | $(m\times n)(n\times p)=(m\times p)$            |
+| Produto interno  | $\mathbf x'\mathbf y$ é um escalar              |
+| Produto externo  | $\mathbf x\mathbf y'$ é uma matriz              |
+| Norma            | $\|\mathbf x\|=\sqrt{\mathbf x'\mathbf x}$      |
+| Simetria         | $\mathbf A'=\mathbf A$                          |
+| Posto completo   | Colunas linearmente independentes               |
+| Invertibilidade  | $\det(\mathbf A)\neq0$                          |
+| Matriz de dados  | Linhas são observações; colunas são regressores |
+
+
+# Considerações finais
+
+Vetores e matrizes permitem organizar os dados e condensar muitas operações em expressões simples. Para a Econometria, os pontos centrais desta primeira parte são a conformabilidade dos produtos, a distinção entre produtos interno e externo, a simetria de $\mathbf X'\mathbf X$ e a condição de posto completo.
+
+Esses resultados serão usados na Parte 2 para estudar sistemas lineares, centralização, formas quadráticas, diferenciação matricial, projeções e a derivação do estimador de MQO.

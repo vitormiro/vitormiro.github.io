@@ -1,0 +1,2012 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vitor Hugo Miro">
+
+<title>Revisão de Álgebra Linear — Parte 2 – Vitor Hugo Miro</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ddd961a2510921635943dfbbd19534c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Vitor Hugo Miro</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">Sobre</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../ensino.html"> 
+<span class="menu-text">Ensino</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../pesquisa.html"> 
+<span class="menu-text">Pesquisa</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html"> 
+<span class="menu-text">Posts</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a>
+  <ul class="collapse">
+  <li><a href="#sistemas-de-equações-lineares" id="toc-sistemas-de-equações-lineares" class="nav-link" data-scroll-target="#sistemas-de-equações-lineares">1. Sistemas de equações lineares</a>
+  <ul class="collapse">
+  <li><a href="#existência-e-unicidade-da-solução" id="toc-existência-e-unicidade-da-solução" class="nav-link" data-scroll-target="#existência-e-unicidade-da-solução">1.1 Existência e unicidade da solução</a></li>
+  <li><a href="#exemplo-com-solução-única" id="toc-exemplo-com-solução-única" class="nav-link" data-scroll-target="#exemplo-com-solução-única">1.2 Exemplo com solução única</a></li>
+  </ul></li>
+  <li><a href="#representação-matricial-da-regressão" id="toc-representação-matricial-da-regressão" class="nav-link" data-scroll-target="#representação-matricial-da-regressão">2. Representação matricial da regressão</a>
+  <ul class="collapse">
+  <li><a href="#exemplo-de-matriz-de-regressão" id="toc-exemplo-de-matriz-de-regressão" class="nav-link" data-scroll-target="#exemplo-de-matriz-de-regressão">2.1 Exemplo de matriz de regressão</a></li>
+  </ul></li>
+  <li><a href="#somatórios-médias-e-centralização" id="toc-somatórios-médias-e-centralização" class="nav-link" data-scroll-target="#somatórios-médias-e-centralização">3. Somatórios, médias e centralização</a>
+  <ul class="collapse">
+  <li><a href="#vetor-de-uns" id="toc-vetor-de-uns" class="nav-link" data-scroll-target="#vetor-de-uns">3.1 Vetor de uns</a></li>
+  <li><a href="#matriz-de-centralização" id="toc-matriz-de-centralização" class="nav-link" data-scroll-target="#matriz-de-centralização">3.2 Matriz de centralização</a></li>
+  <li><a href="#propriedades-da-matriz-de-centralização" id="toc-propriedades-da-matriz-de-centralização" class="nav-link" data-scroll-target="#propriedades-da-matriz-de-centralização">3.3 Propriedades da matriz de centralização</a></li>
+  <li><a href="#soma-de-quadrados-dos-desvios" id="toc-soma-de-quadrados-dos-desvios" class="nav-link" data-scroll-target="#soma-de-quadrados-dos-desvios">3.4 Soma de quadrados dos desvios</a></li>
+  </ul></li>
+  <li><a href="#formas-lineares-bilineares-e-quadráticas" id="toc-formas-lineares-bilineares-e-quadráticas" class="nav-link" data-scroll-target="#formas-lineares-bilineares-e-quadráticas">4. Formas lineares, bilineares e quadráticas</a>
+  <ul class="collapse">
+  <li><a href="#forma-linear" id="toc-forma-linear" class="nav-link" data-scroll-target="#forma-linear">4.1 Forma linear</a></li>
+  <li><a href="#forma-bilinear" id="toc-forma-bilinear" class="nav-link" data-scroll-target="#forma-bilinear">4.2 Forma bilinear</a></li>
+  <li><a href="#forma-quadrática" id="toc-forma-quadrática" class="nav-link" data-scroll-target="#forma-quadrática">4.3 Forma quadrática</a></li>
+  <li><a href="#a-parte-simétrica-de-uma-matriz" id="toc-a-parte-simétrica-de-uma-matriz" class="nav-link" data-scroll-target="#a-parte-simétrica-de-uma-matriz">4.4 A parte simétrica de uma matriz</a></li>
+  </ul></li>
+  <li><a href="#matrizes-definidas-positivas" id="toc-matrizes-definidas-positivas" class="nav-link" data-scroll-target="#matrizes-definidas-positivas">5. Matrizes definidas positivas</a>
+  <ul class="collapse">
+  <li><a href="#a-matriz-mathbf-xmathbf-x" id="toc-a-matriz-mathbf-xmathbf-x" class="nav-link" data-scroll-target="#a-matriz-mathbf-xmathbf-x">5.1 A matriz <span class="math inline">\(\mathbf X'\mathbf X\)</span></a></li>
+  </ul></li>
+  <li><a href="#autovalores-e-autovetores" id="toc-autovalores-e-autovetores" class="nav-link" data-scroll-target="#autovalores-e-autovetores">6. Autovalores e autovetores</a>
+  <ul class="collapse">
+  <li><a href="#exemplo" id="toc-exemplo" class="nav-link" data-scroll-target="#exemplo">6.1 Exemplo</a></li>
+  </ul></li>
+  <li><a href="#diferenciação-matricial" id="toc-diferenciação-matricial" class="nav-link" data-scroll-target="#diferenciação-matricial">7. Diferenciação matricial</a>
+  <ul class="collapse">
+  <li><a href="#forma-linear-1" id="toc-forma-linear-1" class="nav-link" data-scroll-target="#forma-linear-1">7.1 Forma linear</a></li>
+  <li><a href="#forma-quadrática-1" id="toc-forma-quadrática-1" class="nav-link" data-scroll-target="#forma-quadrática-1">7.2 Forma quadrática</a></li>
+  <li><a href="#regra-útil-para-mínimos-quadrados" id="toc-regra-útil-para-mínimos-quadrados" class="nav-link" data-scroll-target="#regra-útil-para-mínimos-quadrados">7.3 Regra útil para mínimos quadrados</a></li>
+  </ul></li>
+  <li><a href="#derivação-matricial-do-estimador-de-mqo" id="toc-derivação-matricial-do-estimador-de-mqo" class="nav-link" data-scroll-target="#derivação-matricial-do-estimador-de-mqo">8. Derivação matricial do estimador de MQO</a>
+  <ul class="collapse">
+  <li><a href="#expandindo-a-função-objetivo" id="toc-expandindo-a-função-objetivo" class="nav-link" data-scroll-target="#expandindo-a-função-objetivo">8.1 Expandindo a função objetivo</a></li>
+  <li><a href="#condições-de-primeira-ordem" id="toc-condições-de-primeira-ordem" class="nav-link" data-scroll-target="#condições-de-primeira-ordem">8.2 Condições de primeira ordem</a></li>
+  <li><a href="#condição-de-segunda-ordem" id="toc-condição-de-segunda-ordem" class="nav-link" data-scroll-target="#condição-de-segunda-ordem">8.3 Condição de segunda ordem</a></li>
+  <li><a href="#cálculo-no-r" id="toc-cálculo-no-r" class="nav-link" data-scroll-target="#cálculo-no-r">8.4 Cálculo no R</a></li>
+  </ul></li>
+  <li><a href="#valores-ajustados-resíduos-e-projeções" id="toc-valores-ajustados-resíduos-e-projeções" class="nav-link" data-scroll-target="#valores-ajustados-resíduos-e-projeções">9. Valores ajustados, resíduos e projeções</a>
+  <ul class="collapse">
+  <li><a href="#matriz-de-projeção" id="toc-matriz-de-projeção" class="nav-link" data-scroll-target="#matriz-de-projeção">9.1 Matriz de projeção</a></li>
+  <li><a href="#matriz-geradora-de-resíduos" id="toc-matriz-geradora-de-resíduos" class="nav-link" data-scroll-target="#matriz-geradora-de-resíduos">9.2 Matriz geradora de resíduos</a></li>
+  <li><a href="#propriedades" id="toc-propriedades" class="nav-link" data-scroll-target="#propriedades">9.3 Propriedades</a></li>
+  <li><a href="#ortogonalidade-dos-resíduos" id="toc-ortogonalidade-dos-resíduos" class="nav-link" data-scroll-target="#ortogonalidade-dos-resíduos">9.4 Ortogonalidade dos resíduos</a></li>
+  </ul></li>
+  <li><a href="#decomposição-da-soma-de-quadrados" id="toc-decomposição-da-soma-de-quadrados" class="nav-link" data-scroll-target="#decomposição-da-soma-de-quadrados">10. Decomposição da soma de quadrados</a></li>
+  <li><a href="#autovalores-posto-e-multicolinearidade" id="toc-autovalores-posto-e-multicolinearidade" class="nav-link" data-scroll-target="#autovalores-posto-e-multicolinearidade">11. Autovalores, posto e multicolinearidade</a>
+  <ul class="collapse">
+  <li><a href="#colinearidade-exata" id="toc-colinearidade-exata" class="nav-link" data-scroll-target="#colinearidade-exata">11.1 Colinearidade exata</a></li>
+  <li><a href="#quase-multicolinearidade" id="toc-quase-multicolinearidade" class="nav-link" data-scroll-target="#quase-multicolinearidade">11.2 Quase multicolinearidade</a></li>
+  </ul></li>
+  <li><a href="#síntese" id="toc-síntese" class="nav-link" data-scroll-target="#síntese">12. Síntese</a></li>
+  </ul></li>
+  <li><a href="#considerações-finais" id="toc-considerações-finais" class="nav-link" data-scroll-target="#considerações-finais">Considerações finais</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Revisão de Álgebra Linear — Parte 2</h1>
+<p class="subtitle lead">Ferramentas matriciais para mínimos quadrados ordinários</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Vitor Hugo Miro </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introdução" class="level1">
+<h1>Introdução</h1>
+<p>Na Parte 1, revisamos vetores, matrizes, produtos, posto e invertibilidade. Neste segundo material, aplicaremos esses conceitos à formulação matricial do método de mínimos quadrados ordinários (MQO).</p>
+<p>Os principais tópicos são:</p>
+<ul>
+<li>sistemas de equações lineares;</li>
+<li>representação matricial do modelo de regressão;</li>
+<li>somatórios, médias e centralização;</li>
+<li>formas lineares, bilineares e quadráticas;</li>
+<li>matrizes definidas positivas e autovalores;</li>
+<li>diferenciação matricial;</li>
+<li>derivação do estimador de MQO;</li>
+<li>matrizes de projeção e de resíduos;</li>
+<li>decomposição da soma de quadrados;</li>
+<li>posto, autovalores e multicolinearidade.</li>
+</ul>
+<section id="sistemas-de-equações-lineares" class="level2">
+<h2 class="anchored" data-anchor-id="sistemas-de-equações-lineares">1. Sistemas de equações lineares</h2>
+<p>Um sistema de <span class="math inline">\(n\)</span> equações em <span class="math inline">\(k\)</span> incógnitas pode ser representado por:</p>
+<p><span class="math display">\[
+\begin{aligned}
+a_{11}x_1+a_{12}x_2+\cdots+a_{1k}x_k&amp;=b_1,\\
+a_{21}x_1+a_{22}x_2+\cdots+a_{2k}x_k&amp;=b_2,\\
+&amp;\vdots\\
+a_{n1}x_1+a_{n2}x_2+\cdots+a_{nk}x_k&amp;=b_n.
+\end{aligned}
+\]</span></p>
+<p>Em notação matricial:</p>
+<p><span class="math display">\[
+\underset{n\times k}{\mathbf A}
+\underset{k\times1}{\mathbf x}
+=
+\underset{n\times1}{\mathbf b}.
+\]</span></p>
+<p>Ou:</p>
+<p><span class="math display">\[
+\mathbf A\mathbf x=\mathbf b.
+\]</span></p>
+<section id="existência-e-unicidade-da-solução" class="level3">
+<h3 class="anchored" data-anchor-id="existência-e-unicidade-da-solução">1.1 Existência e unicidade da solução</h3>
+<p>A expressão:</p>
+<p><span class="math display">\[
+\mathbf x=\mathbf A^{-1}\mathbf b
+\]</span></p>
+<p>somente pode ser utilizada quando <span class="math inline">\(\mathbf A\)</span> é quadrada e não singular.</p>
+<p>Mais geralmente:</p>
+<ul>
+<li>se <span class="math inline">\(\operatorname{posto}(\mathbf A)=k\)</span> e o sistema é compatível, a solução é única;</li>
+<li>se há dependência linear entre as colunas, podem existir infinitas soluções;</li>
+<li>se <span class="math inline">\(\mathbf b\)</span> não pertence ao espaço gerado pelas colunas de <span class="math inline">\(\mathbf A\)</span>, não existe solução exata.</li>
+</ul>
+</section>
+<section id="exemplo-com-solução-única" class="level3">
+<h3 class="anchored" data-anchor-id="exemplo-com-solução-única">1.2 Exemplo com solução única</h3>
+<p>Considere:</p>
+<p><span class="math display">\[
+\begin{aligned}
+x_1+x_2+x_3&amp;=5,\\
+2x_1-x_2+6x_3&amp;=12,\\
+x_1+3x_2+5x_3&amp;=17.
+\end{aligned}
+\]</span></p>
+<p>Na forma matricial:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1&amp;1&amp;1\\
+2&amp;-1&amp;6\\
+1&amp;3&amp;5
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\x_2\\x_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+5\\12\\17
+\end{bmatrix}.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de coeficientes</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">1</span>,  <span class="dv">1</span>, <span class="dv">1</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">6</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,  <span class="dv">3</span>, <span class="dv">5</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">3</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Vetor de constantes</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">12</span>, <span class="dv">17</span>), <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Resolvendo Ax = b</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># solve(A, b) é preferível a solve(A) %*% b</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>x_solucao <span class="ot">&lt;-</span> <span class="fu">solve</span>(A, b)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(x_solucao) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"x1"</span>, <span class="st">"x2"</span>, <span class="st">"x3"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>x_solucao</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   [,1]
+x1    1
+x2    2
+x3    2</code></pre>
+</div>
+</div>
+<p>Podemos verificar a solução substituindo-a no sistema:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> x_solucao</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]
+[1,]    5
+[2,]   12
+[3,]   17</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]
+[1,]    5
+[2,]   12
+[3,]   17</code></pre>
+</div>
+</div>
+<p>A solução é <span class="math inline">\(x_1=1\)</span>, <span class="math inline">\(x_2=2\)</span> e <span class="math inline">\(x_3=2\)</span>.</p>
+<blockquote class="blockquote">
+<p><strong>Por que isso importa para a Econometria?</strong><br>
+A minimização da soma dos quadrados gera um sistema linear chamado de <strong>equações normais</strong>: <span class="math inline">\(\mathbf X'\mathbf X\widehat{\boldsymbol\beta}=\mathbf X'\mathbf y\)</span>.</p>
+</blockquote>
+</section>
+</section>
+<section id="representação-matricial-da-regressão" class="level2">
+<h2 class="anchored" data-anchor-id="representação-matricial-da-regressão">2. Representação matricial da regressão</h2>
+<p>O modelo de regressão linear múltipla pode ser escrito como:</p>
+<p><span class="math display">\[
+\underset{n\times1}{\mathbf y}
+=
+\underset{n\times k}{\mathbf X}
+\underset{k\times1}{\boldsymbol\beta}
++
+\underset{n\times1}{\mathbf u}.
+\]</span></p>
+<p>Em que:</p>
+<p><span class="math display">\[
+\mathbf y=
+\begin{bmatrix}
+y_1\\y_2\\\vdots\\y_n
+\end{bmatrix},
+\qquad
+\boldsymbol\beta=
+\begin{bmatrix}
+\beta_1\\\beta_2\\\vdots\\\beta_k
+\end{bmatrix},
+\qquad
+\mathbf u=
+\begin{bmatrix}
+u_1\\u_2\\\vdots\\u_n
+\end{bmatrix}.
+\]</span></p>
+<p>A matriz de regressores é:</p>
+<p><span class="math display">\[
+\mathbf X=
+\begin{bmatrix}
+x_{11}&amp;x_{12}&amp;\cdots&amp;x_{1k}\\
+x_{21}&amp;x_{22}&amp;\cdots&amp;x_{2k}\\
+\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\
+x_{n1}&amp;x_{n2}&amp;\cdots&amp;x_{nk}
+\end{bmatrix}.
+\]</span></p>
+<p>Se <span class="math inline">\(\mathbf x_i\)</span> representa o vetor-coluna de covariáveis da observação <span class="math inline">\(i\)</span>, então:</p>
+<p><span class="math display">\[
+\mathbf X=
+\begin{bmatrix}
+\mathbf x_1'\\
+\mathbf x_2'\\
+\vdots\\
+\mathbf x_n'
+\end{bmatrix}
+\]</span></p>
+<p>e cada equação individual é:</p>
+<p><span class="math display">\[
+y_i=\mathbf x_i'\boldsymbol\beta+u_i.
+\]</span></p>
+<section id="exemplo-de-matriz-de-regressão" class="level3">
+<h3 class="anchored" data-anchor-id="exemplo-de-matriz-de-regressão">2.1 Exemplo de matriz de regressão</h3>
+<p>Considere dados de oito propriedades rurais.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variável dependente: produtividade em kg/ha</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">2820</span>, <span class="dv">3010</span>, <span class="dv">3190</span>, <span class="dv">3430</span>, <span class="dv">3520</span>, <span class="dv">3740</span>, <span class="dv">3910</span>, <span class="dv">4080</span>),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">1</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="cn">NULL</span>, <span class="st">"produtividade"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Variáveis explicativas</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>fertilizante <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">105</span>, <span class="dv">115</span>, <span class="dv">125</span>, <span class="dv">140</span>, <span class="dv">150</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>chuva <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">680</span>, <span class="dv">720</span>, <span class="dv">700</span>, <span class="dv">760</span>, <span class="dv">790</span>, <span class="dv">770</span>, <span class="dv">830</span>, <span class="dv">850</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de regressores com intercepto</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">intercepto =</span> <span class="dv">1</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">fertilizante =</span> fertilizante,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">chuva =</span> chuva</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     produtividade
+[1,]          2820
+[2,]          3010
+[3,]          3190
+[4,]          3430
+[5,]          3520
+[6,]          3740
+[7,]          3910
+[8,]          4080</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>X</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     intercepto fertilizante chuva
+[1,]          1           70   680
+[2,]          1           80   720
+[3,]          1           90   700
+[4,]          1          105   760
+[5,]          1          115   790
+[6,]          1          125   770
+[7,]          1          140   830
+[8,]          1          150   850</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Número de observações e parâmetros</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(X)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">ncol</span>(X)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">n =</span> n, <span class="at">k =</span> k)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>n k 
+8 3 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8 3</code></pre>
+</div>
+</div>
+<p>Para que todos os parâmetros sejam identificados, precisamos de:</p>
+<p><span class="math display">\[
+\operatorname{posto}(\mathbf X)=k.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qr</span>(X)<span class="sc">$</span>rank</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="somatórios-médias-e-centralização" class="level2">
+<h2 class="anchored" data-anchor-id="somatórios-médias-e-centralização">3. Somatórios, médias e centralização</h2>
+<section id="vetor-de-uns" class="level3">
+<h3 class="anchored" data-anchor-id="vetor-de-uns">3.1 Vetor de uns</h3>
+<p>Denote por <span class="math inline">\(\mathbf 1_n\)</span> o vetor-coluna com <span class="math inline">\(n\)</span> elementos iguais a 1:</p>
+<p><span class="math display">\[
+\mathbf 1_n=
+\begin{bmatrix}
+1\\
+\vdots\\
+1
+\end{bmatrix}_{n\times1}.
+\]</span></p>
+<p>Para um vetor <span class="math inline">\(\mathbf x\)</span>:</p>
+<p><span class="math display">\[
+\mathbf 1_n'\mathbf x
+=
+\sum_{i=1}^{n}x_i.
+\]</span></p>
+<p>Consequentemente:</p>
+<p><span class="math display">\[
+\bar x
+=
+\frac{1}{n}\mathbf 1_n'\mathbf x.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vetor de exemplo</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">7</span>), <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>n_x <span class="ot">&lt;-</span> <span class="fu">nrow</span>(x)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>um <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span>, <span class="at">nrow =</span> n_x, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Soma por produto interno</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>soma_x <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">crossprod</span>(um, x))</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Média por produto interno</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>media_x <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">crossprod</span>(um, x) <span class="sc">/</span> n_x)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">soma_matricial =</span> soma_x,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">soma_R =</span> <span class="fu">sum</span>(x),</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">media_matricial =</span> media_x,</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">media_R =</span> <span class="fu">mean</span>(x)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> soma_matricial          soma_R media_matricial         media_R 
+             25              25               5               5 </code></pre>
+</div>
+</div>
+</section>
+<section id="matriz-de-centralização" class="level3">
+<h3 class="anchored" data-anchor-id="matriz-de-centralização">3.2 Matriz de centralização</h3>
+<p>O vetor contendo os desvios em relação à média é:</p>
+<p><span class="math display">\[
+\mathbf x-\bar x\mathbf 1_n.
+\]</span></p>
+<p>Como:</p>
+<p><span class="math display">\[
+\bar x\mathbf 1_n
+=
+\frac{1}{n}\mathbf 1_n\mathbf 1_n'\mathbf x,
+\]</span></p>
+<p>podemos escrever:</p>
+<p><span class="math display">\[
+\mathbf x-\bar x\mathbf 1_n
+=
+\left(
+\mathbf I_n-\frac{1}{n}\mathbf 1_n\mathbf 1_n'
+\right)\mathbf x.
+\]</span></p>
+<p>Definimos a <strong>matriz de centralização</strong>:</p>
+<p><span class="math display">\[
+\mathbf M_0
+=
+\mathbf I_n-\frac{1}{n}\mathbf 1_n\mathbf 1_n'.
+\]</span></p>
+<p>Assim:</p>
+<p><span class="math display">\[
+\mathbf M_0\mathbf x
+=
+\mathbf x-\bar x\mathbf 1_n.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz identidade e vetor de uns</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>I <span class="ot">&lt;-</span> <span class="fu">diag</span>(n_x)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>um <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span>, <span class="at">nrow =</span> n_x, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de centralização</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>M0 <span class="ot">&lt;-</span> I <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">/</span> n_x) <span class="sc">*</span> <span class="fu">tcrossprod</span>(um)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Desvios em relação à média</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>desvios <span class="ot">&lt;-</span> M0 <span class="sc">%*%</span> x</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x,</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">desvios_matriciais =</span> desvios,</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">desvios_diretos =</span> x <span class="sc">-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]                      [,2] [,3]
+[1,]    4 -1.0000000000000002220446   -1
+[2,]    5 -0.0000000000000002220446    0
+[3,]    6  1.0000000000000006661338    1
+[4,]    3 -1.9999999999999997779554   -2
+[5,]    7  2.0000000000000004440892    2</code></pre>
+</div>
+</div>
+</section>
+<section id="propriedades-da-matriz-de-centralização" class="level3">
+<h3 class="anchored" data-anchor-id="propriedades-da-matriz-de-centralização">3.3 Propriedades da matriz de centralização</h3>
+<p>A matriz <span class="math inline">\(\mathbf M_0\)</span> é:</p>
+<ol type="1">
+<li><strong>simétrica</strong>:</li>
+</ol>
+<p><span class="math display">\[
+\mathbf M_0'=\mathbf M_0;
+\]</span></p>
+<ol start="2" type="1">
+<li><strong>idempotente</strong>:</li>
+</ol>
+<p><span class="math display">\[
+\mathbf M_0^2=\mathbf M_0;
+\]</span></p>
+<ol start="3" type="1">
+<li>ortogonal ao vetor de uns:</li>
+</ol>
+<p><span class="math display">\[
+\mathbf M_0\mathbf 1_n=\mathbf0.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simetria</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">isSymmetric</span>(M0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Idempotência</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(M0 <span class="sc">%*%</span> M0 <span class="sc">-</span> M0, <span class="at">digits =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4] [,5]
+[1,]    0    0    0    0    0
+[2,]    0    0    0    0    0
+[3,]    0    0    0    0    0
+[4,]    0    0    0    0    0
+[5,]    0    0    0    0    0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># M0 elimina o vetor de uns</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(M0 <span class="sc">%*%</span> um, <span class="at">digits =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]
+[1,]    0
+[2,]    0
+[3,]    0
+[4,]    0
+[5,]    0</code></pre>
+</div>
+</div>
+</section>
+<section id="soma-de-quadrados-dos-desvios" class="level3">
+<h3 class="anchored" data-anchor-id="soma-de-quadrados-dos-desvios">3.4 Soma de quadrados dos desvios</h3>
+<p>Como <span class="math inline">\(\mathbf M_0\)</span> é simétrica e idempotente:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sum_{i=1}^{n}(x_i-\bar x)^2
+&amp;=
+(\mathbf M_0\mathbf x)'(\mathbf M_0\mathbf x)\\
+&amp;=
+\mathbf x'\mathbf M_0'\mathbf M_0\mathbf x\\
+&amp;=
+\mathbf x'\mathbf M_0\mathbf x.
+\end{aligned}
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forma matricial</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>sq_matricial <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">crossprod</span>(x, M0 <span class="sc">%*%</span> x))</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo direto</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>sq_direta <span class="ot">&lt;-</span> <span class="fu">sum</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">forma_matricial =</span> sq_matricial,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">forma_direta =</span> sq_direta</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>forma_matricial    forma_direta 
+             10              10 </code></pre>
+</div>
+</div>
+<p>A variância amostral pode ser escrita como:</p>
+<p><span class="math display">\[
+s_x^2
+=
+\frac{1}{n-1}\mathbf x'\mathbf M_0\mathbf x.
+\]</span></p>
+<blockquote class="blockquote">
+<p><strong>Por que isso importa para a Econometria?</strong><br>
+A matriz <span class="math inline">\(\mathbf M_0\)</span> permite escrever a soma total de quadrados de <span class="math inline">\(\mathbf y\)</span> e será utilizada na definição matricial do <span class="math inline">\(R^2\)</span>.</p>
+</blockquote>
+</section>
+</section>
+<section id="formas-lineares-bilineares-e-quadráticas" class="level2">
+<h2 class="anchored" data-anchor-id="formas-lineares-bilineares-e-quadráticas">4. Formas lineares, bilineares e quadráticas</h2>
+<section id="forma-linear" class="level3">
+<h3 class="anchored" data-anchor-id="forma-linear">4.1 Forma linear</h3>
+<p>Uma forma linear é uma função do tipo:</p>
+<p><span class="math display">\[
+f(\mathbf x)=\mathbf a'\mathbf x.
+\]</span></p>
+<p>O resultado é um escalar.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">3</span>), <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>x_forma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>), <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">crossprod</span>(a, x_forma))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+</div>
+</section>
+<section id="forma-bilinear" class="level3">
+<h3 class="anchored" data-anchor-id="forma-bilinear">4.2 Forma bilinear</h3>
+<p>Uma forma bilinear é:</p>
+<p><span class="math display">\[
+f(\mathbf x,\mathbf y)
+=
+\mathbf x'\mathbf A\mathbf y.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>A_forma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>, <span class="dv">4</span>,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>, <span class="dv">6</span>),</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">3</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>x_forma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>y_forma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>), <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">t</span>(x_forma) <span class="sc">%*%</span> A_forma <span class="sc">%*%</span> y_forma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16</code></pre>
+</div>
+</div>
+</section>
+<section id="forma-quadrática" class="level3">
+<h3 class="anchored" data-anchor-id="forma-quadrática">4.3 Forma quadrática</h3>
+<p>Uma forma quadrática é:</p>
+<p><span class="math display">\[
+Q(\mathbf x)
+=
+\mathbf x'\mathbf A\mathbf x.
+\]</span></p>
+<p>Quando <span class="math inline">\(\mathbf A\)</span> é simétrica:</p>
+<p><span class="math display">\[
+Q(\mathbf x)
+=
+\sum_{i=1}^{n}\sum_{j=1}^{n}a_{ij}x_i x_j.
+\]</span></p>
+<p>Para:</p>
+<p><span class="math display">\[
+\mathbf A=
+\begin{bmatrix}
+a&amp;c\\
+c&amp;b
+\end{bmatrix},
+\qquad
+\mathbf x=
+\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix},
+\]</span></p>
+<p>temos:</p>
+<p><span class="math display">\[
+\mathbf x'\mathbf A\mathbf x
+=
+ax_1^2+2cx_1x_2+bx_2^2.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>A_q <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>,</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>, <span class="dv">3</span>),</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">2</span>,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>x_q <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>), <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>Q_x <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">t</span>(x_q) <span class="sc">%*%</span> A_q <span class="sc">%*%</span> x_q)</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>Q_x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+</div>
+</section>
+<section id="a-parte-simétrica-de-uma-matriz" class="level3">
+<h3 class="anchored" data-anchor-id="a-parte-simétrica-de-uma-matriz">4.4 A parte simétrica de uma matriz</h3>
+<p>Se <span class="math inline">\(\mathbf A\)</span> não é simétrica, a forma quadrática depende somente de sua parte simétrica:</p>
+<p><span class="math display">\[
+\mathbf A_s
+=
+\frac{\mathbf A+\mathbf A'}{2}.
+\]</span></p>
+<p>Então:</p>
+<p><span class="math display">\[
+\mathbf x'\mathbf A\mathbf x
+=
+\mathbf x'\mathbf A_s\mathbf x.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz não simétrica</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>A_ns <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">5</span>,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>     <span class="dv">4</span>, <span class="sc">-</span><span class="dv">2</span>),</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">2</span>,</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Parte simétrica</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>A_s <span class="ot">&lt;-</span> (A_ns <span class="sc">+</span> <span class="fu">t</span>(A_ns)) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">forma_original =</span> <span class="fu">as.numeric</span>(<span class="fu">t</span>(x_q) <span class="sc">%*%</span> A_ns <span class="sc">%*%</span> x_q),</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">forma_simetrica =</span> <span class="fu">as.numeric</span>(<span class="fu">t</span>(x_q) <span class="sc">%*%</span> A_s <span class="sc">%*%</span> x_q)</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> forma_original forma_simetrica 
+            -32             -32 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="matrizes-definidas-positivas" class="level2">
+<h2 class="anchored" data-anchor-id="matrizes-definidas-positivas">5. Matrizes definidas positivas</h2>
+<p>Seja <span class="math inline">\(\mathbf A\)</span> uma matriz real simétrica.</p>
+<ul>
+<li><span class="math inline">\(\mathbf A\)</span> é <strong>definida positiva</strong> se:</li>
+</ul>
+<p><span class="math display">\[
+\mathbf x'\mathbf A\mathbf x&gt;0
+\quad\text{para todo }\mathbf x\neq\mathbf0;
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\mathbf A\)</span> é <strong>semidefinida positiva</strong> se:</li>
+</ul>
+<p><span class="math display">\[
+\mathbf x'\mathbf A\mathbf x\geq0
+\quad\text{para todo }\mathbf x;
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\mathbf A\)</span> é <strong>definida negativa</strong> se:</li>
+</ul>
+<p><span class="math display">\[
+\mathbf x'\mathbf A\mathbf x&lt;0
+\quad\text{para todo }\mathbf x\neq\mathbf0;
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\mathbf A\)</span> é <strong>indefinida</strong> se a forma quadrática assume valores positivos e negativos.</li>
+</ul>
+<section id="a-matriz-mathbf-xmathbf-x" class="level3">
+<h3 class="anchored" data-anchor-id="a-matriz-mathbf-xmathbf-x">5.1 A matriz <span class="math inline">\(\mathbf X'\mathbf X\)</span></h3>
+<p>Para qualquer vetor <span class="math inline">\(\mathbf a\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbf a'\mathbf X'\mathbf X\mathbf a
+&amp;=
+(\mathbf X\mathbf a)'(\mathbf X\mathbf a)\\
+&amp;=
+\|\mathbf X\mathbf a\|^2\\
+&amp;\geq0.
+\end{aligned}
+\]</span></p>
+<p>Portanto, <span class="math inline">\(\mathbf X'\mathbf X\)</span> é sempre semidefinida positiva. Se <span class="math inline">\(\mathbf X\)</span> possui posto completo de colunas, então:</p>
+<p><span class="math display">\[
+\mathbf a'\mathbf X'\mathbf X\mathbf a&gt;0
+\quad\text{para todo }\mathbf a\neq\mathbf0,
+\]</span></p>
+<p>e <span class="math inline">\(\mathbf X'\mathbf X\)</span> é definida positiva e invertível.</p>
+<blockquote class="blockquote">
+<p><strong>Por que isso importa para a Econometria?</strong><br>
+O posto completo de <span class="math inline">\(\mathbf X\)</span> garante uma solução única para as equações normais e, portanto, uma estimativa única de cada coeficiente de MQO.</p>
+</blockquote>
+</section>
+</section>
+<section id="autovalores-e-autovetores" class="level2">
+<h2 class="anchored" data-anchor-id="autovalores-e-autovetores">6. Autovalores e autovetores</h2>
+<p>Para uma matriz quadrada <span class="math inline">\(\mathbf A\)</span>, um escalar <span class="math inline">\(\lambda\)</span> e um vetor não nulo <span class="math inline">\(\mathbf v\)</span> satisfazem:</p>
+<p><span class="math display">\[
+\mathbf A\mathbf v=\lambda\mathbf v.
+\]</span></p>
+<p>O escalar <span class="math inline">\(\lambda\)</span> é um <strong>autovalor</strong> e <span class="math inline">\(\mathbf v\)</span> é um <strong>autovetor</strong> associado.</p>
+<p>Para uma matriz real simétrica:</p>
+<ul>
+<li>todos os autovalores são reais;</li>
+<li>existe uma base ortonormal de autovetores;</li>
+<li>a matriz pode ser diagonalizada ortogonalmente:</li>
+</ul>
+<p><span class="math display">\[
+\mathbf A
+=
+\mathbf P\boldsymbol\Lambda\mathbf P',
+\qquad
+\mathbf P'\mathbf P=\mathbf I.
+\]</span></p>
+<p>Isso é válido mesmo quando há autovalores repetidos.</p>
+<section id="exemplo" class="level3">
+<h3 class="anchored" data-anchor-id="exemplo">6.1 Exemplo</h3>
+<p>Considere:</p>
+<p><span class="math display">\[
+\mathbf A=
+\begin{bmatrix}
+3&amp;1\\
+1&amp;2
+\end{bmatrix}.
+\]</span></p>
+<p>O polinômio característico é:</p>
+<p><span class="math display">\[
+\det(\mathbf A-\lambda\mathbf I)
+=
+\lambda^2-5\lambda+5.
+\]</span></p>
+<p>Seus autovalores são:</p>
+<p><span class="math display">\[
+\lambda_1=\frac{5+\sqrt5}{2},
+\qquad
+\lambda_2=\frac{5-\sqrt5}{2}.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz simétrica 2 x 2</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>A_eig <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">2</span>,</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Decomposição espectral</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>decomposicao <span class="ot">&lt;-</span> <span class="fu">eigen</span>(A_eig)</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>autovalores <span class="ot">&lt;-</span> decomposicao<span class="sc">$</span>values</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>autovetores <span class="ot">&lt;-</span> decomposicao<span class="sc">$</span>vectors</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>autovalores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.618034 1.381966</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>autovetores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]       [,2]
+[1,] -0.8506508  0.5257311
+[2,] -0.5257311 -0.8506508</code></pre>
+</div>
+</div>
+<p>Verificando <span class="math inline">\(\mathbf A\mathbf v=\lambda\mathbf v\)</span> para o primeiro par:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>lambda_1 <span class="ot">&lt;-</span> autovalores[<span class="dv">1</span>]</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>v_1 <span class="ot">&lt;-</span> autovetores[, <span class="dv">1</span>, drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>A_eig <span class="sc">%*%</span> v_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]
+[1,] -3.077684
+[2,] -1.902113</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>lambda_1 <span class="sc">*</span> v_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]
+[1,] -3.077684
+[2,] -1.902113</code></pre>
+</div>
+</div>
+<p>Verificando a diagonalização:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> autovetores</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>Lambda <span class="ot">&lt;-</span> <span class="fu">diag</span>(autovalores)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(P <span class="sc">%*%</span> Lambda <span class="sc">%*%</span> <span class="fu">t</span>(P), <span class="at">digits =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    3    1
+[2,]    1    2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>A_eig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    3    1
+[2,]    1    2</code></pre>
+</div>
+</div>
+<p>Para uma matriz simétrica:</p>
+<ul>
+<li>definida positiva <span class="math inline">\(\Longleftrightarrow\)</span> todos os autovalores são positivos;</li>
+<li>semidefinida positiva <span class="math inline">\(\Longleftrightarrow\)</span> todos os autovalores são não negativos;</li>
+<li>indefinida <span class="math inline">\(\Longleftrightarrow\)</span> existem autovalores positivos e negativos.</li>
+</ul>
+<p>Além disso:</p>
+<p><span class="math display">\[
+\det(\mathbf A)=\prod_{j=1}^{n}\lambda_j,
+\qquad
+\operatorname{tr}(\mathbf A)=\sum_{j=1}^{n}\lambda_j.
+\]</span></p>
+</section>
+</section>
+<section id="diferenciação-matricial" class="level2">
+<h2 class="anchored" data-anchor-id="diferenciação-matricial">7. Diferenciação matricial</h2>
+<section id="forma-linear-1" class="level3">
+<h3 class="anchored" data-anchor-id="forma-linear-1">7.1 Forma linear</h3>
+<p>Se:</p>
+<p><span class="math display">\[
+f(\mathbf x)=\mathbf a'\mathbf x,
+\]</span></p>
+<p>então:</p>
+<p><span class="math display">\[
+\frac{\partial f(\mathbf x)}{\partial\mathbf x}
+=
+\mathbf a.
+\]</span></p>
+</section>
+<section id="forma-quadrática-1" class="level3">
+<h3 class="anchored" data-anchor-id="forma-quadrática-1">7.2 Forma quadrática</h3>
+<p>Para:</p>
+<p><span class="math display">\[
+f(\mathbf x)=\mathbf x'\mathbf A\mathbf x,
+\]</span></p>
+<p>o gradiente geral é:</p>
+<p><span class="math display">\[
+\frac{\partial f(\mathbf x)}{\partial\mathbf x}
+=
+(\mathbf A+\mathbf A')\mathbf x.
+\]</span></p>
+<p>Se <span class="math inline">\(\mathbf A\)</span> é simétrica:</p>
+<p><span class="math display">\[
+\frac{\partial f(\mathbf x)}{\partial\mathbf x}
+=
+2\mathbf A\mathbf x.
+\]</span></p>
+<p>A matriz de segundas derivadas, ou Hessiana, é:</p>
+<p><span class="math display">\[
+\frac{\partial^2 f(\mathbf x)}
+{\partial\mathbf x\,\partial\mathbf x'}
+=
+\mathbf A+\mathbf A'.
+\]</span></p>
+<p>Para <span class="math inline">\(\mathbf A\)</span> simétrica:</p>
+<p><span class="math display">\[
+\mathbf H=2\mathbf A.
+\]</span></p>
+</section>
+<section id="regra-útil-para-mínimos-quadrados" class="level3">
+<h3 class="anchored" data-anchor-id="regra-útil-para-mínimos-quadrados">7.3 Regra útil para mínimos quadrados</h3>
+<p>Considere:</p>
+<p><span class="math display">\[
+f(\boldsymbol\beta)
+=
+(\mathbf y-\mathbf X\boldsymbol\beta)'
+(\mathbf y-\mathbf X\boldsymbol\beta).
+\]</span></p>
+<p>Então:</p>
+<p><span class="math display">\[
+\frac{\partial f(\boldsymbol\beta)}
+{\partial\boldsymbol\beta}
+=
+-2\mathbf X'(\mathbf y-\mathbf X\boldsymbol\beta).
+\]</span></p>
+<p>Essa expressão será utilizada na próxima seção.</p>
+</section>
+</section>
+<section id="derivação-matricial-do-estimador-de-mqo" class="level2">
+<h2 class="anchored" data-anchor-id="derivação-matricial-do-estimador-de-mqo">8. Derivação matricial do estimador de MQO</h2>
+<p>O estimador de MQO escolhe <span class="math inline">\(\boldsymbol\beta\)</span> para minimizar a soma dos quadrados dos resíduos:</p>
+<p><span class="math display">\[
+S(\boldsymbol\beta)
+=
+(\mathbf y-\mathbf X\boldsymbol\beta)'
+(\mathbf y-\mathbf X\boldsymbol\beta).
+\]</span></p>
+<section id="expandindo-a-função-objetivo" class="level3">
+<h3 class="anchored" data-anchor-id="expandindo-a-função-objetivo">8.1 Expandindo a função objetivo</h3>
+<p><span class="math display">\[
+\begin{aligned}
+S(\boldsymbol\beta)
+&amp;=
+\mathbf y'\mathbf y
+-\mathbf y'\mathbf X\boldsymbol\beta
+-\boldsymbol\beta'\mathbf X'\mathbf y
++\boldsymbol\beta'\mathbf X'\mathbf X\boldsymbol\beta.
+\end{aligned}
+\]</span></p>
+<p>Os dois termos cruzados são escalares iguais:</p>
+<p><span class="math display">\[
+\mathbf y'\mathbf X\boldsymbol\beta
+=
+\boldsymbol\beta'\mathbf X'\mathbf y.
+\]</span></p>
+<p>Portanto:</p>
+<p><span class="math display">\[
+S(\boldsymbol\beta)
+=
+\mathbf y'\mathbf y
+-2\boldsymbol\beta'\mathbf X'\mathbf y
++\boldsymbol\beta'\mathbf X'\mathbf X\boldsymbol\beta.
+\]</span></p>
+</section>
+<section id="condições-de-primeira-ordem" class="level3">
+<h3 class="anchored" data-anchor-id="condições-de-primeira-ordem">8.2 Condições de primeira ordem</h3>
+<p>Derivando em relação a <span class="math inline">\(\boldsymbol\beta\)</span>:</p>
+<p><span class="math display">\[
+\frac{\partial S(\boldsymbol\beta)}
+{\partial\boldsymbol\beta}
+=
+-2\mathbf X'\mathbf y
++2\mathbf X'\mathbf X\boldsymbol\beta.
+\]</span></p>
+<p>Igualando a zero:</p>
+<p><span class="math display">\[
+\mathbf X'\mathbf X\widehat{\boldsymbol\beta}
+=
+\mathbf X'\mathbf y.
+\]</span></p>
+<p>Essas são as <strong>equações normais</strong>.</p>
+<p>Se <span class="math inline">\(\mathbf X\)</span> possui posto completo de colunas, <span class="math inline">\(\mathbf X'\mathbf X\)</span> é invertível e:</p>
+<p><span class="math display">\[
+\boxed{
+\widehat{\boldsymbol\beta}
+=
+(\mathbf X'\mathbf X)^{-1}\mathbf X'\mathbf y
+}.
+\]</span></p>
+</section>
+<section id="condição-de-segunda-ordem" class="level3">
+<h3 class="anchored" data-anchor-id="condição-de-segunda-ordem">8.3 Condição de segunda ordem</h3>
+<p>A Hessiana é:</p>
+<p><span class="math display">\[
+\frac{\partial^2 S(\boldsymbol\beta)}
+{\partial\boldsymbol\beta\,\partial\boldsymbol\beta'}
+=
+2\mathbf X'\mathbf X.
+\]</span></p>
+<p>Quando <span class="math inline">\(\mathbf X\)</span> possui posto completo de colunas, <span class="math inline">\(\mathbf X'\mathbf X\)</span> é definida positiva. Portanto, a solução das equações normais é o mínimo único da soma dos quadrados.</p>
+</section>
+<section id="cálculo-no-r" class="level3">
+<h3 class="anchored" data-anchor-id="cálculo-no-r">8.4 Cálculo no R</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimador de MQO calculado com operações matriciais</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>beta_mqo <span class="ot">&lt;-</span> <span class="fu">solve</span>(</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">crossprod</span>(X),</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">crossprod</span>(X, y)</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(beta_mqo) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(X)</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>beta_mqo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             produtividade
+intercepto     2327.955420
+fertilizante     17.519061
+chuva            -1.025053</code></pre>
+</div>
+</div>
+<p>Comparando com <code>lm()</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modelo estimado pela função lm()</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>modelo_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>(y) <span class="sc">~</span> fertilizante <span class="sc">+</span> chuva</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">calculo_matricial =</span> <span class="fu">as.numeric</span>(beta_mqo),</span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">funcao_lm =</span> <span class="fu">coef</span>(modelo_lm)</span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             calculo_matricial   funcao_lm
+(Intercept)        2327.955420 2327.955420
+fertilizante         17.519061   17.519061
+chuva                -1.025053   -1.025053</code></pre>
+</div>
+</div>
+<p>As pequenas diferenças que eventualmente aparecem em exemplos maiores decorrem de métodos numéricos distintos. A função <code>lm()</code> utiliza uma decomposição QR, que tende a ser numericamente mais estável do que formar explicitamente <span class="math inline">\((\mathbf X'\mathbf X)^{-1}\)</span>.</p>
+<blockquote class="blockquote">
+<p><strong>Por que isso importa para a Econometria?</strong><br>
+A fórmula matricial mostra simultaneamente o papel da variação dos regressores, da relação entre <span class="math inline">\(\mathbf X\)</span> e <span class="math inline">\(\mathbf y\)</span> e da condição de posto completo.</p>
+</blockquote>
+</section>
+</section>
+<section id="valores-ajustados-resíduos-e-projeções" class="level2">
+<h2 class="anchored" data-anchor-id="valores-ajustados-resíduos-e-projeções">9. Valores ajustados, resíduos e projeções</h2>
+<section id="matriz-de-projeção" class="level3">
+<h3 class="anchored" data-anchor-id="matriz-de-projeção">9.1 Matriz de projeção</h3>
+<p>Os valores ajustados são:</p>
+<p><span class="math display">\[
+\widehat{\mathbf y}
+=
+\mathbf X\widehat{\boldsymbol\beta}.
+\]</span></p>
+<p>Substituindo a fórmula de MQO:</p>
+<p><span class="math display">\[
+\widehat{\mathbf y}
+=
+\mathbf X(\mathbf X'\mathbf X)^{-1}\mathbf X'\mathbf y.
+\]</span></p>
+<p>Definimos a matriz de projeção:</p>
+<p><span class="math display">\[
+\mathbf P_X
+=
+\mathbf X(\mathbf X'\mathbf X)^{-1}\mathbf X'.
+\]</span></p>
+<p>Assim:</p>
+<p><span class="math display">\[
+\widehat{\mathbf y}=\mathbf P_X\mathbf y.
+\]</span></p>
+</section>
+<section id="matriz-geradora-de-resíduos" class="level3">
+<h3 class="anchored" data-anchor-id="matriz-geradora-de-resíduos">9.2 Matriz geradora de resíduos</h3>
+<p>O vetor de resíduos é:</p>
+<p><span class="math display">\[
+\widehat{\mathbf u}
+=
+\mathbf y-\widehat{\mathbf y}.
+\]</span></p>
+<p>Logo:</p>
+<p><span class="math display">\[
+\widehat{\mathbf u}
+=
+(\mathbf I_n-\mathbf P_X)\mathbf y.
+\]</span></p>
+<p>Definimos:</p>
+<p><span class="math display">\[
+\mathbf M_X
+=
+\mathbf I_n-\mathbf P_X.
+\]</span></p>
+<p>Portanto:</p>
+<p><span class="math display">\[
+\widehat{\mathbf u}=\mathbf M_X\mathbf y.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de projeção</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>P_X <span class="ot">&lt;-</span> X <span class="sc">%*%</span> <span class="fu">solve</span>(<span class="fu">crossprod</span>(X)) <span class="sc">%*%</span> <span class="fu">t</span>(X)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz geradora de resíduos</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>M_X <span class="ot">&lt;-</span> <span class="fu">diag</span>(n) <span class="sc">-</span> P_X</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores ajustados e resíduos</span></span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>y_ajustado <span class="ot">&lt;-</span> P_X <span class="sc">%*%</span> y</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>residuos <span class="ot">&lt;-</span> M_X <span class="sc">%*%</span> y</span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(</span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">observado =</span> y,</span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">ajustado =</span> y_ajustado,</span>
+<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">residuo =</span> residuos</span>
+<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     produtividade produtividade produtividade
+[1,]          2820      2857.254    -37.253818
+[2,]          3010      2991.442     18.557680
+[3,]          3190      3187.134      2.866013
+[4,]          3430      3388.417     41.583261
+[5,]          3520      3532.856    -12.855768
+[6,]          3740      3728.547     11.452564
+[7,]          3910      3929.830    -19.830188
+[8,]          4080      4084.520     -4.519744</code></pre>
+</div>
+</div>
+</section>
+<section id="propriedades" class="level3">
+<h3 class="anchored" data-anchor-id="propriedades">9.3 Propriedades</h3>
+<p>As matrizes <span class="math inline">\(\mathbf P_X\)</span> e <span class="math inline">\(\mathbf M_X\)</span> são simétricas e idempotentes:</p>
+<p><span class="math display">\[
+\mathbf P_X'=\mathbf P_X,
+\qquad
+\mathbf P_X^2=\mathbf P_X,
+\]</span></p>
+<p><span class="math display">\[
+\mathbf M_X'=\mathbf M_X,
+\qquad
+\mathbf M_X^2=\mathbf M_X.
+\]</span></p>
+<p>Também:</p>
+<p><span class="math display">\[
+\mathbf P_X\mathbf M_X=\mathbf0.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simetria</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">P_simetrica =</span> <span class="fu">isSymmetric</span>(P_X),</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">M_simetrica =</span> <span class="fu">isSymmetric</span>(M_X)</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>P_simetrica M_simetrica 
+      FALSE       FALSE </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Idempotência e ortogonalidade</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">abs</span>(P_X <span class="sc">%*%</span> P_X <span class="sc">-</span> P_X))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0000000000000462963</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">abs</span>(M_X <span class="sc">%*%</span> M_X <span class="sc">-</span> M_X))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0000000000000462963</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">abs</span>(P_X <span class="sc">%*%</span> M_X))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.00000000000004630324</code></pre>
+</div>
+</div>
+</section>
+<section id="ortogonalidade-dos-resíduos" class="level3">
+<h3 class="anchored" data-anchor-id="ortogonalidade-dos-resíduos">9.4 Ortogonalidade dos resíduos</h3>
+<p>As equações normais implicam:</p>
+<p><span class="math display">\[
+\mathbf X'\widehat{\mathbf u}=\mathbf0.
+\]</span></p>
+<p>Assim, os resíduos são ortogonais a cada coluna de <span class="math inline">\(\mathbf X\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Produtos entre os regressores e os resíduos</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">crossprod</span>(X, residuos), <span class="at">digits =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             produtividade
+intercepto    0.0000000041
+fertilizante  0.0000004695
+chuva         0.0000031761</code></pre>
+</div>
+</div>
+<p>Quando o modelo contém intercepto, uma coluna de <span class="math inline">\(\mathbf X\)</span> é o vetor de uns. Portanto:</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n}\widehat u_i=0.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(residuos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.000000004126406</code></pre>
+</div>
+</div>
+<p>Geometricamente, <span class="math inline">\(\widehat{\mathbf y}\)</span> é a projeção de <span class="math inline">\(\mathbf y\)</span> no espaço gerado pelas colunas de <span class="math inline">\(\mathbf X\)</span>, enquanto <span class="math inline">\(\widehat{\mathbf u}\)</span> pertence ao espaço ortogonal.</p>
+</section>
+</section>
+<section id="decomposição-da-soma-de-quadrados" class="level2">
+<h2 class="anchored" data-anchor-id="decomposição-da-soma-de-quadrados">10. Decomposição da soma de quadrados</h2>
+<p>Quando o modelo contém intercepto:</p>
+<p><span class="math display">\[
+\mathbf y-\bar y\mathbf1_n
+=
+(\widehat{\mathbf y}-\bar y\mathbf1_n)
++\widehat{\mathbf u}.
+\]</span></p>
+<p>Como os valores ajustados são ortogonais aos resíduos:</p>
+<p><span class="math display">\[
+\underbrace{
+\sum_{i=1}^{n}(y_i-\bar y)^2
+}_{\text{SQT}}
+=
+\underbrace{
+\sum_{i=1}^{n}(\widehat y_i-\bar y)^2
+}_{\text{SQE}}
++
+\underbrace{
+\sum_{i=1}^{n}\widehat u_i^2
+}_{\text{SQR}}.
+\]</span></p>
+<p>Em notação matricial:</p>
+<p><span class="math display">\[
+\mathbf y'\mathbf M_0\mathbf y
+=
+\widehat{\mathbf y}'\mathbf M_0\widehat{\mathbf y}
++\widehat{\mathbf u}'\widehat{\mathbf u}.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de centralização adequada ao vetor y</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>um_n <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span>, <span class="at">nrow =</span> n, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>M0_y <span class="ot">&lt;-</span> <span class="fu">diag</span>(n) <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">/</span> n) <span class="sc">*</span> <span class="fu">tcrossprod</span>(um_n)</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Soma total de quadrados</span></span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>SQT <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">t</span>(y) <span class="sc">%*%</span> M0_y <span class="sc">%*%</span> y)</span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Soma explicada de quadrados</span></span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>SQE <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">t</span>(y_ajustado) <span class="sc">%*%</span> M0_y <span class="sc">%*%</span> y_ajustado)</span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Soma dos quadrados dos resíduos</span></span>
+<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a>SQR <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">crossprod</span>(residuos))</span>
+<span id="cb69-13"><a href="#cb69-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-14"><a href="#cb69-14" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb69-15"><a href="#cb69-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">SQT =</span> SQT,</span>
+<span id="cb69-16"><a href="#cb69-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">SQE =</span> SQE,</span>
+<span id="cb69-17"><a href="#cb69-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">SQR =</span> SQR,</span>
+<span id="cb69-18"><a href="#cb69-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">SQE_mais_SQR =</span> SQE <span class="sc">+</span> SQR</span>
+<span id="cb69-19"><a href="#cb69-19" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         SQT          SQE          SQR SQE_mais_SQR 
+ 1354750.000  1350570.287     4179.713  1354750.000 </code></pre>
+</div>
+</div>
+<p>O coeficiente de determinação é:</p>
+<p><span class="math display">\[
+R^2
+=
+\frac{\text{SQE}}{\text{SQT}}
+=
+1-\frac{\text{SQR}}{\text{SQT}}.
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>R2_matricial <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> SQR <span class="sc">/</span> SQT</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>R2_lm <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo_lm)<span class="sc">$</span>r.squared</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">calculo_matricial =</span> R2_matricial,</span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">funcao_lm =</span> R2_lm</span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>calculo_matricial         funcao_lm 
+        0.9969148         0.9969148 </code></pre>
+</div>
+</div>
+</section>
+<section id="autovalores-posto-e-multicolinearidade" class="level2">
+<h2 class="anchored" data-anchor-id="autovalores-posto-e-multicolinearidade">11. Autovalores, posto e multicolinearidade</h2>
+<p>Se as colunas de <span class="math inline">\(\mathbf X\)</span> são linearmente dependentes:</p>
+<p><span class="math display">\[
+\operatorname{posto}(\mathbf X)&lt;k,
+\]</span></p>
+<p>e <span class="math inline">\(\mathbf X'\mathbf X\)</span> possui pelo menos um autovalor igual a zero. Nesse caso, <span class="math inline">\(\mathbf X'\mathbf X\)</span> é singular e o estimador não possui solução única.</p>
+<section id="colinearidade-exata" class="level3">
+<h3 class="anchored" data-anchor-id="colinearidade-exata">11.1 Colinearidade exata</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A terceira coluna é duas vezes a segunda</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>X_exata <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">intercepto =</span> <span class="dv">1</span>,</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1 =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,</span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">x2 =</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">numero_colunas =</span> <span class="fu">ncol</span>(X_exata),</span>
+<span id="cb73-10"><a href="#cb73-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">posto =</span> <span class="fu">qr</span>(X_exata)<span class="sc">$</span>rank</span>
+<span id="cb73-11"><a href="#cb73-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>numero_colunas          posto 
+             3              2 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eigen</span>(<span class="fu">crossprod</span>(X_exata), <span class="at">symmetric =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 459.8583440819188581372   1.1416559180808869556  -0.0000000000001136868</code></pre>
+</div>
+</div>
+</section>
+<section id="quase-multicolinearidade" class="level3">
+<h3 class="anchored" data-anchor-id="quase-multicolinearidade">11.2 Quase multicolinearidade</h3>
+<p>Na prática, uma coluna pode ser aproximadamente uma combinação linear das demais. Então <span class="math inline">\(\mathbf X'\mathbf X\)</span> é invertível, mas apresenta um autovalor muito pequeno.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dois regressores quase linearmente dependentes</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="at">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> x1 <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">sd =</span> <span class="fl">0.01</span>)</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>X_quase <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">intercepto =</span> <span class="dv">1</span>,</span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1 =</span> x1,</span>
+<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">x2 =</span> x2</span>
+<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Autovalores de X'X</span></span>
+<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a><span class="fu">eigen</span>(<span class="fu">crossprod</span>(X_quase), <span class="at">symmetric =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18647.887170956    18.465962887     0.001989961</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Número de condição</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kappa</span>(X_quase)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4836.684</code></pre>
+</div>
+</div>
+<p>Um número de condição elevado indica que pequenas mudanças nos dados podem provocar grandes alterações nas estimativas. Não existe, contudo, um único limiar universal que determine quando a multicolinearidade é grave.</p>
+<blockquote class="blockquote">
+<p><strong>Por que isso importa para a Econometria?</strong><br>
+A multicolinearidade exata impede a estimação separada dos coeficientes. A quase multicolinearidade não impede a estimação, mas pode aumentar os erros-padrão e tornar os coeficientes instáveis.</p>
+</blockquote>
+</section>
+</section>
+<section id="síntese" class="level2">
+<h2 class="anchored" data-anchor-id="síntese">12. Síntese</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 74%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Conceito</th>
+<th style="text-align: left;">Resultado principal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Sistema linear</td>
+<td style="text-align: left;"><span class="math inline">\(\mathbf A\mathbf x=\mathbf b\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Modelo de regressão</td>
+<td style="text-align: left;"><span class="math inline">\(\mathbf y=\mathbf X\boldsymbol\beta+\mathbf u\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Média</td>
+<td style="text-align: left;"><span class="math inline">\(\bar x=n^{-1}\mathbf1_n'\mathbf x\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Centralização</td>
+<td style="text-align: left;"><span class="math inline">\(\mathbf M_0=\mathbf I_n-n^{-1}\mathbf1_n\mathbf1_n'\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Forma quadrática</td>
+<td style="text-align: left;"><span class="math inline">\(\mathbf x'\mathbf A\mathbf x\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gradiente quadrático</td>
+<td style="text-align: left;"><span class="math inline">\((\mathbf A+\mathbf A')\mathbf x\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Equações normais</td>
+<td style="text-align: left;"><span class="math inline">\(\mathbf X'\mathbf X\widehat{\boldsymbol\beta}=\mathbf X'\mathbf y\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Estimador de MQO</td>
+<td style="text-align: left;"><span class="math inline">\((\mathbf X'\mathbf X)^{-1}\mathbf X'\mathbf y\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Valores ajustados</td>
+<td style="text-align: left;"><span class="math inline">\(\widehat{\mathbf y}=\mathbf P_X\mathbf y\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Resíduos</td>
+<td style="text-align: left;"><span class="math inline">\(\widehat{\mathbf u}=\mathbf M_X\mathbf y\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ortogonalidade</td>
+<td style="text-align: left;"><span class="math inline">\(\mathbf X'\widehat{\mathbf u}=\mathbf0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Decomposição</td>
+<td style="text-align: left;"><span class="math inline">\(\text{SQT}=\text{SQE}+\text{SQR}\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="considerações-finais" class="level1">
+<h1>Considerações finais</h1>
+<p>Os principais resultados da álgebra linear aparecem de forma integrada no método de mínimos quadrados. A condição de posto completo garante a invertibilidade de <span class="math inline">\(\mathbf X'\mathbf X\)</span>; as formas quadráticas representam somas de quadrados; a diferenciação matricial produz as equações normais; e as matrizes de projeção revelam a geometria da regressão.</p>
+<p>Essas ferramentas serão retomadas no estudo das propriedades do estimador de MQO, do teorema de Gauss–Markov, da regressão particionada e da inferência em modelos lineares.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
