@@ -1,8 +1,11 @@
 ---
 title: "Revisão de Álgebra Linear (2)"
-subtitle: "Econometria I"
+subtitle: "Sistemas lineares, formas quadráticas, Autovalores e autovetores"
 author: "Vitor Hugo Miro"
-output: html_notebook
+output:
+  html_notebook:
+    toc: true
+    toc_float: true
 ---
 
 ## 1. Sistemas Lineares

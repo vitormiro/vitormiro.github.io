@@ -4,15 +4,25 @@ title: "Pesquisa"
 
 ### Principais Áreas de Concentração
 
--   **Microeconomia aplicada** \[Mercado de Trabalho, Organização Industrial, Economia de Empresas, Desenvolvimento Econômico\]
+-   **Microeconomia aplicada**. Mercado de Trabalho, Economia Agrícola, Desenvolvimento Econômico, Organização Industrial.
 
--   **Estatística e Econometria aplicadas** \[Microeconometria (modelos em cross-section, escolha discreta, decomposição), Ciência de Dados e Machine Learning\]
+-   **Estatística e Econometria aplicadas**. Microeconometria (modelos em cross-section, escolha discreta, decomposição), Ciência de Dados e Machine Learning.
 
--   **Avaliação de Políticas Públicas** \[Métodos estatísticos, inferência causal\]
+-   **Avaliação de Políticas Públicas**. Métodos estatísticos, inferência causal.
 
 \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
 
 ### Artigos publicados em Periódicos
+
+-   [**Crédito rural e mitigação climática: evidências do Programa ABC no Brasil**](https://revistasober.org/article/doi/10.1590/1806-9479.2026.301905). **Revista de Economia e Sociologia Rural**, v. 64, p. e301905-23, 2026. Com Filomena Nádia Rodrigues Bezerra, José de Jesus Sousa Lemos, Kilmer Coelho Campos e Fernando Antônio Teixeira Mendes.
+
+-   [**Análise do impacto do índice tecnológico na receita de apicultores do Ceará: uma abordagem de regressão quantílica**](https://revistasober.org/article/doi/10.1590/1806-9479.2025.295892). **Revista de Economia e Sociologia Rural**, v. 63, p. 1-21, 2025. Com Eucinete de Menezes Albuquerque, Ahmad Saeed Khan e Francisco José Silva Tabosa.
+
+-   [**Impacto das atividades não agrícolas sobre a segurança alimentar e nutricional das famílias rurais do Nordeste brasileiro**](https://seer.faccat.br/index.php/coloquio/article/view/3156). **COLÓQUIO - Revista do Desenvolvimento Regional**, v. 22, p. 227-247, 2025. Com Marcos Paulo Mesquita da Cruz e Jair Andrade de Araujo.
+
+-   [**Escolas em tempo integral e desempenho no Enem: uma avaliação de impacto para o estado do Ceará**](https://revistas.usp.br/ecoa/pt_BR/article/view/194773). **Revista de Economia Aplicada**, v. 28, p. 627-662, 2024. Com Gerrio dos Santos Barbosa, Edward Costa Martins, Helson Gomes de Souza e Gescilene dos Santos Barbosa.
+
+-   [**Impacto do coco híbrido na produção rural no estado do Ceará**](https://revistaaber.org.br/rberu/article/view/1014). **Revista Brasileira de Estudos Regionais e Urbanos**, v. 18, n. 2, p. 176–198, 2024. Com Francisco José da Silva Tabosa, Nicole Sara Carvalho Ponte Moura e Alexandre Nunes de Almeida.
 
 -   [**Crédito rural e produção das lavouras temporárias nos distintos cenários do nordeste brasileiro**](https://www.scielo.br/j/resr/a/VWGKx5SCXWFdY3TmFMFLRrx/?lang=pt). **Revista de Economia e Sociologia Rural 61(1): e247380, 2023.** Com Thyena Karen Magalhães Dias e Edward Martins Costa.
 

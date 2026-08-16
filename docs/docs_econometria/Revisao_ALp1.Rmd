@@ -1,8 +1,11 @@
 ---
 title: "Revisão de Álgebra Linear"
-subtitle: "Econometria I"
+subtitle: "Elementos básicos e operações com matrizes"
 author: "Vitor Hugo Miro"
-output: html_notebook
+output:
+  html_notebook:
+    toc: true
+    toc_float: true
 ---
 
 # Introdução
@@ -153,7 +156,8 @@ $$
 6 & 9\\
 2 & 8
 \end{bmatrix}
-$$ No caso de uma diferença:
+$$ 
+No caso de uma diferença:
 
 $$
 \mathbf{A-B} = \begin{bmatrix}
