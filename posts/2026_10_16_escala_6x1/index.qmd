@@ -69,7 +69,7 @@ A aba abaixo mostra um pouco da notação utilizada no texto.
 ## Notação
 
 | Símbolo                        | Significado                                                                                           |
-|:---------------------|:-------------------------------------------------|
+|:-------------------------------|:------------------------------------------------------------------------------------------------------|
 | $N$                            | número de trabalhadores                                                                               |
 | $H$, $\bar H$                  | horas trabalhadas e jornada legal (semanais)                                                          |
 | $W$, $w$                       | salário semanal base e salário-hora ($w = W/\bar H$)                                                  |
@@ -354,7 +354,7 @@ Mantendo inicialmente as horas efetivamente trabalhadas, a redução da jornada 
 Um exemplo ajuda a visualizar esses dois mecanismos. Considere um trabalhador que mantém uma jornada de 48 horas semanais antes e depois da mudança. Se $w_0$ é o salário-hora inicial, seu salário-base semanal é $W=44\,w_0$. A tabela compara os gastos nas duas situações.
 
 |                             |        Antes ($\bar H = 44$)         |              Depois ($\bar H = 40$)              |
-|:-----------------|:---------------------:|:-----------------------------:|
+|:----------------------------|:------------------------------------:|:------------------------------------------------:|
 | Salário-hora                |                $w_0$                 |                   $1{,}1\,w_0$                   |
 | Horas extras                |                  4                   |                        8                         |
 | Custo das horas extras      | $4 \times 1{,}5 \times w_0 = 6\,w_0$ | $8 \times 1{,}5 \times 1{,}1\,w_0 = 13{,}2\,w_0$ |
