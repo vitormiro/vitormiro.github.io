@@ -69,7 +69,7 @@ A aba abaixo mostra um pouco da notação utilizada no texto.
 ## Notação
 
 | Símbolo                        | Significado                                                                                           |
-|:--------------------|:--------------------------------------------------|
+|:---------------------|:-------------------------------------------------|
 | $N$                            | número de trabalhadores                                                                               |
 | $H$, $\bar H$                  | horas trabalhadas e jornada legal (semanais)                                                          |
 | $W$, $w$                       | salário semanal base e salário-hora ($w = W/\bar H$)                                                  |
@@ -396,6 +396,10 @@ O aumento de 20% no requisito mínimo não significa que todo estabelecimento pr
 
 A restrição de cobertura acrescenta, assim, uma dimensão às escolhas da firma: além de decidir quanto trabalho utilizar, ela precisa organizar sua distribuição entre os dias. A resposta depende da equipe existente, das possibilidades de reorganização e do custo de alterar o funcionamento.
 
+O efeito agregado depende da distribuição das firmas e dos trabalhadores entre os regimes e setores. A necessidade de cobertura pode estar presente tanto em firmas com horas extras quanto em firmas sem elas. Ela constitui uma restrição adicional às escolhas dessas empresas, e não um terceiro grupo independente. Por isso, esses mecanismos precisam ser analisados conjuntamente, evitando contar duas vezes o mesmo ajuste.
+
+Uma aplicação poderia partir das informações sobre jornadas contratuais da RAIS para caracterizar a exposição dos vínculos à redução das horas. Essa informação, isoladamente, não permite distinguir jornadas de 44 horas distribuídas em cinco ou seis dias. Para identificar o uso de horas extras e a organização das escalas, seria necessário verificar a disponibilidade e a qualidade de variáveis adicionais nas bases utilizadas.
+
 ## Oferta de trabalho e bem-estar dos trabalhadores
 
 Até aqui, analisamos as escolhas das firmas. Para os trabalhadores, a redução da jornada também pode trazer ganhos de tempo disponível e diminuir os custos associados aos dias de trabalho.
@@ -435,18 +439,6 @@ Até aqui, mantivemos o salário-base constante para analisar o efeito da reduç
 Mantido o salário mensal, a passagem de 44 para 40 horas eleva o salário nominal por hora em 10%, inclusive para quem recebe o mínimo. O ganho real, porém, depende também da evolução dos preços. Por isso, a análise de médio prazo exige considerar tanto os reajustes salariais quanto possíveis mudanças no custo de vida.
 
 A literatura sobre salário mínimo pode ajudar a discutir as respostas do emprego entre trabalhadores de menor remuneração. Seus resultados, contudo, não devem ser utilizados diretamente como estimativas da elasticidade do nosso modelo: é necessário verificar quais mecanismos e grupos de trabalhadores cada estudo considera.
-
-## Síntese da arquitetura
-
-| Bloco                     | O que entrega                                                                 | Parâmetros críticos                   |
-|:------------------|:----------------------------------|:------------------|
-| Regime 1 (sem hora extra) | Efeito sobre o emprego em função de $\eta$                                    | $\eta$, $\varepsilon_e$               |
-| Regime 2 (com hora extra) | Ajuste conjunto de emprego e horas extras, com sinal dependente das hipóteses | $\phi$, $f/W$, curvatura de $F$ e $e$ |
-| Cobertura                 | No exemplo, aumento de 20% no requisito mínimo de pessoal                     | $D$, $\bar n$, custo de fechar um dia |
-| Oferta e bem-estar        | Ganhos de lazer e de redução de deslocamentos                                 | $U_\ell$, $\kappa$                    |
-| Médio prazo               | Incidência do custo entre firmas e trabalhadores                              | salário mínimo                        |
-
-O efeito agregado depende da distribuição das firmas e dos trabalhadores entre os regimes e setores. O módulo de cobertura acrescenta uma restrição às escolhas das empresas e pode estar presente tanto em firmas com horas extras quanto em firmas sem elas. Por isso, seus efeitos precisam ser analisados conjuntamente, evitando contar duas vezes o mesmo ajuste. A RAIS fornece as horas contratuais por vínculo, o que permite medir a exposição de cada setor; a PNAD Contínua permite aproximar a fração de trabalhadores que fazem horas extras e o grau de informalidade. Uma limitação importante é que a RAIS não distingue a escala 6x1 da 5x2 entre os vínculos de 44 horas.
 
 ## O que a evidência empírica sugere
 
