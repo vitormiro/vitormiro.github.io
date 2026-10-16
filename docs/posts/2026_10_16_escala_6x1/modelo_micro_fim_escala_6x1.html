@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vitor Hugo Miro">
+
+<title>Fim da escala 6x1: o que diz um modelo de demanda por trabalho – Vitor Hugo Miro</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ddd961a2510921635943dfbbd19534c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Vitor Hugo Miro</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">Sobre</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../ensino.html"> 
+<span class="menu-text">Ensino</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../pesquisa.html"> 
+<span class="menu-text">Pesquisa</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html"> 
+<span class="menu-text">Posts</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Fim da escala 6x1: o que diz um modelo de demanda por trabalho</h1>
+            <p class="subtitle lead">Como podemos usar um modelo microeconômico para entender possíveis efeitos do fim da escala 6x1 e a redução da jornada de trabalho</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">mercado de trabalho</div>
+                <div class="quarto-category">jornada de trabalho</div>
+                <div class="quarto-category">microeconomia</div>
+                <div class="quarto-category">escala 6x1</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Autor</div>
+      <div class="quarto-title-meta-contents">
+               <p>Vitor Hugo Miro </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Data de Publicação</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">15 de outubro de 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Nesta página</h2>
+   
+  <ul>
+  <li><a href="#motivação" id="toc-motivação" class="nav-link active" data-scroll-target="#motivação"><span class="header-section-number">1</span> Motivação</a></li>
+  <li><a href="#da-escala-à-jornada-o-que-está-mudando" id="toc-da-escala-à-jornada-o-que-está-mudando" class="nav-link" data-scroll-target="#da-escala-à-jornada-o-que-está-mudando"><span class="header-section-number">2</span> Da escala à jornada: o que está mudando?</a></li>
+  <li><a href="#o-modelo-microeconômico" id="toc-o-modelo-microeconômico" class="nav-link" data-scroll-target="#o-modelo-microeconômico"><span class="header-section-number">3</span> O modelo microeconômico</a>
+  <ul class="collapse">
+  <li><a href="#caracterizando-a-tecnologia-das-firmas" id="toc-caracterizando-a-tecnologia-das-firmas" class="nav-link" data-scroll-target="#caracterizando-a-tecnologia-das-firmas"><span class="header-section-number">3.1</span> Caracterizando a tecnologia das firmas</a></li>
+  <li><a href="#caracterizando-os-custos" id="toc-caracterizando-os-custos" class="nav-link" data-scroll-target="#caracterizando-os-custos"><span class="header-section-number">3.2</span> Caracterizando os custos</a></li>
+  <li><a href="#o-problema-da-firma" id="toc-o-problema-da-firma" class="nav-link" data-scroll-target="#o-problema-da-firma"><span class="header-section-number">3.3</span> O problema da firma</a></li>
+  <li><a href="#regime-1-firmas-sem-hora-extra" id="toc-regime-1-firmas-sem-hora-extra" class="nav-link" data-scroll-target="#regime-1-firmas-sem-hora-extra"><span class="header-section-number">3.4</span> Regime 1: firmas sem hora extra</a></li>
+  <li><a href="#regime-2-firmas-que-utilizam-hora-extra" id="toc-regime-2-firmas-que-utilizam-hora-extra" class="nav-link" data-scroll-target="#regime-2-firmas-que-utilizam-hora-extra"><span class="header-section-number">3.5</span> Regime 2: firmas que utilizam hora extra</a></li>
+  </ul></li>
+  <li><a href="#módulo-de-cobertura-quando-a-empresa-precisa-funcionar-mais-dias-do-que-cada-empregado-trabalha" id="toc-módulo-de-cobertura-quando-a-empresa-precisa-funcionar-mais-dias-do-que-cada-empregado-trabalha" class="nav-link" data-scroll-target="#módulo-de-cobertura-quando-a-empresa-precisa-funcionar-mais-dias-do-que-cada-empregado-trabalha"><span class="header-section-number">4</span> Módulo de cobertura: quando a empresa precisa funcionar mais dias do que cada empregado trabalha</a></li>
+  <li><a href="#oferta-de-trabalho-e-bem-estar-dos-trabalhadores" id="toc-oferta-de-trabalho-e-bem-estar-dos-trabalhadores" class="nav-link" data-scroll-target="#oferta-de-trabalho-e-bem-estar-dos-trabalhadores"><span class="header-section-number">5</span> Oferta de trabalho e bem-estar dos trabalhadores</a></li>
+  <li><a href="#quem-absorve-o-custo-ao-longo-do-tempo" id="toc-quem-absorve-o-custo-ao-longo-do-tempo" class="nav-link" data-scroll-target="#quem-absorve-o-custo-ao-longo-do-tempo"><span class="header-section-number">6</span> Quem absorve o custo ao longo do tempo?</a></li>
+  <li><a href="#síntese-da-arquitetura" id="toc-síntese-da-arquitetura" class="nav-link" data-scroll-target="#síntese-da-arquitetura"><span class="header-section-number">7</span> Síntese da arquitetura</a></li>
+  <li><a href="#o-que-a-evidência-empírica-sugere" id="toc-o-que-a-evidência-empírica-sugere" class="nav-link" data-scroll-target="#o-que-a-evidência-empírica-sugere"><span class="header-section-number">8</span> O que a evidência empírica sugere</a></li>
+  <li><a href="#considerações-finais" id="toc-considerações-finais" class="nav-link" data-scroll-target="#considerações-finais"><span class="header-section-number">9</span> Considerações finais</a></li>
+  <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências"><span class="header-section-number">10</span> Referências</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="motivação" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="motivação"><span class="header-section-number">1</span> Motivação</h2>
+<p>No dia 14 de outubro de 2026, o Senado aprovou uma proposta de emenda à Constituição que acaba com a escala 6x1 e reduz gradualmente a jornada máxima de 44 para 40 horas semanais, sem redução de salário.</p>
+<p>Venho acompanhando as discussões sobre o tema nos últimos meses e fui convidado a comentar a medida, o que me levou a organizar algumas reflexões. Como professor de Microeconomia Aplicada, fiquei pensando em como abordar esse assunto a partir de um modelo de demanda por trabalho, desses que ensinamos aos alunos nos cursos de graduação e pós-graduação em Economia.</p>
+<p>Bom, adaptar um modelo básico e manter a explicação compreensível se mostrou um desafio e tanto. Precisei retomar algumas leituras, buscar outros artigos e, confesso, contei com a ajuda de um agente de IA para trabalhar algumas formulações.</p>
+<p>A pergunta de partida foi a seguinte: <strong>o fim da escala 6x1 e a redução da jornada de trabalho geram ou destroem empregos?</strong> Uma das coisas que mais me interessam na teoria microeconômica é justamente a possibilidade de transformar uma pergunta como essa em um problema que podemos examinar com mais cuidado. Ao desenvolver o modelo, fui percebendo como a resposta depende das hipóteses adotadas: do uso de horas extras, da elasticidade da demanda por trabalho, dos custos fixos por trabalhador e da necessidade de manter equipes nos dias de funcionamento.</p>
+<p>Organizei este texto para compartilhar o raciocínio e as reflexões que surgiram pelo caminho — e também para atualizar este blog, que anda parado há algum tempo. Como todo modelo, este é uma simplificação e deixa de fora aspectos importantes da discussão. Ainda assim, espero que ajude a entender alguns dos mecanismos envolvidos e seja útil para quem está aprendendo ou simplesmente gosta de microeconomia.</p>
+</section>
+<section id="da-escala-à-jornada-o-que-está-mudando" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="da-escala-à-jornada-o-que-está-mudando"><span class="header-section-number">2</span> Da escala à jornada: o que está mudando?</h2>
+<p>A política atinge dois grupos de trabalhadores de forma diferente:</p>
+<ul>
+<li><strong>quem já trabalha em 5x2 com 44 horas</strong> sofre apenas um choque de horas (de 44 para 40);</li>
+<li><strong>quem trabalha em 6x1</strong> sofre o choque de horas e, adicionalmente, perde um dia de trabalho (de 6 para 5).</li>
+</ul>
+<p>Com 40 horas em 5 dias, a jornada diária passa a ser de exatamente 8 horas, que é o teto diário constitucional.</p>
+<p>Há ainda um detalhe institucional decisivo. O salário mensal é convertido em salário-hora pelo divisor de 220 horas quando a jornada é de 44 horas semanais, e de 200 horas quando a jornada é de 40. Como o salário mensal é irredutível, <strong>o salário-hora sobe 10%</strong>, e a hora extra, calculada sobre ele, sobe na mesma proporção.</p>
+<p>A jornada diminui em 4 horas sobre as 44 iniciais, uma redução de aproximadamente 9,1%. Já o salário-hora aumenta na razão entre a jornada antiga e a nova: <span class="math inline">\(44/40 = 1{,}10\)</span>. A empresa continua pagando o mesmo salário por trabalhador, mas passa a receber menos horas em contrapartida.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Ideia central
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Com o salário mensal fixo, reduzir a jornada de 44 para 40 horas semanais equivale a um aumento de 10% no custo da hora contratada. A questão relevante é como as firmas reagem a esse aumento de custo.</p>
+</div>
+</div>
+</section>
+<section id="o-modelo-microeconômico" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="o-modelo-microeconômico"><span class="header-section-number">3</span> O modelo microeconômico</h2>
+<p>O modelo tem três blocos:</p>
+<ul>
+<li>um núcleo de demanda por trabalhadores e horas, válido para todas as firmas;</li>
+<li>um módulo de cobertura, para setores com funcionamento fixo (que possuem a necessidade de manter uma equipe mínima em cada dia de funcionamento, como ocorre em supermercados, restaurantes e outros serviços), onde o 6x1 se concentra; e</li>
+<li>um bloco de oferta e bem-estar dos trabalhadores.</li>
+</ul>
+<p>A estrutura do núcleo segue Calmfors e Hoel (1988), adaptada à rigidez salarial brasileira.</p>
+<p>A aba abaixo mostra um pouco da notação utilizada no texto.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Notação
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Símbolo</th>
+<th style="text-align: left;">Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(N\)</span></td>
+<td style="text-align: left;">número de trabalhadores</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(H\)</span>, <span class="math inline">\(\bar H\)</span></td>
+<td style="text-align: left;">horas trabalhadas e jornada legal (semanais)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(W\)</span>, <span class="math inline">\(w\)</span></td>
+<td style="text-align: left;">salário semanal base e salário-hora (<span class="math inline">\(w = W/\bar H\)</span>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(f\)</span></td>
+<td style="text-align: left;">custo fixo por trabalhador</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\phi\)</span></td>
+<td style="text-align: left;">prêmio de hora extra (0,5)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(e(H)\)</span>, <span class="math inline">\(\varepsilon_e\)</span></td>
+<td style="text-align: left;">eficiência por hora e sua elasticidade</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(L\)</span>, <span class="math inline">\(c_L\)</span></td>
+<td style="text-align: left;">trabalho efetivo e seu custo unitário</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\eta\)</span></td>
+<td style="text-align: left;">elasticidade incondicional da demanda por <span class="math inline">\(L\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(s\)</span>, <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(\varepsilon_D\)</span></td>
+<td style="text-align: left;">participação do trabalho no custo, elasticidade de substituição, elasticidade da demanda pelo produto</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(D\)</span>, <span class="math inline">\(d\)</span>, <span class="math inline">\(\bar n\)</span></td>
+<td style="text-align: left;">dias de funcionamento, dias por trabalhador, equipe mínima diária</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\kappa\)</span></td>
+<td style="text-align: left;">custo por dia trabalhado</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<section id="caracterizando-a-tecnologia-das-firmas" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="caracterizando-a-tecnologia-das-firmas"><span class="header-section-number">3.1</span> Caracterizando a tecnologia das firmas</h3>
+<p>Vamos começar com uma função de produção que representa a tecnologia das firmas:</p>
+<p><span class="math display">\[
+Y = F(K, L),
+\]</span></p>
+<p>em que <span class="math inline">\(Y\)</span> representa a quantidade produzida, <span class="math inline">\(K\)</span> é o capital utilizado e <span class="math inline">\(L\)</span> corresponde ao trabalho efetivo empregado na produção.</p>
+<p>Por sua vez, o trabalho efetivo é definido como:</p>
+<p><span class="math display">\[
+L = N \cdot H \cdot e(H),
+\]</span></p>
+<p>em que <span class="math inline">\(N\)</span> é o número de trabalhadores, <span class="math inline">\(H\)</span> são as horas semanais trabalhadas por cada um e <span class="math inline">\(e(H)\)</span> é uma medida de eficiência por hora. Vamos supor que essa eficiência seja positiva e não crescente com as horas trabalhadas, para representar a possibilidade de fadiga em jornadas longas (Pencavel, 2015).</p>
+<p>É importante distinguir três medidas: o número de pessoas empregadas, <span class="math inline">\(N\)</span>; o total de horas trabalhadas, <span class="math inline">\(N \cdot H\)</span>; e o trabalho efetivo, <span class="math inline">\(L\)</span>, que também considera a eficiência dessas horas. Duas equipes podem trabalhar o mesmo número de horas e entregar quantidades diferentes de trabalho efetivo.</p>
+<p>Para medir como a eficiência por hora responde à duração da jornada, definimos sua elasticidade em relação às horas:</p>
+<p><span class="math display">\[
+\varepsilon_e = \frac{d \ln e(H)}{d \ln H}.
+\]</span></p>
+<p>Adotamos a hipótese de que: <span class="math inline">\(-1 &lt; \varepsilon_e \le 0\)</span>. O limite superior permite que a eficiência por hora diminua ou permaneça constante quando a jornada aumenta. O limite inferior significa que essa queda de eficiência, quando ocorre, é proporcionalmente menor que o aumento das horas. Assim, uma jornada mais longa ainda acrescenta trabalho efetivo por empregado, embora o ganho seja atenuado pela fadiga.</p>
+<p>Por exemplo, se <span class="math inline">\(\varepsilon_e = -0{,}2\)</span>, um aumento de 1% nas horas trabalhadas reduz a eficiência por hora em aproximadamente 0,2%. O trabalho efetivo por empregado aumenta, portanto, cerca de 0,8%.</p>
+</section>
+<section id="caracterizando-os-custos" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="caracterizando-os-custos"><span class="header-section-number">3.2</span> Caracterizando os custos</h3>
+<p>Seja <span class="math inline">\(\bar H\)</span> a jornada normal semanal, <span class="math inline">\(W\)</span> o salário-base semanal e <span class="math inline">\(f\)</span> o custo fixo por trabalhador, expresso em valor equivalente por semana. Esse último componente inclui custos de contratação e treinamento, distribuídos ao longo do vínculo, além de benefícios e outros gastos que não variam com as horas trabalhadas.</p>
+<p>O salário-hora correspondente à jornada normal é definido por:</p>
+<p><span class="math display">\[
+w = \frac{W}{\bar H}.
+\]</span></p>
+<p>Para a contabilidade de horas extras, adotamos um adicional em que <span class="math inline">\(\phi\)</span> é o prêmio de hora extra (<span class="math inline">\(\phi = 0{,}5\)</span> no Brasil).</p>
+<p>O custo total é</p>
+<p><span class="math display">\[
+C = N\left[ W + f + w(1+\phi)\,(H - \bar H)^{+} \right] + rK,
+\]</span></p>
+<p>em que <span class="math inline">\(r\)</span> representa o custo semanal por unidade de capital.</p>
+<p>O termo <span class="math inline">\((H - \bar H)^{+}\)</span> corresponde às horas extras por trabalhador: é igual ao excesso de horas sobre a jornada normal, quando ele existe, e zero caso contrário. A notação utilizada corresponde a uma função do tipo <span class="math inline">\((x)^{+} = \max(x, 0)\)</span>.</p>
+<p>No cenário analisado, a jornada normal <span class="math inline">\(\bar H\)</span> diminui de 44 para 40 horas, mantendo o salário-base <span class="math inline">\(W\)</span> constante. O salário-hora aumenta, portanto, na razão <span class="math inline">\(44/40 = 1{,}10\)</span>, ou seja, 10%. Como o adicional <span class="math inline">\(\phi\)</span> permanece constante, o valor de cada hora extra também aumenta 10%.</p>
+</section>
+<section id="o-problema-da-firma" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="o-problema-da-firma"><span class="header-section-number">3.3</span> O problema da firma</h3>
+<p>Vamos supor que a firma escolha o número de trabalhadores, <span class="math inline">\(N\)</span>, as horas semanais por trabalhador, <span class="math inline">\(H\)</span>, e a quantidade de capital, <span class="math inline">\(K\)</span>, para maximizar o lucro.</p>
+<p>Seja <span class="math inline">\(p\)</span> o preço do produto, que a firma toma como dado. O lucro corresponde à receita obtida com a produção, descontados os custos com trabalhadores e capital. Assim, o problema de otimização é:</p>
+<p><span class="math display">\[
+\max_{N,\,H,\,K} \; \pi = p \cdot F\!\left( K, N H e(H) \right) - N \left[ W + f + w(1+\phi)\,(H - \bar H)^{+} \right] - rK.
+\]</span></p>
+<p>A firma pode ampliar o trabalho efetivo contratando mais pessoas ou aumentando as horas de cada empregado. Essas alternativas têm custos diferentes, especialmente quando a jornada ultrapassa o limite normal e exige o pagamento de horas extras.</p>
+<p>Para analisar a resposta à redução da jornada normal, vamos distinguir dois regimes: firmas que não utilizam horas extras e firmas que utilizam.</p>
+</section>
+<section id="regime-1-firmas-sem-hora-extra" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="regime-1-firmas-sem-hora-extra"><span class="header-section-number">3.4</span> Regime 1: firmas sem hora extra</h3>
+<p>Pense numa loja com 10 empregados com jornadas de 44 horas: são 440 horas por semana. Com jornadas de 40 horas, os mesmos 10 entregam 400 horas semanais. Para manter as 440 horas, a loja precisaria de 11 empregados, e a folha subiria 10%. Esse cálculo mantém constante o total de horas e supõe que a produtividade por hora não muda.</p>
+<p>Será que a loja vai contratar o 11º empregado? Isso depende de como ela responde ao aumento do custo por hora. A loja pode reorganizar a produção, substituir parte do trabalho por máquinas ou reduzir o volume produzido. A elasticidade <span class="math inline">\(\eta\)</span>, definida adiante, mede quanto a quantidade demandada de trabalho efetivo muda em resposta à alteração de seu custo.</p>
+<p>Neste primeiro regime, a firma utiliza toda a jornada normal, sem recorrer a horas extras. Assim, <span class="math inline">\(H = \bar H\)</span>.</p>
+<p>Vamos analisar o que acontece quando a jornada normal diminui de 44 para 40 horas, supondo que a firma continue sem utilizar horas extras após a mudança. Nesse caso, cada empregado trabalha menos horas, mas seu salário-base permanece constante.</p>
+<p>Sem horas extras, cada trabalhador custa <span class="math inline">\(W+f\)</span> e fornece <span class="math inline">\(\bar H\,e(\bar H)\)</span> unidades de trabalho efetivo. Dividindo o custo pela quantidade fornecida, obtemos o custo por unidade de trabalho efetivo, que denominamos <span class="math inline">\(c_L\)</span>. Assim, o gasto total com trabalhadores pode ser escrito como <span class="math inline">\(N(W+f)=c_LL\)</span>.</p>
+<p>Com <span class="math inline">\(H = \bar H\)</span>, o lucro da firma pode ser escrito em termos do trabalho efetivo <span class="math inline">\(L = N\,\bar H\, e(\bar H)\)</span>:</p>
+<p><span class="math display">\[
+\pi = p\,F(K, L) - c_L\,L - rK, \qquad c_L = \frac{W + f}{e(\bar H)\,\bar H}.
+\]</span></p>
+<p>Voltamos, assim, ao problema de escolha de capital e trabalho, com custo unitário do trabalho efetivo igual a <span class="math inline">\(c_L\)</span>. Em uma solução interior, as condições de primeira ordem são <span class="math inline">\(pF_L=c_L\)</span> e <span class="math inline">\(pF_K=r\)</span>: a firma iguala o valor do produto marginal de cada fator ao seu custo unitário. Nesse regime, a redução da jornada altera <span class="math inline">\(c_L\)</span>, pois o custo por trabalhador, <span class="math inline">\(W+f\)</span>, permanece constante, enquanto o trabalho efetivo fornecido por cada empregado diminui.</p>
+<p>Como <span class="math inline">\(H=\bar H\)</span> neste regime, vamos escrever simplesmente <span class="math inline">\(H\)</span> nas expressões seguintes. Para examinar como a redução da jornada altera o custo do trabalho efetivo, usaremos diferenciais logarítmicos, que representam pequenas variações proporcionais.</p>
+<p>Para obter a variação de <span class="math inline">\(c_L\)</span>, tomamos o logaritmo da sua expressão:</p>
+<p><span class="math display">\[
+\ln c_L = \ln(W + f) - \ln e(H) - \ln H.
+\]</span></p>
+<p>Como <span class="math inline">\(W + f\)</span> não muda com a política, o primeiro termo é constante. Diferenciando e usando a definição de <span class="math inline">\(\varepsilon_e\)</span>, temos <span class="math inline">\(d\ln e = \varepsilon_e\, d\ln H\)</span>, de modo que</p>
+<p><span class="math display">\[
+d \ln c_L = -\varepsilon_e\, d\ln H - d\ln H = -(1 + \varepsilon_e)\, d \ln H.
+\]</span></p>
+<p>Como <span class="math inline">\(d \ln H &lt; 0\)</span> e <span class="math inline">\(1 + \varepsilon_e &gt; 0\)</span>, o custo do trabalho efetivo sobe.</p>
+<p>Para saber como a firma reage a esse aumento de custo, precisamos definir a elasticidade-preço incondicional da demanda por trabalho efetivo. Ela incorpora tanto a substituição de trabalho por capital quanto a mudança no volume produzido. Representamos essa elasticidade em valor absoluto por <span class="math inline">\(\eta&gt;0\)</span>:</p>
+<p><span class="math display">\[
+\eta = - \frac{d \ln L}{d \ln c_L}
+\]</span></p>
+<p>Por exemplo, se <span class="math inline">\(\eta = 0{,}5\)</span>, um aumento de 1% no custo do trabalho efetivo reduz sua quantidade demandada em aproximadamente 0,5%. Se <span class="math inline">\(\eta = 1{,}5\)</span>, a redução é de aproximadamente 1,5%. Uma demanda mais elástica significa, portanto, que a empresa ajusta mais intensamente a quantidade utilizada diante de uma mudança de custo. O termo “incondicional” indica que a produção também pode se ajustar, em vez de permanecer fixa.</p>
+<p>Pela definição de <span class="math inline">\(\eta\)</span>, podemos relacionar a mudança no custo à resposta da quantidade demandada de trabalho efetivo:</p>
+<p><span class="math display">\[
+d \ln L = -\eta \, d \ln c_L = \eta\,(1 + \varepsilon_e)\, d \ln H.
+\]</span></p>
+<p>Para chegar ao emprego, usamos a definição <span class="math inline">\(L = N\, H\,e(H)\)</span>. Tomando logaritmos e diferenciando, <span class="math inline">\(d\ln L = d\ln N + (1 + \varepsilon_e)\, d\ln H\)</span>, ou seja,</p>
+<p><span class="math display">\[
+d \ln N = d \ln L - (1 + \varepsilon_e)\, d \ln H.
+\]</span></p>
+<p>Substituindo a expressão de <span class="math inline">\(d\ln L\)</span>:</p>
+<p><span class="math display">\[
+d \ln N = \eta\,(1 + \varepsilon_e)\, d \ln H - (1 + \varepsilon_e)\, d \ln H = (1 + \varepsilon_e)\, d \ln H\,(\eta - 1).
+\]</span></p>
+<p>Como a jornada cai, <span class="math inline">\(d\ln H &lt; 0\)</span>, podemos escrever <span class="math inline">\(d\ln H = -\lvert d\ln H \rvert\)</span>. Isso inverte o sinal do último fator e leva à forma final:</p>
+<p><span class="math display">\[
+\boxed{\; d \ln N = (1 + \varepsilon_e)\,\lvert d \ln H \rvert\,(1 - \eta) \;}
+\]</span></p>
+<p>A fórmula reúne dois movimentos. Por um lado, cada empregado passa a fornecer menos trabalho efetivo, o que exige mais pessoas para manter a mesma quantidade total. Por outro, o aumento do custo leva a empresa a reduzir a quantidade de trabalho efetivo que deseja utilizar.</p>
+<p>O resultado depende da intensidade dessa resposta. Se um aumento de 1% no custo reduz a quantidade demandada de trabalho efetivo em menos de 1%, dizemos que a demanda é inelástica (<span class="math inline">\(\eta &lt; 1\)</span>). Nesse caso, a redução da quantidade demandada é relativamente pequena, e a necessidade de distribuir o trabalho entre mais pessoas predomina: o emprego aumenta.</p>
+<p>Se o mesmo aumento de 1% no custo reduz a quantidade demandada em mais de 1%, a demanda é elástica (<span class="math inline">\(\eta &gt; 1\)</span>). A empresa reduz mais intensamente o trabalho efetivo utilizado, a ponto de precisar de menos empregados, mesmo com a jornada menor: o emprego diminui.</p>
+<p>Quando o aumento de 1% no custo provoca uma redução de exatamente 1% na quantidade demandada, a demanda tem elasticidade unitária (<span class="math inline">\(\eta = 1\)</span>). Os dois movimentos se compensam, e o emprego permanece constante.</p>
+<p>Este é o resultado central do regime 1: sob as hipóteses adotadas e enquanto a firma permanece sem utilizar horas extras, uma pequena redução da jornada aumenta o emprego quando a demanda por trabalho efetivo é inelástica. Para avaliar se essa condição se verifica em determinado contexto, precisamos estimar quanto a quantidade demandada responde às mudanças no custo.</p>
+<p>Três observações:</p>
+<ol type="1">
+<li>Mantidos constantes os demais parâmetros e a permanência no regime 1, o custo fixo por trabalhador não aparece diretamente na expressão da variação proporcional do emprego. Ele integra, porém, o custo inicial do trabalho efetivo e pode influenciar a escolha entre contratar trabalhadores e utilizar horas extras.</li>
+<li>O ganho de produtividade por hora (<span class="math inline">\(\varepsilon_e&lt;0\)</span>) compensa parcialmente a redução das horas e atenua o aumento do custo do trabalho efetivo. Mantida a elasticidade <span class="math inline">\(\eta\)</span>, isso aproxima a variação do emprego de zero: reduz a necessidade de contratações quando <span class="math inline">\(\eta&lt;1\)</span> e ameniza a queda do emprego quando <span class="math inline">\(\eta&gt;1\)</span>.</li>
+<li>O resultado supõe que a firma permanece no regime 1 após a mudança. Algumas empresas podem passar a utilizar horas extras, caso essa alternativa se torne mais vantajosa. Nessa situação, a fórmula deixa de descrever integralmente o ajuste, e é necessário analisar conjuntamente as escolhas de trabalhadores e horas.</li>
+</ol>
+<p>A tabela e o gráfico a seguir ilustram como o resultado varia conforme a elasticidade da demanda por trabalho efetivo e o ganho de eficiência associado à redução da jornada. Aplicamos a expressão à passagem de 44 para 40 horas semanais como uma aproximação, utilizando valores hipotéticos para os parâmetros.</p>
+<div class="cell">
+<div id="tbl-regime1" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-regime1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;1: Regime 1: efeitos da redução de 44 para 40 horas (variações em log, ×100), com εe = −0,2
+</figcaption>
+<div aria-describedby="tbl-regime1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 21%">
+<col style="width: 30%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">η</th>
+<th style="text-align: center;">Δ emprego (N)</th>
+<th style="text-align: center;">Δ horas totais (NH)</th>
+<th style="text-align: center;">Δ custo por unidade efetiva</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">3.8</td>
+<td style="text-align: center;">-5.7</td>
+<td style="text-align: center;">7.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1.0</td>
+<td style="text-align: center;">0.0</td>
+<td style="text-align: center;">-9.5</td>
+<td style="text-align: center;">7.6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1.5</td>
+<td style="text-align: center;">-3.8</td>
+<td style="text-align: center;">-13.3</td>
+<td style="text-align: center;">7.6</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Na primeira linha da tabela, por exemplo, o emprego aumenta, mas o total de horas trabalhadas diminui. Isso acontece porque a contratação adicional não compensa integralmente a redução da jornada de cada empregado. Os valores estão expressos em variações logarítmicas multiplicadas por 100, que aproximam as variações percentuais. São exercícios ilustrativos com os parâmetros escolhidos, e não previsões para o mercado de trabalho brasileiro.</p>
+<p>O gráfico a seguir mostra como o efeito sobre o emprego varia com <span class="math inline">\(\eta\)</span>, para diferentes valores de <span class="math inline">\(\varepsilon_e\)</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-regime1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-regime1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="modelo_micro_fim_escala_6x1_files/figure-html/fig-regime1-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-regime1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1: Regime 1: variação do emprego em função da elasticidade da demanda por trabalho
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Por que a demanda por trabalho pode ser mais sensível ao custo em alguns setores do que em outros? Duas características ajudam a entender essa diferença: a facilidade de substituir trabalho por capital e a resposta dos consumidores às mudanças no preço do produto.</p>
+<p>Em serviços cuja demanda pelo produto é pouco sensível ao preço e nos quais é difícil substituir trabalho por capital, é plausível que a demanda por trabalho seja inelástica. Já em setores expostos à concorrência internacional ou com maior facilidade de automação, a demanda por trabalho pode responder mais intensamente ao aumento de seu custo, tornando menos provável o aumento do emprego após a redução da jornada.</p>
+<p>Podemos organizar esses mecanismos por meio da decomposição de Hicks-Marshall, apresentada por Hamermesh (1993, cap. 2). Aqui, passamos da análise da firma para a do setor: além das escolhas de produção de cada empresa, consideramos como o aumento dos custos altera o preço de mercado e a quantidade vendida.</p>
+<p>Supondo retornos constantes de escala (custo unitário não depende da produção), concorrência no mercado do produto (preço é igual ao custo unitário) e oferta de capital perfeitamente elástica (mantém <span class="math inline">\(r\)</span> constante enquanto as firmas trocam trabalho por capital), temos:</p>
+<p><span class="math display">\[
+\eta = \underbrace{(1-s)\, \sigma}_{\text{efeito substituição}}
++ \underbrace{s\, \varepsilon_D}_{\text{efeito escala}}.
+\]</span></p>
+<p>em que:</p>
+<ul>
+<li><p><span class="math inline">\(s\)</span> é a participação do trabalho no custo total;</p></li>
+<li><p><span class="math inline">\(\sigma\)</span> é a elasticidade de substituição entre capital e trabalho;</p></li>
+<li><p><span class="math inline">\(\varepsilon_D\)</span> é a elasticidade-preço da demanda pelo produto do setor, em valor absoluto.</p></li>
+</ul>
+<p>O primeiro termo representa a substituição entre fatores. Quanto mais fácil for substituir trabalho por capital, maior será a redução do trabalho utilizado para produzir determinada quantidade diante de um aumento de seu custo.</p>
+<p>O segundo termo representa o efeito escala. O aumento do custo do trabalho eleva o custo de produção e, nas condições consideradas, o preço do produto do setor. Se os consumidores reduzirem muito suas compras em resposta a esse aumento de preço, a produção e a demanda por trabalho também cairão mais intensamente.</p>
+<p>Assim, uma demanda pouco sensível ao preço do produto contribui para tornar a demanda por trabalho menos elástica, mas não garante esse resultado: também precisamos considerar as possibilidades de substituição entre trabalho e capital. Da mesma forma, maior facilidade de substituição ou maior sensibilidade dos consumidores ao preço contribuem para tornar a demanda por trabalho mais elástica.</p>
+<p>Para utilizar essa decomposição na fórmula anterior, devemos interpretar <span class="math inline">\(L\)</span> e <span class="math inline">\(N\)</span> como o trabalho efetivo e o emprego do setor, e <span class="math inline">\(\eta\)</span> como a elasticidade da demanda setorial. Essa aplicação pressupõe que a jornada e a eficiência por hora possam ser representadas de forma comum às firmas consideradas.</p>
+</section>
+<section id="regime-2-firmas-que-utilizam-hora-extra" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="regime-2-firmas-que-utilizam-hora-extra"><span class="header-section-number">3.5</span> Regime 2: firmas que utilizam hora extra</h3>
+<p>Neste regime, a jornada efetivamente trabalhada ultrapassa a jornada normal: <span class="math inline">\(H&gt;\bar H\)</span>. A firma escolhe tanto o número de empregados (<span class="math inline">\(N\)</span>) quanto as horas trabalhadas por cada um (<span class="math inline">\(H\)</span>). Em uma solução interior, as condições de primeira ordem para essas duas escolhas são:</p>
+<p><span class="math display">\[
+\text{(N):} \quad p\,F_L\,H \,e(H) = W + f + w(1+\phi)(H - \bar H),
+\]</span></p>
+<p><span class="math display">\[
+\text{(H):} \quad p\,F_L\, \left[ e(H) + e'(H)\,H \right] = w(1+\phi).
+\]</span></p>
+<p>A condição (N) iguala o valor da produção acrescentada por um trabalhador ao custo de contratá-lo para a jornada <span class="math inline">\(H\)</span>, incluindo suas horas extras. A condição (H) compara o ganho de receita com a extensão da jornada ao pagamento adicional exigido. Como aumentar <span class="math inline">\(H\)</span> amplia a jornada de todos os empregados, o número de trabalhadores aparece nos dois lados dessa segunda condição e é cancelado.</p>
+<p>A empresa compara duas maneiras de ampliar o trabalho utilizado: contratar mais uma pessoa ou aumentar as horas de quem já está empregado. A contratação acrescenta salário e custos fixos; a extensão da jornada exige o pagamento de horas extras e pode reduzir a eficiência por hora. Por isso, a escolha depende tanto dos custos de cada alternativa quanto do trabalho efetivo que ela acrescenta.</p>
+<p>Mantendo inicialmente as horas efetivamente trabalhadas, a redução da jornada normal de 44 para 40 horas aumenta o gasto com horas extras por dois mecanismos:</p>
+<ol type="1">
+<li><strong>Mais horas passam a ser extraordinárias.</strong> Para um mesmo <span class="math inline">\(H\)</span>, a diferença <span class="math inline">\(H-\bar H\)</span> aumenta em quatro horas semanais.</li>
+<li><strong>Cada hora extra fica mais cara.</strong> Com o salário-base <span class="math inline">\(W\)</span> constante, o salário-hora aumenta 10%. Mantido o adicional <span class="math inline">\(\phi\)</span>, o preço da hora extra sobe na mesma proporção.</li>
+</ol>
+<p>Um exemplo ajuda a visualizar esses dois mecanismos. Considere um trabalhador que mantém uma jornada de 48 horas semanais antes e depois da mudança. Se <span class="math inline">\(w_0\)</span> é o salário-hora inicial, seu salário-base semanal é <span class="math inline">\(W=44\,w_0\)</span>. A tabela compara os gastos nas duas situações.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 36%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Antes (<span class="math inline">\(\bar H = 44\)</span>)</th>
+<th style="text-align: center;">Depois (<span class="math inline">\(\bar H = 40\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Salário-hora</td>
+<td style="text-align: center;"><span class="math inline">\(w_0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1{,}1\,w_0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Horas extras</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Custo das horas extras</td>
+<td style="text-align: center;"><span class="math inline">\(4 \times 1{,}5 \times w_0 = 6\,w_0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(8 \times 1{,}5 \times 1{,}1\,w_0 = 13{,}2\,w_0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Salário-base + horas extras</td>
+<td style="text-align: center;"><span class="math inline">\(50\,w_0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(57{,}2\,w_0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Mantidas as 48 horas trabalhadas, o gasto com salário-base e horas extras aumenta 14,4%. Incluindo o custo fixo por trabalhador, o custo passa de <span class="math inline">\(50w_0+f\)</span> para <span class="math inline">\(57{,}2w_0+f\)</span>, com aumento percentual menor quando <span class="math inline">\(f&gt;0\)</span>. No regime 1, o gasto por empregado permanece constante e as horas diminuem; aqui, calculamos quanto custa manter a jornada efetiva.</p>
+<p>Esse aumento de custo, porém, não determina sozinho o efeito sobre o emprego. A empresa pode ajustar tanto o número de empregados quanto as horas por trabalhador e o volume produzido. Para saber se haverá contratação ou redução do quadro, precisamos especificar melhor a tecnologia e analisar essas escolhas conjuntamente.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Implicação para a análise empírica
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A aplicação empírica exigiria verificar a disponibilidade e a qualidade das informações sobre horas extras, além das jornadas contratuais. Embora a documentação da RAIS preveja a coleta de horas extras mensais, seria necessário avaliar o acesso a esses dados e sua adequação para distinguir os regimes do modelo. A estimação das respostas das firmas à mudança de custo constituiria uma etapa adicional.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="módulo-de-cobertura-quando-a-empresa-precisa-funcionar-mais-dias-do-que-cada-empregado-trabalha" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="módulo-de-cobertura-quando-a-empresa-precisa-funcionar-mais-dias-do-que-cada-empregado-trabalha"><span class="header-section-number">4</span> Módulo de cobertura: quando a empresa precisa funcionar mais dias do que cada empregado trabalha</h2>
+<p>Até aqui, analisamos o número de trabalhadores e suas horas semanais. Mas a distribuição desse trabalho entre os dias também importa. Um supermercado ou restaurante, por exemplo, pode precisar manter uma equipe em todos os dias de funcionamento, mesmo quando cada empregado trabalha apenas cinco dias por semana.</p>
+<p>Para representar essa necessidade, suponha que o estabelecimento precise de pelo menos <span class="math inline">\(\bar n\)</span> trabalhadores por dia, durante <span class="math inline">\(D\)</span> dias por semana. Se cada empregado trabalha <span class="math inline">\(d\)</span> dias, uma condição necessária para atender a essa cobertura é:</p>
+<p><span class="math display">\[
+N \cdot d \ge D \cdot \bar n.
+\]</span></p>
+<p>O lado esquerdo representa o total de dias de trabalho que a equipe pode fornecer na semana. O lado direito representa o total necessário para manter o estabelecimento funcionando com a equipe mínima diária.</p>
+<p>Considere um estabelecimento que funciona seis dias por semana. Quando cada empregado também trabalha seis dias, o requisito mínimo é <span class="math inline">\(N\ge\bar n\)</span>. Se cada empregado passa a trabalhar cinco dias, esse requisito se torna:</p>
+<p><span class="math display">\[
+N \ge \frac{6}{5}\,\bar n = 1{,}2\,\bar n.
+\]</span></p>
+<p>O requisito mínimo de pessoal aumenta, portanto, 20%. Por exemplo, uma equipe de dez pessoas por dia, durante seis dias, exige 60 dias de trabalho individuais por semana. Dez empregados trabalhando seis dias fornecem exatamente esse total. Com cinco dias por empregado, são necessários doze trabalhadores, desde que as folgas possam ser distribuídas de forma a garantir dez pessoas em cada dia.</p>
+<p>Esse cálculo mantém constantes os dias de funcionamento e a equipe mínima diária. Também simplifica a organização dos turnos e dos horários: a desigualdade contabiliza dias de trabalho, mas não garante, sozinha, que todas as necessidades de cobertura ao longo de cada dia sejam atendidas.</p>
+<p>O aumento de 20% no requisito mínimo não significa que todo estabelecimento precisará ampliar seu quadro nessa proporção. Uma empresa que já tenha pessoal suficiente pode conseguir reorganizar as escalas. Outras podem reduzir os dias de funcionamento ou modificar processos e serviços para operar com uma equipe diária menor.</p>
+<p>A restrição de cobertura acrescenta, assim, uma dimensão às escolhas da firma: além de decidir quanto trabalho utilizar, ela precisa organizar sua distribuição entre os dias. A resposta depende da equipe existente, das possibilidades de reorganização e do custo de alterar o funcionamento.</p>
+</section>
+<section id="oferta-de-trabalho-e-bem-estar-dos-trabalhadores" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="oferta-de-trabalho-e-bem-estar-dos-trabalhadores"><span class="header-section-number">5</span> Oferta de trabalho e bem-estar dos trabalhadores</h2>
+<p>Até aqui, analisamos as escolhas das firmas. Para os trabalhadores, a redução da jornada também pode trazer ganhos de tempo disponível e diminuir os custos associados aos dias de trabalho.</p>
+<p>Para representar esses efeitos de forma simples, partimos de uma função de utilidade que depende do consumo e do lazer, como nos modelos usuais de oferta de trabalho. Acrescentamos um custo associado a cada dia trabalhado:</p>
+<p><span class="math display">\[
+V = U(c,\ell)-\kappa d,
+\qquad c=W+y,
+\qquad \ell=T-H.
+\]</span></p>
+<p>em que <span class="math inline">\(c\)</span> é o consumo, <span class="math inline">\(\ell\)</span> é o tempo disponível fora do trabalho, <span class="math inline">\(y\)</span> é a renda não salarial e <span class="math inline">\(T\)</span> é o tempo total disponível na semana. O parâmetro <span class="math inline">\(\kappa\)</span> representa, em unidades de utilidade, o custo associado a cada dia trabalhado, como o desgaste e os inconvenientes do deslocamento. Todas as variáveis de tempo e renda são expressas em termos semanais, e o preço do consumo é normalizado em um.</p>
+<p>Consideremos primeiro um trabalhador que mantém o emprego e a renda, cuja jornada efetiva diminui de 44 para 40 horas semanais. Nesse caso, o consumo permanece constante e ele ganha quatro horas de tempo disponível. Se também passa da escala 6x1 para a 5x2, deixa de incorrer no custo associado a um dia de trabalho por semana.</p>
+<p>O ganho de bem-estar pode ser aproximado por:</p>
+<p><span class="math display">\[
+\Delta V \approx U_\ell\cdot 4+\kappa(d_0-d_1),
+\]</span></p>
+<p>em que <span class="math inline">\(U_\ell\)</span> é a utilidade marginal do tempo disponível, e <span class="math inline">\(d_0\)</span> e <span class="math inline">\(d_1\)</span> são os dias trabalhados por semana antes e depois da mudança. Para quem passa de seis para cinco dias, <span class="math inline">\(d_0-d_1=1\)</span>; para quem já trabalhava cinco dias, essa diferença é zero.</p>
+<p>O primeiro termo representa o ganho proporcionado pelas quatro horas liberadas. O segundo representa o benefício de trabalhar um dia a menos na semana, incluindo a redução dos deslocamentos.</p>
+<p>Essa comparação descreve o ganho de quem mantém o emprego e a renda. Uma avaliação mais ampla precisaria considerar também possíveis perdas de remuneração por horas extras e mudanças na situação de emprego. Esses efeitos não são calculados por esta expressão.</p>
+</section>
+<section id="quem-absorve-o-custo-ao-longo-do-tempo" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="quem-absorve-o-custo-ao-longo-do-tempo"><span class="header-section-number">6</span> Quem absorve o custo ao longo do tempo?</h2>
+<p>Até aqui, mantivemos o salário-base constante para analisar o efeito da redução da jornada. No médio prazo, porém, a evolução dos salários e dos preços também precisa ser considerada.</p>
+<p><strong>A trajetória dos salários pode mudar.</strong> Parte do aumento inicial do custo por hora pode ser compensada por reajustes salariais menores do que os que ocorreriam sem a redução da jornada. Nesse caso, o salário não precisa cair em termos nominais: basta crescer menos que no cenário sem a mudança. Os trabalhadores absorveriam parte do custo por meio de uma trajetória salarial menos favorável, o que poderia atenuar os efeitos sobre o emprego. A intensidade desse ajuste dependeria das negociações salariais e das condições do mercado de trabalho.</p>
+<p><strong>O salário mínimo restringe esse ajuste.</strong> Para os trabalhadores remunerados pelo piso, a empresa tem menos margem para ajustar o salário-base, pois precisa respeitar o mínimo aplicável. A evolução desse piso passa, portanto, a ser relevante para a distribuição dos custos ao longo do tempo.</p>
+<p>Mantido o salário mensal, a passagem de 44 para 40 horas eleva o salário nominal por hora em 10%, inclusive para quem recebe o mínimo. O ganho real, porém, depende também da evolução dos preços. Por isso, a análise de médio prazo exige considerar tanto os reajustes salariais quanto possíveis mudanças no custo de vida.</p>
+<p>A literatura sobre salário mínimo pode ajudar a discutir as respostas do emprego entre trabalhadores de menor remuneração. Seus resultados, contudo, não devem ser utilizados diretamente como estimativas da elasticidade do nosso modelo: é necessário verificar quais mecanismos e grupos de trabalhadores cada estudo considera.</p>
+</section>
+<section id="síntese-da-arquitetura" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="síntese-da-arquitetura"><span class="header-section-number">7</span> Síntese da arquitetura</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 31%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Bloco</th>
+<th style="text-align: left;">O que entrega</th>
+<th style="text-align: left;">Parâmetros críticos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Regime 1 (sem hora extra)</td>
+<td style="text-align: left;">Efeito sobre o emprego em função de <span class="math inline">\(\eta\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\eta\)</span>, <span class="math inline">\(\varepsilon_e\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Regime 2 (com hora extra)</td>
+<td style="text-align: left;">Ajuste conjunto de emprego e horas extras, com sinal dependente das hipóteses</td>
+<td style="text-align: left;"><span class="math inline">\(\phi\)</span>, <span class="math inline">\(f/W\)</span>, curvatura de <span class="math inline">\(F\)</span> e <span class="math inline">\(e\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cobertura</td>
+<td style="text-align: left;">No exemplo, aumento de 20% no requisito mínimo de pessoal</td>
+<td style="text-align: left;"><span class="math inline">\(D\)</span>, <span class="math inline">\(\bar n\)</span>, custo de fechar um dia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Oferta e bem-estar</td>
+<td style="text-align: left;">Ganhos de lazer e de redução de deslocamentos</td>
+<td style="text-align: left;"><span class="math inline">\(U_\ell\)</span>, <span class="math inline">\(\kappa\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Médio prazo</td>
+<td style="text-align: left;">Incidência do custo entre firmas e trabalhadores</td>
+<td style="text-align: left;">salário mínimo</td>
+</tr>
+</tbody>
+</table>
+<p>O efeito agregado depende da distribuição das firmas e dos trabalhadores entre os regimes e setores. O módulo de cobertura acrescenta uma restrição às escolhas das empresas e pode estar presente tanto em firmas com horas extras quanto em firmas sem elas. Por isso, seus efeitos precisam ser analisados conjuntamente, evitando contar duas vezes o mesmo ajuste. A RAIS fornece as horas contratuais por vínculo, o que permite medir a exposição de cada setor; a PNAD Contínua permite aproximar a fração de trabalhadores que fazem horas extras e o grau de informalidade. Uma limitação importante é que a RAIS não distingue a escala 6x1 da 5x2 entre os vínculos de 44 horas.</p>
+</section>
+<section id="o-que-a-evidência-empírica-sugere" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="o-que-a-evidência-empírica-sugere"><span class="header-section-number">8</span> O que a evidência empírica sugere</h2>
+<p>As experiências brasileira e internacional ajudam a avaliar os mecanismos discutidos no modelo. Os resultados, porém, precisam ser interpretados considerando as características de cada reforma, o período analisado e o que cada estudo procura medir.</p>
+<ul>
+<li><p><strong>Brasil, 1988 — redução de 48 para 44 horas:</strong> Gonzaga, Menezes-Filho e Camargo (2003) encontram redução da jornada efetiva e aumento do salário real por hora. Nos 12 meses seguintes à mudança, não identificam aumento da probabilidade de desemprego dos trabalhadores afetados e observam redução da probabilidade de ficarem sem ocupação, incluindo a saída da força de trabalho. Os resultados não indicam efeitos negativos sobre o emprego nesse horizonte.</p></li>
+<li><p><strong>Portugal, 1996 — redução de 44 para 40 horas:</strong> Raposo e van Ours (2010) encontram evidências de efeito positivo sobre o emprego, associado à menor destruição de postos de trabalho. Esse resultado chama a atenção para uma possibilidade importante: o emprego pode aumentar em relação ao cenário sem a reforma pela preservação de postos, sem que isso decorra necessariamente de mais contratações.</p></li>
+<li><p><strong>França:</strong> Crépon e Kramarz (2002), ao analisar a redução de 40 para 39 horas em 1982, encontram maior probabilidade de perda do emprego entre os trabalhadores afetados. Já Chemin e Wasmer (2009), explorando diferenças na aplicação da reforma das 35 horas entre a Alsácia-Mosela e o restante da França, não encontram diferenças estatisticamente significativas de emprego associadas à intensidade da redução da jornada.</p></li>
+<li><p><strong>Alemanha:</strong> Hunt (1999) analisa reduções negociadas da jornada e encontra resultados que sugerem possível redução do emprego no período de 1984 a 1994.</p></li>
+</ul>
+<p>Esses estudos apresentam resultados distintos, e nem todos estimam o mesmo efeito: alguns examinam a permanência dos trabalhadores no emprego, enquanto outros analisam fluxos de criação e destruição de postos ou o emprego setorial. Por isso, não devem ser tratados como estimativas diretamente comparáveis de um único efeito sobre o emprego total.</p>
+<p>A principal contribuição dessas experiências é mostrar que a redução da jornada não produz um resultado uniforme. Os efeitos dependem das condições em que a mudança ocorre e das respostas de empresas e trabalhadores. Essa diversidade reforça a necessidade de investigar os mecanismos e o contexto de cada aplicação.</p>
+</section>
+<section id="considerações-finais" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="considerações-finais"><span class="header-section-number">9</span> Considerações finais</h2>
+<p>O modelo ajuda a entender por que a redução da jornada pode produzir respostas diferentes entre empresas e setores. Nas firmas que permanecem sem horas extras, uma pequena redução da jornada aumenta o emprego quando a demanda por trabalho efetivo é inelástica. Nas firmas que utilizam horas extras, o resultado depende do ajuste conjunto do número de empregados e das horas por trabalhador. Nos estabelecimentos que precisam manter equipes mínimas ao longo da semana, a mudança de escala acrescenta uma necessidade de cobertura, que pode exigir contratações ou alterações no funcionamento.</p>
+<p>Para os trabalhadores que mantêm o emprego e a renda e passam a trabalhar menos horas, há um ganho de tempo disponível. Quem passa de seis para cinco dias de trabalho também reduz os deslocamentos semanais. A avaliação da política precisa considerar esses benefícios, as possíveis mudanças na remuneração por horas extras e os efeitos sobre o emprego. No médio prazo, a evolução dos salários e dos preços também pode alterar a distribuição dos ganhos e dos custos.</p>
+<p>A pergunta que motivou o texto continua relevante, mas agora podemos formulá-la com mais precisão: em quais condições a redução da jornada favorece novas contratações, em quais situações esse efeito é limitado e como os trabalhadores são afetados?</p>
+<p>Para encerrar, acho que esse exercício ilustra uma das principais razões para usar modelos na análise de questões econômicas e sociais. Ao construir um modelo, precisamos explicitar nossas hipóteses, identificar os mecanismos que consideramos relevantes e verificar quais conclusões decorrem deles. O modelo não encerra a discussão, mas ajuda a formular perguntas mais precisas e a organizar o que precisamos investigar.</p>
+</section>
+<section id="referências" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="referências"><span class="header-section-number">10</span> Referências</h2>
+<p>Calmfors, L.; Hoel, M. (1988). Work sharing and overtime. <em>Scandinavian Journal of Economics</em>, 90(1), 45–62.</p>
+<p>Chemin, M.; Wasmer, E. (2009). Using Alsace-Moselle local laws to build a difference-in-differences estimation strategy of the employment effects of the 35-hour workweek regulation in France. <em>Journal of Labor Economics</em>, 27(4), 487–524.</p>
+<p>Crépon, B.; Kramarz, F. (2002). Employed 40 hours or not employed 39: lessons from the 1982 mandatory reduction of the workweek. <em>Journal of Political Economy</em>, 110(6), 1355–1389.</p>
+<p>Gonzaga, G.; Menezes-Filho, N.; Camargo, J. M. (2003). Os efeitos da redução da jornada de trabalho de 48 para 44 horas semanais em 1988. <em>Revista Brasileira de Economia</em>, 57(2), 369–400.</p>
+<p>Hamermesh, D. S. (1993). <em>Labor Demand</em>. Princeton: Princeton University Press.</p>
+<p>Hunt, J. (1999). Has work-sharing worked in Germany? <em>Quarterly Journal of Economics</em>, 114(1), 117–148.</p>
+<p>Pencavel, J. (2015). The productivity of working hours. <em>Economic Journal</em>, 125(589), 2052–2076.</p>
+<p>Raposo, P. S.; van Ours, J. C. (2010). How a reduction of standard working hours affects employment dynamics. <em>De Economist</em>, 158(2), 193–207.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
