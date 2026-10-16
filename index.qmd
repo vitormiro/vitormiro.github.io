@@ -1,22 +1,29 @@
 ---
 title: "Vitor Hugo Miro"
-image: images/vhm_bw.jpg
-about: 
+image: images/vhm_ibre.jpg
+lang: pt-BR
+toc: false
+about:
   template: trestles
   image-shape: rounded
-  image-width: 12em
+  image-width: 13em
   links:
-    - icon: linkedin 
+    - icon: mortarboard
+      text: Currículo Lattes
+      href: http://lattes.cnpq.br/5332657654400413
+    - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/vitorhugomiro/
-    - icon: github 
+    - icon: github
       text: GitHub
       href: https://github.com/vitormiro
-    - icon: envelope 
-      text: Email
+    - icon: envelope
+      text: E-mail
       href: mailto:vitormiro@ufc.br
 ---
 
-Vitor Hugo Miro é professor do Departamento de Economia Agrícola/ Centro de Ciências Agrárias da Universidade Federal do Ceará ([DEA/UFC](https://dea.ufc.br/pt/)) e do Programa de Pós-Graduação em Economia Rural ([PPGER/UFC](https://ppger.ufc.br/pt/)).
+-   Professor do Departamento de Economia Agrícola, do Centro de Ciências Agrárias da Universidade Federal do Ceará ([DEA/UFC](https://dea.ufc.br/pt/)), e do Programa de Pós-Graduação em Economia Rural ([PPGER/UFC](https://ppger.ufc.br/pt/)).
 
-\
+-   Pesquisador do Instituto Brasileiro de Economia/ Fundação Getúlio Vargas [(FGV IBRE)](https://portalibre.fgv.br/nordeste#:~:text=%E2%80%8B%20O%20Centro%20de%20Estudos,aprofundados%20para%20a%20regi%C3%A3o%20Nordeste).
+
+-   Coordenador do Laboratório de Análise de Dados em Economia Agrícola - [LABDEA](https://labdea.ufc.br/pt/).
