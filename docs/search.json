@@ -11,7 +11,7 @@
     "href": "ensino.html",
     "title": "Ensino",
     "section": "",
-    "text": "Administração Rural (Economia e Gestão de Empresas Rurais)\nProjetos Agropecuários (Princípios de Finanças para Empresas Rurais)"
+    "text": "Fundamentos de Economia Rural (Microeconomia)\nAdministração Rural (Economia e Gestão de Empresas Rurais)\nProjetos Agropecuários (Princípios de Finanças para Empresas Rurais)"
   },
   {
     "objectID": "ensino.html#programa-de-pós-graduação-em-economia-rural",
@@ -25,7 +25,7 @@
     "href": "ensino.html#departamento-de-economia-agrícola-graduação",
     "title": "Ensino",
     "section": "",
-    "text": "Administração Rural (Economia e Gestão de Empresas Rurais)\nProjetos Agropecuários (Princípios de Finanças para Empresas Rurais)"
+    "text": "Fundamentos de Economia Rural (Microeconomia)\nAdministração Rural (Economia e Gestão de Empresas Rurais)\nProjetos Agropecuários (Princípios de Finanças para Empresas Rurais)"
   },
   {
     "objectID": "index.html",
@@ -838,5 +838,12 @@
     "title": "Vitor Hugo Miro",
     "section": "Ensino e Pesquisa",
     "text": "Ensino e Pesquisa\n\nMicroeconomia Aplicada\nMercado de trabalho\nDesenvolvimento econômico\nEconomia Agrícola"
+  },
+  {
+    "objectID": "econ_rural.html",
+    "href": "econ_rural.html",
+    "title": "Fundamentos de Rural(Microeconomia)",
+    "section": "",
+    "text": "Disciplina ofertada pelo Departamento de Economia Agrícola da Universidade Federal do Ceará."
   }
 ]

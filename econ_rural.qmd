@@ -1,0 +1,8 @@
+---
+title: "Fundamentos de Rural<br>(Microeconomia)"
+author: "Vitor Hugo Miro"
+title-block: false
+---
+
+Disciplina ofertada pelo Departamento de Economia Agrícola da Universidade Federal do Ceará.
+

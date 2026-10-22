@@ -4,7 +4,9 @@ title: "Ensino"
 
 ## Departamento de Economia Agrícola (Graduação)
 
--   [Administração Rural (Economia e Gestão de Empresas Rurais)](adm_rural.html)
+- [Fundamentos de Economia Rural (Microeconomia)](econ_rural.html)
+
+- [Administração Rural (Economia e Gestão de Empresas Rurais)](adm_rural.html)
 
 -   Projetos Agropecuários (Princípios de Finanças para Empresas Rurais)
 
